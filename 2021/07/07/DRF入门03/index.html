@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>DRF(基础) | Hexo</title>
+  <title>DRF之组件及异常处理 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="昨日回顾1234567891011121314151617181920212223242526272829301 路由组件	-自动生成路由（两个类）    -action装饰器2 认证组件	-写一个类，继承一个基类，重写authenticate，认证通过，返回空或两个值，第一个值给request.user    -局部使用：视图类中中配置    -全局使用：配置文件中配置3 权限组件	-写一个类，">
+  <meta name="description" content="1 权限组件源码分析（2星）12345678APIView---》dispatch-self.initial---》self.check_permissions(request)   for permission in self.get_permissions():            if not permission.has_permission(request, self):">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DRF(基础)">
+<meta property="og:title" content="DRF之组件及异常处理">
 <meta property="og:url" content="http://example.com/2021/07/07/DRF%E5%85%A5%E9%97%A803/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="昨日回顾1234567891011121314151617181920212223242526272829301 路由组件	-自动生成路由（两个类）    -action装饰器2 认证组件	-写一个类，继承一个基类，重写authenticate，认证通过，返回空或两个值，第一个值给request.user    -局部使用：视图类中中配置    -全局使用：配置文件中配置3 权限组件	-写一个类，">
+<meta property="og:description" content="1 权限组件源码分析（2星）12345678APIView---》dispatch-self.initial---》self.check_permissions(request)   for permission in self.get_permissions():            if not permission.has_permission(request, self):">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-07-07T14:30:50.000Z">
-<meta property="article:modified_time" content="2021-07-08T06:43:44.335Z">
+<meta property="article:modified_time" content="2021-07-08T11:13:23.359Z">
 <meta property="article:author" content="Vivek">
 <meta property="article:tag" content="-DRF">
 <meta name="twitter:card" content="summary">
@@ -67,7 +67,7 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/category/">分类</a></li>
+				<li><a href="/category/%E5%88%86%E7%B1%BB/">分类</a></li>
 	        
 				<li><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
 	        
@@ -160,7 +160,7 @@
 				
 					<li style="width: 25%"><a href="/">主页</a></li>
 		        
-					<li style="width: 25%"><a href="/category/">分类</a></li>
+					<li style="width: 25%"><a href="/category/%E5%88%86%E7%B1%BB/">分类</a></li>
 		        
 					<li style="width: 25%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
 		        
@@ -187,7 +187,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      DRF(基础)
+      DRF之组件及异常处理
     </h1>
   
 
@@ -206,11 +206,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="昨日回顾"><a href="#昨日回顾" class="headerlink" title="昨日回顾"></a>昨日回顾</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> 路由组件</span><br><span class="line">	-自动生成路由（两个类）</span><br><span class="line">    -action装饰器</span><br><span class="line"><span class="number">2</span> 认证组件</span><br><span class="line">	-写一个类，继承一个基类，重写authenticate，认证通过，返回空或两个值，第一个值给request.user</span><br><span class="line">    -局部使用：视图类中中配置</span><br><span class="line">    -全局使用：配置文件中配置</span><br><span class="line"><span class="number">3</span> 权限组件</span><br><span class="line">	-写一个类，继承基类，重写<span class="function"><span class="keyword">def</span> <span class="title">has_permission</span>(<span class="params">self, request, view</span>)，权限通过，返回<span class="title">True</span></span></span><br><span class="line"><span class="function">    -局部使用：视图类中中配置</span></span><br><span class="line"><span class="function">    -全局使用：配置文件中配置</span></span><br><span class="line"><span class="function">4 认证源码</span></span><br><span class="line"><span class="function">	<span class="title">APIView</span>---》<span class="title">dispatch</span>-<span class="title">self</span>.<span class="title">initial</span>---》<span class="title">self</span>.<span class="title">perform_authentication</span>---》<span class="title">request</span>.<span class="title">user</span></span></span><br><span class="line"><span class="function">	<span class="title">Request</span>的<span class="title">user</span>方法---》<span class="title">self</span>.<span class="title">_authenticate</span>()</span></span><br><span class="line"><span class="function">	      <span class="title">for</span> <span class="title">authenticator</span> <span class="title">in</span> <span class="title">self</span>.<span class="title">authenticators</span>:</span></span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                <span class="comment"># (user,token)</span></span><br><span class="line">                user_auth_tuple = authenticator.authenticate(self)</span><br><span class="line">            <span class="keyword">except</span> exceptions.APIException:</span><br><span class="line">                self._not_authenticated()</span><br><span class="line">                <span class="keyword">raise</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> user_auth_tuple <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                self._authenticator = authenticator</span><br><span class="line">                self.user, self.auth = user_auth_tuple</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">5</span> session</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h1><h2 id="1-权限组件源码分析（2星）"><a href="#1-权限组件源码分析（2星）" class="headerlink" title="1 权限组件源码分析（2星）"></a>1 权限组件源码分析（2星）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">APIView---》dispatch-self.initial---》self.check_permissions(request)</span><br><span class="line">   <span class="keyword">for</span> permission <span class="keyword">in</span> self.get_permissions():</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> permission.has_permission(request, self):</span><br><span class="line">                self.permission_denied(</span><br><span class="line">                    request,</span><br><span class="line">                    message=<span class="built_in">getattr</span>(permission, <span class="string">&#x27;message&#x27;</span>, <span class="literal">None</span>),</span><br><span class="line">                    code=<span class="built_in">getattr</span>(permission, <span class="string">&#x27;code&#x27;</span>, <span class="literal">None</span>)</span><br><span class="line">                )</span><br></pre></td></tr></table></figure>
+        <h2 id="1-权限组件源码分析（2星）"><a href="#1-权限组件源码分析（2星）" class="headerlink" title="1 权限组件源码分析（2星）"></a>1 权限组件源码分析（2星）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">APIView---》dispatch-self.initial---》self.check_permissions(request)</span><br><span class="line">   <span class="keyword">for</span> permission <span class="keyword">in</span> self.get_permissions():</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> permission.has_permission(request, self):</span><br><span class="line">                self.permission_denied(</span><br><span class="line">                    request,</span><br><span class="line">                    message=<span class="built_in">getattr</span>(permission, <span class="string">&#x27;message&#x27;</span>, <span class="literal">None</span>),</span><br><span class="line">                    code=<span class="built_in">getattr</span>(permission, <span class="string">&#x27;code&#x27;</span>, <span class="literal">None</span>)</span><br><span class="line">                )</span><br></pre></td></tr></table></figure>
 
 
 
@@ -224,16 +220,6 @@
 
 <h2 id="4异常处理（4星）"><a href="#4异常处理（4星）" class="headerlink" title="4异常处理（4星）"></a>4异常处理（4星）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> 全局统一捕获异常，返回固定的格式  &#123;code:<span class="number">999</span>,msg:<span class="string">&#x27;未知错误&#x27;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="number">2</span> 使用步骤</span><br><span class="line">	-写一个函数</span><br><span class="line">    -在配置文件中配置</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="comment">#  写函数</span></span><br><span class="line"><span class="keyword">from</span> rest_framework.views <span class="keyword">import</span> exception_handler</span><br><span class="line"><span class="keyword">from</span> rest_framework.response <span class="keyword">import</span> Response</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">common_exception_handler</span>(<span class="params">exc, context</span>):</span></span><br><span class="line">    <span class="comment"># 记录日志</span></span><br><span class="line">    <span class="built_in">print</span>(context[<span class="string">&#x27;request&#x27;</span>].META.get(<span class="string">&#x27;REMOTE_ADDR&#x27;</span>))</span><br><span class="line">    response=exception_handler(exc, context)</span><br><span class="line">    <span class="keyword">if</span> response:  <span class="comment"># 处理了drf的异常</span></span><br><span class="line">        data = &#123;<span class="string">&#x27;code&#x27;</span>: <span class="number">999</span>, <span class="string">&#x27;msg&#x27;</span>: <span class="string">&#x27;错误&#x27;</span>,<span class="string">&#x27;detail&#x27;</span>:response.data&#125;</span><br><span class="line">        <span class="keyword">return</span> Response(data)</span><br><span class="line">    <span class="keyword">else</span>: <span class="comment"># 不知道的异常</span></span><br><span class="line">        data = &#123;<span class="string">&#x27;code&#x27;</span>:<span class="number">999</span>,<span class="string">&#x27;msg&#x27;</span>:<span class="string">&#x27;未知错误&#x27;</span>&#125;</span><br><span class="line">        <span class="keyword">return</span> Response(data)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="comment"># 配置文件配置</span></span><br><span class="line"></span><br><span class="line">REST_FRAMEWORK = &#123;</span><br><span class="line">    <span class="string">&#x27;EXCEPTION_HANDLER&#x27;</span>: <span class="string">&#x27;app01.utils.common_exception_handler&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
 
-
-
-
-
-
-<h1 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> 继承SimpleRateThrottle写一个认证类，限制一个用户每分钟只能访问<span class="number">5</span>次</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">2</span> 过一权限类源码</span><br><span class="line"></span><br><span class="line"><span class="number">3</span> 写查询所有图书接口，实现按名字和价格过滤，并且支持排序</span><br><span class="line"></span><br><span class="line"><span class="number">4</span> 写一个全局异常函数，配置好，只要视图类中出异常，就返回统一格式</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">5</span>继承BaseThrottle，实现频率限制，重写<span class="function"><span class="keyword">def</span> <span class="title">allow_request</span>，重写<span class="title">wait</span>  (<span class="params">如果写不出来，对着我的看，看明白</span>)</span></span><br><span class="line"><span class="function">&#123;<span class="title">ip1</span>:</span>[第一次访问时间，第二次访问时间，],ip2:[]&#125;</span><br><span class="line"><span class="comment"># 自定义的逻辑</span></span><br><span class="line"><span class="comment">#（1）取出访问者ip</span></span><br><span class="line"><span class="comment">#（2）判断当前ip不在访问字典里，添加进去，并且直接返回True,表示第一次访问，在字典里，继续往下走</span></span><br><span class="line"><span class="comment">#（3）循环判断当前ip的列表，有值，并且当前时间减去列表的最后一个时间大于60s，把这种数据pop掉，这样列表中只有60s以内的访问时间，</span></span><br><span class="line"><span class="comment">#（4）判断，当列表小于3，说明一分钟以内访问不足三次，把当前时间插入到列表第一个位置，返回True，顺利通过</span></span><br><span class="line"><span class="comment">#（5）当大于等于3，说明一分钟内访问超过三次，返回False验证失败</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="有兴趣"><a href="#有兴趣" class="headerlink" title="有兴趣"></a>有兴趣</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> 看这个源码 </span><br><span class="line"><span class="keyword">from</span> django.contrib.sessions.middleware <span class="keyword">import</span> SessionMiddleware</span><br><span class="line"><span class="number">2</span> request.session源码</span><br><span class="line">django.contrib.sessions.backends.db.SessionSto  内网穿透</span><br></pre></td></tr></table></figure>
       
 
       
@@ -362,14 +348,14 @@
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          DRF(基础)
+          DRF之分页功能及接口文档
         
       </div>
     </a>
   
   
     <a href="/2021/07/07/DRF%E5%85%A5%E9%97%A802/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">DRF(基础)</div>
+      <div class="article-nav-title">DRF之路由及常用组件</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -396,7 +382,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%98%A8%E6%97%A5%E5%9B%9E%E9%A1%BE"><span class="toc-number">1.</span> <span class="toc-text">昨日回顾</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8A%E6%97%A5%E5%86%85%E5%AE%B9"><span class="toc-number">2.</span> <span class="toc-text">今日内容</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9D%83%E9%99%90%E7%BB%84%E4%BB%B6%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%882%E6%98%9F%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">1 权限组件源码分析（2星）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%A2%91%E7%8E%87%E7%BB%84%E4%BB%B6%E4%BD%BF%E7%94%A8%EF%BC%885%E6%98%9F%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">2 频率组件使用（5星）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%BF%87%E6%BB%A4%E5%92%8C%E6%8E%92%E5%BA%8F%EF%BC%884%E6%98%9F%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">3 过滤和排序（4星）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%EF%BC%884%E6%98%9F%EF%BC%89"><span class="toc-number">2.4.</span> <span class="toc-text">4异常处理（4星）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%9C%E4%B8%9A"><span class="toc-number">3.</span> <span class="toc-text">作业</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%89%E5%85%B4%E8%B6%A3"><span class="toc-number">4.</span> <span class="toc-text">有兴趣</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9D%83%E9%99%90%E7%BB%84%E4%BB%B6%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%882%E6%98%9F%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">1 权限组件源码分析（2星）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%A2%91%E7%8E%87%E7%BB%84%E4%BB%B6%E4%BD%BF%E7%94%A8%EF%BC%885%E6%98%9F%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">2 频率组件使用（5星）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%BF%87%E6%BB%A4%E5%92%8C%E6%8E%92%E5%BA%8F%EF%BC%884%E6%98%9F%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">3 过滤和排序（4星）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%EF%BC%884%E6%98%9F%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">4异常处理（4星）</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -606,7 +592,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
         <ul class="search-ul">
           
             <li class="search-li">
-              <a href="http://1.15.155.250/Hina/article/65" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Hina</a>
+              <a href="http://101.34.78.44/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Hina</a>
             </li>
           
             <li class="search-li">

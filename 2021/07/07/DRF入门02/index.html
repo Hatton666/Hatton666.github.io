@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>DRF(基础) | Hexo</title>
+  <title>DRF之路由及常用组件 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="上节回顾12345678910111213141516171819202122232425262728291 两个视图基类	-APIView    -GenericAPIView：    	-queryset        -serilaizer_class        -获取单个        -获取所有        -获取序列化类2 5 个视图扩展类	CreateModelMixin,">
+  <meta name="description" content="1 路由组件（4星）1.1 自动生成路由的基本使用123456789## 自动生成路由;视图类需要是ViewSetMixin子类from rest_framework.routers import DefaultRouter,SimpleRouter# router&#x3D;DefaultRouter()router&#x3D;SimpleRouter()router.register(&amp;#x27;books&amp;#x">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DRF(基础)">
+<meta property="og:title" content="DRF之路由及常用组件">
 <meta property="og:url" content="http://example.com/2021/07/07/DRF%E5%85%A5%E9%97%A802/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="上节回顾12345678910111213141516171819202122232425262728291 两个视图基类	-APIView    -GenericAPIView：    	-queryset        -serilaizer_class        -获取单个        -获取所有        -获取序列化类2 5 个视图扩展类	CreateModelMixin,">
+<meta property="og:description" content="1 路由组件（4星）1.1 自动生成路由的基本使用123456789## 自动生成路由;视图类需要是ViewSetMixin子类from rest_framework.routers import DefaultRouter,SimpleRouter# router&#x3D;DefaultRouter()router&#x3D;SimpleRouter()router.register(&amp;#x27;books&amp;#x">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-07-07T14:30:26.000Z">
-<meta property="article:modified_time" content="2021-07-08T06:43:23.906Z">
+<meta property="article:modified_time" content="2021-07-08T11:14:39.051Z">
 <meta property="article:author" content="Vivek">
 <meta property="article:tag" content="-DRF">
 <meta name="twitter:card" content="summary">
@@ -67,7 +67,7 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/category/">分类</a></li>
+				<li><a href="/category/%E5%88%86%E7%B1%BB/">分类</a></li>
 	        
 				<li><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
 	        
@@ -160,7 +160,7 @@
 				
 					<li style="width: 25%"><a href="/">主页</a></li>
 		        
-					<li style="width: 25%"><a href="/category/">分类</a></li>
+					<li style="width: 25%"><a href="/category/%E5%88%86%E7%B1%BB/">分类</a></li>
 		        
 					<li style="width: 25%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
 		        
@@ -187,7 +187,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      DRF(基础)
+      DRF之路由及常用组件
     </h1>
   
 
@@ -206,11 +206,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="上节回顾"><a href="#上节回顾" class="headerlink" title="上节回顾"></a>上节回顾</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> 两个视图基类</span><br><span class="line">	-APIView</span><br><span class="line">    -GenericAPIView：</span><br><span class="line">    	-queryset</span><br><span class="line">        -serilaizer_class</span><br><span class="line">        -获取单个</span><br><span class="line">        -获取所有</span><br><span class="line">        -获取序列化类</span><br><span class="line"><span class="number">2</span> <span class="number">5</span> 个视图扩展类</span><br><span class="line">	CreateModelMixin,</span><br><span class="line">    ListModelMixin</span><br><span class="line">    DestroyModelMixin,</span><br><span class="line">    UpdateModelMixin,</span><br><span class="line">    RetrieveModelMixin</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="number">3</span> <span class="number">9</span>个视图子类</span><br><span class="line"></span><br><span class="line"><span class="number">4</span> 视图集</span><br><span class="line">	-ModelViewSet,</span><br><span class="line">    -ReadOnlyModelViewSet,</span><br><span class="line">    </span><br><span class="line">    GenericViewSet,</span><br><span class="line">    ViewSet,</span><br><span class="line">    </span><br><span class="line">    ViewSetMixin：重写了as_view，路由变了</span><br><span class="line"></span><br><span class="line"><span class="number">5</span> 如果跟数据库打交到，继承GenericAPIView及子类，不跟数据库打交到，就继承ApiView及子类</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="今日内容"><a href="#今日内容" class="headerlink" title="今日内容"></a>今日内容</h1><h2 id="1-路由组件（4星）"><a href="#1-路由组件（4星）" class="headerlink" title="1 路由组件（4星）"></a>1 路由组件（4星）</h2><h3 id="1-1-自动生成路由的基本使用"><a href="#1-1-自动生成路由的基本使用" class="headerlink" title="1.1 自动生成路由的基本使用"></a>1.1 自动生成路由的基本使用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 自动生成路由;视图类需要是ViewSetMixin子类</span></span><br><span class="line"><span class="keyword">from</span> rest_framework.routers <span class="keyword">import</span> DefaultRouter,SimpleRouter</span><br><span class="line"></span><br><span class="line"><span class="comment"># router=DefaultRouter()</span></span><br><span class="line">router=SimpleRouter()</span><br><span class="line">router.register(<span class="string">&#x27;books&#x27;</span>,views.BookView,<span class="string">&#x27;books&#x27;</span>)</span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;&#x27;</span>, include(router.urls)),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+        <h2 id="1-路由组件（4星）"><a href="#1-路由组件（4星）" class="headerlink" title="1 路由组件（4星）"></a>1 路由组件（4星）</h2><h3 id="1-1-自动生成路由的基本使用"><a href="#1-1-自动生成路由的基本使用" class="headerlink" title="1.1 自动生成路由的基本使用"></a>1.1 自动生成路由的基本使用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 自动生成路由;视图类需要是ViewSetMixin子类</span></span><br><span class="line"><span class="keyword">from</span> rest_framework.routers <span class="keyword">import</span> DefaultRouter,SimpleRouter</span><br><span class="line"></span><br><span class="line"><span class="comment"># router=DefaultRouter()</span></span><br><span class="line">router=SimpleRouter()</span><br><span class="line">router.register(<span class="string">&#x27;books&#x27;</span>,views.BookView,<span class="string">&#x27;books&#x27;</span>)</span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;&#x27;</span>, include(router.urls)),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 
 
 
@@ -245,11 +241,6 @@
 
 
 <h2 id="3-权限组件（4星）"><a href="#3-权限组件（4星）" class="headerlink" title="3  权限组件（4星）"></a>3  权限组件（4星）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 超级用户可以访问books接口，普通用户不能</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 写一个权限类</span></span><br><span class="line"><span class="keyword">from</span> rest_framework.permissions <span class="keyword">import</span> BasePermission</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserPermission</span>(<span class="params">BasePermission</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">has_permission</span>(<span class="params">self, request, view</span>):</span></span><br><span class="line">        <span class="comment"># 写权限的逻辑(有权限访问就是True，没有权限就是False)</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> request.user.user_type==<span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line"><span class="comment"># 局部使用，在视图类上配置</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookView</span>(<span class="params">ViewSetMixin,ListAPIView</span>):</span></span><br><span class="line">    permission_classes = [UserPermission,]</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 全局使用(配置文件中)</span></span><br><span class="line"></span><br><span class="line">REST_FRAMEWORK=&#123;</span><br><span class="line">    <span class="comment"># 全局使用写得权限类</span></span><br><span class="line">    <span class="string">&#x27;DEFAULT_PERMISSION_CLASSES&#x27;</span>:[<span class="string">&#x27;app01.auth.UserPermission&#x27;</span>]</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-<h1 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span> books和publish5个接口，自动生成路由</span><br><span class="line"><span class="number">1</span> 写登录功能，使用action映射</span><br><span class="line"><span class="number">2</span> 写一个认证类，保证books的所有接口，必须认证通过才能访问</span><br><span class="line">	-访问时，token不放在请求地址中，放在请求头中</span><br><span class="line"><span class="number">3</span> 写一个权限类，publish的所有接口，必须超级用户才能访问</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 部分人</span></span><br><span class="line"><span class="number">4</span> 权限user_type使用choice，返回的提示信息，自定制</span><br><span class="line"><span class="number">5</span> 把认证类源码过一遍</span><br><span class="line"><span class="number">6</span> 权限类源码看一看</span><br></pre></td></tr></table></figure>
 
 
       
@@ -380,14 +371,14 @@
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          DRF(基础)
+          DRF之组件及异常处理
         
       </div>
     </a>
   
   
     <a href="/2021/07/07/DRF%E5%85%A5%E9%97%A801/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">DRF(基础)</div>
+      <div class="article-nav-title">DRF之三层视图及视图集</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -414,7 +405,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8A%E8%8A%82%E5%9B%9E%E9%A1%BE"><span class="toc-number">1.</span> <span class="toc-text">上节回顾</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8A%E6%97%A5%E5%86%85%E5%AE%B9"><span class="toc-number">2.</span> <span class="toc-text">今日内容</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%B7%AF%E7%94%B1%E7%BB%84%E4%BB%B6%EF%BC%884%E6%98%9F%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">1 路由组件（4星）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E8%B7%AF%E7%94%B1%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">2.1.1.</span> <span class="toc-text">1.1 自动生成路由的基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E8%A7%86%E5%9B%BE%E7%B1%BB%E4%B8%AD%E6%B4%BE%E7%94%9F%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%8C%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E8%B7%AF%E7%94%B1%EF%BC%88action%EF%BC%89"><span class="toc-number">2.1.2.</span> <span class="toc-text">1.2 视图类中派生的方法，自动生成路由（action）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E6%80%BB%E7%BB%93"><span class="toc-number">2.1.3.</span> <span class="toc-text">1.3 总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%AE%A4%E8%AF%81%E7%BB%84%E4%BB%B6%EF%BC%885%E6%98%9F%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">2 认证组件（5星）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%99%BB%E5%BD%95%E5%8A%9F%E8%83%BD"><span class="toc-number">2.2.1.</span> <span class="toc-text">2.1 登录功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E8%AE%A4%E8%AF%81%E7%B1%BB%E7%9A%84%E7%BC%96%E5%86%99"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.2 认证类的编写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E8%AE%A4%E8%AF%81%E7%B1%BB%E7%9A%84%E5%85%A8%E5%B1%80%E4%BD%BF%E7%94%A8%E5%92%8C%E5%B1%80%E9%83%A8%E4%BD%BF%E7%94%A8"><span class="toc-number">2.2.3.</span> <span class="toc-text">2.3 认证类的全局使用和局部使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%882%E6%98%9F%EF%BC%89"><span class="toc-number">2.2.4.</span> <span class="toc-text">2.4 源码分析（2星）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%9D%83%E9%99%90%E7%BB%84%E4%BB%B6%EF%BC%884%E6%98%9F%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">3  权限组件（4星）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%9C%E4%B8%9A"><span class="toc-number">3.</span> <span class="toc-text">作业</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%B7%AF%E7%94%B1%E7%BB%84%E4%BB%B6%EF%BC%884%E6%98%9F%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">1 路由组件（4星）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E8%B7%AF%E7%94%B1%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 自动生成路由的基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E8%A7%86%E5%9B%BE%E7%B1%BB%E4%B8%AD%E6%B4%BE%E7%94%9F%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%8C%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E8%B7%AF%E7%94%B1%EF%BC%88action%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 视图类中派生的方法，自动生成路由（action）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E6%80%BB%E7%BB%93"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%AE%A4%E8%AF%81%E7%BB%84%E4%BB%B6%EF%BC%885%E6%98%9F%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">2 认证组件（5星）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%99%BB%E5%BD%95%E5%8A%9F%E8%83%BD"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 登录功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E8%AE%A4%E8%AF%81%E7%B1%BB%E7%9A%84%E7%BC%96%E5%86%99"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 认证类的编写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E8%AE%A4%E8%AF%81%E7%B1%BB%E7%9A%84%E5%85%A8%E5%B1%80%E4%BD%BF%E7%94%A8%E5%92%8C%E5%B1%80%E9%83%A8%E4%BD%BF%E7%94%A8"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 认证类的全局使用和局部使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%882%E6%98%9F%EF%BC%89"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 源码分析（2星）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%9D%83%E9%99%90%E7%BB%84%E4%BB%B6%EF%BC%884%E6%98%9F%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">3  权限组件（4星）</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -624,7 +615,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
         <ul class="search-ul">
           
             <li class="search-li">
-              <a href="http://1.15.155.250/Hina/article/65" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Hina</a>
+              <a href="http://101.34.78.44/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Hina</a>
             </li>
           
             <li class="search-li">
