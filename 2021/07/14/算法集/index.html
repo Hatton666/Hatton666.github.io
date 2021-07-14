@@ -6,20 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>DRF之restful设计风格 | Hexo</title>
+  <title>常用排序算法 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1,web应用模式(了解) 目的: 知道web开发的两种模式 前后端分离: 注意点: 业务服务器和静态服务器是分开的   前后端不分离: 注意点: 页面和数据都是有后端处理的    123456789101112131415161718192021222324252627282930313233341 前后端开发模式	-分离（djanog+vue分离），只专注于写接口，调接口的性能    -混合（">
+  <meta name="description" content="0，算法前戏时间估算    一次基本操作  单位O(1)     事件规模n    单位O(n)     事件规模n^2  单位O(n^2)     事件规模减半   单位O(n* log(n)) 快速简单判断算法复杂度技巧：(适用于绝大多数 简单情况)    1,确定问题规模(n)    2,循环减半过程log(n)    3,k层关于n的循环(n^k) 复杂情况：根据算法执行过程判断 1234">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DRF之restful设计风格">
-<meta property="og:url" content="http://example.com/2021/07/05/DRF/index.html">
+<meta property="og:title" content="常用排序算法">
+<meta property="og:url" content="http://example.com/2021/07/14/%E7%AE%97%E6%B3%95%E9%9B%86/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1,web应用模式(了解) 目的: 知道web开发的两种模式 前后端分离: 注意点: 业务服务器和静态服务器是分开的   前后端不分离: 注意点: 页面和数据都是有后端处理的    123456789101112131415161718192021222324252627282930313233341 前后端开发模式	-分离（djanog+vue分离），只专注于写接口，调接口的性能    -混合（">
+<meta property="og:description" content="0，算法前戏时间估算    一次基本操作  单位O(1)     事件规模n    单位O(n)     事件规模n^2  单位O(n^2)     事件规模减半   单位O(n* log(n)) 快速简单判断算法复杂度技巧：(适用于绝大多数 简单情况)    1,确定问题规模(n)    2,循环减半过程log(n)    3,k层关于n的循环(n^k) 复杂情况：根据算法执行过程判断 1234">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-07-05T09:25:56.000Z">
-<meta property="article:modified_time" content="2021-07-12T17:04:55.065Z">
+<meta property="og:image" content="http://5b0988e595225.cdn.sohucs.com/images/20190330/a23ccf3f7a8f41ae82ec7ae1deca5447.gif">
+<meta property="og:image" content="http://5b0988e595225.cdn.sohucs.com/images/20190330/78db2613c2b547278c957b9f145debf6.gif">
+<meta property="og:image" content="http://5b0988e595225.cdn.sohucs.com/images/20190330/e0608647aa9641b39411392767533092.gif">
+<meta property="article:published_time" content="2021-07-14T07:12:25.000Z">
+<meta property="article:modified_time" content="2021-07-14T09:25:24.024Z">
 <meta property="article:author" content="Vivek">
-<meta property="article:tag" content="-DRF">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://5b0988e595225.cdn.sohucs.com/images/20190330/a23ccf3f7a8f41ae82ec7ae1deca5447.gif">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -180,14 +184,14 @@
           </div>
           <div id="js-content" class="content-ll">
             
-<article id="post-DRF" class="article article-type-post " itemscope itemprop="blogPost">
+<article id="post-算法集" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      DRF之restful设计风格
+      常用排序算法
     </h1>
   
 
@@ -198,27 +202,120 @@
 		  <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
 	</span>
 
-<a href="/2021/07/05/DRF/" class="archive-article-date">
-  	<time datetime="2021-07-05T09:25:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-05</time>
+<a href="/2021/07/14/%E7%AE%97%E6%B3%95%E9%9B%86/" class="archive-article-date">
+  	<time datetime="2021-07-14T07:12:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-14</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="1-web应用模式-了解"><a href="#1-web应用模式-了解" class="headerlink" title="1,web应用模式(了解)"></a>1,web应用模式(了解)</h4><ul>
-<li>目的: 知道web开发的两种模式</li>
-<li>前后端分离:<ul>
-<li>注意点: 业务服务器和静态服务器是分开的</li>
-</ul>
-</li>
-<li>前后端不分离:<ul>
-<li>注意点: 页面和数据都是有后端处理的</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> 前后端开发模式</span><br><span class="line">	-分离（djanog+vue分离），只专注于写接口，调接口的性能</span><br><span class="line">    -混合（django+admin做后台管理）</span><br><span class="line">    </span><br><span class="line"><span class="number">2</span> API接口</span><br><span class="line">	-写前后端分离项目时，后端提供给前端的接口</span><br><span class="line">    -访问地址，携带数据，返回相应的数据</span><br><span class="line">    -使用第三方服务，第三方的官方文档会提供API接口文档</span><br><span class="line">    </span><br><span class="line"><span class="number">3</span> 接口测试工具</span><br><span class="line">	-postman。。。</span><br><span class="line">    -本质：模拟发送http请求</span><br><span class="line">    -前后端交互的编码方式</span><br><span class="line">    	-urlencoded</span><br><span class="line">        -form-data</span><br><span class="line">        -json </span><br><span class="line"></span><br><span class="line"><span class="comment">#### 3,restful设计风格(了解)</span></span><br><span class="line"></span><br><span class="line">- 目的: 知道常见的restful风格的标准</span><br><span class="line">- 具体的标准:</span><br><span class="line">  - <span class="number">1</span>, api部署的域名, 主域名或者专有域名</span><br><span class="line">  - <span class="number">2</span>, 版本,  通过url地址或者请求头accept</span><br><span class="line">  - <span class="number">3</span>, 路径, 只能有名词, 不能有动词</span><br><span class="line">  - <span class="number">4</span>, http请求动词,  get, post, update, delete</span><br><span class="line">  - <span class="number">5</span>, 状态, <span class="number">200</span>, <span class="number">201</span>, <span class="number">204</span>, <span class="number">400</span>, <span class="number">401</span>, <span class="number">403</span>, <span class="number">404</span></span><br><span class="line">  - ….</span><br><span class="line">    </span><br><span class="line"><span class="number">5</span> 序列化和反序列化</span><br><span class="line">	</span><br><span class="line"><span class="number">6</span> drf介绍和安装</span><br><span class="line">	-django的一个app，集成到django中可以方便我们快速写出符合restful规范的接口（有的公司可能没用）</span><br><span class="line">    -pip3 install djangorestframework</span><br><span class="line">	-版本对应关系：最新的drf，只支持<span class="number">2.</span>x 及<span class="number">3.</span>x以上</span><br></pre></td></tr></table></figure>
+        <h2 id="0，算法前戏"><a href="#0，算法前戏" class="headerlink" title="0，算法前戏"></a>0，算法前戏</h2><p><strong>时间估算</strong><br>    一次基本操作  单位O(1)<br>     事件规模n    单位O(n)<br>     事件规模n^2  单位O(n^2)<br>     事件规模减半   单位O(n* log(n))</p>
+<p><strong>快速简单判断算法复杂度技巧：</strong>(适用于绝大多数 简单情况)<br>    1,确定问题规模(n)<br>    2,循环减半过程log(n)<br>    3,k层关于n的循环(n^k)</p>
+<p>复杂情况：根据算法执行过程判断</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">常见时间复杂度排序</span><br><span class="line">O(1)&lt;O(n)&lt;O(log(n))&lt;O(n*log(n))&lt;O(n**2)...</span><br><span class="line"></span><br><span class="line">大部分算法：空间换时间，来提高速度。</span><br></pre></td></tr></table></figure>
 
+<p><strong>递归</strong>  ： 1，调用自身 ；2，有结束条件</p>
+<p><strong>案例</strong>  ： 汉诺塔问题</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hanoi</span>(<span class="params">n, a, b, c</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n &gt; <span class="number">0</span>:</span><br><span class="line">        hanoi(n - <span class="number">1</span>, a, c, b)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;%s from to %s&#x27;</span> % (a, c))</span><br><span class="line">        hanoi(n - <span class="number">1</span>, b, a, c)</span><br><span class="line"></span><br><span class="line">hanoi(<span class="number">3</span>, <span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;C&#x27;</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;&gt;&gt;</span><br><span class="line">A <span class="keyword">from</span> to C</span><br><span class="line">A <span class="keyword">from</span> to B</span><br><span class="line">C <span class="keyword">from</span> to B</span><br><span class="line">A <span class="keyword">from</span> to C</span><br><span class="line">B <span class="keyword">from</span> to A</span><br><span class="line">B <span class="keyword">from</span> to C</span><br><span class="line">A <span class="keyword">from</span> to C</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="一，查找问题"><a href="#一，查找问题" class="headerlink" title="一，查找问题"></a>一，查找问题</h2><p><strong>列表查找：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">找到返回元素index，搜索到列表中最后一个元素没找到，则返回None或者-1.</span><br><span class="line"></span><br><span class="line">输入：li 和 value</span><br><span class="line">输出：index 或 value</span><br></pre></td></tr></table></figure>
+
+<p><strong>顺序查找</strong> <strong>:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">又叫linerSearch(线性查找)</span><br><span class="line">时间复杂度 O(n)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">liner_search</span>(<span class="params">li, val</span>):</span></span><br><span class="line">    <span class="keyword">for</span> ind, v <span class="keyword">in</span> <span class="built_in">enumerate</span>(li):</span><br><span class="line">        <span class="keyword">if</span> v == val:</span><br><span class="line">            <span class="keyword">return</span> ind</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>二分法查找:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">二分法查找</span><br><span class="line">前提：列表有序 <span class="comment"># 列表有序</span></span><br><span class="line">时间复杂度 O(log(n))</span><br><span class="line"></span><br><span class="line">本身排序的时间复杂度&gt;O(n)</span><br><span class="line">所以，当一个列表被查的频率比较高时，可以先排序，再二分查找。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">binary_search</span>(<span class="params">li, val</span>):</span></span><br><span class="line">    left = <span class="number">0</span></span><br><span class="line">    right = <span class="built_in">len</span>(li) - <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> left &lt;= right:  <span class="comment"># 后选区有值</span></span><br><span class="line">        mid = (left + right) // <span class="number">2</span>  <span class="comment"># 找到中间索引</span></span><br><span class="line">        <span class="keyword">if</span> li[mid] == val:</span><br><span class="line">            <span class="keyword">return</span> mid</span><br><span class="line">        <span class="keyword">elif</span> li[mid] &gt; val:   <span class="comment"># 要找的val在mid的左侧</span></span><br><span class="line">            right = mid - <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:                 <span class="comment"># li[mid] &lt; val 要找的val在mid的右侧</span></span><br><span class="line">            left = mid + <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">li = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line"><span class="built_in">print</span>(binary_search(li, <span class="number">3</span>))</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="二，冒泡排序"><a href="#二，冒泡排序" class="headerlink" title="二，冒泡排序"></a>二，冒泡排序</h2><p>冒泡排序（Bubble Sort），是一种计算机科学领域的较简单的排序算法。</p>
+<p>它重复地走访过要排序的元素列，依次比较两个相邻的元素，</p>
+<p>一层一层的将较大的元素往后移动，其现象和气泡在上升过程中慢慢变大类似，故成为<strong>冒泡排序</strong>。</p>
+<p><strong>1.过程图解</strong></p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190330/a23ccf3f7a8f41ae82ec7ae1deca5447.gif" alt="img"></p>
+<p><strong>2.算法思想</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">列表每相邻的两个数，如果前面比后面的大，则交换两个数</span><br><span class="line">两列表分为有序区（排好的），和无序区（顺序没有排好的）。</span><br><span class="line">一趟排序后，无序区减少一个数，有序区增加一个数。</span><br><span class="line"></span><br><span class="line">列表长度为n,则一共排n-1趟。</span><br><span class="line">第i趟无序区的范围：n-i-1</span><br><span class="line">（i是按索引数定的，第0趟，第一趟...）</span><br><span class="line"></span><br><span class="line">关键点代码：趟（数），无序区范围。</span><br><span class="line"></span><br><span class="line">优化方案：  如果没有标志位，则任何情况下的列表，都需要排n-1趟</span><br><span class="line">增加一个标志位。exchange = False</span><br><span class="line"># 如果一趟冒泡排序中没有发生交换，则列表已经排好序，无需后续的循环。</span><br><span class="line">if not exchange:  </span><br><span class="line">        return li</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>3.代码实现</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubble_sort</span>(<span class="params">li</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(li) - <span class="number">1</span>):    <span class="comment"># n-1趟</span></span><br><span class="line">        exchange = <span class="literal">False</span>    <span class="comment"># 标志位 如果没有标志位，则任何情况下的列表，都需要排n-1趟。</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(li) - i - <span class="number">1</span>):    <span class="comment"># 无序区范围</span></span><br><span class="line">            <span class="keyword">if</span> li[j] &gt; li[j + <span class="number">1</span>]:</span><br><span class="line">                li[j + <span class="number">1</span>], li[j] = li[j], li[j + <span class="number">1</span>]</span><br><span class="line">                exchange = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> exchange:    <span class="comment"># 如果一趟冒泡排序中没有发生交换，则列表已经排好序，无需后续的循环。</span></span><br><span class="line">        <span class="keyword">return</span> li</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="comment"># 列表生成式，随机从0~100中取十个数形成一个列表。</span></span><br><span class="line">li = [random.randint(<span class="number">0</span>, <span class="number">100</span>) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(bubble_sort(li))</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;&gt;&gt;:</span><br><span class="line">    [<span class="number">8</span>, <span class="number">12</span>, <span class="number">12</span>, <span class="number">28</span>, <span class="number">37</span>, <span class="number">52</span>, <span class="number">72</span>, <span class="number">78</span>, <span class="number">83</span>, <span class="number">86</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<p>4.<strong>算法分析</strong></p>
+<p><strong>时间复杂度：</strong>为O(n^2)  它需要双层循环n*(n-1))<br><strong>空间复杂度：</strong>空间复杂度为O(1), 原地排序（in-place）。<br><strong>稳定性：</strong>只有前一个元素大于后一个元素才可能交换位置，所以相同元素的相对顺序不可能改变，<br>      所以它是(稳定排序)。<br><strong>比较性：</strong>因为排序时元素之间需要比较，所以是比较排序<br><strong>记忆方法：</strong>想象成气泡，一层一层的往上变大</p>
+<p><strong>应用场景：</strong>每一轮比较可能多个元素移动位置，而元素位置的互换是需要消耗资源的，<br>所以这是一种偏慢的排序算法，仅适用于对于含有较少元素的数列进行排序。</p>
+<hr>
+<h2 id="三，选择排序"><a href="#三，选择排序" class="headerlink" title="三，选择排序"></a>三，选择排序</h2><p><strong>选择排序简单版：</strong>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">select_sort_simple</span>(<span class="params">li</span>):</span></span><br><span class="line">    li_new = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(li)):</span><br><span class="line">        min_val = <span class="built_in">min</span>(li)   <span class="comment"># min()不是一次基础操作就找到最小值,而是要循环li.</span></span><br><span class="line">        li_new.append(min_val)</span><br><span class="line">        li.remove(min_val)   <span class="comment"># remove()不是一次基础操作就找到最小值，而是要循环li</span></span><br><span class="line">    <span class="keyword">return</span> li_new</span><br><span class="line"></span><br><span class="line">li = [<span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">7</span>, <span class="number">8</span>]</span><br><span class="line"><span class="built_in">print</span>(select_sort_simple(li))</span><br></pre></td></tr></table></figure>
+
+<p><strong>存在问题</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">两大致命缺点：</span><br><span class="line">    1：不是原地排序，又生成了新的列表，</span><br><span class="line">    2：min()和 remove()的时间复杂度都为O(n)  =&gt;算做一个O(n)</span><br><span class="line">    选择排序简单版时间复杂度为O(n^2)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>正规版：</strong></p>
+<p>选择排序（Selection sort）是一种简单直观的排序算法。</p>
+<p>它的工作原理是每一次从待排序的数据元素中<strong>选出</strong>最小（或最大）的一个元素，</p>
+<p>存放在序列的起始位置，所以称为：<strong>选择排序</strong></p>
+<p><strong>1.过程图解</strong></p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190330/78db2613c2b547278c957b9f145debf6.gif" alt="img"></p>
+<p><strong>2.算法思想</strong></p>
+<p>设第一个元素为比较元素，依次和后面的元素比较，比较完所有元素找到最小的元素，将它和第一个元素互换</p>
+<p>重复上述操作，我们找出第二小的元素和第二个位置的元素互换，以此类推找出剩余最小元素将它换到前面，即完成排序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">代码关键：</span><br><span class="line">1，有序区，无序区范围</span><br><span class="line">2，无序区最小数位置</span><br><span class="line">   无序区范围，第0趟是（0,n）,第1趟是（1,n）...第i趟是（i，n），假设i为无序区第一个值</span><br><span class="line">3，（i,min_loc都为索引，用索引交换）无序区的最小值和无序区的第一个值交换</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>3.代码实现</strong></p>
+<p>写一个装饰器，计算排序完成所用时间。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cal_time</span>(<span class="params">func</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wraper</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">        t1 = time.time()</span><br><span class="line">        result = func(*args, **kwargs)</span><br><span class="line">        t2 = time.time()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;%s running time %s　second&#x27;</span> % (func.__name__, t2 - t1))</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    <span class="keyword">return</span> wraper</span><br></pre></td></tr></table></figure>
+
+<p>选择排序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="meta">@cal_time</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">select_sort</span>(<span class="params">li</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(li) - <span class="number">1</span>):  <span class="comment"># n-1趟 最后一个数不用排</span></span><br><span class="line">        min_loc = i  <span class="comment"># 假设第i趟无序区第一个值li[i]为最小值</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 无序区范围range(i,len(li)),</span></span><br><span class="line">        <span class="comment"># 避免下面j与自己的重复比较range(i+1,len(li))</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i + <span class="number">1</span>, <span class="built_in">len</span>(li)):</span><br><span class="line">            <span class="keyword">if</span> li[j] &lt; li[min_loc]:</span><br><span class="line">                min_loc = j  <span class="comment"># 循环结束后找到无序区的最小值</span></span><br><span class="line">                </span><br><span class="line">                <span class="comment"># 无序区的最小值和假设的无序区第一个值交换</span></span><br><span class="line">        li[i], li[min_loc] = li[min_loc], li[i] </span><br><span class="line">        <span class="comment"># print(li)  # 为了看每一趟的结果</span></span><br><span class="line">    <span class="keyword">return</span> li</span><br><span class="line"></span><br><span class="line">li=<span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">10</span>))</span><br><span class="line">random.shuffle(li) <span class="comment"># 打乱顺序</span></span><br><span class="line"><span class="built_in">print</span>(li)</span><br><span class="line"></span><br><span class="line">select_sort(li) <span class="comment"># 选择排序</span></span><br><span class="line"><span class="built_in">print</span>(li)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;&gt;&gt;</span><br><span class="line">[<span class="number">5</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">0</span>, <span class="number">7</span>]</span><br><span class="line">select_sort running time <span class="number">0.0</span>　second</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>4.算法分析</strong></p>
+<p><strong>比较性：</strong>因为排序时元素之间需要比较，所以是<strong>比较排序</strong></p>
+<p><strong>稳定性：</strong>因为存在任意位置的两个元素交换，</p>
+<p>比如[5, 8, 5, 2]，第一个5会和2交换位置，改变了两个5原来的相对顺序，所以为<strong>不稳定排序</strong>。</p>
+<p><strong>时间复杂度：</strong>双层循环n*(n-1))，所以时间复杂度也为：O(n^2)</p>
+<p><strong>空间复杂度</strong>：只需要常数个辅助单元，所以空间复杂度也为<strong>O(1)</strong></p>
+<p><strong>记忆方法：</strong>选择对象要先选最小的，小小小，好好好。</p>
+<hr>
+<h2 id="四，插入排序"><a href="#四，插入排序" class="headerlink" title="四，插入排序"></a>四，插入排序</h2><p>插入排序（Insertion-Sort）的算法描述是一种简单直观的排序算法。</p>
+<p>它的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，</p>
+<p>找到相应位置并插入。</p>
+<p><strong>1.过程图解</strong></p>
+<p><img src="http://5b0988e595225.cdn.sohucs.com/images/20190330/e0608647aa9641b39411392767533092.gif" alt="img"></p>
+<p><strong>2.算法思想</strong></p>
+<p>​    初始时手里（有序区）只有一张牌<br>​    每次从（无序区）摸一张牌，插入到手里已有牌的正确位置。</p>
+<p>​    从小到大排<br>​    （循环）摸牌，把每次摸到的牌和其左边的牌（依次循环）比较，从左边的第一个开始比，<br>​    直到 摸到的牌比左边的牌大，或则，比到最后左边已经没牌了，比较结束<br>​    那就把摸到的牌放在j+1的位置<br>​    总共摸n-1此牌，排n-1趟</p>
+<p><strong>3.代码实现</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="meta">@cal_time  </span><span class="comment"># cal_time装饰器可以检测算法运行时间</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert_sort</span>(<span class="params">li</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(li)):  <span class="comment"># i是摸到的牌的位置</span></span><br><span class="line">        tmp = li[i]  <span class="comment"># 摸到的牌</span></span><br><span class="line">        j = i - <span class="number">1</span>  <span class="comment"># j是要和摸到的牌比较的牌的位置</span></span><br><span class="line">        <span class="keyword">while</span> j &gt;= <span class="number">0</span> <span class="keyword">and</span> li[j] &gt; tmp:  <span class="comment"># 结束比较的两个条件</span></span><br><span class="line">            li[j + <span class="number">1</span>] = li[j]  <span class="comment"># 把比摸到的牌（tmp）大的往右边移一个位置</span></span><br><span class="line">            j -= <span class="number">1</span>  <span class="comment"># 往左移动一个，循环接着比</span></span><br><span class="line">        li[j + <span class="number">1</span>] = tmp  <span class="comment"># 把摸到的牌放在条件结束的位置</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> li</span><br><span class="line">li = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">10</span>))  <span class="comment"># 生成一个n=10000的列表</span></span><br><span class="line">random.shuffle(li)</span><br><span class="line">insert_sort(li)</span><br><span class="line"><span class="built_in">print</span>(li)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;&gt;&gt;</span><br><span class="line">[<span class="number">5</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">0</span>]</span><br><span class="line">insert_sort running time <span class="number">0.0</span>　second</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>4.算法分析</strong></p>
+<p><strong>适用场景：</strong></p>
+<p><strong>一个新元素需要插入到一组已经是有序的数组中</strong>，或者是一组<strong>基本有序的数组排序</strong>。</p>
+<p>比较性：排序时元素之间需要比较，所以为<strong>比较排序</strong></p>
+<p>稳定性：从代码我们可以看出只有比较元素大于当前元素，比较元素才会往后移动，</p>
+<p>所以相同元素是不会改变相对顺序。</p>
+<p>时间复杂度：需要两次循坏一个一个比较，故时间复杂度也为O(n^2)</p>
+<p>空间复杂度：只需要常数个辅助单元，所以空间复杂度也为<strong>O(1)</strong></p>
+<p>记忆方法：随机摸牌游戏</p>
+<hr>
+<h3 id="总结-冒泡排序，选择排序，插入排序。"><a href="#总结-冒泡排序，选择排序，插入排序。" class="headerlink" title="总结 冒泡排序，选择排序，插入排序。"></a>总结 冒泡排序，选择排序，插入排序。</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">low B 三人组的时间复杂度都为O(n^2)</span><br><span class="line">假如对n=10000的列表进行排序，就要排10000^2次 一亿次</span><br><span class="line">而计算机一秒中可以进行一千万次操作</span><br><span class="line">冒泡排序需要11秒左右</span><br><span class="line">插入排序需要4秒左右</span><br><span class="line">选择排序需要13秒左右</span><br></pre></td></tr></table></figure>
+
+<hr>
 
       
 
@@ -263,7 +360,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">-DRF</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
         		</li>
       		
 		</ul>
@@ -275,7 +372,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color3">-Python</a>
+        			<a href="/categories/算法集//" class="article-tag-list-link color4">算法集</a>
         		</li>
       		
 		</ul>
@@ -330,7 +427,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://vivek-666.github.io/021/07/05/DRF/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://vivek-666.github.io/021/07/14/%E7%AE%97%E6%B3%95%E9%9B%86/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -344,15 +441,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/07/07/DRF%E5%85%A5%E9%97%A801/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          DRF之三层视图及视图集
-        
-      </div>
-    </a>
   
+    <a href="/2021/07/14/CBV%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">CBV源码分析</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -377,7 +470,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-web%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F-%E4%BA%86%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">1,web应用模式(了解)</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0%EF%BC%8C%E7%AE%97%E6%B3%95%E5%89%8D%E6%88%8F"><span class="toc-number">1.</span> <span class="toc-text">0，算法前戏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%EF%BC%8C%E6%9F%A5%E6%89%BE%E9%97%AE%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">一，查找问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%EF%BC%8C%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F"><span class="toc-number">3.</span> <span class="toc-text">二，冒泡排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%EF%BC%8C%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F"><span class="toc-number">4.</span> <span class="toc-text">三，选择排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%EF%BC%8C%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="toc-number">5.</span> <span class="toc-text">四，插入排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%EF%BC%8C%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F%EF%BC%8C%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E3%80%82"><span class="toc-number">5.1.</span> <span class="toc-text">总结 冒泡排序，选择排序，插入排序。</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
