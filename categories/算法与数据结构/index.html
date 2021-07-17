@@ -6,19 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>DRF之分页功能及接口文档 | Hexo</title>
+  <title>Category: 算法与数据结构 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1 频率组件源码分析（2星）12345678910111213141516APIVIew的dispatch---》self.initial(request, *args, **kwargs)----》self.check_throttles(request)        throttle_durations &#x3D; []        for throttle in self.get_throttl">
-<meta property="og:type" content="article">
-<meta property="og:title" content="DRF之分页功能及接口文档">
-<meta property="og:url" content="http://example.com/2021/07/07/DRF%E5%85%A5%E9%97%A804/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1 频率组件源码分析（2星）12345678910111213141516APIVIew的dispatch---》self.initial(request, *args, **kwargs)----》self.check_throttles(request)        throttle_durations &#x3D; []        for throttle in self.get_throttl">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-07-07T14:31:00.000Z">
-<meta property="article:modified_time" content="2021-07-17T17:12:46.588Z">
 <meta property="article:author" content="Vivek">
-<meta property="article:tag" content="后端">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -180,278 +175,76 @@
           </div>
           <div id="js-content" class="content-ll">
             
-<article id="post-DRF入门04" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 class="article-title" itemprop="name">
-      DRF之分页功能及接口文档
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2021" class="archive-year">2021</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	
+<a href="/2021/07/14/%E7%AE%97%E6%B3%95%E9%9B%86/" class="archive-article-date">
+  	<time datetime="2021-07-14T07:12:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-14</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2021/07/14/%E7%AE%97%E6%B3%95%E9%9B%86/">常用排序算法</a>
     </h1>
   
 
-        
-        
-	<!-- 不蒜子统计 -->
-	<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-		  <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-	</span>
-
-<a href="/2021/07/07/DRF%E5%85%A5%E9%97%A804/" class="archive-article-date">
-  	<time datetime="2021-07-07T14:31:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id=""><a href="#" class="headerlink" title=""></a></h1><h2 id="1-频率组件源码分析（2星）"><a href="#1-频率组件源码分析（2星）" class="headerlink" title="1 频率组件源码分析（2星）"></a>1 频率组件源码分析（2星）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">APIVIew的dispatch---》self.initial(request, *args, **kwargs)----》self.check_throttles(request)</span><br><span class="line">        throttle_durations = []</span><br><span class="line">        <span class="keyword">for</span> throttle <span class="keyword">in</span> self.get_throttles():</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> throttle.allow_request(request, self):</span><br><span class="line">                throttle_durations.append(throttle.wait())</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> throttle_durations:</span><br><span class="line">            <span class="comment"># Filter out `None` values which may happen in case of config / rate</span></span><br><span class="line">            <span class="comment"># changes, see #1438</span></span><br><span class="line">            durations = [</span><br><span class="line">                duration <span class="keyword">for</span> duration <span class="keyword">in</span> throttle_durations</span><br><span class="line">                <span class="keyword">if</span> duration <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span></span><br><span class="line">            ]</span><br><span class="line"></span><br><span class="line">            duration = <span class="built_in">max</span>(durations, default=<span class="literal">None</span>)</span><br><span class="line">            self.throttled(request, duration)</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="2-分页功能（5星）"><a href="#2-分页功能（5星）" class="headerlink" title="2 分页功能（5星）"></a>2 分页功能（5星）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查询所有，才有分页功能，在网站上的下一页功能，app的下滑加载更多</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="2-1-PageNumberPagination-基本分页"><a href="#2-1-PageNumberPagination-基本分页" class="headerlink" title="2.1 PageNumberPagination 基本分页"></a>2.1 PageNumberPagination 基本分页</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重要类属性</span></span><br><span class="line">page_size = api_settings.PAGE_SIZE   <span class="comment"># 每页显示条数</span></span><br><span class="line">page_query_param = <span class="string">&#x27;page&#x27;</span> <span class="comment"># 查询时用的参数http://127.0.0.1:8000/books/?page=2</span></span><br><span class="line">page_size_query_param = <span class="string">&#x27;size&#x27;</span> <span class="comment"># http://127.0.0.1:8000/books/?page=1&amp;size=4  更改返回条数，第一页返回四条</span></span><br><span class="line">max_page_size = <span class="number">10</span>           <span class="comment"># 一页最多显示10条 </span></span><br></pre></td></tr></table></figure>
-
-<p><strong>使用</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">####1  写一个类，继承PageNumberPagination，重写4个类属性</span></span><br><span class="line"><span class="keyword">from</span> rest_framework.pagination <span class="keyword">import</span> PageNumberPagination</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CommonPageNumberPagination</span>(<span class="params">PageNumberPagination</span>):</span></span><br><span class="line">    page_size = <span class="number">2</span>  <span class="comment"># 每页显示条数</span></span><br><span class="line">    page_query_param = <span class="string">&#x27;page&#x27;</span>  <span class="comment"># 查询时用的参数http://127.0.0.1:8000/books/?page=2</span></span><br><span class="line">    page_size_query_param = <span class="string">&#x27;size&#x27;</span>  <span class="comment"># http://127.0.0.1:8000/books/?page=1&amp;size=4  更改返回条数，第一页返回四条</span></span><br><span class="line">    max_page_size = <span class="number">3</span>  <span class="comment"># 一页最多显示10条</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="comment">#### 2 在视图类中配置我们写的分页类即可</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookView</span>(<span class="params">ViewSetMixin,ListAPIView</span>):</span></span><br><span class="line"><span class="comment"># class BookView(GenericViewSet,ListModelMixin):</span></span><br><span class="line">    <span class="comment"># 配置分页类，继承GenericAPIView及子类，才能使用</span></span><br><span class="line">    pagination_class = PageNumberPagination</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="comment"># 访问</span></span><br><span class="line">http://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8000</span>/books/?page=<span class="number">4</span>&amp;size=<span class="number">2</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="2-2-LimitOffsetPagination-偏移分页"><a href="#2-2-LimitOffsetPagination-偏移分页" class="headerlink" title="2.2 LimitOffsetPagination 偏移分页"></a>2.2 LimitOffsetPagination 偏移分页</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重要的类属性</span></span><br><span class="line">default_limit = api_settings.PAGE_SIZE   <span class="comment"># 显示多少条</span></span><br><span class="line">limit_query_param = <span class="string">&#x27;limit&#x27;</span>              <span class="comment"># limit的参数http://127.0.0.1:8000/books/?limit=2&amp;offset=4</span></span><br><span class="line">offset_query_param = <span class="string">&#x27;offset&#x27;</span>           <span class="comment"># offset偏移的查询参数http://127.0.0.1:8000/books/?limit=2&amp;offset=4</span></span><br><span class="line">max_limit = <span class="number">5</span>                        <span class="comment"># 最大显示条数，为5</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 访问</span></span><br><span class="line">http://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>/four/students/?limit=<span class="number">100</span>&amp;offset=<span class="number">400</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="2-3-游标分页"><a href="#2-3-游标分页" class="headerlink" title="2.3 游标分页"></a>2.3 游标分页</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重要类属性</span></span><br><span class="line">cursor_query_param = <span class="string">&#x27;cursor&#x27;</span>   <span class="comment"># 查询条件</span></span><br><span class="line">page_size = api_settings.PAGE_SIZE  <span class="comment"># 每页显示多少条</span></span><br><span class="line">ordering = <span class="string">&#x27;id&#x27;</span>              <span class="comment"># 排序，按id排序</span></span><br><span class="line">page_size_query_param = <span class="string">&#x27;size&#x27;</span> <span class="comment"># 通过这个参数决定每页显示多少条  </span></span><br><span class="line">max_page_size = <span class="number">5</span>           <span class="comment"># 每页最大显示多少条</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 优点：速度最快，数据量越大，越有优势</span></span><br><span class="line"><span class="comment">## 缺点：只能前一页和后一页，不能直接跳到某一页</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 访问</span></span><br><span class="line">http://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>/four/students/?cursor=cD0xNQ%3D%3D</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="2-4-继承APIView实现三种分页方式"><a href="#2-4-继承APIView实现三种分页方式" class="headerlink" title="2.4 继承APIView实现三种分页方式"></a>2.4 继承APIView实现三种分页方式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookViewALL</span>(<span class="params">APIView</span>):</span></span><br><span class="line"></span><br><span class="line">    throttle_classes = []</span><br><span class="line">    authentication_classes = []</span><br><span class="line">    permission_classes = []</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">self,request,*args,**kwargs</span>):</span></span><br><span class="line">        book_list=Books.objects.<span class="built_in">all</span>()</span><br><span class="line">        <span class="comment">#实例化得到一个对象</span></span><br><span class="line">        pagination=CommonPageNumberPagination()</span><br><span class="line">        <span class="comment"># 修改对象属性，我们不需要改</span></span><br><span class="line">        <span class="comment"># pagination.page_query_param=&#x27;page&#x27;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#调用对象方法，传入要分页的数据，book_list,返回分页号的数据</span></span><br><span class="line">        book_list2=pagination.paginate_queryset(book_list,request,self)</span><br><span class="line"></span><br><span class="line">        ser=BookSerializer(instance=book_list2,many=<span class="literal">True</span>)</span><br><span class="line">        res=&#123;<span class="string">&#x27;pre&#x27;</span>:pagination.get_previous_link(),<span class="string">&#x27;next&#x27;</span>:pagination.get_next_link(),<span class="string">&#x27;count&#x27;</span>:pagination.page.paginator.count,<span class="string">&#x27;data&#x27;</span>:ser.data&#125;</span><br><span class="line">        <span class="keyword">return</span> Response(res)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 另一种返回方式</span></span><br><span class="line">        <span class="keyword">return</span> pagination.get_paginated_response(ser.data)</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="3-自动生成接口文档（3星）"><a href="#3-自动生成接口文档（3星）" class="headerlink" title="3 自动生成接口文档（3星）"></a>3 自动生成接口文档（3星）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 后端人员写好接口，编写接口文档，给前端人员看，前端人员依照接口文档开发</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 公司里主流</span></span><br><span class="line">	-后端，使用world，md写，提到git上</span><br><span class="line">    -公司有接口平台，后端开发在接口平台录入（yapi，第三方），可以批量导入</span><br><span class="line">    -后端项目自动生成接口文档（不是特别美观或友好，有时候还需要配合上面两种）</span><br><span class="line">    	-django的drf自动生成  coerapi，swagger：java，go，python</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="3-1-使用coreapi自动生成"><a href="#3-1-使用coreapi自动生成" class="headerlink" title="3.1 使用coreapi自动生成"></a>3.1 使用coreapi自动生成</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第一步：安装coreapi</span></span><br><span class="line"><span class="comment"># 第二步：路由中配置</span></span><br><span class="line"><span class="keyword">from</span> rest_framework.documentation <span class="keyword">import</span> include_docs_urls</span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;docs/&#x27;</span>, include_docs_urls(title=<span class="string">&#x27;路飞项目接口文档&#x27;</span>)),]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 第三步：配置文件中配置</span></span><br><span class="line">REST_FRAMEWORK = &#123;</span><br><span class="line">    <span class="comment">## 接口文档配置</span></span><br><span class="line">    <span class="string">&#x27;DEFAULT_SCHEMA_CLASS&#x27;</span>: <span class="string">&#x27;rest_framework.schemas.coreapi.AutoSchema&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#第四步：写接口，加注释</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 第五步：访问</span></span><br><span class="line">http://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8000</span>/docs/</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/alipay.jpg">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/222.jpg">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">后端</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/DRF//" class="article-tag-list-link color4">DRF</a>
+        			<a href="/categories/算法与数据结构//" class="article-tag-list-link color3">算法与数据结构</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://vivek-666.github.io/021/07/07/DRF%E5%85%A5%E9%97%A804/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2021/07/08/RBAC%E5%8F%8AJWT%E4%BB%8B%E7%BB%8D/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          RBAC及JWT介绍
-        
-      </div>
-    </a>
   
   
-    <a href="/2021/07/07/DRF%E5%85%A5%E9%97%A803/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">DRF之组件及异常处理</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%A2%91%E7%8E%87%E7%BB%84%E4%BB%B6%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%882%E6%98%9F%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">1 频率组件源码分析（2星）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%88%86%E9%A1%B5%E5%8A%9F%E8%83%BD%EF%BC%885%E6%98%9F%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">2 分页功能（5星）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-PageNumberPagination-%E5%9F%BA%E6%9C%AC%E5%88%86%E9%A1%B5"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 PageNumberPagination 基本分页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-LimitOffsetPagination-%E5%81%8F%E7%A7%BB%E5%88%86%E9%A1%B5"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 LimitOffsetPagination 偏移分页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E6%B8%B8%E6%A0%87%E5%88%86%E9%A1%B5"><span class="toc-number">1.2.3.</span> <span class="toc-text">2.3 游标分页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E7%BB%A7%E6%89%BFAPIView%E5%AE%9E%E7%8E%B0%E4%B8%89%E7%A7%8D%E5%88%86%E9%A1%B5%E6%96%B9%E5%BC%8F"><span class="toc-number">1.2.4.</span> <span class="toc-text">2.4 继承APIView实现三种分页方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3%EF%BC%883%E6%98%9F%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">3 自动生成接口文档（3星）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E4%BD%BF%E7%94%A8coreapi%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1 使用coreapi自动生成</span></a></li></ol></li></ol></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
+    
 
-  
-
-  
  
-
-  
-      <section id="comments" class="comments">
-        <style>
-          .comments{margin:30px;padding:10px;background:#fff}
-          @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
-        </style>
-        <div id="vcomment" class="comment"></div>
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
-<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script>
-  var notify = 'false' == true ? true : false;
-  var verify = 'false' == true ? true : false;
-  new Valine({
-    av: AV,
-    el: '#vcomment',
-    notify: notify,
-    app_id: "4078A2Bntfkxp8EVq5TtPO1P-gzGzoHsz",
-    app_key: "2wBAkBOnl2RpsnGy3dYaEPlN",
-    placeholder: "Just go go",
-    avatar: "mm",
-  });
-</script>
-
-    </section>
   
 
-
-
-
+  
           </div>
         </div>
       </div>
@@ -483,10 +276,10 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
-		isCategory: false,
+		isCategory: true,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",

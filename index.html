@@ -176,6 +176,107 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-django数据库相关" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/17/django%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3/">django数据库相关</a>
+    </h1>
+  
+
+        
+        
+<a href="/2021/07/17/django%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3/" class="archive-article-date">
+  	<time datetime="2021-07-17T15:03:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-pycharm-链接MySQL"><a href="#1-pycharm-链接MySQL" class="headerlink" title="1,pycharm 链接MySQL"></a>1,pycharm 链接MySQL</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1,Download missing driver files 安装驱动</span><br><span class="line">2，有了库，再链接。</span><br><span class="line">3，submite 同步</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-django-链接MySQL"><a href="#2-django-链接MySQL" class="headerlink" title="2.django 链接MySQL"></a>2.django 链接MySQL</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>,配置文件中配置</span><br><span class="line"><span class="number">2</span>，代码声明</span><br><span class="line">	手动改用pymysql</span><br><span class="line">	<span class="comment"># 项目名下 _init_.py</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-字段的增删改查"><a href="#3-字段的增删改查" class="headerlink" title="3.字段的增删改查"></a>3.字段的增删改查</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 字段的增加</span></span><br><span class="line">	<span class="number">1.</span>null=<span class="literal">True</span></span><br><span class="line">    <span class="number">2.</span>直接给字段设置默认值 default = <span class="string">&#x27;study&#x27;</span></span><br><span class="line"><span class="comment"># 字段的修改</span></span><br><span class="line">	数据迁移</span><br><span class="line"><span class="comment"># 字段的删除</span></span><br><span class="line">	直接注释</span><br><span class="line">    </span><br><span class="line"> 存在风险 ，要细心。</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-基本ORM语句"><a href="#4-基本ORM语句" class="headerlink" title="4.基本ORM语句"></a>4.基本ORM语句</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> app01 <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line">models.Userinfo.objects.<span class="built_in">all</span>()  <span class="comment"># --&gt;QuerySet [数据对象1,数据对象2,...]</span></span><br><span class="line"></span><br><span class="line">models.Userinfo.objects.<span class="built_in">filter</span>(**&#123;...&#125;) <span class="comment"># 多个参数，and关系</span></span><br><span class="line"><span class="comment"># --&gt;QuerySet [数据对象1,数据对象2,...] #  可以按照索引取值 切片 推荐.first()取值</span></span><br><span class="line">models.Userinfo.objects.<span class="built_in">filter</span>(username=username) </span><br><span class="line"><span class="comment"># =&gt;select * from user where username = &#x27;xxx&#x27;  # 当打印对象时，可以__str__查看</span></span><br><span class="line"></span><br><span class="line">models.Userinfo.objects.create(**&#123;...&#125;)</span><br><span class="line"><span class="comment"># 也可以对象.属性，save()保存</span></span><br><span class="line"></span><br><span class="line">models.Userinfo.objects.update(**&#123;...&#125;)</span><br><span class="line"><span class="comment"># 取数据库修改对应的内容 批量更新</span></span><br><span class="line">models.Userinfo.objects.<span class="built_in">filter</span>.update(**&#123;...&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">models.Userinfo.objects.delete(...)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">将数据对象展示到页面上</span><br><span class="line"><span class="keyword">return</span> render(request,<span class="string">&#x27;xxx.html&#x27;</span>,<span class="built_in">locals</span>())</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-ORM表关系创建"><a href="#5-ORM表关系创建" class="headerlink" title="5 ORM表关系创建"></a>5 ORM表关系创建</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">表关系</span><br><span class="line">	一对多</span><br><span class="line">    多对多</span><br><span class="line">    一对一</span><br><span class="line"> </span><br><span class="line">图书管理系统表设计</span><br><span class="line">	图书表</span><br><span class="line">    出版社表</span><br><span class="line">    作者表</span><br><span class="line">    作者详情表</span><br><span class="line">    ps:<span class="string">&#x27;换位思考&#x27;</span></span><br><span class="line">    </span><br><span class="line">表关系</span><br><span class="line">	图书表与出版社表</span><br><span class="line">    	一对多		外键字段建在多的一方</span><br><span class="line">        	models.ForeignKey(to=<span class="string">&#x27;Publish&#x27;</span>)</span><br><span class="line">    图书表与作者表</span><br><span class="line">    	多对多		外键字段需要建在第三张关系表</span><br><span class="line">        	models.ManyToManyField(to=<span class="string">&#x27;Author&#x27;</span>) </span><br><span class="line">    作者表与作者详情表</span><br><span class="line">    	一对一		外键字段建在任意一方均可 推荐建在查询频率高</span><br><span class="line"> 			author_detail = models.OneToOneField(to=<span class="string">&#x27;AuthorDetail&#x27;</span>)</span><br><span class="line"><span class="comment"># 复习MySQL创建表的完整语法 字段类型 约束条件</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create your models here.</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Book</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    title = models.CharField(verbose_name=<span class="string">&#x27;书名&#x27;</span>,max_length=<span class="number">32</span>)</span><br><span class="line">    <span class="comment"># 小数总共8位 小数位占两位</span></span><br><span class="line">    price = models.DecimalField(verbose_name=<span class="string">&#x27;价格&#x27;</span>,max_digits=<span class="number">8</span>,decimal_places=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 书与出版社是一对多 并且书是多的一方 外键字段建在数据表中</span></span><br><span class="line">    publish = models.ForeignKey(to=<span class="string">&#x27;Publish&#x27;</span>)</span><br><span class="line">    <span class="string">&quot;&quot;&quot;针对外键字段 orm会自动加_id后缀 如果你加了再继续加_id&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 书与作者是多对多  orm不需要你自己建 它自动帮你建</span></span><br><span class="line">    authors = models.ManyToManyField(to=<span class="string">&#x27;Author&#x27;</span>)  <span class="comment"># 告诉orm自动创建第三张关系表</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;虚拟字段 不会在表中展示出来 用于ORM自动创建第三张关系表&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Publish</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    name = models.CharField(verbose_name=<span class="string">&#x27;出版社名称&#x27;</span>,max_length=<span class="number">32</span>)</span><br><span class="line">    addr = models.CharField(verbose_name=<span class="string">&#x27;出版社地址&#x27;</span>,max_length=<span class="number">64</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Author</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    name = models.CharField(verbose_name=<span class="string">&#x27;姓名&#x27;</span>, max_length=<span class="number">32</span>)</span><br><span class="line">    addr = models.CharField(verbose_name=<span class="string">&#x27;地址&#x27;</span>, max_length=<span class="number">64</span>)</span><br><span class="line">    <span class="comment"># 作者与作者详情是一对一 推荐建在查询频率高的</span></span><br><span class="line">    author_detail = models.OneToOneField(to=<span class="string">&#x27;AuthorDetail&#x27;</span>)</span><br><span class="line">    <span class="string">&quot;&quot;&quot;针对外键字段 orm会自动加_id后缀 如果你加了再继续加_id&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AuthorDetail</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    age = models.IntegerField(verbose_name=<span class="string">&#x27;年龄&#x27;</span>)</span><br><span class="line">    phone = models.BigIntegerField(verbose_name=<span class="string">&#x27;手机号&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="django请求生命周期流程图"><a href="#django请求生命周期流程图" class="headerlink" title="django请求生命周期流程图"></a>django请求生命周期流程图</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">...</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">-数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/django//" class="article-tag-list-link color3">-django</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/07/17/django%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+ 
+
+
+
+  
     <article id="post-Vue-CLI搭建项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -272,7 +373,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">-Vue</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
         		</li>
       		
 		</ul>
@@ -284,7 +385,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color4">-前端</a>
+        			<a href="/categories/Vue//" class="article-tag-list-link color4">Vue</a>
         		</li>
       		
 		</ul>
@@ -367,7 +468,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">-DRF源码分析</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码分析</a>
         		</li>
       		
 		</ul>
@@ -379,7 +480,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color3">-Python</a>
+        			<a href="/categories/DRF//" class="article-tag-list-link color4">DRF</a>
         		</li>
       		
 		</ul>
@@ -560,7 +661,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">-Vue</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
         		</li>
       		
 		</ul>
@@ -572,7 +673,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color4">-前端</a>
+        			<a href="/categories/Vue//" class="article-tag-list-link color4">Vue</a>
         		</li>
       		
 		</ul>
@@ -768,7 +869,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据</a>
         		</li>
       		
 		</ul>
@@ -780,7 +881,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/算法集//" class="article-tag-list-link color4">算法集</a>
+        			<a href="/categories/算法与数据结构//" class="article-tag-list-link color3">算法与数据结构</a>
         		</li>
       		
 		</ul>
@@ -868,7 +969,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">-DRF源码分析</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码分析</a>
         		</li>
       		
 		</ul>
@@ -880,7 +981,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color3">-Python</a>
+        			<a href="/categories/django//" class="article-tag-list-link color2">django</a>
         		</li>
       		
 		</ul>
@@ -942,7 +1043,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="lt-center-gt-面向对象-lt-center-gt"><a href="#lt-center-gt-面向对象-lt-center-gt" class="headerlink" title="&lt;center&gt;面向对象&lt;/center&gt;"></a>&lt;center&gt;面向对象&lt;/center&gt;</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>对象 ：对象是把数据与功能整合到一起的产物</p>
+        <h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>对象 ：对象是把数据与功能整合到一起的产物</p>
 <p>_Why_：所有的程序都是由”数据”与“功能“组成，因而编写程序的本质就是定义出一系列的数据，然后定义出一系列的功能来对数据进行操作。</p>
 <p><em>类</em> ：类是用来存放多个对象相同的数据与功能的容器。</p>
 <p>_Why_：节省空间、减少代码冗余的机制，所以类中的内容仍然是属于对象的，面向对象编程最终的核心仍然是去使用对象。</p>
@@ -1114,7 +1215,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">-面向对象</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码分析</a>
         		</li>
       		
 		</ul>
@@ -1126,7 +1227,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color3">-Python</a>
+        			<a href="/categories/面向对象//" class="article-tag-list-link color5">面向对象</a>
         		</li>
       		
 		</ul>
@@ -1231,7 +1332,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">-DRF</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">前后端交互</a>
         		</li>
       		
 		</ul>
@@ -1243,7 +1344,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color3">-Python</a>
+        			<a href="/categories/DRF//" class="article-tag-list-link color4">DRF</a>
         		</li>
       		
 		</ul>
@@ -1349,7 +1450,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">-DRF</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">后端</a>
         		</li>
       		
 		</ul>
@@ -1361,7 +1462,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color3">-Python</a>
+        			<a href="/categories/DRF//" class="article-tag-list-link color4">DRF</a>
         		</li>
       		
 		</ul>
@@ -1449,7 +1550,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">-DRF</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">后端</a>
         		</li>
       		
 		</ul>
@@ -1461,7 +1562,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color3">-Python</a>
+        			<a href="/categories/DRF//" class="article-tag-list-link color4">DRF</a>
         		</li>
       		
 		</ul>
@@ -1471,129 +1572,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/07/07/DRF%E5%85%A5%E9%97%A803/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
- 
-
-
-
-  
-    <article id="post-DRF入门02" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/07/DRF%E5%85%A5%E9%97%A802/">DRF之路由及常用组件</a>
-    </h1>
-  
-
-        
-        
-<a href="/2021/07/07/DRF%E5%85%A5%E9%97%A802/" class="archive-article-date">
-  	<time datetime="2021-07-07T14:30:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-路由组件（4星）"><a href="#1-路由组件（4星）" class="headerlink" title="1 路由组件（4星）"></a>1 路由组件（4星）</h2><h3 id="1-1-自动生成路由的基本使用"><a href="#1-1-自动生成路由的基本使用" class="headerlink" title="1.1 自动生成路由的基本使用"></a>1.1 自动生成路由的基本使用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 自动生成路由;视图类需要是ViewSetMixin子类</span></span><br><span class="line"><span class="keyword">from</span> rest_framework.routers <span class="keyword">import</span> DefaultRouter,SimpleRouter</span><br><span class="line"></span><br><span class="line"><span class="comment"># router=DefaultRouter()</span></span><br><span class="line">router=SimpleRouter()</span><br><span class="line">router.register(<span class="string">&#x27;books&#x27;</span>,views.BookView,<span class="string">&#x27;books&#x27;</span>)</span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;&#x27;</span>, include(router.urls)),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="1-2-视图类中派生的方法"><a href="#1-2-视图类中派生的方法" class="headerlink" title="1.2 视图类中派生的方法"></a>1.2 视图类中派生的方法</h3><h3 id="自动生成路由（action）"><a href="#自动生成路由（action）" class="headerlink" title="自动生成路由（action）"></a>自动生成路由（action）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookView</span>(<span class="params">ModelViewSet</span>):</span></span><br><span class="line">    queryset = Books.objects.<span class="built_in">all</span>()</span><br><span class="line">    serializer_class = BookSerializer</span><br><span class="line">    <span class="comment"># 自己扩展的方法(派生)</span></span><br><span class="line"><span class="meta">    @action(<span class="params">methods=[<span class="string">&#x27;GET&#x27;</span>],detail=<span class="literal">False</span>,url_path=<span class="string">&#x27;login&#x27;</span></span>)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">login</span>(<span class="params">self,request,*args, **kwargs</span>):</span></span><br><span class="line">        <span class="keyword">return</span> Response(<span class="string">&#x27;登录成功&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="comment"># 自动生成的路由是</span></span><br><span class="line">books/login/   发送get请求，触发login方法的执行</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果detail=False，生成的路由是,在视图类的方法中，能够取到pk</span></span><br><span class="line">books/<span class="number">5</span>/login/</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 补充（了解），必须继承ViewSetMixin的视图类才有</span></span><br><span class="line">视图类有action属性，是当此请求要执行的函数名</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-3-总结"><a href="#1-3-总结" class="headerlink" title="1.3 总结"></a>1.3 总结</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> 自动生成路由的视图类，</span><br><span class="line">	-需要继承ViewSetMixin+<span class="number">9</span>个视图字类</span><br><span class="line">    -需要继承ViewSetMixin+视图类（APIView。。。）+<span class="number">5</span>个视图扩展类</span><br><span class="line"><span class="number">2</span> 可以使用action的视图类，ViewSetMixin+视图类（APIView。。。）</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="2-认证组件（5星）"><a href="#2-认证组件（5星）" class="headerlink" title="2 认证组件（5星）"></a>2 认证组件（5星）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 判断用户是否登录，如果登录过，认证成功，如果没有登录，就认证失败</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="2-1-登录功能"><a href="#2-1-登录功能" class="headerlink" title="2.1 登录功能"></a>2.1 登录功能</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 表模型中两个表</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    username=models.CharField(max_length=<span class="number">32</span>)</span><br><span class="line">    password=models.CharField(max_length=<span class="number">32</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserToken</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    user=models.OneToOneField(to=<span class="string">&#x27;User&#x27;</span>,on_delete=models.CASCADE)</span><br><span class="line">    token=models.CharField(max_length=<span class="number">64</span>)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 登录视图类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserView</span>(<span class="params">APIView</span>):</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post</span>(<span class="params">self, request, *args, **kwargs</span>):</span></span><br><span class="line">        res = &#123;<span class="string">&#x27;code&#x27;</span>: <span class="number">100</span>, <span class="string">&#x27;msg&#x27;</span>: <span class="literal">None</span>&#125;</span><br><span class="line">        username = request.data.get(<span class="string">&#x27;username&#x27;</span>)</span><br><span class="line">        password = request.data.get(<span class="string">&#x27;password&#x27;</span>)</span><br><span class="line">        user = models.User.objects.<span class="built_in">filter</span>(username=username, password=password).first()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> user:  <span class="comment"># 登录成功再生成token</span></span><br><span class="line">            token = <span class="built_in">str</span>(uuid.uuid4())  <span class="comment"># 生成一个不重复的随机字符串</span></span><br><span class="line">            <span class="comment"># 原来有，就更新，原来没有就新增</span></span><br><span class="line">            <span class="comment"># models.UserToken.objects.create(user=user,token=token)</span></span><br><span class="line">            <span class="comment"># 根据user=user去查询，如果有，使用defaults更新，如果没有，新增一条</span></span><br><span class="line">            models.UserToken.objects.update_or_create(defaults=&#123;<span class="string">&#x27;token&#x27;</span>: token&#125;, user=user)</span><br><span class="line">            res[<span class="string">&#x27;msg&#x27;</span>] = <span class="string">&#x27;登录成功&#x27;</span></span><br><span class="line">            res[<span class="string">&#x27;token&#x27;</span>] = token</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res[<span class="string">&#x27;code&#x27;</span>] = <span class="string">&#x27;101&#x27;</span></span><br><span class="line">            res[<span class="string">&#x27;msg&#x27;</span>] = <span class="string">&#x27;用户名或密码错误&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> Response(res)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 路由配置</span></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;login/&#x27;</span>, views.UserView.as_view()),]</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-2-认证类的编写"><a href="#2-2-认证类的编写" class="headerlink" title="2.2 认证类的编写"></a>2.2 认证类的编写</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新建一个py文件auth.py</span></span><br><span class="line"><span class="keyword">from</span> rest_framework.authentication <span class="keyword">import</span> BaseAuthentication</span><br><span class="line"><span class="keyword">from</span> rest_framework.exceptions <span class="keyword">import</span> AuthenticationFailed</span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> models</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LoginAuth</span>(<span class="params">BaseAuthentication</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">authenticate</span>(<span class="params">self, request</span>):</span></span><br><span class="line">        <span class="comment"># 写认证规则</span></span><br><span class="line">        <span class="comment"># 取出用户携带的token</span></span><br><span class="line">        token=request.query_params.get(<span class="string">&#x27;token&#x27;</span>)</span><br><span class="line">        <span class="comment"># 去数据库查询，token是否存在，如果存在，说明这个人登录了，如果不存在，表示没有登录</span></span><br><span class="line">        user_token=models.UserToken.objects.<span class="built_in">filter</span>(token=token).first()</span><br><span class="line">        <span class="keyword">if</span> user_token:</span><br><span class="line">            <span class="comment"># 登录了，认证通过，继续往后走</span></span><br><span class="line">            <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">            如果返回user，token，后面视图类中通过request对象，可以取到当前登录用户</span></span><br><span class="line"><span class="string">            &#x27;&#x27;&#x27;</span></span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 没有登录，不能继续往后走，抛认证失败异常</span></span><br><span class="line">            <span class="keyword">raise</span> AuthenticationFailed(<span class="string">&#x27;您没有登录，认证失败&#x27;</span>)</span><br><span class="line"></span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line"><span class="comment"># 对某个接口生效</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookView</span>(<span class="params">ViewSetMixin,ListAPIView</span>):</span></span><br><span class="line">    <span class="comment"># 以后，必须登录以后才能访问这个视图类</span></span><br><span class="line">    authentication_classes = [LoginAuth,]</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-3-认证类的全局使用和局部使用"><a href="#2-3-认证类的全局使用和局部使用" class="headerlink" title="2.3 认证类的全局使用和局部使用"></a>2.3 认证类的全局使用和局部使用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 全局使用</span></span><br><span class="line">REST_FRAMEWORK=&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 全局使用写得认证类</span></span><br><span class="line">    <span class="string">&#x27;DEFAULT_AUTHENTICATION_CLASSES&#x27;</span>:[<span class="string">&#x27;app01.auth.LoginAuth&#x27;</span>]</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 局部禁用（在视图类中）</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserView</span>(<span class="params">APIView</span>):</span></span><br><span class="line">    authentication_classes = []</span><br><span class="line"></span><br><span class="line"><span class="comment"># 认证类的查找顺序</span></span><br><span class="line">先找视图类自己中有没有：authentication_classes，如果没有----》项目的配置文件DEFAULT_AUTHENTICATION_CLASSES------》drf的配置文件（有两个，这两个，等于无）</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="2-4-源码分析（2星）"><a href="#2-4-源码分析（2星）" class="headerlink" title="2.4 源码分析（2星）"></a>2.4 源码分析（2星）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># APIView---&gt;dispathch方法的-----》self.initial(request, *args, **kwargs)（497行）---》APIView的initial方法----》有三句话</span></span><br><span class="line">self.perform_authentication(request)  <span class="comment"># 认证</span></span><br><span class="line">self.check_permissions(request)       <span class="comment"># 权限</span></span><br><span class="line">self.check_throttles(request)         <span class="comment"># 频率</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># self.perform_authentication(request)----》新的request对象的.user(是个方法，包装成了数据数属性)---》新的Request类中找到了user方法---》self._authenticate()-----》Request类中的_authenticate</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_authenticate</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">for</span> authenticator <span class="keyword">in</span> self.authenticators: <span class="comment"># 配置在视图类中认证类列表，实例化得到的对象</span></span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                user_auth_tuple = authenticator.authenticate(self)</span><br><span class="line">            <span class="keyword">except</span> exceptions.APIException:</span><br><span class="line">                self._not_authenticated()</span><br><span class="line">                <span class="keyword">raise</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> user_auth_tuple <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">                self._authenticator = authenticator</span><br><span class="line">                self.user, self.auth = user_auth_tuple</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line"> <span class="comment">#  self.authenticators，self是Request类的对象，authenticators属性是Request这个类在实例化的时候，传入的</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Request类在实例化的时候代码</span></span><br><span class="line">    <span class="keyword">return</span> Request(</span><br><span class="line">            request,</span><br><span class="line">            parsers=self.get_parsers(),</span><br><span class="line">            authenticators=self.get_authenticators(),  <span class="comment"># 要看的</span></span><br><span class="line">            negotiator=self.get_content_negotiator(),</span><br><span class="line">            parser_context=parser_context</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># self.get_authenticators()是APIView的方法</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_authenticators</span>(<span class="params">self</span>):</span></span><br><span class="line">   	 	<span class="comment"># 列表推导式</span></span><br><span class="line">        <span class="keyword">return</span> [auth() <span class="keyword">for</span> auth <span class="keyword">in</span> self.authentication_classes]</span><br><span class="line">    	<span class="comment"># 返回结果是我们配在视图类中自己写的认证类列表的对象</span></span><br><span class="line">        <span class="keyword">return</span> [LoginAuth(),]</span><br><span class="line">		</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="3-权限组件（4星）"><a href="#3-权限组件（4星）" class="headerlink" title="3  权限组件（4星）"></a>3  权限组件（4星）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 超级用户可以访问books接口，普通用户不能</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 写一个权限类</span></span><br><span class="line"><span class="keyword">from</span> rest_framework.permissions <span class="keyword">import</span> BasePermission</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserPermission</span>(<span class="params">BasePermission</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">has_permission</span>(<span class="params">self, request, view</span>):</span></span><br><span class="line">        <span class="comment"># 写权限的逻辑(有权限访问就是True，没有权限就是False)</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> request.user.user_type==<span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line"><span class="comment"># 局部使用，在视图类上配置</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookView</span>(<span class="params">ViewSetMixin,ListAPIView</span>):</span></span><br><span class="line">    permission_classes = [UserPermission,]</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 全局使用(配置文件中)</span></span><br><span class="line"></span><br><span class="line">REST_FRAMEWORK=&#123;</span><br><span class="line">    <span class="comment"># 全局使用写得权限类</span></span><br><span class="line">    <span class="string">&#x27;DEFAULT_PERMISSION_CLASSES&#x27;</span>:[<span class="string">&#x27;app01.auth.UserPermission&#x27;</span>]</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">-DRF</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python//" class="article-tag-list-link color3">-Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/07/DRF%E5%85%A5%E9%97%A802/">展开全文 >></a>
         </p>
       
 
@@ -1738,23 +1716,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">-DRF源码分析</a>
+                <a href="javascript:void(0)" class="js-tag color5">源码分析</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-DRF</a>
+                <a href="javascript:void(0)" class="js-tag color3">后端</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-Vue</a>
+                <a href="javascript:void(0)" class="js-tag color1">前后端交互</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">-面向对象</a>
+                <a href="javascript:void(0)" class="js-tag color3">数据</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">-数据库</a>
               </li>
             
             <div class="clearfix"></div>
