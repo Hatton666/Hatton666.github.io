@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>DRF之路由及常用组件 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1 路由组件（4星）1.1 自动生成路由的基本使用123456789## 自动生成路由;视图类需要是ViewSetMixin子类from rest_framework.routers import DefaultRouter,SimpleRouter# router&#x3D;DefaultRouter()router&#x3D;SimpleRouter()router.register(&amp;#x27;books&amp;#x">
+  <meta name="description" content="1 路由组件（4星）1.1 自动生成路由的基本使用123456789101112## 自动生成路由;视图类需要是ViewSetMixin子类from rest_framework.routers import DefaultRouter,SimpleRouter# router&#x3D;DefaultRouter()# 实例化得到 router对象router&#x3D;SimpleRouter()# 传参， 至少">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DRF之路由及常用组件">
 <meta property="og:url" content="http://example.com/2021/07/07/DRF%E5%85%A5%E9%97%A802/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1 路由组件（4星）1.1 自动生成路由的基本使用123456789## 自动生成路由;视图类需要是ViewSetMixin子类from rest_framework.routers import DefaultRouter,SimpleRouter# router&#x3D;DefaultRouter()router&#x3D;SimpleRouter()router.register(&amp;#x27;books&amp;#x">
+<meta property="og:description" content="1 路由组件（4星）1.1 自动生成路由的基本使用123456789101112## 自动生成路由;视图类需要是ViewSetMixin子类from rest_framework.routers import DefaultRouter,SimpleRouter# router&#x3D;DefaultRouter()# 实例化得到 router对象router&#x3D;SimpleRouter()# 传参， 至少">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-07-07T14:30:26.000Z">
-<meta property="article:modified_time" content="2021-07-18T07:54:53.984Z">
+<meta property="article:modified_time" content="2021-07-19T15:47:18.569Z">
 <meta property="article:author" content="Vivek">
 <meta property="article:tag" content="DRF">
 <meta name="twitter:card" content="summary">
@@ -206,13 +206,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-路由组件（4星）"><a href="#1-路由组件（4星）" class="headerlink" title="1 路由组件（4星）"></a>1 路由组件（4星）</h2><h3 id="1-1-自动生成路由的基本使用"><a href="#1-1-自动生成路由的基本使用" class="headerlink" title="1.1 自动生成路由的基本使用"></a>1.1 自动生成路由的基本使用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 自动生成路由;视图类需要是ViewSetMixin子类</span></span><br><span class="line"><span class="keyword">from</span> rest_framework.routers <span class="keyword">import</span> DefaultRouter,SimpleRouter</span><br><span class="line"></span><br><span class="line"><span class="comment"># router=DefaultRouter()</span></span><br><span class="line">router=SimpleRouter()</span><br><span class="line">router.register(<span class="string">&#x27;books&#x27;</span>,views.BookView,<span class="string">&#x27;books&#x27;</span>)</span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;&#x27;</span>, include(router.urls)),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+        <h2 id="1-路由组件（4星）"><a href="#1-路由组件（4星）" class="headerlink" title="1 路由组件（4星）"></a>1 路由组件（4星）</h2><h3 id="1-1-自动生成路由的基本使用"><a href="#1-1-自动生成路由的基本使用" class="headerlink" title="1.1 自动生成路由的基本使用"></a>1.1 自动生成路由的基本使用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 自动生成路由;视图类需要是ViewSetMixin子类</span></span><br><span class="line"><span class="keyword">from</span> rest_framework.routers <span class="keyword">import</span> DefaultRouter,SimpleRouter</span><br><span class="line"></span><br><span class="line"><span class="comment"># router=DefaultRouter()</span></span><br><span class="line"><span class="comment"># 实例化得到 router对象</span></span><br><span class="line">router=SimpleRouter()</span><br><span class="line"><span class="comment"># 传参， 至少三个参数</span></span><br><span class="line">router.register(<span class="string">&#x27;books&#x27;</span>,views.BookView,<span class="string">&#x27;books&#x27;</span>)</span><br><span class="line"><span class="comment"># router.urls 自动生成的路由；添加到列表中。</span></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;&#x27;</span>, include(router.urls)),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 
 
 
 
 
-<h3 id="1-2-视图类中派生的方法"><a href="#1-2-视图类中派生的方法" class="headerlink" title="1.2 视图类中派生的方法"></a>1.2 视图类中派生的方法</h3><h3 id="自动生成路由（action）"><a href="#自动生成路由（action）" class="headerlink" title="自动生成路由（action）"></a>自动生成路由（action）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookView</span>(<span class="params">ModelViewSet</span>):</span></span><br><span class="line">    queryset = Books.objects.<span class="built_in">all</span>()</span><br><span class="line">    serializer_class = BookSerializer</span><br><span class="line">    <span class="comment"># 自己扩展的方法(派生)</span></span><br><span class="line"><span class="meta">    @action(<span class="params">methods=[<span class="string">&#x27;GET&#x27;</span>],detail=<span class="literal">False</span>,url_path=<span class="string">&#x27;login&#x27;</span></span>)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">login</span>(<span class="params">self,request,*args, **kwargs</span>):</span></span><br><span class="line">        <span class="keyword">return</span> Response(<span class="string">&#x27;登录成功&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="comment"># 自动生成的路由是</span></span><br><span class="line">books/login/   发送get请求，触发login方法的执行</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果detail=False，生成的路由是,在视图类的方法中，能够取到pk</span></span><br><span class="line">books/<span class="number">5</span>/login/</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 补充（了解），必须继承ViewSetMixin的视图类才有</span></span><br><span class="line">视图类有action属性，是当此请求要执行的函数名</span><br></pre></td></tr></table></figure>
+<h3 id="1-2-视图类中派生的方法"><a href="#1-2-视图类中派生的方法" class="headerlink" title="1.2 视图类中派生的方法"></a>1.2 视图类中派生的方法</h3><h3 id="自动生成路由（action）"><a href="#自动生成路由（action）" class="headerlink" title="自动生成路由（action）"></a>自动生成路由（action）</h3><p>action方法 ： 是为了给继承自 ModelViewSet  的视图类中定义的函数也添加路由</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookView</span>(<span class="params">ModelViewSet</span>):</span></span><br><span class="line">    queryset = Books.objects.<span class="built_in">all</span>()</span><br><span class="line">    serializer_class = BookSerializer</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 自己扩展的方法(派生)</span></span><br><span class="line"><span class="meta">    @action(<span class="params">methods=[<span class="string">&#x27;GET&#x27;</span>],detail=<span class="literal">False</span>,url_path=<span class="string">&#x27;login&#x27;</span></span>)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">login</span>(<span class="params">self,request,*args, **kwargs</span>):</span></span><br><span class="line">        <span class="keyword">return</span> Response(<span class="string">&#x27;登录成功&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="comment"># 自动生成的路由是</span></span><br><span class="line">books/login/   发送get请求，触发login方法的执行</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果detail=False，生成的路由是,在视图类的方法中，能够取到pk</span></span><br><span class="line">books/<span class="number">5</span>/login/</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 补充（了解），必须继承ViewSetMixin的视图类才有</span></span><br><span class="line">视图类有action属性，是当此请求要执行的函数名</span><br></pre></td></tr></table></figure>
 
 
 
@@ -563,7 +564,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">源码分析</a>
+                <a href="javascript:void(0)" class="js-tag color2">django</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -575,11 +576,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">django</a>
+                <a href="javascript:void(0)" class="js-tag color4">one</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">项目学习</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">排序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">源码分析</a>
               </li>
             
             <div class="clearfix"></div>
