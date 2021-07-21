@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>每日一问 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="跨域请求123456789101112131415161718192021What: 当前发起请求的域与该请求指向资源所在的域不一样； 跨域就包括 协议，域名，端口，只要有一项不同就是跨域；简单点说就是浏览器的地址栏里边的 协议，域名，端口 和你网页中js请求的接口的 协议，域名，和端口 ，任意一项不同就属于跨域。 如果页面用了 iframe，这个判断方法就不适用。Why: 浏览器的同源策略 ，浏">
+  <meta name="description" content="跨域请求 What:     当前发起请求的域与该请求指向资源所在的域不一样； 跨域就包括 协议，域名，端口，只要有一项不同就是跨域；简单点说就是浏览器的地址栏里边的 协议，域名，端口 和你网页中js请求的接口的 协议，域名，和端口 ，任意一项不同就属于跨域。 如果页面用了 iframe，这个判断方法就不适用。 Why:      浏览器的同源策略 ，浏览器不允许向不同的域发请求。 注意！ 1，到">
 <meta property="og:type" content="article">
 <meta property="og:title" content="每日一问">
 <meta property="og:url" content="http://example.com/2021/07/19/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%97%AE/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="跨域请求123456789101112131415161718192021What: 当前发起请求的域与该请求指向资源所在的域不一样； 跨域就包括 协议，域名，端口，只要有一项不同就是跨域；简单点说就是浏览器的地址栏里边的 协议，域名，端口 和你网页中js请求的接口的 协议，域名，和端口 ，任意一项不同就属于跨域。 如果页面用了 iframe，这个判断方法就不适用。Why: 浏览器的同源策略 ，浏">
+<meta property="og:description" content="跨域请求 What:     当前发起请求的域与该请求指向资源所在的域不一样； 跨域就包括 协议，域名，端口，只要有一项不同就是跨域；简单点说就是浏览器的地址栏里边的 协议，域名，端口 和你网页中js请求的接口的 协议，域名，和端口 ，任意一项不同就属于跨域。 如果页面用了 iframe，这个判断方法就不适用。 Why:      浏览器的同源策略 ，浏览器不允许向不同的域发请求。 注意！ 1，到">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-07-18T23:16:26.000Z">
-<meta property="article:modified_time" content="2021-07-20T00:27:06.838Z">
+<meta property="article:modified_time" content="2021-07-21T09:04:35.364Z">
 <meta property="article:author" content="Vivek">
 <meta property="article:tag" content="one">
 <meta name="twitter:card" content="summary">
@@ -206,8 +206,34 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="跨域请求"><a href="#跨域请求" class="headerlink" title="跨域请求"></a>跨域请求</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">What: 当前发起请求的域与该请求指向资源所在的域不一样； 跨域就包括 协议，域名，端口，只要有一项不同就是跨域；简单点说就是浏览器的地址栏里边的 协议，域名，端口 和你网页中js请求的接口的 协议，域名，和端口 ，任意一项不同就属于跨域。 如果页面用了 iframe，这个判断方法就不适用。</span><br><span class="line"></span><br><span class="line">Why: 浏览器的同源策略 ，浏览器不允许向不同的域发请求。</span><br><span class="line"></span><br><span class="line">注意！ 1，到底是谁和谁的域不同；2，服务器不同就是跨域，或者IP地址不同就是跨域，都是不准确的；</span><br><span class="line">	 3，只说了域名，忽略了 协议和端口；4，如何解决跨域问题；</span><br><span class="line">	 </span><br><span class="line">How: 跨域请求解决方案</span><br><span class="line"></span><br><span class="line">	-jsonp：利用一些标签比如 script标签等，实现（只能发送get请求）---不怎么用</span><br><span class="line">	</span><br><span class="line">	 -cors：跨域资源共享（都用这种，需要在项目中写） </span><br><span class="line">	</span><br><span class="line">        客户端： 发送ajax/fetch请求，配置 允许cookie</span><br><span class="line">        服务器端： 设置相关的头信息 允许那个源，访问等）和 opition处理。</span><br><span class="line">        </span><br><span class="line">  	 -通过代理实现</span><br><span class="line">        	-前端代理：node 开启个服务器。写的vue用，只能在开发阶段用，</span><br><span class="line">            -后端代理：nginx反向代理</span><br><span class="line">            </span><br></pre></td></tr></table></figure>
-
+        <h2 id="跨域请求"><a href="#跨域请求" class="headerlink" title="跨域请求"></a>跨域请求</h2><p> <strong>What:</strong>     当前发起请求的域与该请求指向资源所在的域不一样； 跨域就包括 协议，域名，端口，只要有一项不同就是跨域；简单点说就是浏览器的地址栏里边的 协议，域名，端口 和你网页中js请求的接口的 协议，域名，和端口 ，任意一项不同就属于跨域。 如果页面用了 iframe，这个判断方法就不适用。</p>
+<p><strong>Why:</strong>      浏览器的同源策略 ，浏览器不允许向不同的域发请求。</p>
+<p><strong>注意！</strong></p>
+<p>1，到底是谁和谁的域不同；2，服务器不同就是跨域，或者IP地址不同就是跨域，都是不准确的；<br>3，只说了域名，忽略了 协议和端口；4，如何解决跨域问题；</p>
+<p><strong>How: 跨域请求解决方案</strong></p>
+<p> -jsonp：利用一些标签比如 script标签等，实现（只能发送get请求）—不怎么用</p>
+<p>  -cors：跨域资源共享（都用这种，需要在项目中写） </p>
+<pre><code>    客户端： 发送ajax/fetch请求，配置 允许cookie
+    服务器端： 设置相关的头信息 允许那个源，访问等）和 opition处理。
+</code></pre>
+<p>   -通过代理实现<br>         -前端代理：node 开启个服务器。写的vue用，只能在开发阶段用，<br>         -后端代理：nginx反向代理</p>
+<h2 id="TCP和UDP的区别"><a href="#TCP和UDP的区别" class="headerlink" title="TCP和UDP的区别"></a>TCP和UDP的区别</h2><p><strong>UDP</strong>是用户数据报协议，是一种无连接的传输层协议，提供面向事物的简单 不可靠信息传送服务。</p>
+<p><strong>TCP</strong> 传输控制协议，是在不可靠的互联网上 提供可靠的端对端字节流 的传输协议。</p>
+<p><strong>udp和ctp主要区别：</strong> </p>
+<ol>
+<li><p><strong>信息传送的信息可靠性方面不同</strong>：tcp协议包含了专门的传输保证机制，数据传输更加可靠。</p>
+<p>udp协议  不提供数据传送的保证机制，因此人们也把udp协议称为 不可靠传输协议。</p>
+</li>
+<li><p><strong>传输数度不同</strong>： tcp协议的速度比较慢，udp的速度比较快。</p>
+</li>
+</ol>
+<h2 id="猴子补丁"><a href="#猴子补丁" class="headerlink" title="猴子补丁"></a>猴子补丁</h2><p>当我们使用模块的时候，对其功能不满意，或者自定义功能 替换原来的，就是要打补丁。</p>
+<p>就是用自己的代码替换原代码，这一操作一般在程序的入口文件中。</p>
+<p>**例如 ** ujson模块提供的方法比json模块效率要高，</p>
+<p>可以用 ujson 的 dumps()和 loads() 替换json中 的相应方法。 </p>
+<p><strong>例如</strong> py2上, django有一个模块操作Mysql的，叫 Mysql_DB，只在py2.x上使用，</p>
+<p>3.x上就不在维护了。 有一个组织把 Mysql_DB 源码拿过来，在py3上维护，改名字叫 pymysql。</p>
+<p>__init__中配置的那两句话，就是猴子补丁。 把原来的对象，换成Pymysql中的对象。</p>
 
       
 
@@ -333,6 +359,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2021/07/21/%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%EF%BC%881%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          项目配置（1）
+        
+      </div>
+    </a>
+  
   
     <a href="/2021/07/18/%E6%97%A5%E5%B8%B8%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">日常笔记</div>
@@ -362,7 +397,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82"><span class="toc-number">1.</span> <span class="toc-text">跨域请求</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82"><span class="toc-number">1.</span> <span class="toc-text">跨域请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP%E5%92%8CUDP%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">2.</span> <span class="toc-text">TCP和UDP的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8C%B4%E5%AD%90%E8%A1%A5%E4%B8%81"><span class="toc-number">3.</span> <span class="toc-text">猴子补丁</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -536,11 +571,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目学习</a>
+                <a href="javascript:void(0)" class="js-tag color3">排序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">排序</a>
+                <a href="javascript:void(0)" class="js-tag color5">项目学习</a>
               </li>
              
               <li class="article-tag-list-item">
