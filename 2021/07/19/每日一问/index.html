@@ -8,18 +8,22 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>每日一问 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="跨域请求 What:     当前发起请求的域与该请求指向资源所在的域不一样； 跨域就包括 协议，域名，端口，只要有一项不同就是跨域；简单点说就是浏览器的地址栏里边的 协议，域名，端口 和你网页中js请求的接口的 协议，域名，和端口 ，任意一项不同就属于跨域。 如果页面用了 iframe，这个判断方法就不适用。 Why:      浏览器的同源策略 ，浏览器不允许向不同的域发请求。 注意！ 1，到">
+  <meta name="description" content="跨域请求 What:     当前发起请求的域与该请求指向资源所在的域不一样； 跨域就包括 协议，域名，端口，只要有一项不同就是跨域；简单点说就是浏览器的地址栏里边的 协议，域名，端口 和你网页中js请求的接口的 协议，域名，和端口 ，任意一项不同就属于跨域。 如果页面用了 iframe，这个判断方法就不适用。 注意！ 1，到底是谁和谁的域不同；2，服务器不同就是跨域，或者IP地址不同就是跨域，都">
 <meta property="og:type" content="article">
 <meta property="og:title" content="每日一问">
 <meta property="og:url" content="http://example.com/2021/07/19/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%97%AE/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="跨域请求 What:     当前发起请求的域与该请求指向资源所在的域不一样； 跨域就包括 协议，域名，端口，只要有一项不同就是跨域；简单点说就是浏览器的地址栏里边的 协议，域名，端口 和你网页中js请求的接口的 协议，域名，和端口 ，任意一项不同就属于跨域。 如果页面用了 iframe，这个判断方法就不适用。 Why:      浏览器的同源策略 ，浏览器不允许向不同的域发请求。 注意！ 1，到">
+<meta property="og:description" content="跨域请求 What:     当前发起请求的域与该请求指向资源所在的域不一样； 跨域就包括 协议，域名，端口，只要有一项不同就是跨域；简单点说就是浏览器的地址栏里边的 协议，域名，端口 和你网页中js请求的接口的 协议，域名，和端口 ，任意一项不同就属于跨域。 如果页面用了 iframe，这个判断方法就不适用。 注意！ 1，到底是谁和谁的域不同；2，服务器不同就是跨域，或者IP地址不同就是跨域，都">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=329667539,78294726&fm=173&app=49&f=JPEG?w=405&h=211&s=BAC1814646581A65628FD71103007098">
+<meta property="og:image" content="http://t10.baidu.com/it/u=295854921,2687880015&fm=173&app=25&f=JPEG?w=500&h=206&s=1EAA7C238F684C010AF4E5D30000A0B1">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019053013061428.png">
 <meta property="article:published_time" content="2021-07-18T23:16:26.000Z">
-<meta property="article:modified_time" content="2021-07-22T09:06:03.847Z">
+<meta property="article:modified_time" content="2021-07-23T10:21:42.230Z">
 <meta property="article:author" content="Vivek">
 <meta property="article:tag" content="oneday">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=329667539,78294726&fm=173&app=49&f=JPEG?w=405&h=211&s=BAC1814646581A65628FD71103007098">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -207,16 +211,19 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="跨域请求"><a href="#跨域请求" class="headerlink" title="跨域请求"></a>跨域请求</h2><p> <strong>What:</strong>     当前发起请求的域与该请求指向资源所在的域不一样； 跨域就包括 协议，域名，端口，只要有一项不同就是跨域；简单点说就是浏览器的地址栏里边的 协议，域名，端口 和你网页中js请求的接口的 协议，域名，和端口 ，任意一项不同就属于跨域。 如果页面用了 iframe，这个判断方法就不适用。</p>
-<p><strong>Why:</strong>      浏览器的同源策略 ，浏览器不允许向不同的域发请求。</p>
 <p><strong>注意！</strong></p>
 <p>1，到底是谁和谁的域不同；2，服务器不同就是跨域，或者IP地址不同就是跨域，都是不准确的；<br>3，只说了域名，忽略了 协议和端口；4，如何解决跨域问题；</p>
+<p><strong>Why:</strong>      1 同源策略<br>同源策略（Same origin policy）是一种约定，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，则浏览器的正常功能可能都会受到影响。可以说Web是构建在同源策略基础之上的，浏览器只是针对同源策略的一种实现</p>
+<p>请求的url地址,必须与浏览器上的url地址处于同域上,也就是域名,端口,协议相同.</p>
+<p>比如:我在本地上的域名是127.0.0.1:8000,请求另外一个域名：127.0.0.1:8001一段数据</p>
+<p>浏览器上就会报错，这个就是同源策略的保护,如果浏览器对javascript没有同源策略的保护,那么一些重要的机密网站将会很危险</p>
 <p><strong>How: 跨域请求解决方案</strong></p>
-<p> -jsonp：利用一些标签比如 script标签等，实现（只能发送get请求）—不怎么用</p>
-<p>  -cors：跨域资源共享（都用这种，需要在项目中写） </p>
-<pre><code>    客户端： 发送ajax/fetch请求，配置 允许cookie
-    服务器端： 设置相关的头信息 允许那个源，访问等）和 opition处理。
-</code></pre>
-<p>   -通过代理实现<br>         -前端代理：node 开启个服务器。写的vue用，只能在开发阶段用，<br>         -后端代理：nginx反向代理</p>
+<p>2 cors：跨域资源共享<br>    CORS需要浏览器和服务器同时支持。目前，所有浏览器都支持该功能<br>    实现CORS通信的关键是服务器。只要服务器实现了CORS，就可以跨源通信</p>
+<p>3 cors:分两种<br>    （1） 请求方法是以下三种方法之一：<br>        HEAD<br>        GET<br>        POST<br>    （2）HTTP的头信息不超出以下几种字段：<br>        Accept<br>        Accept-Language<br>        Content-Language<br>        Last-Event-ID<br>        Content-Type：只限于三个值application/x-www-form-urlencoded、multipart/form-data、text/plain</p>
+<p>​    就是简单请求，否则就是非简单请求</p>
+<p>​    简单请求，发送一次请求；非简单请求，发送两次，第一次是options请求，如果允许跨越，再发送真实请求</p>
+<p>4 自己处理跨域，需要再中间件中写</p>
+<p>5 我们的项目，使用第三方插件（django-cors-headers）</p>
 <h2 id="TCP和UDP的区别"><a href="#TCP和UDP的区别" class="headerlink" title="TCP和UDP的区别"></a>TCP和UDP的区别</h2><p><strong>UDP</strong>是用户数据报协议，是一种无连接的传输层协议，提供面向事物的简单 不可靠信息传送服务。</p>
 <p><strong>TCP</strong> 传输控制协议，是在不可靠的互联网上 提供可靠的端对端字节流 的传输协议。</p>
 <p><strong>udp和ctp主要区别：</strong> </p>
@@ -227,6 +234,7 @@
 <li><p><strong>传输数度不同</strong>： tcp协议的速度比较慢，udp的速度比较快。</p>
 </li>
 </ol>
+<hr>
 <h2 id="猴子补丁"><a href="#猴子补丁" class="headerlink" title="猴子补丁"></a>猴子补丁</h2><p>当我们使用模块的时候，对其功能不满意，或者自定义功能 替换原来的，就是要打补丁。</p>
 <p>就是用自己的代码替换原代码，这一操作一般在程序的入口文件中。</p>
 <p>**例如 ** ujson模块提供的方法比json模块效率要高，</p>
@@ -234,6 +242,23 @@
 <p><strong>例如</strong> py2上, django有一个模块操作Mysql的，叫 Mysql_DB，只在py2.x上使用，</p>
 <p>3.x上就不在维护了。 有一个组织把 Mysql_DB 源码拿过来，在py3上维护，改名字叫 pymysql。</p>
 <p>__init__中配置的那两句话，就是猴子补丁。 把原来的对象，换成Pymysql中的对象。</p>
+<hr>
+<h2 id="公钥和私钥"><a href="#公钥和私钥" class="headerlink" title="公钥和私钥"></a>公钥和私钥</h2><p><img src="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=329667539,78294726&fm=173&app=49&f=JPEG?w=405&h=211&s=BAC1814646581A65628FD71103007098" alt="非对称加密算法"></p>
+<p>首先公钥和私钥是俗称的不对称加密方式，也就是非对称加密算法，是对以前的对称加密（使用用户名与密码）方式的提高。</p>
+<p>**当使用非对称加密算法时，会生成**两把配对**的密钥，其中一把由私人保管，必须非常小心保存，最好加上密码，无需传输，所以称为私钥，私钥主要是用来**解密/签章**的。另一把对外公布，是给大家用的，本身就无需保密，称为公钥，公钥主要是用来*<em>加密/验章*<em>用的。</em></em></p>
+<p><strong>当你用了其中一把钥匙加密信息时，只有配对的另一把钥匙才能解密，所以公钥和私钥形成了唯一对应的关系</strong>。正是基于这种唯一对应的关系，非对称加密首先可以用来验证信息发送方的身份，另一个就是保密传输。</p>
+<p>举个电子邮件的方式说明一下，比如我现在要发送一份电子邮件给七三，但是为了保证这份邮件的安全性和保密性，我使用了公钥和私钥来加密，而要实现这个安全性、保密性必须保证有以下几步：</p>
+<p>1.我发送给你的内容必须加密，在邮件的传输过程中不能被别人看到；</p>
+<p>\2. 必须保证是我发送的邮件，不是别人冒充我的。</p>
+<p>3.要达到这样的目标，发送接受邮件的两人必须都有公钥和私钥。</p>
+<p>具体操作是，我和七三分别都有对方的公钥，然后我用七三的公钥加密给她发送了一份邮件，七三收到后，就可以用自己的私钥来解密，然后就可以看到邮件内容了。如果我用我的私钥给这个邮件加密了，发给七三后，七三就可以用我的公钥来验证，确认这个邮件还是不是我发的。</p>
+<p>说的更明白点就是：</p>
+<p>当A发给B资料时，A会使用B的公钥加密，这样才能确保只有B能解开，否则人人都能解开加密的讯息，这就是失去了资料的保密性，验证方面则是使用签验章的机制，也就是用B的私钥来验证。当A传资料给B时，用自己的私钥做签章，那么B就可以用A的公钥来验章，确认讯息是由 A 发出来的了。</p>
+<p><img src="http://t10.baidu.com/it/u=295854921,2687880015&fm=173&app=25&f=JPEG?w=500&h=206&s=1EAA7C238F684C010AF4E5D30000A0B1" alt="img"></p>
+<p>===&gt;&gt;&gt;&gt;<img src="https://img-blog.csdnimg.cn/2019053013061428.png" alt="img"></p>
+<p>私钥是完成交易的唯一不要条件，为了给其他人（网络中的其他节点）证明你拥有对应的私钥，完成了对应的交易，就需要将公钥发给大家，来证明你拥有对应的私钥。</p>
+<p>****因为私钥可生成公钥，但是公钥无法倒推私钥****，所以这种方式即能证明交易成功，又能保证私钥的安全性。</p>
+<p>简单理解就是：<strong>既然是加密，那肯定是不希望别人知道我的消息，所以只有我才能解密，所以可得出公钥负责加密，私钥负责解密；同理，既然是签名，那肯定是不希望有人冒充我发消息，只有我才能发布这个签名，所以可得出私钥负责签名，公钥负责验证。</strong></p>
 
       
 
@@ -397,7 +422,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82"><span class="toc-number">1.</span> <span class="toc-text">跨域请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP%E5%92%8CUDP%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">2.</span> <span class="toc-text">TCP和UDP的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8C%B4%E5%AD%90%E8%A1%A5%E4%B8%81"><span class="toc-number">3.</span> <span class="toc-text">猴子补丁</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82"><span class="toc-number">1.</span> <span class="toc-text">跨域请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP%E5%92%8CUDP%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">2.</span> <span class="toc-text">TCP和UDP的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8C%B4%E5%AD%90%E8%A1%A5%E4%B8%81"><span class="toc-number">3.</span> <span class="toc-text">猴子补丁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AC%E9%92%A5%E5%92%8C%E7%A7%81%E9%92%A5"><span class="toc-number">4.</span> <span class="toc-text">公钥和私钥</span></a></li></ol>
                     </div>
                 </span>
             </div>
