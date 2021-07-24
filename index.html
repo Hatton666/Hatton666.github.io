@@ -176,130 +176,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-git使用2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/23/git%E4%BD%BF%E7%94%A82/">git使用之协同开发</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2021/07/23/git%E4%BD%BF%E7%94%A82/" class="archive-article-date">
-  	<time datetime="2021-07-23T11:15:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-23</time>
-</a>
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-git-远程仓库"><a href="#1-git-远程仓库" class="headerlink" title="1 git 远程仓库"></a>1 git 远程仓库</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> 创建.gitignore文件，过滤不提交的文件。</span><br><span class="line">在 gitee上新建空仓库 （参考上面）</span><br><span class="line"><span class="number">2</span> luffy_api中</span><br><span class="line">	-git init  <span class="comment"># 初始化</span></span><br><span class="line">    -git add . <span class="comment"># 提交到暂存区</span></span><br><span class="line">    -git commit -m <span class="string">&#x27;第一次提交&#x27;</span> （提交到版本库）</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># git remote add 名字 远程仓库地址</span></span><br><span class="line">    -git remote add origin https://gitee.com/vivek-<span class="number">666</span>/luffy_api.git  <span class="comment"># 增加一个远程仓库</span></span><br><span class="line">	<span class="comment"># git push 远程仓库名字 分支名字 （把分支名提交到厂库名）</span></span><br><span class="line">    -git push origin master   <span class="comment"># 把本地版本库内容，提交到远程仓库，需要输入giee的用户名密码 &gt;&gt;&gt; 用户名就注册的是邮箱</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="number">3</span> 远程仓库操作</span><br><span class="line">	-增加</span><br><span class="line">    	-git remote add 名字 远程仓库地址</span><br><span class="line">    -查看</span><br><span class="line">    	-git remote</span><br><span class="line">    -删除</span><br><span class="line">    	-git remote remove origin</span><br><span class="line">    -提交到远程仓库</span><br><span class="line">    	-git push origin master</span><br><span class="line">        </span><br><span class="line"><span class="number">4</span> 控制面板里有 凭据管理，可以删除保存的用户名和密码。</span><br><span class="line"><span class="number">5</span> 新增或者删除，会自动加到暂存区，变成绿色。</span><br><span class="line"></span><br><span class="line"><span class="number">5</span> 以上是利用https中的协议连接远程。</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="2-采用ssh协议连接远程"><a href="#2-采用ssh协议连接远程" class="headerlink" title="2 采用ssh协议连接远程"></a>2 采用ssh协议连接远程</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> https方式：使用用户名+密码认证方式</span><br><span class="line"><span class="number">2</span> ssh方式：公钥私钥方式</span><br><span class="line">	 -本地生成公钥私钥</span><br><span class="line">    	<span class="comment"># 官方</span></span><br><span class="line">    	-https://gitee.com/profile/sshkeys</span><br><span class="line">        <span class="comment"># 自己生成</span></span><br><span class="line">         -cmd窗口中：ssh-keygen -t rsa -C <span class="string">&quot;1851321518@qq.com&quot;</span></span><br><span class="line">            <span class="comment"># 一路回车 </span></span><br><span class="line">        -生成到用户家路径的 .ssh文件夹下  &gt;&gt; C:\Users\lenovo\.ssh</span><br><span class="line">        -id_rsa      <span class="comment"># 私钥</span></span><br><span class="line">        -id_rsa.pub  <span class="comment"># 公钥</span></span><br><span class="line">     -把公钥配置到gitee上</span><br><span class="line">     -以后再提交代码就不需要输入用户名密码了</span><br><span class="line">        -重新配置远程仓库</span><br><span class="line">                        <span class="comment"># 名字 远程仓库地址</span></span><br><span class="line">        git remote add origin git@gitee.com:vivek-<span class="number">666</span>/luffy_api.git</span><br><span class="line">        git push origin master  <span class="comment"># 远程仓库名字 分支名字 （把分支名提交到厂库名）</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="3-项目创始者和项目开发者"><a href="#3-项目创始者和项目开发者" class="headerlink" title="3 项目创始者和项目开发者"></a>3 项目创始者和项目开发者</h2><p>​    <strong>成为了开发者，就有了上推的权力。</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> 如果我是项目开发者，需要把代码clone到本地</span><br><span class="line">	-git clone https://gitee.com/liuqingzheng/luffy_api.git</span><br><span class="line">    -git clone git@gitee.com:vivek-<span class="number">666</span>/luffy_api1.git</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 所有的记录都放在了.git中</span></span><br><span class="line">     -修改代码</span><br><span class="line">    </span><br><span class="line">    -提交到远程</span><br><span class="line">    	git push origin master</span><br><span class="line"><span class="number">2</span> 如果我是项目创始者，需要远程新建仓库，本地代码push上去</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="4-协同开发"><a href="#4-协同开发" class="headerlink" title="4 协同开发"></a>4 协同开发</h2><p>针对厂库层面的操作的</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> 管理员，开发者（<span class="number">10</span>开发者）</span><br><span class="line">	-能提交代码（能增删查改代码）</span><br><span class="line"><span class="number">2</span> 有一个开发者提交了代码 ，版本就更新了。</span><br><span class="line"></span><br><span class="line"><span class="number">3</span> 另一个开发者，在提交之前，必须先拉取代码，让本地成为最新。</span><br><span class="line">  可能会出冲突，解决冲突，再提交</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="number">4</span> 冲突解决（多人在同一个分支开发，导致冲突）</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD  # 冲突的开始</span></span><br><span class="line"><span class="string"># 自己的代码</span></span><br><span class="line"><span class="string">=======  # 分割线</span></span><br><span class="line"><span class="string"># 别人的代码</span></span><br><span class="line"><span class="string">&gt;&gt;&gt;&gt;&gt;&gt;&gt; b63c408abd05b87fc492d40523240561999dba50  # 冲突的结束(版本)</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment"># 冲突解决：</span></span><br><span class="line">	-改同样的功能出现的冲突，看一下谁的代码更好，保留好代码，删除不好代码</span><br><span class="line">    -改的不是同样的功能出现了冲突，留着两个人的</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 避免冲突</span></span><br><span class="line">	-没事就拉一下代码 </span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="5-线上分支合并"><a href="#5-线上分支合并" class="headerlink" title="5 线上分支合并"></a>5 线上分支合并</h2><p>分支线上操作</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> 本地和远端分支</span><br><span class="line">	-本地建立分支，同步到远端</span><br><span class="line">    	-git branch dev</span><br><span class="line">        -git push origin dev</span><br><span class="line">    -远端建立分支，同步到本地</span><br><span class="line">    	-远端建立分支</span><br><span class="line">        -git pull origin dev</span><br><span class="line">        -git branch   <span class="comment"># 看不到</span></span><br><span class="line">        -git checkout dev  <span class="comment">#切到dev分支，本地就能看到了</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line"><span class="number">2</span> 提一个pr：pull request，分支合并的请求</span><br><span class="line">可自动合并，说明没冲突。</span><br><span class="line"></span><br><span class="line"><span class="number">3</span> 领导点审核通过，测试通过：合并分支，扁平化合并</span><br><span class="line">	-git 变基（git rebase）扁平化合并。合并后只有一个版本号，主分支更好看。</span><br><span class="line">    相当于打包好 再合并到上面。</span><br><span class="line">    </span><br><span class="line"><span class="number">4</span> 远端：dev分支代码和master分支代码完全一致 </span><br><span class="line"></span><br><span class="line"><span class="number">5</span> 总结 ： 本地是本地 ， 远端是远端。  本地与远端 相互交互， 能够保证 保持一致性。</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="6-本地分支合并推送到远程"><a href="#6-本地分支合并推送到远程" class="headerlink" title="6 本地分支合并推送到远程"></a>6 本地分支合并推送到远程</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> 由于dev分支和master分支合并时，有冲突，就不能自动合并了，我们需要本地合并完，解决冲突，再提交</span><br><span class="line"><span class="number">2</span> 把dev合并到master</span><br><span class="line">	-git checkout master</span><br><span class="line">    -git merge dev</span><br><span class="line">    -有冲突，解决冲突</span><br><span class="line">    -再提交</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="number">3</span> 本地的分支提交到远端分支（如果名字不一样）</span><br><span class="line">	git push origin dev111:dev222  <span class="comment">#尽量不要做</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="7-pycharm操作git"><a href="#7-pycharm操作git" class="headerlink" title="7 pycharm操作git"></a>7 pycharm操作git</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> git clone 地址</span><br><span class="line"><span class="number">2</span> clone 前 确认一下 git.exe的 运行环境。</span><br><span class="line"><span class="number">3</span> 注释 推，拉。</span><br><span class="line"></span><br><span class="line">对着视频练习一下</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="8-企业git使用流程"><a href="#8-企业git使用流程" class="headerlink" title="8 企业git使用流程"></a>8 企业git使用流程</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> 领导给你一个git地址，git clone下来，pycharm打开，本地把代码运行起来</span><br><span class="line"><span class="number">2</span> 你改bug，提交，提交不上去</span><br><span class="line">	-需要有一个gitlab账号（你去注册一个，别人帮你注册好了）</span><br><span class="line">    -公司会把你的账号，添加到项目的开发者</span><br><span class="line">    -ssh操作：本地生成公钥私钥，自己配置在gitlab上</span><br><span class="line">    -把你的公钥给管这个东西的人（一般不做）</span><br><span class="line"><span class="number">3</span> 使用pycharm操作，提交即可</span><br><span class="line">	-勤拉代码</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">面试题：</span><br><span class="line">	-<span class="number">1</span> git操作出没出冲突，如何解决</span><br><span class="line">    	-第一：多人在同一分支开发</span><br><span class="line">        -第二：分支合并出冲突</span><br><span class="line">        </span><br><span class="line">    -<span class="number">2</span> git 变基</span><br><span class="line">    -<span class="number">3</span> git fetch 和 git pull的区别</span><br><span class="line">    -<span class="number">4</span> git add . <span class="comment"># 不建议使用</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/工具学习//" class="article-tag-list-link color5">工具学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/23/git%E4%BD%BF%E7%94%A82/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
- 
-
-
-
-  
     <article id="post-每日一刷" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -807,6 +683,144 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/07/21/%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%EF%BC%881%EF%BC%89/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+ 
+
+
+
+  
+    <article id="post-每日一问" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/19/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%97%AE/">每日一问</a>
+    </h1>
+  
+
+        
+        
+
+<a href="/2021/07/19/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%97%AE/" class="archive-article-date">
+  	<time datetime="2021-07-18T23:16:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-19</time>
+</a>
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="跨域请求"><a href="#跨域请求" class="headerlink" title="跨域请求"></a>跨域请求</h2><p> <strong>What:</strong>     当前发起请求的域与该请求指向资源所在的域不一样； 跨域就包括 协议，域名，端口，只要有一项不同就是跨域；简单点说就是浏览器的地址栏里边的 协议，域名，端口 和你网页中js请求的接口的 协议，域名，和端口 ，任意一项不同就属于跨域。 如果页面用了 iframe，这个判断方法就不适用。</p>
+<p><strong>注意！</strong></p>
+<p>1，到底是谁和谁的域不同；2，服务器不同就是跨域，或者IP地址不同就是跨域，都是不准确的；<br>3，只说了域名，忽略了 协议和端口；4，如何解决跨域问题；</p>
+<p><strong>Why:</strong>      1 同源策略<br>同源策略（Same origin policy）是一种约定，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，则浏览器的正常功能可能都会受到影响。可以说Web是构建在同源策略基础之上的，浏览器只是针对同源策略的一种实现</p>
+<p>请求的url地址,必须与浏览器上的url地址处于同域上,也就是域名,端口,协议相同.</p>
+<p>比如:我在本地上的域名是127.0.0.1:8000,请求另外一个域名：127.0.0.1:8001一段数据</p>
+<p>浏览器上就会报错，这个就是同源策略的保护,如果浏览器对javascript没有同源策略的保护,那么一些重要的机密网站将会很危险</p>
+<p><strong>How: 跨域请求解决方案</strong></p>
+<p>2 cors：跨域资源共享<br>    CORS需要浏览器和服务器同时支持。目前，所有浏览器都支持该功能<br>    实现CORS通信的关键是服务器。只要服务器实现了CORS，就可以跨源通信</p>
+<p>3 cors:分两种<br>    （1） 请求方法是以下三种方法之一：<br>        HEAD<br>        GET<br>        POST<br>    （2）HTTP的头信息不超出以下几种字段：<br>        Accept<br>        Accept-Language<br>        Content-Language<br>        Last-Event-ID<br>        Content-Type：只限于三个值application/x-www-form-urlencoded、multipart/form-data、text/plain</p>
+<p>​    就是简单请求，否则就是非简单请求</p>
+<p>​    简单请求，发送一次请求；非简单请求，发送两次，第一次是options请求，如果允许跨越，再发送真实请求</p>
+<p>4 自己处理跨域，需要再中间件中写</p>
+<p>5 我们的项目，使用第三方插件（django-cors-headers）</p>
+<h2 id="TCP和UDP的区别"><a href="#TCP和UDP的区别" class="headerlink" title="TCP和UDP的区别"></a>TCP和UDP的区别</h2><p><strong>UDP</strong>是用户数据报协议，是一种无连接的传输层协议，提供面向事物的简单 不可靠信息传送服务。</p>
+<p><strong>TCP</strong> 传输控制协议，是在不可靠的互联网上 提供可靠的端对端字节流 的传输协议。</p>
+<p><strong>udp和ctp主要区别：</strong> </p>
+<ol>
+<li><p><strong>信息传送的信息可靠性方面不同</strong>：tcp协议包含了专门的传输保证机制，数据传输更加可靠。</p>
+<p>udp协议  不提供数据传送的保证机制，因此人们也把udp协议称为 不可靠传输协议。</p>
+</li>
+<li><p><strong>传输数度不同</strong>： tcp协议的速度比较慢，udp的速度比较快。</p>
+</li>
+</ol>
+<hr>
+<h2 id="猴子补丁"><a href="#猴子补丁" class="headerlink" title="猴子补丁"></a>猴子补丁</h2><p>当我们使用模块的时候，对其功能不满意，或者自定义功能 替换原来的，就是要打补丁。</p>
+<p>就是用自己的代码替换原代码，这一操作一般在程序的入口文件中。</p>
+<p>**例如 ** ujson模块提供的方法比json模块效率要高，</p>
+<p>可以用 ujson 的 dumps()和 loads() 替换json中 的相应方法。 </p>
+<p><strong>例如</strong> py2上, django有一个模块操作Mysql的，叫 Mysql_DB，只在py2.x上使用，</p>
+<p>3.x上就不在维护了。 有一个组织把 Mysql_DB 源码拿过来，在py3上维护，改名字叫 pymysql。</p>
+<p>__init__中配置的那两句话，就是猴子补丁。 把原来的对象，换成Pymysql中的对象。</p>
+<hr>
+<h2 id="公钥和私钥"><a href="#公钥和私钥" class="headerlink" title="公钥和私钥"></a>公钥和私钥</h2><p><img src="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=329667539,78294726&fm=173&app=49&f=JPEG?w=405&h=211&s=BAC1814646581A65628FD71103007098" alt="非对称加密算法"></p>
+<p>首先公钥和私钥是俗称的不对称加密方式，也就是非对称加密算法，是对以前的对称加密（使用用户名与密码）方式的提高。</p>
+<p>**当使用非对称加密算法时，会生成**两把配对**的密钥，其中一把由私人保管，必须非常小心保存，最好加上密码，无需传输，所以称为私钥，私钥主要是用来**解密/签章**的。另一把对外公布，是给大家用的，本身就无需保密，称为公钥，公钥主要是用来*<em>加密/验章*<em>用的。</em></em></p>
+<p><strong>当你用了其中一把钥匙加密信息时，只有配对的另一把钥匙才能解密，所以公钥和私钥形成了唯一对应的关系</strong>。正是基于这种唯一对应的关系，非对称加密首先可以用来验证信息发送方的身份，另一个就是保密传输。</p>
+<p>举个电子邮件的方式说明一下，比如我现在要发送一份电子邮件给七三，但是为了保证这份邮件的安全性和保密性，我使用了公钥和私钥来加密，而要实现这个安全性、保密性必须保证有以下几步：</p>
+<p>1.我发送给你的内容必须加密，在邮件的传输过程中不能被别人看到；</p>
+<p>\2. 必须保证是我发送的邮件，不是别人冒充我的。</p>
+<p>3.要达到这样的目标，发送接受邮件的两人必须都有公钥和私钥。</p>
+<p>具体操作是，我和七三分别都有对方的公钥，然后我用七三的公钥加密给她发送了一份邮件，七三收到后，就可以用自己的私钥来解密，然后就可以看到邮件内容了。如果我用我的私钥给这个邮件加密了，发给七三后，七三就可以用我的公钥来验证，确认这个邮件还是不是我发的。</p>
+<p>说的更明白点就是：</p>
+<p>当A发给B资料时，A会使用B的公钥加密，这样才能确保只有B能解开，否则人人都能解开加密的讯息，这就是失去了资料的保密性，验证方面则是使用签验章的机制，也就是用B的私钥来验证。当A传资料给B时，用自己的私钥做签章，那么B就可以用A的公钥来验章，确认讯息是由 A 发出来的了。</p>
+<p><img src="http://t10.baidu.com/it/u=295854921,2687880015&fm=173&app=25&f=JPEG?w=500&h=206&s=1EAA7C238F684C010AF4E5D30000A0B1" alt="img"></p>
+<p>===&gt;&gt;&gt;&gt;<img src="https://img-blog.csdnimg.cn/2019053013061428.png" alt="img"></p>
+<p>私钥是完成交易的唯一不要条件，为了给其他人（网络中的其他节点）证明你拥有对应的私钥，完成了对应的交易，就需要将公钥发给大家，来证明你拥有对应的私钥。</p>
+<p>****因为私钥可生成公钥，但是公钥无法倒推私钥****，所以这种方式即能证明交易成功，又能保证私钥的安全性。</p>
+<p>简单理解就是：<strong>既然是加密，那肯定是不希望别人知道我的消息，所以只有我才能解密，所以可得出公钥负责加密，私钥负责解密；同理，既然是签名，那肯定是不希望有人冒充我发消息，只有我才能发布这个签名，所以可得出私钥负责签名，公钥负责验证。</strong></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">oneday</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/everyday//" class="article-tag-list-link color4">everyday</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/07/19/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%97%AE/">展开全文 >></a>
         </p>
       
 
