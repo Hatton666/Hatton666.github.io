@@ -540,15 +540,15 @@
 
 <h2 id="2-自定义配置"><a href="#2-自定义配置" class="headerlink" title="2 自定义配置"></a>2 自定义配置</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> 额外有一个配置文件，后期，该配置文件中的配置，可以直接在django的配置文件中使用</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在setting文件夹下新建common_setting</span></span><br><span class="line"><span class="comment"># 写入</span></span><br><span class="line">BANNER_COUNT=<span class="number">1</span></span><br><span class="line"><span class="comment"># 在dev.py中，写入</span></span><br><span class="line"><span class="keyword">from</span> .common_settings <span class="keyword">import</span>  *</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在setting文件夹下新建common_setting</span></span><br><span class="line"><span class="comment"># 写入</span></span><br><span class="line">BANNER_COUNT=<span class="number">1</span></span><br><span class="line"><span class="comment"># 在dev.py中，写入</span></span><br><span class="line"><span class="keyword">from</span> .common_settings <span class="keyword">import</span>  *</span><br><span class="line"><span class="comment"># 这样就可以在自己的vue中通过切片拿到。</span></span><br></pre></td></tr></table></figure>
 
 
 
 
 
-<h3 id="2-1-前端存储数据的地方"><a href="#2-1-前端存储数据的地方" class="headerlink" title="2.1 前端存储数据的地方"></a>2.1 前端存储数据的地方</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> 存到cookie中：到了过期时间，失效</span><br><span class="line"><span class="number">2</span> 存到sessionStorage中：在当前页面中有效，关闭浏览器无效</span><br><span class="line"><span class="number">3</span> 存到localStorage中：永久有效，除非我们删除</span><br></pre></td></tr></table></figure>
+<h3 id="2-1-前端存储数据的地方"><a href="#2-1-前端存储数据的地方" class="headerlink" title="2.1 前端存储数据的地方"></a>2.1 前端存储数据的地方</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> 存到cookie中：到了过期时间，失效</span><br><span class="line"><span class="number">2</span> 存到sessionStorage中：在当前页面中有效，关闭浏览器无效</span><br><span class="line"><span class="number">3</span> 存到localStorage中：永久有效，除非我们删除</span><br><span class="line"></span><br><span class="line">localStorage.name = <span class="string">&#x27;lqz&#x27;</span></span><br><span class="line">sessionStorage.name = <span class="string">&#x27;lqz&#x27;</span></span><br><span class="line">this.$cookies.<span class="built_in">set</span>(<span class="string">&#x27;name&#x27;</span>,<span class="string">&#x27;lqz&#x27;</span>,<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-2-vue-router路由跳转的方式"><a href="#2-2-vue-router路由跳转的方式" class="headerlink" title="2.2 vue-router路由跳转的方式"></a>2.2 vue-router路由跳转的方式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方式1（html中）</span></span><br><span class="line">&lt;router-link to=<span class="string">&quot;/about&quot;</span>&gt;&lt;/router-link&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方式2（js中）</span></span><br><span class="line">this.$router.push(<span class="string">&#x27;/about&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-vue-router路由跳转的方式"><a href="#2-2-vue-router路由跳转的方式" class="headerlink" title="2.2 vue-router路由跳转的方式"></a>2.2 vue-router路由跳转的方式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">this.$router   全局vue-router的对象</span><br><span class="line">this.$router   当次请求地址的对象 有请求地址， 有携带数据。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 方式1（html中）</span></span><br><span class="line">&lt;router-link to=<span class="string">&quot;/about&quot;</span>&gt; 原来的事件 &lt;/router-link&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方式2（js中）</span></span><br><span class="line"><span class="meta">@一个事件，，将跳转写在定义的事件中。</span></span><br><span class="line">this.$router.push(<span class="string">&#x27;/about&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
 
       
@@ -978,15 +978,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">oneday</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">luffy</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法与数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color2">oneday</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法和数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
