@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Tag: 算法和数据结构 | Hexo</title>
+  <title>luffy前台课程接口 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/tags/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.html">
+  <meta name="description" content="1 所有课程接口  课程分类1.1 课程分类接口1234567891011121314151617181920212223242526272829303132333435363738394041424344454647#视图类from rest_framework.viewsets import GenericViewSetfrom rest_framework.mixins import Lis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="luffy前台课程接口">
+<meta property="og:url" content="http://example.com/2021/07/30/luffy%E8%AF%BE%E7%A8%8B%E6%8E%A5%E5%8F%A3/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1 所有课程接口  课程分类1.1 课程分类接口1234567891011121314151617181920212223242526272829303132333435363738394041424344454647#视图类from rest_framework.viewsets import GenericViewSetfrom rest_framework.mixins import Lis">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-30T11:48:27.000Z">
+<meta property="article:modified_time" content="2021-07-31T12:37:03.056Z">
 <meta property="article:author" content="Vivek">
+<meta property="article:tag" content="luffy">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -175,80 +180,260 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+<article id="post-luffy课程接口" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-
-<a href="/2021/07/14/%E7%AE%97%E6%B3%95%E9%9B%86/" class="archive-article-date">
-  	<time datetime="2021-07-14T07:12:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-14</time>
-</a>
-
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/14/%E7%AE%97%E6%B3%95%E9%9B%86/">排序算法</a>
+    <h1 class="article-title" itemprop="name">
+      luffy前台课程接口
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        
+	<!-- 不蒜子统计 -->
+	<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+		  <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+
+<a href="/2021/07/30/luffy%E8%AF%BE%E7%A8%8B%E6%8E%A5%E5%8F%A3/" class="archive-article-date">
+  	<time datetime="2021-07-30T11:48:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-30</time>
+</a>
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-所有课程接口-课程分类"><a href="#1-所有课程接口-课程分类" class="headerlink" title="1 所有课程接口  课程分类"></a>1 所有课程接口  课程分类</h2><h3 id="1-1-课程分类接口"><a href="#1-1-课程分类接口" class="headerlink" title="1.1 课程分类接口"></a>1.1 课程分类接口</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#视图类</span></span><br><span class="line"><span class="keyword">from</span> rest_framework.viewsets <span class="keyword">import</span> GenericViewSet</span><br><span class="line"><span class="keyword">from</span> rest_framework.mixins <span class="keyword">import</span> ListModelMixin</span><br><span class="line"><span class="keyword">from</span> course.serializer <span class="keyword">import</span> CourseCategorySerializer</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 课程类接口</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CourseCategoryView</span>(<span class="params">GenericViewSet, ListModelMixin</span>):</span></span><br><span class="line">    <span class="comment"># CourseCategory继承了BaseModel，带有过滤条件参数。</span></span><br><span class="line">    queryset = CourseCategory.objects.<span class="built_in">all</span>().<span class="built_in">filter</span>(is_delete=<span class="literal">False</span>, is_show=<span class="literal">True</span>).oder_by(<span class="string">&#x27;orders&#x27;</span>)</span><br><span class="line">    serializer_class = CourseCategorySerializer</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#####序列化类</span></span><br><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> serializers</span><br><span class="line"><span class="keyword">from</span> course.models <span class="keyword">import</span> CourseCategory</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 课程类序列化器</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CourseCategorySerializer</span>(<span class="params">serializers.ModelSerializer</span>):</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        model = CourseCategory</span><br><span class="line"></span><br><span class="line">    <span class="built_in">filter</span> = [<span class="string">&#x27;id&#x27;</span>, <span class="string">&#x27;name&#x27;</span>]</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="comment">#根路由</span></span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path, include</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;api/course/&#x27;</span>, include(<span class="string">&#x27;course.urls&#x27;</span>)),</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 子路由</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path, include</span><br><span class="line"><span class="keyword">from</span> rest_framework.routers <span class="keyword">import</span> SimpleRouter</span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> views</span><br><span class="line"></span><br><span class="line">router = SimpleRouter()</span><br><span class="line">router.register(<span class="string">&#x27;category&#x27;</span>, views.CourseCategoryView, <span class="string">&#x27;category&#x27;</span>)</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;&#x27;</span>, include(router.urls)),</span><br><span class="line">]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h3 id="1-2-所有课程接口"><a href="#1-2-所有课程接口" class="headerlink" title="1.2 所有课程接口"></a>1.2 所有课程接口</h3><h4 id="序列化表中没有字段的处理-和-外键字段的处理"><a href="#序列化表中没有字段的处理-和-外键字段的处理" class="headerlink" title="序列化表中没有字段的处理 和 外键字段的处理"></a>序列化表中没有字段的处理 和 外键字段的处理</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">####实战课表 </span></span><br><span class="line"><span class="comment"># models.py #</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Course</span>(<span class="params">BaseModel</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;课程&quot;&quot;&quot;</span></span><br><span class="line">    course_type = (</span><br><span class="line">        (<span class="number">0</span>, <span class="string">&#x27;付费&#x27;</span>),</span><br><span class="line">        (<span class="number">1</span>, <span class="string">&#x27;VIP专享&#x27;</span>),</span><br><span class="line">        (<span class="number">2</span>, <span class="string">&#x27;学位课程&#x27;</span>)</span><br><span class="line">    )</span><br><span class="line">    level_choices = (</span><br><span class="line">        (<span class="number">0</span>, <span class="string">&#x27;初级&#x27;</span>),</span><br><span class="line">        (<span class="number">1</span>, <span class="string">&#x27;中级&#x27;</span>),</span><br><span class="line">        (<span class="number">2</span>, <span class="string">&#x27;高级&#x27;</span>),</span><br><span class="line">    )</span><br><span class="line">    status_choices = (</span><br><span class="line">        (<span class="number">0</span>, <span class="string">&#x27;上线&#x27;</span>),</span><br><span class="line">        (<span class="number">1</span>, <span class="string">&#x27;下线&#x27;</span>),</span><br><span class="line">        (<span class="number">2</span>, <span class="string">&#x27;预上线&#x27;</span>),</span><br><span class="line">    )</span><br><span class="line">    name = models.CharField(max_length=<span class="number">128</span>, verbose_name=<span class="string">&quot;课程名称&quot;</span>)</span><br><span class="line">    course_img = models.ImageField(upload_to=<span class="string">&quot;courses&quot;</span>, max_length=<span class="number">255</span>, verbose_name=<span class="string">&quot;封面图片&quot;</span>, blank=<span class="literal">True</span>, null=<span class="literal">True</span>)</span><br><span class="line">    course_type = models.SmallIntegerField(choices=course_type, default=<span class="number">0</span>, verbose_name=<span class="string">&quot;付费类型&quot;</span>)</span><br><span class="line">    <span class="comment"># 使用这个字段的原因</span></span><br><span class="line">    brief = models.TextField(max_length=<span class="number">2048</span>, verbose_name=<span class="string">&quot;详情介绍&quot;</span>, null=<span class="literal">True</span>, blank=<span class="literal">True</span>)</span><br><span class="line">    level = models.SmallIntegerField(choices=level_choices, default=<span class="number">0</span>, verbose_name=<span class="string">&quot;难度等级&quot;</span>)</span><br><span class="line">    pub_date = models.DateField(verbose_name=<span class="string">&quot;发布日期&quot;</span>, auto_now_add=<span class="literal">True</span>)</span><br><span class="line">    period = models.IntegerField(verbose_name=<span class="string">&quot;建议学习周期(day)&quot;</span>, default=<span class="number">7</span>)</span><br><span class="line">    attachment_path = models.FileField(upload_to=<span class="string">&quot;attachment&quot;</span>, max_length=<span class="number">128</span>, verbose_name=<span class="string">&quot;课件路径&quot;</span>, blank=<span class="literal">True</span>,</span><br><span class="line">                                       null=<span class="literal">True</span>)</span><br><span class="line">    status = models.SmallIntegerField(choices=status_choices, default=<span class="number">0</span>, verbose_name=<span class="string">&quot;课程状态&quot;</span>)</span><br><span class="line">    students = models.IntegerField(verbose_name=<span class="string">&quot;学习人数&quot;</span>, default=<span class="number">0</span>)  <span class="comment"># 正常来讲，没有这个字段，应该跟User表关联</span></span><br><span class="line">    sections = models.IntegerField(verbose_name=<span class="string">&quot;总课时数量&quot;</span>, default=<span class="number">0</span>)</span><br><span class="line">    pub_sections = models.IntegerField(verbose_name=<span class="string">&quot;课时更新数量&quot;</span>, default=<span class="number">0</span>)</span><br><span class="line">    price = models.DecimalField(max_digits=<span class="number">6</span>, decimal_places=<span class="number">2</span>, verbose_name=<span class="string">&quot;课程原价&quot;</span>, default=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">###### 关联字段</span></span><br><span class="line">    teacher = models.ForeignKey(<span class="string">&quot;Teacher&quot;</span>, on_delete=models.DO_NOTHING, null=<span class="literal">True</span>, blank=<span class="literal">True</span>, verbose_name=<span class="string">&quot;授课老师&quot;</span>)</span><br><span class="line">    <span class="comment"># db_constraint=False 表示断开关联，就不会有外键关联，但是连表查询还能正常使用</span></span><br><span class="line">    course_category = models.ForeignKey(<span class="string">&quot;CourseCategory&quot;</span>, on_delete=models.SET_NULL, db_constraint=<span class="literal">False</span>, null=<span class="literal">True</span>,</span><br><span class="line">                                        blank=<span class="literal">True</span>,</span><br><span class="line">                                        verbose_name=<span class="string">&quot;课程分类&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># 顶格</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        db_table = <span class="string">&quot;luffy_course&quot;</span></span><br><span class="line">        verbose_name = <span class="string">&quot;课程&quot;</span></span><br><span class="line">        verbose_name_plural = <span class="string">&quot;课程&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;%s&quot;</span> % self.name</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 对于序列化的表中没有的,新添加的字段的处理。</span></span><br><span class="line">    <span class="comment"># 方法一：在models.py中写以该字段命名的方法。</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将新添加的字段包装成数据属性 ？？</span></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">course_type_name</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment"># 拿到course_type字段用choice映射的中文名</span></span><br><span class="line">        <span class="keyword">return</span> self.get_course_type_display()</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">level_name</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.get_level_display()</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">status_name</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.get_status_display()</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 对于外键字段，想拿到外键字段对应的详情.</span></span><br><span class="line">    <span class="comment"># 反向查询 , 由一向多得方向查询。</span></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">section_list</span>(<span class="params">self</span>):</span></span><br><span class="line">        sections_all = []</span><br><span class="line">        <span class="comment"># 通过课程拿到所有章节（反向操作:使用表名小写_set.all()）</span></span><br><span class="line">        <span class="comment"># 如果ForeignKey加了related_name，反向操作的时候，直接使用related_name对象的值：coursechapters</span></span><br><span class="line">		</span><br><span class="line">        <span class="comment"># 循环拿章节</span></span><br><span class="line">        <span class="keyword">for</span> coursechapter <span class="keyword">in</span> self.coursechapters.<span class="built_in">all</span>():</span><br><span class="line">            <span class="comment"># 循环拿课时</span></span><br><span class="line">            <span class="keyword">for</span> course_section <span class="keyword">in</span> coursechapter.coursesections.<span class="built_in">all</span>():</span><br><span class="line">                <span class="comment"># 追加前端展示字段</span></span><br><span class="line">                sections_all.append(</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="string">&#x27;name&#x27;</span>: course_section.name,</span><br><span class="line">                        <span class="string">&#x27;section_link&#x27;</span>: course_section.section_link,</span><br><span class="line">                        <span class="string">&#x27;duration&#x27;</span>: course_section.duration,</span><br><span class="line">                        <span class="string">&#x27;free_trail&#x27;</span>: course_section.free_trail,</span><br><span class="line">                    &#125;</span><br><span class="line">                )</span><br><span class="line">                <span class="comment"># 拿4个结束，最多显示4个。</span></span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">len</span>(sections_all) &gt;= <span class="number">4</span>:</span><br><span class="line">                    <span class="keyword">return</span> sections_all</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sections_all</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"><span class="comment">#related_name:反向操作时，使用的字段名，用于代替原反向查询时的’表名_set’</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 本来 表名小写Course.objects.filter(coursechapters__name) 变成</span></span><br><span class="line"><span class="comment"># Course.objects.filter(aaa__name)</span></span><br><span class="line">当章节表CourseChapter的外键字段course 含有 (related_query_name = <span class="string">&#x27;aaa&#x27;</span>)</span><br><span class="line"><span class="comment"># related_query_name: 反向查询操作时，使用的连接前缀，用于替换表名 </span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> course.models <span class="keyword">import</span> Course</span><br><span class="line"><span class="keyword">from</span> rest_framework.viewsets <span class="keyword">import</span> GenericViewSet</span><br><span class="line"><span class="keyword">from</span> rest_framework.mixins <span class="keyword">import</span> ListModelMixin</span><br><span class="line"><span class="keyword">from</span> course.serializer <span class="keyword">import</span> CourseSerializer</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 课程接口</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CourseView</span>(<span class="params">GenericViewSet,ListModelMixin</span>):</span></span><br><span class="line">    <span class="comment"># 继承了基表，带有过滤条件参数。</span></span><br><span class="line">    queryset = Course.objects.<span class="built_in">all</span>().<span class="built_in">filter</span>(is_delete=<span class="literal">False</span>, is_show=<span class="literal">True</span>).oder_by(<span class="string">&#x27;orders&#x27;</span>)</span><br><span class="line">    serializer_class = CourseSerializer</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> serializers</span><br><span class="line"><span class="keyword">from</span> course.models <span class="keyword">import</span> CourseCategory</span><br><span class="line"><span class="keyword">from</span> course.models <span class="keyword">import</span> Course</span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> Teacher</span><br><span class="line"></span><br><span class="line"><span class="comment"># 课程类序列化器</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CourseCategorySerializer</span>(<span class="params">serializers.ModelSerializer</span>):</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        model = CourseCategory</span><br><span class="line"></span><br><span class="line">    <span class="built_in">filter</span> = [<span class="string">&#x27;id&#x27;</span>, <span class="string">&#x27;name&#x27;</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 对于外键字段，想拿到外键字段对应的详情.</span></span><br><span class="line"><span class="comment"># 序列化老师的第三种方式:子序列化</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TeacherSerializer</span>(<span class="params">serializers.ModelSerializer</span>):</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        model = Teacher</span><br><span class="line">        fields = (<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;role_name&#x27;</span>, <span class="string">&#x27;title&#x27;</span>, <span class="string">&#x27;signature&#x27;</span>, <span class="string">&#x27;image&#x27;</span>, <span class="string">&#x27;brief&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 课程序列化器</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CourseSerializer</span>(<span class="params">serializers.ModelSerializer</span>):</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        model = Course</span><br><span class="line"></span><br><span class="line">    <span class="built_in">filter</span> = [<span class="string">&#x27;id&#x27;</span>,  <span class="comment"># 查课程详情</span></span><br><span class="line">              <span class="string">&#x27;name&#x27;</span>,</span><br><span class="line">              <span class="string">&#x27;course_img&#x27;</span>,</span><br><span class="line">              <span class="string">&#x27;brief&#x27;</span>,  <span class="comment"># 课程介绍</span></span><br><span class="line">              <span class="string">&#x27;attachment_path&#x27;</span>,  <span class="comment"># 课程链接</span></span><br><span class="line">              <span class="string">&#x27;pub_sections&#x27;</span>,  <span class="comment"># 课时数量</span></span><br><span class="line">              <span class="string">&#x27;price&#x27;</span>,</span><br><span class="line">              <span class="string">&#x27;students&#x27;</span>,</span><br><span class="line">              <span class="string">&#x27;period&#x27;</span>,</span><br><span class="line">              <span class="string">&#x27;sections&#x27;</span>,  <span class="comment"># 课时更新数量</span></span><br><span class="line">              <span class="string">&#x27;course_type_name&#x27;</span>,  <span class="comment"># 注意&gt;要拿到中文名</span></span><br><span class="line">              <span class="string">&#x27;level_name&#x27;</span>,  <span class="comment"># 注意 给前端中文</span></span><br><span class="line">              <span class="string">&#x27;status_name&#x27;</span>,  <span class="comment"># 注意</span></span><br><span class="line">              <span class="string">&#x27;teacher&#x27;</span>,  <span class="comment"># 外键，显示老师详情 &#123;&#125;</span></span><br><span class="line">              <span class="string">&#x27;section_list&#x27;</span>, ]  <span class="comment"># 显示课时 一页最多4个。</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">  	<span class="comment"># 对于序列化的表中没有的,新添加的字段的处理。</span></span><br><span class="line">    <span class="comment"># 方法二：source =</span></span><br><span class="line">    <span class="comment"># course_type_name = serializers.CharField(source=&#x27;get_course_type_display&#x27;)</span></span><br><span class="line">    <span class="comment"># </span></span><br><span class="line">    <span class="comment"># 对于序列化的表中没有的,新添加的字段的处理。</span></span><br><span class="line">    <span class="comment"># 方法三：serializers.Serialize rMethodField()</span></span><br><span class="line">    course_type_name = serializers.SerializerMethodField()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_course_type_name</span>(<span class="params">self, obj</span>):</span></span><br><span class="line">        <span class="comment"># 要拿到中文名</span></span><br><span class="line">        <span class="keyword">return</span> obj.get_course_type_display()</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 对于外键字段，想拿到外键字段对应的详情.</span></span><br><span class="line">    <span class="comment">#方法二：serializers.SerializerMethodField()</span></span><br><span class="line">    teacher = serializers.SerializerMethodField()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_teacher</span>(<span class="params">self, obj</span>):</span></span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="string">&#x27;name&#x27;</span>: obj.teacher.name&#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 对于外键字段，想拿到外键字段对应的详情.</span></span><br><span class="line">    <span class="comment"># 序列化老师的第三种方式:子序列化</span></span><br><span class="line">    teacher = TeacherSerializer()</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-所有课程接口，支持排序，过滤，分页"><a href="#1-2-所有课程接口，支持排序，过滤，分页" class="headerlink" title="1.2 所有课程接口，支持排序，过滤，分页"></a>1.2 所有课程接口，支持排序，过滤，分页</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.filters <span class="keyword">import</span> OrderingFilter</span><br><span class="line"><span class="keyword">from</span> django_filters.rest_framework <span class="keyword">import</span> DjangoFilterBackend</span><br><span class="line"><span class="keyword">from</span> rest_framework.filters <span class="keyword">import</span> SearchFilter</span><br><span class="line"></span><br><span class="line"><span class="comment"># 课程接口</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CourseView</span>(<span class="params">GenericViewSet, ListModelMixin</span>):</span></span><br><span class="line">    <span class="comment"># 继承了基表，带有过滤条件参数。</span></span><br><span class="line">    queryset = Course.objects.<span class="built_in">all</span>().<span class="built_in">filter</span>(is_delete=<span class="literal">False</span>, is_show=<span class="literal">True</span>).oder_by(<span class="string">&#x27;orders&#x27;</span>)</span><br><span class="line">    serializer_class = CourseSerializer</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 加排序功能</span></span><br><span class="line">    filter_backends = [OrderingFilter, DjangoFilterBackend]</span><br><span class="line">    <span class="comment"># 指定排序按什么字段</span></span><br><span class="line">    ordering_fields = [<span class="string">&#x27;students&#x27;</span>, <span class="string">&#x27;price&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 加过滤功能 （使用第三方）</span></span><br><span class="line">    <span class="comment"># 第三方：course_category=2</span></span><br><span class="line">    <span class="comment"># 对应的字段</span></span><br><span class="line">    filter_fields = [<span class="string">&#x27;course_category&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># # 内置过滤用的是 SearchFilter模块</span></span><br><span class="line">    <span class="comment"># filter_backends = [SearchFilter]</span></span><br><span class="line">    <span class="comment"># search = &#x27;1&#x27;</span></span><br><span class="line">    <span class="comment"># # 模糊匹配，不够精确。</span></span><br><span class="line">    <span class="comment"># search_fields = [&#x27;course_category&#x27;]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># views.py #  </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> .page <span class="keyword">import</span> CommonPageNumberPagination</span><br><span class="line">    <span class="comment"># 分页功能</span></span><br><span class="line">    pagination_class = CommonPageNumberPagination</span><br><span class="line">   </span><br><span class="line"><span class="comment"># page.py #</span></span><br><span class="line"><span class="keyword">from</span> rest_framework.pagination <span class="keyword">import</span> PageNumberPagination</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CommonPageNumberPagination</span>(<span class="params">PageNumberPagination</span>):</span></span><br><span class="line">    page_size = <span class="number">2</span></span><br><span class="line">    page_query_param = <span class="string">&#x27;page&#x27;</span></span><br><span class="line">    page_size_query_description = <span class="string">&#x27;size&#x27;</span></span><br><span class="line">    max_page_size = <span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="自定义过滤器（规则）"><a href="#自定义过滤器（规则）" class="headerlink" title="自定义过滤器（规则）"></a>自定义过滤器（规则）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> 建一个<span class="built_in">filter</span>.py，写一个类CourseNameFilter，继承BaseFilterBackend</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> rest_framework.filters <span class="keyword">import</span> BaseFilterBackend</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 自定义模糊查询，根据名字中含有什么搜索。</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CourseNameFilter</span>(<span class="params">BaseFilterBackend</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">filter_queryset</span>(<span class="params">self, request, queryset, view</span>):</span></span><br><span class="line">        name = request.query_params.get(<span class="string">&#x27;name&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> name:</span><br><span class="line">            <span class="keyword">return</span> queryset.<span class="built_in">filter</span>(name_contains=name)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> queryset</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line"><span class="comment"># views.py # </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> .<span class="built_in">filter</span> <span class="keyword">import</span> CourseNameFilter</span><br><span class="line"></span><br><span class="line"><span class="comment"># 课程接口</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CourseView</span>(<span class="params">GenericViewSet, ListModelMixin</span>):</span></span><br><span class="line">    <span class="comment"># 继承了基表，带有过滤条件参数。</span></span><br><span class="line">    queryset = Course.objects.<span class="built_in">all</span>().<span class="built_in">filter</span>(is_delete=<span class="literal">False</span>, is_show=<span class="literal">True</span>).oder_by(<span class="string">&#x27;orders&#x27;</span>)</span><br><span class="line">    serializer_class = CourseSerializer</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 加功能(规则)</span></span><br><span class="line">    filter_backends = [CourseNameFilter]</span><br><span class="line">    </span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<h3 id="1-4-借助django-filter实现过滤功能"><a href="#1-4-借助django-filter实现过滤功能" class="headerlink" title="1.4 借助django-filter实现过滤功能"></a>1.4 借助django-filter实现过滤功能</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#########方案一（弱点是只能使用课程（course表）中的字段）#######</span></span><br><span class="line"><span class="comment">### 1 在视图类中</span></span><br><span class="line">filter_backends = [DjangoFilterBackend]</span><br><span class="line">filter_fields=[<span class="string">&#x27;course_category&#x27;</span>,<span class="string">&#x27;name&#x27;</span>]</span><br><span class="line"><span class="comment">## 使用</span></span><br><span class="line">http://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8000</span>/api/course/actual_course/?course_category=<span class="number">2</span></span><br><span class="line">        </span><br><span class="line"><span class="comment">#########方案二:可以自定义字段，及规则实现过滤#######        </span></span><br><span class="line">filter_backends = [DjangoFilterBackend]</span><br><span class="line">filter_class = CourseFilterSet  <span class="comment">#写一个类</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#### 过滤类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CourseFilterSet</span>(<span class="params">FilterSet</span>):</span></span><br><span class="line">    min_price = filters.NumberFilter(field_name=<span class="string">&#x27;price&#x27;</span>, lookup_expr=<span class="string">&#x27;gte&#x27;</span>)</span><br><span class="line">    max_price = filters.NumberFilter(field_name=<span class="string">&#x27;price&#x27;</span>, lookup_expr=<span class="string">&#x27;lte&#x27;</span>)</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        model = models.Course</span><br><span class="line">        fields = [<span class="string">&#x27;course_category&#x27;</span>,<span class="string">&#x27;max_price&#x27;</span>,<span class="string">&#x27;min_price&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-课程详情接口-获取所有章节接口"><a href="#2-课程详情接口-获取所有章节接口" class="headerlink" title="2 课程详情接口  获取所有章节接口"></a>2 课程详情接口  获取所有章节接口</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###详情接口</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CourseView</span>(<span class="params">GenericViewSet,ListModelMixin,RetrieveModelMixin</span>):</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-视图类"><a href="#2-2-视图类" class="headerlink" title="2.2 视图类"></a>2.2 视图类</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> CourseChapter</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CourseChapterView</span>(<span class="params">GenericViewSet,ListModelMixin</span>):</span></span><br><span class="line">    queryset = CourseChapter.objects.<span class="built_in">filter</span>(is_delete=<span class="literal">False</span>,is_show=<span class="literal">True</span>).order_by(<span class="string">&#x27;orders&#x27;</span>)</span><br><span class="line">    serializer_class =CourseChapterSerializer</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 加一个通过课程id过滤功能</span></span><br><span class="line">    filter_backends = [ DjangoFilterBackend]</span><br><span class="line">    filter_fields = [<span class="string">&#x27;course&#x27;</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-序列化类"><a href="#2-3-序列化类" class="headerlink" title="2.3 序列化类"></a>2.3 序列化类</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CourseSectionSerializer</span>(<span class="params">serializers.ModelSerializer</span>):</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        model=CourseSection</span><br><span class="line">        fields=[<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;orders&#x27;</span>, <span class="string">&#x27;section_link&#x27;</span>, <span class="string">&#x27;duration&#x27;</span>, <span class="string">&#x27;free_trail&#x27;</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CourseChapterSerializer</span>(<span class="params">serializers.ModelSerializer</span>):</span></span><br><span class="line">    coursesections=CourseSectionSerializer(many=<span class="literal">True</span>) <span class="comment"># 子序列化,多条</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        model=CourseChapter</span><br><span class="line">        fields=[<span class="string">&#x27;course&#x27;</span>,<span class="string">&#x27;chapter&#x27;</span>,<span class="string">&#x27;name&#x27;</span>,<span class="string">&#x27;summary&#x27;</span>,<span class="string">&#x27;coursesections&#x27;</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#####总结：课程列表和详情相关，需要写的接口</span></span><br><span class="line"><span class="number">1</span> 课程分类</span><br><span class="line"><span class="number">2</span> 查询所有课程：支持分页，支持排序（价格，人数），支持过滤   ---》自定义过滤类，根据django-<span class="built_in">filter</span>自定义区间过滤</span><br><span class="line"><span class="number">3</span> 课程详情接口</span><br><span class="line"><span class="number">4</span> 所有课程章节接口（每个章节下的课时：子序列化）：支持按课程<span class="built_in">id</span>号过滤功能</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/222.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法和数据结构</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">luffy</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/数据//" class="article-tag-list-link color3">数据</a>
+        			<a href="/categories/项目//" class="article-tag-list-link color3">项目</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://vivek-666.github.io/021/07/30/luffy%E8%AF%BE%E7%A8%8B%E6%8E%A5%E5%8F%A3/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2021/07/29/docker%E9%AB%98%E7%BA%A7/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">docker高级</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%89%80%E6%9C%89%E8%AF%BE%E7%A8%8B%E6%8E%A5%E5%8F%A3-%E8%AF%BE%E7%A8%8B%E5%88%86%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">1 所有课程接口  课程分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%AF%BE%E7%A8%8B%E5%88%86%E7%B1%BB%E6%8E%A5%E5%8F%A3"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 课程分类接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%89%80%E6%9C%89%E8%AF%BE%E7%A8%8B%E6%8E%A5%E5%8F%A3"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 所有课程接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E8%A1%A8%E4%B8%AD%E6%B2%A1%E6%9C%89%E5%AD%97%E6%AE%B5%E7%9A%84%E5%A4%84%E7%90%86-%E5%92%8C-%E5%A4%96%E9%94%AE%E5%AD%97%E6%AE%B5%E7%9A%84%E5%A4%84%E7%90%86"><span class="toc-number">1.2.1.</span> <span class="toc-text">序列化表中没有字段的处理 和 外键字段的处理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%89%80%E6%9C%89%E8%AF%BE%E7%A8%8B%E6%8E%A5%E5%8F%A3%EF%BC%8C%E6%94%AF%E6%8C%81%E6%8E%92%E5%BA%8F%EF%BC%8C%E8%BF%87%E6%BB%A4%EF%BC%8C%E5%88%86%E9%A1%B5"><span class="toc-number">1.3.</span> <span class="toc-text">1.2 所有课程接口，支持排序，过滤，分页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%BF%87%E6%BB%A4%E5%99%A8%EF%BC%88%E8%A7%84%E5%88%99%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">自定义过滤器（规则）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E5%80%9F%E5%8A%A9django-filter%E5%AE%9E%E7%8E%B0%E8%BF%87%E6%BB%A4%E5%8A%9F%E8%83%BD"><span class="toc-number">1.5.</span> <span class="toc-text">1.4 借助django-filter实现过滤功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%AF%BE%E7%A8%8B%E8%AF%A6%E6%83%85%E6%8E%A5%E5%8F%A3-%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E7%AB%A0%E8%8A%82%E6%8E%A5%E5%8F%A3"><span class="toc-number">2.</span> <span class="toc-text">2 课程详情接口  获取所有章节接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E8%A7%86%E5%9B%BE%E7%B1%BB"><span class="toc-number">2.1.</span> <span class="toc-text">2.2 视图类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%BA%8F%E5%88%97%E5%8C%96%E7%B1%BB"><span class="toc-number">2.2.</span> <span class="toc-text">2.3 序列化类</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
+ 
+
+  
+      <section id="comments" class="comments">
+        <style>
+          .comments{margin:30px;padding:10px;background:#fff}
+          @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+        </style>
+        <div id="vcomment" class="comment"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var notify = 'false' == true ? true : false;
+  var verify = 'false' == true ? true : false;
+  new Valine({
+    av: AV,
+    el: '#vcomment',
+    notify: notify,
+    app_id: "4078A2Bntfkxp8EVq5TtPO1P-gzGzoHsz",
+    app_key: "2wBAkBOnl2RpsnGy3dYaEPlN",
+    placeholder: "Just go go",
+    avatar: "mm",
+  });
+</script>
+
+    </section>
+  
 
 
-
-<!-- 添加代码  -->
-<span id="busuanzi_container_page_pv">
-  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-</span>
 
 
           </div>
@@ -282,9 +467,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

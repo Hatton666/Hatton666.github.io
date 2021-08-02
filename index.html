@@ -176,6 +176,96 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-luffy课程接口" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/30/luffy%E8%AF%BE%E7%A8%8B%E6%8E%A5%E5%8F%A3/">luffy前台课程接口</a>
+    </h1>
+  
+
+        
+        
+
+<a href="/2021/07/30/luffy%E8%AF%BE%E7%A8%8B%E6%8E%A5%E5%8F%A3/" class="archive-article-date">
+  	<time datetime="2021-07-30T11:48:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-30</time>
+</a>
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-所有课程接口-课程分类"><a href="#1-所有课程接口-课程分类" class="headerlink" title="1 所有课程接口  课程分类"></a>1 所有课程接口  课程分类</h2><h3 id="1-1-课程分类接口"><a href="#1-1-课程分类接口" class="headerlink" title="1.1 课程分类接口"></a>1.1 课程分类接口</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#视图类</span></span><br><span class="line"><span class="keyword">from</span> rest_framework.viewsets <span class="keyword">import</span> GenericViewSet</span><br><span class="line"><span class="keyword">from</span> rest_framework.mixins <span class="keyword">import</span> ListModelMixin</span><br><span class="line"><span class="keyword">from</span> course.serializer <span class="keyword">import</span> CourseCategorySerializer</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 课程类接口</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CourseCategoryView</span>(<span class="params">GenericViewSet, ListModelMixin</span>):</span></span><br><span class="line">    <span class="comment"># CourseCategory继承了BaseModel，带有过滤条件参数。</span></span><br><span class="line">    queryset = CourseCategory.objects.<span class="built_in">all</span>().<span class="built_in">filter</span>(is_delete=<span class="literal">False</span>, is_show=<span class="literal">True</span>).oder_by(<span class="string">&#x27;orders&#x27;</span>)</span><br><span class="line">    serializer_class = CourseCategorySerializer</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#####序列化类</span></span><br><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> serializers</span><br><span class="line"><span class="keyword">from</span> course.models <span class="keyword">import</span> CourseCategory</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 课程类序列化器</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CourseCategorySerializer</span>(<span class="params">serializers.ModelSerializer</span>):</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        model = CourseCategory</span><br><span class="line"></span><br><span class="line">    <span class="built_in">filter</span> = [<span class="string">&#x27;id&#x27;</span>, <span class="string">&#x27;name&#x27;</span>]</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="comment">#根路由</span></span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path, include</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;api/course/&#x27;</span>, include(<span class="string">&#x27;course.urls&#x27;</span>)),</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 子路由</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path, include</span><br><span class="line"><span class="keyword">from</span> rest_framework.routers <span class="keyword">import</span> SimpleRouter</span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> views</span><br><span class="line"></span><br><span class="line">router = SimpleRouter()</span><br><span class="line">router.register(<span class="string">&#x27;category&#x27;</span>, views.CourseCategoryView, <span class="string">&#x27;category&#x27;</span>)</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;&#x27;</span>, include(router.urls)),</span><br><span class="line">]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">luffy</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/项目//" class="article-tag-list-link color3">项目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/07/30/luffy%E8%AF%BE%E7%A8%8B%E6%8E%A5%E5%8F%A3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+ 
+
+
+
+  
     <article id="post-docker高级" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -866,98 +956,6 @@
 
 
   
-    <article id="post-git使用2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/23/git%E4%BD%BF%E7%94%A82/">git使用之协同开发</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2021/07/23/git%E4%BD%BF%E7%94%A82/" class="archive-article-date">
-  	<time datetime="2021-07-23T11:15:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-23</time>
-</a>
-
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1 git 远程仓库；2 采用ssh协议连接远程；3 项目创始者和项目开发者；</p>
-<p>4 协同开发 ；5 线上分支合并；6 本地分支合并推送到远程；7 pycharm操作git；</p>
-<p>8 企业git使用流程</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/工具学习//" class="article-tag-list-link color5">工具学习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/23/git%E4%BD%BF%E7%94%A82/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
- 
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1090,10 +1088,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
@@ -1102,11 +1096,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">redis</a>
+                <a href="javascript:void(0)" class="js-tag color1">luffy</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">luffy</a>
+                <a href="javascript:void(0)" class="js-tag color2">docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">redis</a>
               </li>
              
               <li class="article-tag-list-item">
