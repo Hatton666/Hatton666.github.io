@@ -6,19 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>招聘管理系统 | Hexo</title>
+  <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="招聘管理系统day 01​    – 确定开发项目课题，简单的招聘系统。 ​    – 查找招聘相关课题资料（B站，Gitee，CSDN官网，百度文档） ​    – 整理开题报告 （功能分析，开发平台，开发流程，任务定制） ​    – 建立 角色，权限，表关系 ​    – 整理路飞学诚项目技术点 ​    – 复习Django admin 后台管理 的使用  day 021，搭建开发环境12">
-<meta property="og:type" content="article">
-<meta property="og:title" content="招聘管理系统">
-<meta property="og:url" content="http://example.com/2021/08/12/%E6%8B%9B%E8%81%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/6/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="招聘管理系统day 01​    – 确定开发项目课题，简单的招聘系统。 ​    – 查找招聘相关课题资料（B站，Gitee，CSDN官网，百度文档） ​    – 整理开题报告 （功能分析，开发平台，开发流程，任务定制） ​    – 建立 角色，权限，表关系 ​    – 整理路飞学诚项目技术点 ​    – 复习Django admin 后台管理 的使用  day 021，搭建开发环境12">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-08-12T03:42:08.000Z">
-<meta property="article:modified_time" content="2021-08-12T03:46:20.195Z">
 <meta property="article:author" content="Vivek">
-<meta property="article:tag" content="招聘系统项目">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -180,214 +175,35 @@
           </div>
           <div id="js-content" class="content-ll">
             
-<article id="post-招聘管理系统" class="article article-type-post " itemscope itemprop="blogPost">
+  
+    <article id="post-DRF入门01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      招聘管理系统
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/07/DRF%E5%85%A5%E9%97%A801/">DRF之三层视图及视图集</a>
     </h1>
   
 
         
         
-	<!-- 不蒜子统计 -->
-	<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-		  <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-	</span>
 
-
-<a href="/2021/08/12/%E6%8B%9B%E8%81%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" class="archive-article-date">
-  	<time datetime="2021-08-12T03:42:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-12</time>
+<a href="/2021/07/07/DRF%E5%85%A5%E9%97%A801/" class="archive-article-date">
+  	<time datetime="2021-07-07T14:29:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-07</time>
 </a>
 
         
-        
-          <span class="archive-article-date">
-            阅读量 <span id="busuanzi_value_page_pv"></span>
-          </span>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="招聘管理系统"><a href="#招聘管理系统" class="headerlink" title="招聘管理系统"></a>招聘管理系统</h1><h2 id="day-01"><a href="#day-01" class="headerlink" title="day 01"></a>day 01</h2><p>​    – 确定开发项目课题，简单的招聘系统。</p>
-<p>​    – 查找招聘相关课题资料（B站，Gitee，CSDN官网，百度文档）</p>
-<p>​    – 整理开题报告 （功能分析，开发平台，开发流程，任务定制）</p>
-<p>​    – 建立 角色，权限，表关系</p>
-<p>​    – 整理路飞学诚项目技术点</p>
-<p>​    – 复习Django admin 后台管理 的使用 </p>
-<h2 id="day-02"><a href="#day-02" class="headerlink" title="day 02"></a>day 02</h2><h3 id="1，搭建开发环境"><a href="#1，搭建开发环境" class="headerlink" title="1，搭建开发环境"></a>1，搭建开发环境</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1,创建系统虚拟环境</span></span><br><span class="line">	-- mkvirtualenv -p python3 虚拟环境名称</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 2, django-dmin 创建应用</span></span><br><span class="line">	-- django-admin startproject recruitment</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 3,创建Django管理后台</span></span><br><span class="line">	-- 数据库初始化</span><br><span class="line">    	-- python manage.py makemigrations</span><br><span class="line">        -- python manege.py migrate</span><br><span class="line">        </span><br><span class="line">    -- 创建admin账号</span><br><span class="line">    	-- python manage.py createsuperuser</span><br><span class="line">        -- Usernaem admin</span><br><span class="line">        -- password: admin1234</span><br><span class="line">    -- 登录django dmin管理后台</span><br><span class="line">    	-- 更改settings.py  <span class="string">&#x27;zh-hans&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><a href="!%5Bimage-20210808164814633%5D(C:%5CUsers%5Clenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210808164814633.png)">效果展示</a></p>
-<h3 id="2，后台职位管理系统"><a href="#2，后台职位管理系统" class="headerlink" title="2，后台职位管理系统"></a>2，后台职位管理系统</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一，需求：三个功能</span></span><br><span class="line">	-- <span class="number">1.</span> 管理员能够发布职位</span><br><span class="line">	-- <span class="number">2.</span> 匿名用户能够浏览职位 </span><br><span class="line">    	  <span class="comment">## 在职位介绍中有Email地址，假设候选人能够通过Eamil投递简历。</span></span><br><span class="line">	-- <span class="number">3.</span> 匿名用户能够投递职位（先不开发，假设用户能够线下完成，后续迭代加上）   </span><br><span class="line">	-- <span class="number">4.</span>包含字段</span><br><span class="line">    职位名称，类别，工作地点，职位职责，职位要求，发布人，发布日期，修改日期</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 二，创建jobs应用</span></span><br><span class="line">	-- <span class="number">1.</span>python manage.py startapp jobs</span><br><span class="line">    -- <span class="number">2.</span> 注册app</span><br><span class="line">    -- <span class="number">3.</span>建表 <span class="class"><span class="keyword">class</span> <span class="title">Job</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    -- <span class="number">4.</span> admin.py 中注册Job</span><br><span class="line">    -- <span class="number">5.</span> 数据库迁移</span><br><span class="line">    -- <span class="number">6.</span>添加一个职位</span><br></pre></td></tr></table></figure>
-
-<p><a href="!%5Bimage-20210808164703721%5D(C:%5CUsers%5Clenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210808164703721.png)">初次效果</a></p>
-<p>不足：1，需要手动生成 创建人，创建日期 ，修改日期；</p>
-<p>​            2，列表展示 展示的是 Job object（1），而不是想看的 中文职位名称。</p>
-<p>优化：1，创建日期 ，修改日期，设置默认值</p>
-<p>​            2，创建人默认为当前登录用户</p>
-<p>​            3，列表展示 中文职位名称</p>
-<p>​            4，不展示 创建人 ，创建日期 ，修改日期； </p>
-<p><a href="!%5Bimage-20210808173436351%5D(C:%5CUsers%5Clenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210808173436351.png)">职位维护页：二次效果</a></p>
-<p><a href="!%5Bimage-20210808174445017%5D(C:%5CUsers%5Clenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210808174445017.png)">列表页：二次效果</a></p>
-<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">**admin.py**</span><br><span class="line"><span class="comment"># 定义管理类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">JobAdmin</span>(<span class="params">admin.ModelAdmin</span>):</span></span><br><span class="line">    <span class="comment"># 隐藏字段；</span></span><br><span class="line">    exclude = (<span class="string">&#x27;creator&#x27;</span>, <span class="string">&#x27;created_date&#x27;</span>, <span class="string">&#x27;modified_date&#x27;</span>)</span><br><span class="line">    <span class="comment"># 展示字段</span></span><br><span class="line">    list_display = (<span class="string">&#x27;job_name&#x27;</span>, <span class="string">&#x27;job_type&#x27;</span>, <span class="string">&#x27;job_city&#x27;</span>, <span class="string">&#x27;creator&#x27;</span>, <span class="string">&#x27;created_date&#x27;</span>, <span class="string">&#x27;modified_date&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 解决隐藏字段在提交时系统没有的问题，提交之前保存。</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">save_model</span>(<span class="params">self, request, obj, form, change</span>):</span></span><br><span class="line">        <span class="keyword">if</span> obj.creator <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="comment"># 职位创建人设置为当前登录用户</span></span><br><span class="line">            obj.creator = request.user</span><br><span class="line">            <span class="comment"># 是ModelAdmin里的属性</span></span><br><span class="line">        <span class="built_in">super</span>().save_model(request, obj, form, change)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 注册model表</span></span><br><span class="line">admin.site.register(Job, JobAdmin)</span><br></pre></td></tr></table></figure>
-
-<h3 id="3，职位展示页面-自定义"><a href="#3，职位展示页面-自定义" class="headerlink" title="3，职位展示页面(自定义)"></a>3，职位展示页面(自定义)</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">1,自定义base页面</span><br><span class="line"><span class="comment">&lt;!-- base.html --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">style</span>=<span class="string">&quot;margin: auto;width: 50%;&quot;</span>&gt;</span>齐天大猿科技开放职位<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line">2,职位列表页	</span><br><span class="line">	-- 加模板</span><br><span class="line">	-- 视图里注册</span><br><span class="line">	-- 添加url路由映射</span><br><span class="line">3.职位详情页</span><br><span class="line">	-- 创建模板</span><br><span class="line">	-- 视图里把数据map渲染进模板</span><br><span class="line">	-- 添加url路由映射</span><br></pre></td></tr></table></figure>
-
-<p><a href="!%5Bimage-20210808200934578%5D(C:%5CUsers%5Clenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210808200934578.png)">职位列表页效果</a></p>
-<p><a href="!%5Bimage-20210808212848649%5D(C:%5CUsers%5Clenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210808212848649.png)">职位详情页效果</a></p>
-<h2 id="day-03"><a href="#day-03" class="headerlink" title="day 03"></a>day 03</h2><h3 id="1，招聘线下流程"><a href="#1，招聘线下流程" class="headerlink" title="1，招聘线下流程"></a>1，招聘线下流程</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 准备简历 &amp; 面试评估表：</span></span><br><span class="line"></span><br><span class="line">	o HR：发出面试评估表模板（Word）到一面面试官 （邮箱发出来）</span><br><span class="line">	o 一面面试官：登录邮箱下载 Word 模板，每个学生拷贝一份</span><br><span class="line">	o 按学生名字命名文件， 录入学生名字，学校，电话，学历等</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第一轮面试：</span></span><br><span class="line">	o 一面官：每面完一个学生，填写 Word 格式的评估表中</span><br><span class="line">	o 一面官：面完一天的学生后，批量把 Word 文档 Email 到 HR</span><br><span class="line">	o HR：晚上查收下载评估表，汇总结果到 Excel，通知学生复试</span><br><span class="line">	o HR：同时把已经通知复试的学生信息，发送到技术二面复试官</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 第二轮面试和 HR 面试：</span></span><br><span class="line">	o 二面官：查收 Email，下载 Word 格式的一面评估记录</span><br><span class="line">	o 二面官：复试后追加复试的评估到 Word 记录中，邮件到 HR</span><br><span class="line">	o 类似如上步骤的 HR 复试。</span><br></pre></td></tr></table></figure>
-
-<h3 id="2，角色对应的功能列表"><a href="#2，角色对应的功能列表" class="headerlink" title="2，角色对应的功能列表"></a>2，角色对应的功能列表</h3><table>
-<thead>
-<tr>
-<th>角色</th>
-<th>功能</th>
-<th>是否必须</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>HR</td>
-<td>可以管理职位</td>
-<td></td>
-</tr>
-<tr>
-<td>候选人</td>
-<td>可以浏览职位列表，详情</td>
-<td></td>
-</tr>
-<tr>
-<td>候选人</td>
-<td>可以在线投递简历</td>
-<td></td>
-</tr>
-<tr>
-<td>HR</td>
-<td>查看候选人投递的简历，审核简历</td>
-<td></td>
-</tr>
-<tr>
-<td>HR</td>
-<td>导入候选人</td>
-<td>***</td>
-</tr>
-<tr>
-<td>HR</td>
-<td>添加，修改候选人，查看候选人列表</td>
-<td>***</td>
-</tr>
-<tr>
-<td>管理员</td>
-<td>可以添加面试官</td>
-<td></td>
-</tr>
-<tr>
-<td>面试官</td>
-<td>可以进行一面，二面；HR可以进行终面</td>
-<td>***</td>
-</tr>
-<tr>
-<td>管理员</td>
-<td>能够管理HR，面试官的角色</td>
-<td></td>
-</tr>
-<tr>
-<td>HR/面试官</td>
-<td>HR和面试官只能看到有权限的内容</td>
-<td></td>
-</tr>
-</tbody></table>
-<h3 id="3，初代版本："><a href="#3，初代版本：" class="headerlink" title="3，初代版本："></a>3，初代版本：</h3><h4 id="两个需求："><a href="#两个需求：" class="headerlink" title="两个需求："></a>两个需求：</h4><ul>
-<li>1， 能够导入候选人信息，让候选人进到系统里面来，并能够维护候选人的信息；<ul>
-<li>方法1，HR将拿到的Excel导入到系统</li>
-<li>方法2， HR人肉录入 （选择）提供 django 自带增删改查 的功能给HR</li>
-</ul>
-</li>
-<li>2，面试官录入面试反馈<ul>
-<li>面试官录入面试反馈（选择）利用 django 自带的创建用户功能 创建面试官</li>
-<li>做面试评估，反馈到系统里面，录入反馈结论。</li>
-</ul>
-</li>
-</ul>
-<h4 id="初代一版本"><a href="#初代一版本" class="headerlink" title="初代一版本"></a>初代一版本</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#初代版本： 用一张候选人信息表，存放候选人信息 + 面试评估反馈</span></span><br><span class="line"></span><br><span class="line">	-- 一张表实现上面两个功能，实现快速开发。</span><br><span class="line">    -- 后期根据需要再拆分</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 创建应用，实现面试评估表增删改的功能</span></span><br><span class="line"></span><br><span class="line">	-- 页面按分组展示不同内容</span><br><span class="line">    </span><br><span class="line">    	-- 候选人信息</span><br><span class="line">        -- 一面的面试结果</span><br><span class="line">        -- 二面的面试结果</span><br><span class="line">        -- HR面试结果</span><br></pre></td></tr></table></figure>
-
-<h5 id="创建-interview应用"><a href="#创建-interview应用" class="headerlink" title="创建 interview应用"></a>创建 interview应用</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>,python manage.py startapp interview</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>，定义一个Candidate 的候选人的类</span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">Candidate</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">        </span><br><span class="line"><span class="number">3</span>, 注册app</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>, admin.py 中注册Job</span><br><span class="line">	admin.site.register(Candidate)</span><br><span class="line">    </span><br><span class="line"><span class="number">5</span>，数据库迁移</span><br><span class="line">	</span><br></pre></td></tr></table></figure>
-
-<p><a href="!%5Bimage-20210809000436472%5D(C:%5CUsers%5Clenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210809000436472.png)">初代候选人信息表1.0</a></p>
-<h5 id="admin-py-中定义管理类"><a href="#admin-py-中定义管理类" class="headerlink" title="admin.py 中定义管理类"></a>admin.py 中定义管理类</h5><ul>
-<li>字段展示设置</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义 Candidate 管理类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CandidateAdmin</span>(<span class="params">admin.ModelAdmin</span>):</span></span><br><span class="line">    <span class="comment"># 不展示的字段</span></span><br><span class="line">    exclude = (<span class="string">&#x27;creator&#x27;</span>, <span class="string">&#x27;created_date&#x27;</span>, <span class="string">&#x27;modified_date&#x27;</span>)</span><br><span class="line">	<span class="comment"># 展示字段</span></span><br><span class="line">    list_display = (</span><br><span class="line">        <span class="string">&#x27;username&#x27;</span>, <span class="string">&#x27;city&#x27;</span>, <span class="string">&#x27;bachelor_school&#x27;</span>, <span class="string">&#x27;first_score&#x27;</span>, <span class="string">&#x27;first_result&#x27;</span>, <span class="string">&#x27;first_interviewer_user&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;second_result&#x27;</span>, <span class="string">&#x27;second_interviewer_user&#x27;</span>, <span class="string">&#x27;hr_score&#x27;</span>, <span class="string">&#x27;hr_result&#x27;</span>, <span class="string">&#x27;last_editor&#x27;</span>,</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">admin.site.register(Candidate, CandidateAdmin)</span><br></pre></td></tr></table></figure>
-
-<p><a href="!%5Bimage-20210809005657178%5D(C:%5CUsers%5Clenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210809005657178.png)">初代候选人信息表1.1</a></p>
-<ul>
-<li>字段分组</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">字段集合 fieldsets</span><br><span class="line">	-- 集合中的元素为元组，元组的第一个元素为<span class="string">&#x27;分组展示名&#x27;</span>，第二个元素为一个<span class="built_in">map</span></span><br><span class="line">    -- <span class="built_in">map</span>中定义了有那些字段，每一个字段是一个字符串</span><br><span class="line">    -- 分成四个组</span><br><span class="line">    	-- 用户基本信息 （不展示文本内容作为标题，不要名字）</span><br><span class="line">        -- 第一轮面试记录</span><br><span class="line">        -- 第二轮面试记录</span><br><span class="line">        -- 第三轮面试记录</span><br><span class="line">        </span><br><span class="line">fieldsets = (</span><br><span class="line">        (<span class="literal">None</span>, &#123;<span class="string">&#x27;fields&#x27;</span>: (<span class="string">&quot;userid&quot;</span>, <span class="string">&quot;username&quot;</span>,)&#125;),</span><br><span class="line">        (<span class="string">&#x27;第一轮面试记录&#x27;</span>, &#123;<span class="string">&#x27;fields&#x27;</span>: (<span class="string">&quot;&quot;</span>,)&#125;),</span><br><span class="line">        (<span class="string">&#x27;第二轮面试记录&#x27;</span>, &#123;<span class="string">&#x27;fields&#x27;</span>: (<span class="string">&quot;&quot;</span>,)&#125;),</span><br><span class="line">        (<span class="string">&#x27;第三轮面试记录&#x27;</span>, &#123;<span class="string">&#x27;fields&#x27;</span>: (<span class="string">&quot;&quot;</span>,)&#125;),</span><br><span class="line">    )</span><br><span class="line">       </span><br><span class="line">如何将对应字段 填到对应组中</span><br><span class="line">	-- 列模式</span><br><span class="line">    -- 正则表达式来操作</span><br><span class="line">    	-- 将所有字段导入到一个普通文本</span><br><span class="line">        -- ctrl+r 调出正则操作栏</span><br><span class="line">        -- 去掉其他的，只保留字段名</span><br><span class="line">        -- 每一行去空格，加<span class="string">&quot;&quot;</span>,加逗号，拼成一行 Edit下（Join lines）</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><a href="!%5Bimage-20210809100851975%5D(C:%5CUsers%5Clenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210809100851975.png)">初代候选人信息表1.2</a></p>
-<p><strong>初代一版本实现：</strong></p>
-<p>​    – 实现了对候选人 的增删改的功能，</p>
-<p>​    – 针对候选人面试评估信息，对页面进行了分组定制，更清晰。</p>
-<p>​    – 面试官可以录入面试结果反馈</p>
-<p><strong>初代版本缺陷</strong></p>
-<p>​    – 导入大量候选人信息，HR需要手动录入到系统，不可行。</p>
-<h3 id="二代一版本"><a href="#二代一版本" class="headerlink" title="二代一版本"></a>二代一版本</h3><p>​    – <strong>HR将拿到的候选人Excel表格 导入到候选人数据库中</strong></p>
-<p>​    <strong>实现方法：</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 利用 Django里面的 management command 机制， 是一个可以让我们直接添加命令行的工具。</span></span><br><span class="line">-- 创建的命令可以直接在命令行中使用</span><br><span class="line">--interview</span><br><span class="line">	-- management</span><br><span class="line">		--commands</span><br><span class="line">    		-- import_candidates.py</span><br><span class="line">        </span><br><span class="line"><span class="comment"># 以 csv 的方式 更方便，文本格式处理起来更方便    </span></span><br><span class="line"><span class="number">1</span>，将Excel表格，以.csv的文件方式导出</span><br><span class="line"><span class="number">2</span>，将.csv放到 项目根目录</span><br><span class="line"><span class="number">2</span>，在 import_candidates.py中 导入 csv</span><br><span class="line"></span><br><span class="line"><span class="comment"># 代码实现</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">from</span> django.core.management <span class="keyword">import</span> BaseCommand  <span class="comment"># BaseCommand 管理工具</span></span><br><span class="line"><span class="keyword">from</span> interview.models <span class="keyword">import</span> Candidate</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行命令</span></span><br><span class="line"><span class="comment"># python manage.py import_candidates --path /path/to/your/file.csv</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 采用 csv文本格式 导入excel表格</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Command</span>(<span class="params">BaseCommand</span>):</span></span><br><span class="line">    <span class="comment"># 类中自带属性</span></span><br><span class="line">    <span class="built_in">help</span> = <span class="string">&#x27;从一个CSV文件的内容中读取候选人列表，导入到数据库中&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 定义命令行参数</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add_arguments</span>(<span class="params">self, parser</span>):</span></span><br><span class="line">        <span class="comment"># 参数传进来是一个字符串的命令</span></span><br><span class="line">        parser.add_argument(<span class="string">&#x27;--path&#x27;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>)  <span class="comment"># Linux中 两个--表示长命令</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 处理逻辑</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">handle</span>(<span class="params">self, *args, **kwargs</span>):</span></span><br><span class="line">        path = kwargs[<span class="string">&#x27;path&#x27;</span>]  <span class="comment"># 从命令行参数中读取路径文件路径</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 表格以csv格式导出成文件，文件编码格式 &quot;gbk&quot;</span></span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(path, <span class="string">&#x27;rt&#x27;</span>, encoding=<span class="string">&quot;utf-8&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            <span class="comment"># 指定读取格式 &#x27;excel&#x27;, 指定分割符 &#x27;;&#x27;。csv方式读取</span></span><br><span class="line">            reader = csv.reader(f, dialect=<span class="string">&#x27;excel&#x27;</span>, delimiter=<span class="string">&#x27;;&#x27;</span>)</span><br><span class="line">            <span class="keyword">for</span> row <span class="keyword">in</span> reader:</span><br><span class="line">                <span class="comment"># 创建候选人</span></span><br><span class="line">                candidate = Candidate.objects.create(</span><br><span class="line">                    username=row[<span class="number">0</span>],</span><br><span class="line">                    city=row[<span class="number">1</span>],</span><br><span class="line">                    phone=row[<span class="number">2</span>],</span><br><span class="line">                    bachelor_school=row[<span class="number">3</span>],</span><br><span class="line">                    major=row[<span class="number">4</span>],</span><br><span class="line">                    degree=row[<span class="number">5</span>],</span><br><span class="line">                    test_score_of_general_ability=row[<span class="number">6</span>],</span><br><span class="line">                    paper_score=row[<span class="number">7</span>]</span><br><span class="line">                )</span><br><span class="line"></span><br><span class="line">                <span class="built_in">print</span>(candidate)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><a href="!%5Bimage-20210809151755577%5D(C:%5CUsers%5Clenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210809151755577.png)">初代候选人表2.1</a></p>
-<p><a href="!%5Bimage-20210809151915699%5D(C:%5CUsers%5Clenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210809151915699.png)">初代候选人信息详情表2.1</a></p>
-<p><strong>二代一版本实现：</strong></p>
-<p>​    – 实现了HR通过Excel 录入候选人信息的功能</p>
-<h3 id="二代二版本"><a href="#二代二版本" class="headerlink" title="二代二版本"></a>二代二版本</h3><p>需求：</p>
-<p>​    – 候选人列表筛选和查询</p>
-<ul>
-<li> 能够按照名字、手机号码、学校来查询候选人信息 </li>
-<li> 能够按照初试结果，复试结果，HR复试结果，面试官来筛选；</li>
-<li> 能按照复试结果来排序</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在 django admin 中定义搜索字段，筛选字段，排序字段</span></span><br></pre></td></tr></table></figure>
-
-<p><a href="!%5Bimage-20210809160513686%5D(C:%5CUsers%5Clenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210809160513686.png)">二代二版本候选人表2.2</a></p>
-<p><a href="!%5Bimage-20210809160633715%5D(C:%5CUsers%5Clenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210809160633715.png)">二代二版本候选人信息表2.2</a></p>
-
+        <p>​    1 两个视图基类 ; 2 五个视图扩展类 ; 3 多个视图子类(9个) ; 4 视图集</p>
+        
       
 
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/alipay.jpg">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/222.jpg">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -398,7 +214,189 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">招聘系统项目</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DRF</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/07/07/DRF%E5%85%A5%E9%97%A801/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+ 
+
+
+
+  
+    <article id="post-DRF" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/05/DRF/">DRF之restful设计风格</a>
+    </h1>
+  
+
+        
+        
+
+<a href="/2021/07/05/DRF/" class="archive-article-date">
+  	<time datetime="2021-07-05T09:25:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-05</time>
+</a>
+
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>​    1,web应用模式</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DRF</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python//" class="article-tag-list-link color2">Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/07/05/DRF/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+ 
+
+
+
+  
+    <article id="post-路飞项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/19/%E8%B7%AF%E9%A3%9E%E9%A1%B9%E7%9B%AE/">环境搭建</a>
+    </h1>
+  
+
+        
+        
+
+<a href="/2020/07/19/%E8%B7%AF%E9%A3%9E%E9%A1%B9%E7%9B%AE/" class="archive-article-date">
+  	<time datetime="2020-07-19T08:53:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-19</time>
+</a>
+
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>​    3 虚拟环境搭建 ; 虚拟环境中创建项目</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">luffy</a>
         		</li>
       		
 		</ul>
@@ -418,75 +416,16 @@
 
 
       
-
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/19/%E8%B7%AF%E9%A3%9E%E9%A1%B9%E7%9B%AE/">展开全文 >></a>
+        </p>
       
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
 
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://vivek-666.github.io/021/08/12/%E6%8B%9B%E8%81%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-  
-    <a href="/2021/08/02/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E5%8A%9F%E8%83%BD/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">支付宝（沙箱环境）</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -501,62 +440,26 @@
         </div>
         
         
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8B%9B%E8%81%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.</span> <span class="toc-text">招聘管理系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#day-01"><span class="toc-number">1.1.</span> <span class="toc-text">day 01</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#day-02"><span class="toc-number">1.2.</span> <span class="toc-text">day 02</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%8C%E6%90%AD%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="toc-number">1.2.1.</span> <span class="toc-text">1，搭建开发环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%8C%E5%90%8E%E5%8F%B0%E8%81%8C%E4%BD%8D%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.2.2.</span> <span class="toc-text">2，后台职位管理系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">代码实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%BC%8C%E8%81%8C%E4%BD%8D%E5%B1%95%E7%A4%BA%E9%A1%B5%E9%9D%A2-%E8%87%AA%E5%AE%9A%E4%B9%89"><span class="toc-number">1.2.3.</span> <span class="toc-text">3，职位展示页面(自定义)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#day-03"><span class="toc-number">1.3.</span> <span class="toc-text">day 03</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%8C%E6%8B%9B%E8%81%98%E7%BA%BF%E4%B8%8B%E6%B5%81%E7%A8%8B"><span class="toc-number">1.3.1.</span> <span class="toc-text">1，招聘线下流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%8C%E8%A7%92%E8%89%B2%E5%AF%B9%E5%BA%94%E7%9A%84%E5%8A%9F%E8%83%BD%E5%88%97%E8%A1%A8"><span class="toc-number">1.3.2.</span> <span class="toc-text">2，角色对应的功能列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%BC%8C%E5%88%9D%E4%BB%A3%E7%89%88%E6%9C%AC%EF%BC%9A"><span class="toc-number">1.3.3.</span> <span class="toc-text">3，初代版本：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%A4%E4%B8%AA%E9%9C%80%E6%B1%82%EF%BC%9A"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">两个需求：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9D%E4%BB%A3%E4%B8%80%E7%89%88%E6%9C%AC"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">初代一版本</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-interview%E5%BA%94%E7%94%A8"><span class="toc-number">1.3.3.2.1.</span> <span class="toc-text">创建 interview应用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#admin-py-%E4%B8%AD%E5%AE%9A%E4%B9%89%E7%AE%A1%E7%90%86%E7%B1%BB"><span class="toc-number">1.3.3.2.2.</span> <span class="toc-text">admin.py 中定义管理类</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E4%BB%A3%E4%B8%80%E7%89%88%E6%9C%AC"><span class="toc-number">1.3.4.</span> <span class="toc-text">二代一版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E4%BB%A3%E4%BA%8C%E7%89%88%E6%9C%AC"><span class="toc-number">1.3.5.</span> <span class="toc-text">二代二版本</span></a></li></ol></li></ol></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
     </div>
 </aside>
 
 
-
-  
-  
-  
-
-  
-
-  
-
-  
  
 
-  
-      <section id="comments" class="comments">
-        <style>
-          .comments{margin:30px;padding:10px;background:#fff}
-          @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
-        </style>
-        <div id="vcomment" class="comment"></div>
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
-<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script>
-  var notify = 'false' == true ? true : false;
-  var verify = 'false' == true ? true : false;
-  new Valine({
-    av: AV,
-    el: '#vcomment',
-    notify: notify,
-    app_id: "4078A2Bntfkxp8EVq5TtPO1P-gzGzoHsz",
-    app_key: "2wBAkBOnl2RpsnGy3dYaEPlN",
-    placeholder: "Just go go",
-    avatar: "mm",
-  });
-</script>
 
-    </section>
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/5/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span>
+    </nav>
   
 
+
+<!-- 添加代码  -->
+<span id="busuanzi_container_page_pv">
+  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+</span>
 
 
 
@@ -591,8 +494,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: false,
-		isPost: true,
+		isHome: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
@@ -679,11 +582,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">docker</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+                <a href="javascript:void(0)" class="js-tag color2">docker</a>
               </li>
              
               <li class="article-tag-list-item">
