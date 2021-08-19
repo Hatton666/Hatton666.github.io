@@ -176,22 +176,22 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-每日一问" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-git协同使用2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/19/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%97%AE/">每日一问</a>
+      <a class="article-title" href="/2021/07/23/git%E5%8D%8F%E5%90%8C%E4%BD%BF%E7%94%A82/">git协同开发</a>
     </h1>
   
 
         
         
 
-<a href="/2021/07/19/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%97%AE/" class="archive-article-date">
-  	<time datetime="2021-07-18T23:16:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-19</time>
+<a href="/2021/07/23/git%E5%8D%8F%E5%90%8C%E4%BD%BF%E7%94%A82/" class="archive-article-date">
+  	<time datetime="2021-07-23T11:15:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-23</time>
 </a>
 
         
@@ -200,7 +200,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>1,跨域请求; 2,TCP和UDP的区别;3,猴子补丁; 4,公钥和私钥;…</p>
+        <p>1 git 远程仓库；2 采用ssh协议连接远程；3 项目创始者和项目开发者；</p>
+<p>4 协同开发 ；5 线上分支合并；6 本地分支合并推送到远程；7 pycharm操作git；</p>
+<p>8 企业git使用流程</p>
         
       
 
@@ -214,7 +216,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">oneday</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
         		</li>
       		
 		</ul>
@@ -226,7 +228,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/everyday//" class="article-tag-list-link color4">everyday</a>
+        			<a href="/categories/必备技术//" class="article-tag-list-link color5">必备技术</a>
         		</li>
       		
 		</ul>
@@ -235,7 +237,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/19/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%97%AE/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/07/23/git%E5%8D%8F%E5%90%8C%E4%BD%BF%E7%94%A82/">展开全文 >></a>
         </p>
       
 
@@ -267,22 +269,22 @@
 
 
   
-    <article id="post-django数据库相关" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-签发Token" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/17/django%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3/">django数据库相关</a>
+      <a class="article-title" href="/2021/07/22/%E7%AD%BE%E5%8F%91Token/">签发token相关</a>
     </h1>
   
 
         
         
 
-<a href="/2021/07/17/django%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3/" class="archive-article-date">
-  	<time datetime="2021-07-17T15:03:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-17</time>
+<a href="/2021/07/22/%E7%AD%BE%E5%8F%91Token/" class="archive-article-date">
+  	<time datetime="2021-07-22T09:23:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-22</time>
 </a>
 
         
@@ -291,9 +293,42 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>​    1,pycharm 链接MySQL ; 2.django 链接MySQL ;  3.字段的增删改查;  4.基本ORM语句;</p>
-<p>​    5 ORM表关系创建 ; django请求生命周期流程图</p>
-        
+        <h1 id="session式自己写签发token"><a href="#session式自己写签发token" class="headerlink" title="session式自己写签发token"></a>session式自己写签发token</h1><p> <strong>认证前 ，写登录功能。</strong></p>
+<p> <strong>认证组件 ：判断用户是否登录，如果登录过，认证成功，如果没有登录，就认证失败</strong></p>
+<h3 id="2-1-登录功能"><a href="#2-1-登录功能" class="headerlink" title="2.1 登录功能"></a>2.1 登录功能</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 表模型中两个表</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    username=models.CharField(max_length=<span class="number">32</span>)</span><br><span class="line">    password=models.CharField(max_length=<span class="number">32</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一对一的关系， 垂直分表，查询效率更高。 to_filed 默认为主键，省略。</span></span><br><span class="line"><span class="comment"># on_delete=models.CASCADE 级联删除。</span></span><br><span class="line"><span class="comment"># CASCADE 方法 不加()</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserToken</span>(<span class="params">models.Model</span>):</span></span><br><span class="line">    user=models.OneToOneField(to=<span class="string">&#x27;User&#x27;</span>,on_delete=models.CASCADE)</span><br><span class="line">    token=models.CharField(max_length=<span class="number">64</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 登录视图类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserView</span>(<span class="params">APIView</span>):</span></span><br><span class="line">    <span class="comment"># post请求提交数据</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post</span>(<span class="params">self, request, *args, **kwargs</span>):</span></span><br><span class="line">        res = &#123;<span class="string">&#x27;code&#x27;</span>: <span class="number">100</span>, <span class="string">&#x27;msg&#x27;</span>: <span class="literal">None</span>&#125;</span><br><span class="line">        <span class="comment"># 拿数据</span></span><br><span class="line">        username = request.data.get(<span class="string">&#x27;username&#x27;</span>)</span><br><span class="line">        password = request.data.get(<span class="string">&#x27;password&#x27;</span>)</span><br><span class="line">        <span class="comment"># 校验</span></span><br><span class="line">        user = models.User.objects.<span class="built_in">filter</span>(username=username, password=password).first()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> user:  <span class="comment"># 登录成功再生成token</span></span><br><span class="line">            token = <span class="built_in">str</span>(uuid.uuid4())  <span class="comment"># 生成一个不重复的随机字符串</span></span><br><span class="line">            <span class="comment"># token存起来，下次来了用于校验</span></span><br><span class="line">            <span class="comment"># 原来有，就更新，原来没有就新增</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment"># models .UserToken.objects.create(user=user,token=token)不能更新</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 查询update_or_create源码，可知道。</span></span><br><span class="line">            <span class="comment"># 根据user=user去查询，如果有，使用defaults更新，如果没有，新增一条</span></span><br><span class="line">              </span><br><span class="line">            models.UserToken.objects.update_or_create(defaults=&#123;<span class="string">&#x27;token&#x27;</span>: token&#125;, user=user)</span><br><span class="line">            res[<span class="string">&#x27;msg&#x27;</span>] = <span class="string">&#x27;登录成功&#x27;</span></span><br><span class="line">            res[<span class="string">&#x27;token&#x27;</span>] = token <span class="comment"># 将生成的token也在响应中返回。</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res[<span class="string">&#x27;code&#x27;</span>] = <span class="string">&#x27;101&#x27;</span></span><br><span class="line">            res[<span class="string">&#x27;msg&#x27;</span>] = <span class="string">&#x27;用户名或密码错误&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> Response(res)</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="JWT使用第三方模块签发token"><a href="#JWT使用第三方模块签发token" class="headerlink" title="JWT使用第三方模块签发token"></a>JWT使用第三方模块签发token</h1><p><strong>签发token</strong>    </p>
+<p>前提是： 系统用的django自带的auth 的 user表，作为用户表。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">下载 rest_framework_jwt 第三方模块。</span><br><span class="line">在 urls.py中 导入： <span class="keyword">from</span> rest_framework_jwt.views <span class="keyword">import</span> obtain_jwt_token</span><br><span class="line"></span><br><span class="line">path(<span class="string">&#x27;login/&#x27;</span>, obtain_jwt_token)</span><br><span class="line"><span class="comment"># 内部使用的是，auth 的user表,</span></span><br><span class="line"><span class="comment"># 签发，只需要在路由中加入,向这个地址发送post请求，携带用户名密码，就可以签发token</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 只需要再前端向 /login/地址，发送post请求，携带用户名密码，就可以签发token</span></span><br><span class="line">http://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8000</span>/login/</span><br><span class="line">        </span><br><span class="line">字段是django写死的，用超级用户和密码签发token。因为用的是django的内置auth 的 user表。        </span><br><span class="line">&#123;<span class="string">&quot;username&quot;</span>:<span class="string">&quot;lqz&quot;</span>,<span class="string">&quot;password&quot;</span>:<span class="string">&quot;lqz12345&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配个路由，发个post请求，就能够签发出token.</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6InJvb3QiLCJleHAiOjE2Mjc0ODIyNjYsImVtYWlsIjoiM0BxcS5jb20ifQ.Il0j6vn1CuPR_ooEFjXXiddIpzZPnohbI1NLuSetaiE&quot;</span></span><br><span class="line"></span><br><span class="line">三段式：分别解码查看</span><br><span class="line"><span class="comment"># 一种普通的编码方式，并不是加密。</span></span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">res = base64.b64decode(<span class="string">&#x27;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9&#x27;</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(res)</span><br><span class="line">&gt;&gt; <span class="string">b&#x27;&#123;&quot;typ&quot;:&quot;JWT&quot;,&quot;alg&quot;:&quot;HS256&quot;&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">res = </span><br><span class="line"><span class="comment"># bases64解码，要凑齐成4的倍数。</span></span><br><span class="line">base64.b64decode(<span class="string">&#x27;eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6InJvb3QiLCJleHAiOjE2Mjc0ODIyNjYsImVtYWlsIjoiM0BxcS5jb20ifQ==&#x27;</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(res)</span><br><span class="line">&gt;&gt; <span class="string">b&#x27;&#123;&quot;user_id&quot;:1,&quot;username&quot;:&quot;root&quot;,&quot;exp&quot;:1627482266,&quot;email&quot;:&quot;3@qq.com&quot;&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 时间戳，默认的时间是7天</span></span><br><span class="line"><span class="string">&quot;exp&quot;</span>:<span class="number">1627482266</span> </span><br><span class="line">    </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>token校验,带着tokenc才能访问</strong>，就是说：经过认证，并登录之后才能访问。</p>
+<p> rest_framework_jwt 第三方模块 已经帮我们写好了 认证和登录。</p>
+<p>token字符串 带在请求头里，发送请求，才能访问。</p>
+<p>token 不能过期  </p>
+<p>“detail”: “Signature has expired”</p>
+<p> token 串改了也不行</p>
+<p>“detail”: “Error decoding signature.”</p>
+<p><strong>views.py</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 我们只需要 rest_framework_jwt里的认证类导过来，配在想要管制的视图类上就可以了。</span></span><br><span class="line"><span class="comment"># 想要用rest_framework_jwt里的认证类，必须配合一个权限类使用；</span></span><br><span class="line"><span class="comment">###  token字符串 带在请求头里，发送请求，才能访问。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> rest_framework.viewsets <span class="keyword">import</span> ModelViewSet</span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> Books</span><br><span class="line"><span class="keyword">from</span> .serializer <span class="keyword">import</span> BookSerializer</span><br><span class="line"><span class="comment"># 导过来</span></span><br><span class="line"><span class="keyword">from</span> rest_framework_jwt.authentication <span class="keyword">import</span> JSONWebTokenAuthentication</span><br><span class="line"><span class="comment"># 配合一个权限类使用</span></span><br><span class="line"><span class="keyword">from</span> rest_framework.permissions <span class="keyword">import</span> IsAuthenticated</span><br><span class="line"><span class="comment"># 在视图类中配置，认证类，和权限类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bookview</span>(<span class="params">ModelViewSet</span>):</span></span><br><span class="line">    queryset = Books.objects.<span class="built_in">all</span>()</span><br><span class="line">    serializer_class = BookSerializer</span><br><span class="line">    <span class="comment"># 配上就可以了, 配在认证类和权限类中。</span></span><br><span class="line">    authentication_classes = [JSONWebTokenAuthentication, ]</span><br><span class="line">    permission_classes = [IsAuthenticated, ]</span><br><span class="line"></span><br><span class="line">     </span><br><span class="line"><span class="comment">### 前端访问，需要在请求头中加入，如果不携带，或者篡改了，就认证不通过</span></span><br><span class="line">Authorization：jwt eyJ0eXAiOiJKV1QiLChbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6InJvb3QiLCJleHAiOjE2MjU3Mjk3MDAsImVtYWlsIjoiM0BxcS5jb20ifQ.V6X_4wdBvrrRSPOuUf8z5gENB1kJyGimxiLBEjbiQGY   </span><br></pre></td></tr></table></figure>
+
+<p><strong>serializers.py</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework.serializers <span class="keyword">import</span> ModelSerializer</span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> Books</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookSerializer</span>(<span class="params">ModelSerializer</span>):</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        model = Books</span><br><span class="line">        fields = <span class="string">&#x27;__all__&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>urls.py</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path</span><br><span class="line"><span class="keyword">from</span> rest_framework.routers <span class="keyword">import</span> SimpleRouter</span><br><span class="line"><span class="keyword">from</span> app01 <span class="keyword">import</span> views</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> rest_framework_jwt.views <span class="keyword">import</span> obtain_jwt_token</span><br><span class="line">router = SimpleRouter()</span><br><span class="line">router.register(<span class="string">&#x27;books&#x27;</span>, views.Bookview)</span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;login/&#x27;</span>, obtain_jwt_token)</span><br><span class="line">]</span><br><span class="line">urlpatterns += router.urls</span><br></pre></td></tr></table></figure>
+
+<h3 id="签发token后，自定制返回格式"><a href="#签发token后，自定制返回格式" class="headerlink" title="签发token后，自定制返回格式"></a><strong>签发token后，自定制返回格式</strong></h3><p>基于上面的，登录成功后，不仅仅返回token。</p>
+<p>要明白，jwt也有自己的一套源代码，里面有默认的配置，比如 token 默认的销毁时间等等。</p>
+<p>以及一些登录认证功能等等。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对于默认的配置 ，我们可以更改。</span></span><br><span class="line"><span class="comment"># 我们可以自己配置，就会优先用自己的配置。</span></span><br><span class="line"><span class="comment"># 参考源码的代码样式，写在 utls中。</span></span><br><span class="line">比如 token 默认的销毁时间，配置在自己的 settings文件中。</span><br><span class="line">比如 返回的格式</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只需要写一个函数，在配置文件中配置</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 函数 写在 utls中。</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">jwt_response_payload_handler</span>(<span class="params">token, user=<span class="literal">None</span>, request=<span class="literal">None</span></span>):</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="string">&#x27;code&#x27;</span>:<span class="number">100</span>,</span><br><span class="line">        <span class="string">&#x27;msg&#x27;</span>:<span class="string">&#x27;登录成功&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;username&#x27;</span>:user.username,</span><br><span class="line">        <span class="string">&#x27;token&#x27;</span>: token,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">## 配置文件</span></span><br><span class="line">JWT_AUTH =&#123;</span><br><span class="line">    <span class="comment"># token的过期时间</span></span><br><span class="line">    <span class="string">&#x27;JWT_EXPIRATION_DELTA&#x27;</span>: datetime.timedelta(days=<span class="number">7</span>),</span><br><span class="line">    <span class="comment"># 自定义认证结果：见下方序列化user和自定义response</span></span><br><span class="line">    <span class="comment"># 如果不自定义，返回的格式是固定的，只有token字段</span></span><br><span class="line">    <span class="string">&#x27;JWT_RESPONSE_PAYLOAD_HANDLER&#x27;</span>: <span class="string">&#x27;app01.utils.jwt_response_payload_handler&#x27;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
       
 
       
@@ -306,7 +341,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Python亮点技术</a>
         		</li>
       		
 		</ul>
@@ -318,7 +353,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/数据//" class="article-tag-list-link color3">数据</a>
+        			<a href="/categories/亮点技术//" class="article-tag-list-link color5">亮点技术</a>
         		</li>
       		
 		</ul>
@@ -327,7 +362,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/17/django%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/07/22/%E7%AD%BE%E5%8F%91Token/">展开全文 >></a>
         </p>
       
 
@@ -359,22 +394,22 @@
 
 
   
-    <article id="post-Vue-CLI搭建项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-git安装使用1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/17/Vue-CLI%E6%90%AD%E5%BB%BA%E9%A1%B9%E7%9B%AE/">Vue-CLI搭建vue项目</a>
+      <a class="article-title" href="/2021/07/22/git%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A81/">git安装与运用</a>
     </h1>
   
 
         
         
 
-<a href="/2021/07/17/Vue-CLI%E6%90%AD%E5%BB%BA%E9%A1%B9%E7%9B%AE/" class="archive-article-date">
-  	<time datetime="2021-07-17T09:01:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-17</time>
+<a href="/2021/07/22/git%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A81/" class="archive-article-date">
+  	<time datetime="2021-07-22T08:45:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-22</time>
 </a>
 
         
@@ -383,7 +418,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>​    vue get猫眼电影案例  ;  1 Vue-CLI 搭建vue项目</p>
+        <h2 id="1-git介绍安装"><a href="#1-git介绍安装" class="headerlink" title="1 git介绍安装"></a>1 git介绍安装</h2><p><strong>git 主要功能</strong> 1，版本控制：协同开发（多人合作开发）2 ，合并代码。</p>
+<p>2 git 常用命令，3 git 过滤文件，4 git 分支操作。</p>
         
       
 
@@ -397,7 +433,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Vue</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
         		</li>
       		
 		</ul>
@@ -409,7 +445,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
+        			<a href="/categories/必备技术//" class="article-tag-list-link color5">必备技术</a>
         		</li>
       		
 		</ul>
@@ -418,7 +454,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/17/Vue-CLI%E6%90%AD%E5%BB%BA%E9%A1%B9%E7%9B%AE/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/07/22/git%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A81/">展开全文 >></a>
         </p>
       
 
@@ -450,22 +486,22 @@
 
 
   
-    <article id="post-CBV继承APIView源码分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-路飞前台页面" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/16/CBV%E7%BB%A7%E6%89%BFAPIView%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">CBV继承APIView源码分析</a>
+      <a class="article-title" href="/2021/07/22/%E8%B7%AF%E9%A3%9E%E5%89%8D%E5%8F%B0%E9%A1%B5%E9%9D%A2/">项目前台页面</a>
     </h1>
   
 
         
         
 
-<a href="/2021/07/16/CBV%E7%BB%A7%E6%89%BFAPIView%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="archive-article-date">
-  	<time datetime="2021-07-15T16:15:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-16</time>
+<a href="/2021/07/22/%E8%B7%AF%E9%A3%9E%E5%89%8D%E5%8F%B0%E9%A1%B5%E9%9D%A2/" class="archive-article-date">
+  	<time datetime="2021-07-22T08:42:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-22</time>
 </a>
 
         
@@ -474,7 +510,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>​    CBV继承APIView源码分析</p>
+        <h2 id="1-前台首页设计"><a href="#1-前台首页设计" class="headerlink" title="1 前台首页设计"></a>1 前台首页设计</h2><p>1.1 Header组件，1.2 Footer组件，1.3 Banner组件，1.4 Home组件，</p>
+<p>2 自定义配置，2.1 前端存储数据的地方，2.2 vue-router路由跳转的方式</p>
         
       
 
@@ -488,7 +525,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DRF</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学城项目</a>
         		</li>
       		
 		</ul>
@@ -500,7 +537,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/源码分析//" class="article-tag-list-link color5">源码分析</a>
+        			<a href="/categories/Python项目//" class="article-tag-list-link color4">Python项目</a>
         		</li>
       		
 		</ul>
@@ -509,7 +546,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/16/CBV%E7%BB%A7%E6%89%BFAPIView%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/07/22/%E8%B7%AF%E9%A3%9E%E5%89%8D%E5%8F%B0%E9%A1%B5%E9%9D%A2/">展开全文 >></a>
         </p>
       
 
@@ -541,22 +578,22 @@
 
 
   
-    <article id="post-Vue生命周期及组件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-项目打通前后端" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/15/Vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%8F%8A%E7%BB%84%E4%BB%B6/">Vue生命周期及组件</a>
+      <a class="article-title" href="/2021/07/21/%E9%A1%B9%E7%9B%AE%E6%89%93%E9%80%9A%E5%89%8D%E5%90%8E%E7%AB%AF/">项目打通前后端</a>
     </h1>
   
 
         
         
 
-<a href="/2021/07/15/Vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%8F%8A%E7%BB%84%E4%BB%B6/" class="archive-article-date">
-  	<time datetime="2021-07-15T15:15:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-15</time>
+<a href="/2021/07/21/%E9%A1%B9%E7%9B%AE%E6%89%93%E9%80%9A%E5%89%8D%E5%90%8E%E7%AB%AF/" class="archive-article-date">
+  	<time datetime="2021-07-21T14:06:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-21</time>
 </a>
 
         
@@ -565,9 +602,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>​        o:Vue基础</p>
-<p>​        二：生命周期   与后端交互的几种方式  ;</p>
-<p>​        7 ref属性    4.1 全局组件    6 组件通信之子传父</p>
+        <p>​    1 扩写user表;  </p>
+<p>​    2 主页后台模块设计,  2.1 在utils下新建models.py, 2.2 在home app下models新建表</p>
+<p>​    2.3 编写视图 ; 2.4 配置路由</p>
+<p>​    3 xadmin/simple-ui后台管理</p>
+<p>​    4 4 跨越问题详解</p>
         
       
 
@@ -581,7 +620,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Vue</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学城项目</a>
         		</li>
       		
 		</ul>
@@ -593,7 +632,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
+        			<a href="/categories/Python项目//" class="article-tag-list-link color4">Python项目</a>
         		</li>
       		
 		</ul>
@@ -602,7 +641,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/15/Vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%8F%8A%E7%BB%84%E4%BB%B6/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/07/21/%E9%A1%B9%E7%9B%AE%E6%89%93%E9%80%9A%E5%89%8D%E5%90%8E%E7%AB%AF/">展开全文 >></a>
         </p>
       
 
@@ -634,22 +673,22 @@
 
 
   
-    <article id="post-算法集" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-路飞项目配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/14/%E7%AE%97%E6%B3%95%E9%9B%86/">排序算法</a>
+      <a class="article-title" href="/2021/07/21/%E8%B7%AF%E9%A3%9E%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE/">学城项目配置</a>
     </h1>
   
 
         
         
 
-<a href="/2021/07/14/%E7%AE%97%E6%B3%95%E9%9B%86/" class="archive-article-date">
-  	<time datetime="2021-07-14T07:12:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-14</time>
+<a href="/2021/07/21/%E8%B7%AF%E9%A3%9E%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE/" class="archive-article-date">
+  	<time datetime="2021-07-21T10:55:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-21</time>
 </a>
 
         
@@ -658,7 +697,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>0，算法前戏;    一，查找问题;    二，常用排序；</p>
+        <p>​    1 django中使用日志；2 封装项目异常处理；3 封装Response对象</p>
+<p>​    4 路飞数据库配置；5 路飞前台项目创建</p>
         
       
 
@@ -672,7 +712,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法和数据结构</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学城项目</a>
         		</li>
       		
 		</ul>
@@ -684,7 +724,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/数据//" class="article-tag-list-link color3">数据</a>
+        			<a href="/categories/Python项目//" class="article-tag-list-link color4">Python项目</a>
         		</li>
       		
 		</ul>
@@ -693,7 +733,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/14/%E7%AE%97%E6%B3%95%E9%9B%86/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/07/21/%E8%B7%AF%E9%A3%9E%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE/">展开全文 >></a>
         </p>
       
 
@@ -727,7 +767,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -850,7 +890,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DRF</a>
+                <a href="javascript:void(0)" class="js-tag color4">drf</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Go基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">开发规范</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -858,23 +914,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">luffy</a>
+                <a href="javascript:void(0)" class="js-tag color5">学城项目</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">redis</a>
+                <a href="javascript:void(0)" class="js-tag color1">Python亮点技术</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -882,15 +930,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">oneday</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法和数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color5">面试高频</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">经典代码</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
               </li>
             
             <div class="clearfix"></div>
