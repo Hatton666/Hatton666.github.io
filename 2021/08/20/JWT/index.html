@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives | Hexo</title>
+  <title>JWT | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/page/4/index.html">
+  <meta name="description" content="2 JWT介绍（5星）1234567891011121314151617181920212223242526272829303132333435363738394041424344#  jwt是什么：Json web token (JWT)，一种前后端的认证方式# jwt的：构成和工作原理	-三段式（header，payload，signature）    -头：认证方式，加密方式，公司名字。。。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JWT">
+<meta property="og:url" content="http://example.com/2021/08/20/JWT/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="2 JWT介绍（5星）1234567891011121314151617181920212223242526272829303132333435363738394041424344#  jwt是什么：Json web token (JWT)，一种前后端的认证方式# jwt的：构成和工作原理	-三段式（header，payload，signature）    -头：认证方式，加密方式，公司名字。。。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-20T07:49:00.000Z">
+<meta property="article:modified_time" content="2021-08-20T08:01:44.716Z">
 <meta property="article:author" content="Vivek">
+<meta property="article:tag" content="Python亮点技术">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -175,552 +180,274 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+<article id="post-JWT" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JWT
+    </h1>
+  
+
+        
+        
+	<!-- 不蒜子统计 -->
+	<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+		  <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+
+<a href="/2021/08/20/JWT/" class="archive-article-date">
+  	<time datetime="2021-08-20T07:49:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-20</time>
+</a>
+
+        
+        
+          <span class="archive-article-date">
+            阅读量 <span id="busuanzi_value_page_pv"></span>
+          </span>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="2-JWT介绍（5星）"><a href="#2-JWT介绍（5星）" class="headerlink" title="2 JWT介绍（5星）"></a>2 JWT介绍（5星）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  jwt是什么：Json web token (JWT)，一种前后端的认证方式</span></span><br><span class="line"><span class="comment"># jwt的：构成和工作原理</span></span><br><span class="line">	-三段式（header，payload，signature）</span><br><span class="line">    -头：认证方式，加密方式，公司名字。。。</span><br><span class="line">    	&#123;</span><br><span class="line">          <span class="string">&#x27;typ&#x27;</span>: <span class="string">&#x27;JWT&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;alg&#x27;</span>: <span class="string">&#x27;HS256&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    -荷载：用户信息，过期时间，签发时间...</span><br><span class="line">    	&#123;</span><br><span class="line">          <span class="string">&quot;userid&quot;</span>: <span class="string">&quot;2&quot;</span>,</span><br><span class="line">          <span class="string">&quot;name&quot;</span>: <span class="string">&quot;John Doe&quot;</span>,</span><br><span class="line">          <span class="string">&quot;exp&quot;</span>: <span class="number">1214356</span></span><br><span class="line">        &#125;</span><br><span class="line">    -签名</span><br><span class="line">    	-把前面的头和荷载通过某种加密方式得到要  串 </span><br><span class="line">    	</span><br><span class="line">        </span><br><span class="line"><span class="comment"># 签发和校验</span></span><br><span class="line">	-用户登录成功，构造token的头部，固定的，构造荷载，使用设置好的加密方式对头和荷载加密，得到token，拼到最后，生成一个token串（使用base64编码），如下：</span><br><span class="line">  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ</span><br><span class="line">	-用户携带token，来到后端，把头和荷载再使用同样的加密方式加密，得到签名，比较新签名和旧签名是否一致，如果一致，说明token可以信任，解析出当前用户（荷载），继续往后走</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># base64编码 </span></span><br><span class="line"><span class="comment">### 编码</span></span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line">dic=&#123;<span class="string">&#x27;name&#x27;</span>:<span class="string">&#x27;lqz&#x27;</span>,<span class="string">&#x27;id&#x27;</span>:<span class="number">1</span>&#125;</span><br><span class="line">user_info_str=json.dumps(dic)</span><br><span class="line"><span class="comment"># res=base64.b64encode(bytes(user_info_str,encoding=&#x27;utf-8&#x27;))</span></span><br><span class="line">res=base64.b64encode(user_info_str.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(res) <span class="comment"># eyJuYW1lIjogImxxeiIsICJpZCI6IDF9</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">###  解码</span></span><br><span class="line">res=base64.b64decode(<span class="string">&#x27;TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ=&#x27;</span>.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(res)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### 注意：base64长度是4的倍数，如果不足，需要用 = 补齐</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="3-JWT快速使用-2星"><a href="#3-JWT快速使用-2星" class="headerlink" title="3 JWT快速使用(2星)"></a>3 JWT快速使用(2星)</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 签发和验证</span></span><br><span class="line"><span class="comment"># 使用第三方：</span></span><br><span class="line">	-djangorestframework-jwt：好久不维护，还能用</span><br><span class="line">    -djangorestframework-simplejwt：最新的，https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-1-签发"><a href="#3-1-签发" class="headerlink" title="3.1 签发"></a>3.1 签发</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 签发，只需要再路由中加入,向这个地址发送post请求，携带用户名密码，就可以签发token</span></span><br><span class="line"><span class="comment"># 内部使用的是，auth 的user表</span></span><br><span class="line">path(<span class="string">&#x27;login/&#x27;</span>, obtain_jwt_token),</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 只需要再前端向 /login/地址，发送post请求，携带用户名密码，就可以签发token</span></span><br><span class="line">http://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8000</span>/login/</span><br><span class="line">&#123;<span class="string">&quot;username&quot;</span>:<span class="string">&quot;lqz&quot;</span>,<span class="string">&quot;password&quot;</span>:<span class="string">&quot;lqz12345&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 签发的eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImxxeiIsImV4cCI6MTYyNTcyODkwMywiZW1haWwiOiIifQ.SX3kyZJYXQMeJa3MK8raiZNmfGqyR8S3bg1Dvimf_5k</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-认证"><a href="#3-2-认证" class="headerlink" title="3.2 认证"></a>3.2 认证</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在视图类中配置，认证类，和权限类</span></span><br><span class="line"><span class="keyword">from</span> rest_framework_jwt.authentication <span class="keyword">import</span> JSONWebTokenAuthentication</span><br><span class="line"><span class="keyword">from</span> rest_framework.permissions <span class="keyword">import</span> IsAuthenticated</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BookView</span>(<span class="params">ViewSetMixin,ListAPIView</span>):</span></span><br><span class="line">    authentication_classes = [JSONWebTokenAuthentication,]</span><br><span class="line">    permission_classes = [IsAuthenticated,]</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="comment">### 前端访问，需要在请求头中加入，如果不携带，或者篡改了，就认证不通过</span></span><br><span class="line">Authorization：jwt eyJ0eXAiOiJKV1QiLChbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6InJvb3QiLCJleHAiOjE2MjU3Mjk3MDAsImVtYWlsIjoiM0BxcS5jb20ifQ.V6X_4wdBvrrRSPOuUf8z5gENB1kJyGimxiLBEjbiQGY</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="4-JWT使用auth表签发token，自定制格式（3星）"><a href="#4-JWT使用auth表签发token，自定制格式（3星）" class="headerlink" title="4  JWT使用auth表签发token，自定制格式（3星）"></a>4  JWT使用auth表签发token，自定制格式（3星）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 只需要写一个函数，在配置文件中配置</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">jwt_response_payload_handler</span>(<span class="params">token, user=<span class="literal">None</span>, request=<span class="literal">None</span></span>):</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="string">&#x27;code&#x27;</span>:<span class="number">100</span>,</span><br><span class="line">        <span class="string">&#x27;msg&#x27;</span>:<span class="string">&#x27;登录成功&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;username&#x27;</span>:user.username,</span><br><span class="line">        <span class="string">&#x27;token&#x27;</span>: token,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">## 配置文件</span></span><br><span class="line">JWT_AUTH =&#123;</span><br><span class="line">    <span class="comment"># token的过期时间</span></span><br><span class="line">    <span class="string">&#x27;JWT_EXPIRATION_DELTA&#x27;</span>: datetime.timedelta(days=<span class="number">7</span>),</span><br><span class="line">    <span class="comment"># 自定义认证结果：见下方序列化user和自定义response</span></span><br><span class="line">    <span class="comment"># 如果不自定义，返回的格式是固定的，只有token字段</span></span><br><span class="line">    <span class="string">&#x27;JWT_RESPONSE_PAYLOAD_HANDLER&#x27;</span>: <span class="string">&#x27;app01.utils.jwt_response_payload_handler&#x27;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="djangorestframework-jwt模块"><a href="#djangorestframework-jwt模块" class="headerlink" title="djangorestframework-jwt模块"></a>djangorestframework-jwt模块</h2><h4 id="obtain-jwt-token源码分析（2星）"><a href="#obtain-jwt-token源码分析（2星）" class="headerlink" title="obtain_jwt_token源码分析（2星）"></a>obtain_jwt_token源码分析（2星）</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">ObtainJSONWebToken.as_view()---&gt;ObtainJSONWebToken----&gt;post方法</span><br><span class="line"> <span class="function"><span class="keyword">def</span> <span class="title">post</span>(<span class="params">self, request, *args, **kwargs</span>):</span></span><br><span class="line">        serializer = self.get_serializer(data=request.data)</span><br><span class="line">        <span class="keyword">if</span> serializer.is_valid():  <span class="comment"># 验证用户登录和签发token，都在序列化类的validate方法中完成的</span></span><br><span class="line">            user = serializer.<span class="built_in">object</span>.get(<span class="string">&#x27;user&#x27;</span>) <span class="keyword">or</span> request.user</span><br><span class="line">            token = serializer.<span class="built_in">object</span>.get(<span class="string">&#x27;token&#x27;</span>)</span><br><span class="line">            response_data = jwt_response_payload_handler(token, user, request)</span><br><span class="line">            response = Response(response_data)</span><br><span class="line">            <span class="comment"># 返回了咱们自定指的格式 </span></span><br><span class="line">            <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">               &#123;</span></span><br><span class="line"><span class="string">                &#x27;code&#x27;:100,</span></span><br><span class="line"><span class="string">                &#x27;msg&#x27;:&#x27;登录成功&#x27;,</span></span><br><span class="line"><span class="string">                &#x27;username&#x27;:user.username,</span></span><br><span class="line"><span class="string">                &#x27;token&#x27;: token,</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">            </span></span><br><span class="line"><span class="string">            &#x27;&#x27;&#x27;</span></span><br><span class="line">            <span class="keyword">return</span> response</span><br><span class="line">        <span class="keyword">return</span> Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">     <span class="function"><span class="keyword">def</span> <span class="title">validate</span>(<span class="params">self, attrs</span>):</span></span><br><span class="line">        credentials = &#123;</span><br><span class="line">            <span class="comment"># 拿到用户名和密码</span></span><br><span class="line">            self.username_field: attrs.get(self.username_field),</span><br><span class="line">            <span class="string">&#x27;password&#x27;</span>: attrs.get(<span class="string">&#x27;password&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">all</span>(credentials.values()):</span><br><span class="line">            <span class="comment"># 根据用户名密码去auth的user表校验，是否存在</span></span><br><span class="line">            user = authenticate(**credentials)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> user:</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> user.is_active:</span><br><span class="line">                    msg = _(<span class="string">&#x27;User account is disabled.&#x27;</span>)</span><br><span class="line">                    <span class="keyword">raise</span> serializers.ValidationError(msg)</span><br><span class="line">				<span class="comment"># 生成payload  jwt_payload_handler 通过用户名得到payload字典</span></span><br><span class="line">                payload = jwt_payload_handler(user)</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> &#123;</span><br><span class="line">                    <span class="string">&#x27;token&#x27;</span>: jwt_encode_handler(payload), <span class="comment"># 通过payload生成token</span></span><br><span class="line">                    <span class="string">&#x27;user&#x27;</span>: user</span><br><span class="line">                &#125;</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">               <span class="comment"># 不在抛异常，前端就看到信息了</span></span><br><span class="line">                <span class="keyword">raise</span> serializers.ValidationError(msg)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> serializers.ValidationError(msg)</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/222.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-
-<a href="/2021/07/15/Vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%8F%8A%E7%BB%84%E4%BB%B6/" class="archive-article-date">
-  	<time datetime="2021-07-15T15:15:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-15</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/15/Vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%8F%8A%E7%BB%84%E4%BB%B6/">Vue生命周期及组件</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Vue</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Python亮点技术</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/前端//" class="article-tag-list-link color3">前端</a>
+        			<a href="/categories/亮点技术//" class="article-tag-list-link color5">亮点技术</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://vivek-666.github.io/021/08/20/JWT/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
+<nav id="article-nav">
+  
+    <a href="/2021/08/20/RBAC/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          RBAC
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/08/20/Docker%E9%83%A8%E7%BD%B2Yapi/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Docker部署Yapi</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
-<a href="/2021/07/14/%E7%AE%97%E6%B3%95%E9%9B%86/" class="archive-article-date">
-  	<time datetime="2021-07-14T07:12:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-14</time>
-</a>
 
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/14/%E7%AE%97%E6%B3%95%E9%9B%86/">排序算法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法和数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/计算机基础//" class="article-tag-list-link color1">计算机基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-JWT%E4%BB%8B%E7%BB%8D%EF%BC%885%E6%98%9F%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">2 JWT介绍（5星）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-JWT%E5%BF%AB%E9%80%9F%E4%BD%BF%E7%94%A8-2%E6%98%9F"><span class="toc-number">2.</span> <span class="toc-text">3 JWT快速使用(2星)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E7%AD%BE%E5%8F%91"><span class="toc-number">2.1.</span> <span class="toc-text">3.1 签发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E8%AE%A4%E8%AF%81"><span class="toc-number">2.2.</span> <span class="toc-text">3.2 认证</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-JWT%E4%BD%BF%E7%94%A8auth%E8%A1%A8%E7%AD%BE%E5%8F%91token%EF%BC%8C%E8%87%AA%E5%AE%9A%E5%88%B6%E6%A0%BC%E5%BC%8F%EF%BC%883%E6%98%9F%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">4  JWT使用auth表签发token，自定制格式（3星）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#djangorestframework-jwt%E6%A8%A1%E5%9D%97"><span class="toc-number">4.</span> <span class="toc-text">djangorestframework-jwt模块</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#obtain-jwt-token%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%882%E6%98%9F%EF%BC%89"><span class="toc-number">4.0.1.</span> <span class="toc-text">obtain_jwt_token源码分析（2星）</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-
-<a href="/2021/07/14/CBV%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="archive-article-date">
-  	<time datetime="2021-07-14T00:59:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-14</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/14/CBV%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">CBV源码分析</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">django</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python框架//" class="article-tag-list-link color4">Python框架</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
 
-<a href="/2021/07/09/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" class="archive-article-date">
-  	<time datetime="2021-07-09T11:31:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-09</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/09/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">面向对象</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">面向对象</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python基础//" class="article-tag-list-link color4">Python基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-
-<a href="/2021/07/08/RBAC%E5%8F%8AJWT%E4%BB%8B%E7%BB%8D/" class="archive-article-date">
-  	<time datetime="2021-07-08T11:31:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-08</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/08/RBAC%E5%8F%8AJWT%E4%BB%8B%E7%BB%8D/">RBAC</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">开发规范</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/开发相关//" class="article-tag-list-link color5">开发相关</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-
-<a href="/2021/07/07/DRF%E5%85%A5%E9%97%A804/" class="archive-article-date">
-  	<time datetime="2021-07-07T14:31:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-07</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/07/DRF%E5%85%A5%E9%97%A804/">DRF之分页及接口文档</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">drf</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python框架//" class="article-tag-list-link color4">Python框架</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-
-<a href="/2021/07/07/DRF%E5%85%A5%E9%97%A803/" class="archive-article-date">
-  	<time datetime="2021-07-07T14:30:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-07</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/07/DRF%E5%85%A5%E9%97%A803/">DRF组件及异常处理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">drf</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python框架//" class="article-tag-list-link color4">Python框架</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-
-<a href="/2021/07/07/DRF%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%9D%83%E9%99%90/" class="archive-article-date">
-  	<time datetime="2021-07-07T14:30:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-07</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/07/DRF%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%9D%83%E9%99%90/">DRF之路由及常用组件</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">drf</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python框架//" class="article-tag-list-link color4">Python框架</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-
-<a href="/2021/07/07/DRF%E5%85%A5%E9%97%A801/" class="archive-article-date">
-  	<time datetime="2021-07-07T14:29:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-07</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/07/DRF%E5%85%A5%E9%97%A801/">三层视图及视图集</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">drf</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python框架//" class="article-tag-list-link color4">Python框架</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-
-<a href="/2021/07/05/%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F%E5%8F%8A%E8%A7%84%E8%8C%83/" class="archive-article-date">
-  	<time datetime="2021-07-05T09:25:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-05</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/05/%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F%E5%8F%8A%E8%A7%84%E8%8C%83/">restful设计风格</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">开发规范</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/必备技能//" class="article-tag-list-link color5">必备技能</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/archives/page/5/">5</a><a class="extend next" rel="next" href="/archives/page/5/">Next &amp;raquo;</a>
-    </nav>
+  
+
+  
+
+  
+ 
+
+  
+      <section id="comments" class="comments">
+        <style>
+          .comments{margin:30px;padding:10px;background:#fff}
+          @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+        </style>
+        <div id="vcomment" class="comment"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var notify = 'false' == true ? true : false;
+  var verify = 'false' == true ? true : false;
+  new Valine({
+    av: AV,
+    el: '#vcomment',
+    notify: notify,
+    app_id: "4078A2Bntfkxp8EVq5TtPO1P-gzGzoHsz",
+    app_key: "2wBAkBOnl2RpsnGy3dYaEPlN",
+    placeholder: "Just go go",
+    avatar: "mm",
+  });
+</script>
+
+    </section>
   
 
 
-
-<!-- 添加代码  -->
-<span id="busuanzi_container_page_pv">
-  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-</span>
 
 
           </div>
@@ -755,8 +482,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
