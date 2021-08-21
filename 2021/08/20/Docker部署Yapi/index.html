@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>Docker部署Yapi | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="docker部署Yapi安装docker#1234sudo yum install -y yum-utils device-mapper-persistent-data lvm2sudo yum-config-manager --add-repo http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-ce&#x2F;linux&#x2F;centos&#x2F;docker-ce.reposudo yum inst">
+  <meta name="description" content="docker部署Yapidocker部署Yapi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker部署Yapi">
 <meta property="og:url" content="http://example.com/2021/08/20/Docker%E9%83%A8%E7%BD%B2Yapi/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="docker部署Yapi安装docker#1234sudo yum install -y yum-utils device-mapper-persistent-data lvm2sudo yum-config-manager --add-repo http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-ce&#x2F;linux&#x2F;centos&#x2F;docker-ce.reposudo yum inst">
+<meta property="og:description" content="docker部署Yapidocker部署Yapi">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-19T16:13:25.000Z">
-<meta property="article:modified_time" content="2021-08-19T16:15:51.344Z">
+<meta property="article:modified_time" content="2021-08-21T08:54:21.012Z">
 <meta property="article:author" content="Vivek">
 <meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary">
@@ -213,7 +213,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="docker部署Yapi"><a href="#docker部署Yapi" class="headerlink" title="docker部署Yapi"></a>docker部署Yapi</h1><h2 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker#"></a>安装docker<a target="_blank" rel="noopener" href="http://101.34.78.44/Hina/article/34#2062527792">#</a></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line">sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line">sudo yum install docker-ce</span><br><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
+        <h1 id="docker部署Yapi"><a href="#docker部署Yapi" class="headerlink" title="docker部署Yapi"></a>docker部署Yapi</h1><p>docker部署Yapi</p>
+<span id="more"></span>
+
+<h2 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker#"></a>安装docker<a target="_blank" rel="noopener" href="http://101.34.78.44/Hina/article/34#2062527792">#</a></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line">sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line">sudo yum install docker-ce</span><br><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
 
 <h2 id="安装docker-compose"><a href="#安装docker-compose" class="headerlink" title="安装docker-compose#"></a>安装docker-compose<a target="_blank" rel="noopener" href="http://101.34.78.44/Hina/article/34#4100256682">#</a></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://get.daocloud.io/docker/compose/releases/download/1.29.1/docker-compose-`uname -s`-`uname -m` &gt; /usr/<span class="built_in">local</span>/bin/docker-compose</span><br><span class="line"></span><br><span class="line">chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</span><br></pre></td></tr></table></figure>
 
@@ -547,11 +550,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DRF</a>
+                <a href="javascript:void(0)" class="js-tag color2">Django</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Django</a>
+                <a href="javascript:void(0)" class="js-tag color4">DRF</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -667,10 +670,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             </li>
           
             <li class="search-li">
-              <a href="https://www.cnblogs.com/linhaifeng/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Egon</a>
-            </li>
-          
-            <li class="search-li">
               <a href="https://www.zhihu.com/people/xiaoyuanqujing/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>小猿取经</a>
             </li>
           
@@ -680,6 +679,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           
             <li class="search-li">
               <a href="https://www.zhihu.com/people/justin_liu" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>老刘知乎</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://liushao.vip/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>刘洋</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://huang_zhao.gitee.io/task/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>黄钊</a>
             </li>
           
         </ul>

@@ -176,6 +176,193 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Redis为什么很快" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/19/Redis%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BE%88%E5%BF%AB/">Redis为什么很快</a>
+    </h1>
+  
+
+        
+        
+
+<a href="/2021/08/19/Redis%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BE%88%E5%BF%AB/" class="archive-article-date">
+  	<time datetime="2021-08-19T15:52:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-19</time>
+</a>
+
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Redis为什么快？"><a href="#Redis为什么快？" class="headerlink" title="Redis为什么快？"></a>Redis为什么快？</h1><blockquote>
+<p>完全基于内存实现</p>
+</blockquote>
+<p>内存中的操作速度是纳秒级的 而磁盘上的操作时毫秒级的 差了10W倍</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/必备技能//" class="article-tag-list-link color5">必备技能</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/19/Redis%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BE%88%E5%BF%AB/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+ 
+
+
+
+  
+    <article id="post-Redis与Mysql双写一致性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/19/Redis%E4%B8%8EMysql%E5%8F%8C%E5%86%99%E4%B8%80%E8%87%B4%E6%80%A7/">Redis与Mysql双写一致性</a>
+    </h1>
+  
+
+        
+        
+
+<a href="/2021/08/19/Redis%E4%B8%8EMysql%E5%8F%8C%E5%86%99%E4%B8%80%E8%87%B4%E6%80%A7/" class="archive-article-date">
+  	<time datetime="2021-08-19T15:49:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-19</time>
+</a>
+
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Redis与Mysql双写一致性"><a href="#Redis与Mysql双写一致性" class="headerlink" title="Redis与Mysql双写一致性"></a>Redis与Mysql双写一致性</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言#"></a>前言<a target="_blank" rel="noopener" href="http://101.34.78.44/Hina/article/61#2659815514">#</a></h2><p>首先，缓存由于其高并发和高性能的特性，已经在项目中被广泛使用。在读取缓存方面，大家没啥疑问，都是按照下图的流程来进行业务操作</p>
+<p><img src="http://101.34.78.44/media/editor/1_20210729211708718050.jpg" alt="img"></p>
+<p>但是在更新缓存方面，对于更新完数据库，是更新缓存呢，还是删除缓存。又或者是先删除缓存，再更新数据库，其实大家存在很大的争议</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/必备技能//" class="article-tag-list-link color5">必备技能</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/19/Redis%E4%B8%8EMysql%E5%8F%8C%E5%86%99%E4%B8%80%E8%87%B4%E6%80%A7/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+ 
+
+
+
+  
     <article id="post-数据结构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -547,195 +734,9 @@
 
 
   
-    <article id="post-招聘管理系统3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/18/%E6%8B%9B%E8%81%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F3/">招聘管理系统3</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2021/08/18/%E6%8B%9B%E8%81%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F3/" class="archive-article-date">
-  	<time datetime="2021-08-18T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-18</time>
-</a>
-
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Day05"><a href="#Day05" class="headerlink" title="Day05"></a>Day05</h2><h3 id="一：替换Django-admin的主题风格-django-grappelli"><a href="#一：替换Django-admin的主题风格-django-grappelli" class="headerlink" title="一：替换Django admin的主题风格:  django-grappelli"></a>一：替换Django admin的主题风格:  django-grappelli</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">• 安装 django-grappelli 风格</span><br><span class="line">	• pip install django-grappelli</span><br><span class="line"></span><br><span class="line">• settings.py 中配置</span><br><span class="line"></span><br><span class="line">	• INSTALLED_APPS = ( <span class="string">&#x27;grappelli&#x27;</span>, <span class="string">&#x27;django.contrib.admin&#x27;</span>, )</span><br><span class="line">	</span><br><span class="line">• urls.py 中添加 URL 映射</span><br><span class="line">	urlpatterns = [ </span><br><span class="line">	path(<span class="string">&#x27;grappelli/&#x27;</span>, include(<span class="string">&#x27;grappelli.urls&#x27;</span>)), </span><br><span class="line">	path(<span class="string">&#x27;admin/&#x27;</span>, admin.site.urls), <span class="comment"># admin site</span></span><br><span class="line">	]</span><br></pre></td></tr></table></figure>
-
-<p><a href="!%5Bimage-20210811164227629%5D(C:%5CUsers%5Clenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210811164227629.png)">django-grappelli风格展示</a></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">招聘系统项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python项目//" class="article-tag-list-link color4">Python项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/18/%E6%8B%9B%E8%81%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
- 
-
-
-
-  
-    <article id="post-招聘管理系统2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/18/%E6%8B%9B%E8%81%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F2/">招聘管理系统2</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2021/08/18/%E6%8B%9B%E8%81%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F2/" class="archive-article-date">
-  	<time datetime="2021-08-18T05:48:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-18</time>
-</a>
-
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="day-04"><a href="#day-04" class="headerlink" title="day 04"></a>day 04</h2><h4 id="LDAP学习"><a href="#LDAP学习" class="headerlink" title="LDAP学习"></a>LDAP学习</h4><p>目标：</p>
-<p>​    – 目录结构搞清楚</p>
-<p>​    – 会应用</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">招聘系统项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python项目//" class="article-tag-list-link color4">Python项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/18/%E6%8B%9B%E8%81%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
- 
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -854,11 +855,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DRF</a>
+                <a href="javascript:void(0)" class="js-tag color2">Django</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Django</a>
+                <a href="javascript:void(0)" class="js-tag color4">DRF</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -974,10 +975,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             </li>
           
             <li class="search-li">
-              <a href="https://www.cnblogs.com/linhaifeng/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Egon</a>
-            </li>
-          
-            <li class="search-li">
               <a href="https://www.zhihu.com/people/xiaoyuanqujing/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>小猿取经</a>
             </li>
           
@@ -987,6 +984,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           
             <li class="search-li">
               <a href="https://www.zhihu.com/people/justin_liu" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>老刘知乎</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://liushao.vip/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>刘洋</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://huang_zhao.gitee.io/task/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>黄钊</a>
             </li>
           
         </ul>
