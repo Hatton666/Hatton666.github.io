@@ -176,6 +176,192 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-支付宝支付功能" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/02/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E5%8A%9F%E8%83%BD/">支付宝（沙箱环境）</a>
+    </h1>
+  
+
+        
+        
+
+<a href="/2021/08/02/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E5%8A%9F%E8%83%BD/" class="archive-article-date">
+  	<time datetime="2021-08-02T10:52:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-02</time>
+</a>
+
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="熟悉支付宝"><a href="#熟悉支付宝" class="headerlink" title="熟悉支付宝"></a>熟悉支付宝</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">1）支付宝API：六大接口</span></span><br><span class="line"><span class="string">https://docs.open.alipay.com/270/105900/</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">2）支付宝工作流程(见下图)：</span></span><br><span class="line"><span class="string">https://docs.open.alipay.com/270/105898/</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">3）支付宝8次异步通知机制(支付宝对我们服务器发送POST请求，索要 success 7个字符)</span></span><br><span class="line"><span class="string">https://docs.open.alipay.com/270/105902/</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="支付宝沙箱环境使用"><a href="#支付宝沙箱环境使用" class="headerlink" title="支付宝沙箱环境使用"></a>支付宝沙箱环境使用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 0，进入沙箱环境  </span></span><br><span class="line"><span class="comment"># 1、在沙箱环境下实名认证：https://openhome.alipay.com/platform/appDaily.htm?tab=info</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2、电脑网站支付API：https://docs.open.alipay.com/270/105900/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3、完成RSA密钥生成：https://docs.open.alipay.com/291/105971</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 4、在开发中心的沙箱应用下设置应用公钥：填入生成的公钥文件中的内容</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 5、Python支付宝开源框架：https://github.com/fzlee/alipay</span></span><br><span class="line"><span class="comment"># 在项目应用上安装 ，就可以进行测试了。</span></span><br><span class="line"><span class="comment"># &gt;: pip install python-alipay-sdk --upgrade</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 7、公钥私钥设置</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string"># alipay_public_key.pem</span></span><br><span class="line"><span class="string">-----BEGIN PUBLIC KEY-----</span></span><br><span class="line"><span class="string">支付宝公钥</span></span><br><span class="line"><span class="string">-----END PUBLIC KEY-----</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># app_private_key.pem</span></span><br><span class="line"><span class="string">-----BEGIN RSA PRIVATE KEY-----</span></span><br><span class="line"><span class="string">用户私钥</span></span><br><span class="line"><span class="string">-----END RSA PRIVATE KEY-----</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 8、支付宝链接</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">开发：https://openapi.alipay.com/gateway.do</span></span><br><span class="line"><span class="string">沙箱：https://openapi.alipaydev.com/gateway.do</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 清晰步骤：</span></span><br><span class="line"> 申请支付宝支付</span><br><span class="line">	-必须以企业申请（需要营业执照）</span><br><span class="line">    -沙箱环境（测试环境）</span><br><span class="line">    	-沙箱app</span><br><span class="line">        </span><br><span class="line">    -买家</span><br><span class="line">    买家账号bfxtlv8393@sandbox.com</span><br><span class="line">    登录密码<span class="number">111111</span></span><br><span class="line">    支付密码<span class="number">111111</span></span><br><span class="line">    </span><br><span class="line">  使用第三方sdk实现支付</span><br><span class="line">	-生成公钥私钥（非对称加密）</span><br><span class="line">		-非对称加密：加密和解密使用不同秘钥，加密使用公钥，解密使用私钥</span><br><span class="line">        -对称加密：加密解密使用同一个秘钥</span><br><span class="line">        </span><br><span class="line">    -生成公钥私钥</span><br><span class="line">    	-https://opendocs.alipay.com/<span class="built_in">open</span>/<span class="number">291</span>/introduce</span><br><span class="line">         <span class="comment"># 选中web模式，直接生成密钥。（非java使用）</span></span><br><span class="line"> GitHub开源框架       </span><br><span class="line"> <span class="comment"># https://github.com/fzlee/alipay </span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># ?</span></span><br><span class="line"> 使用第三sdk</span><br><span class="line">	-pip install python-alipay-sdk</span><br><span class="line">    -pip install pyOpenSsl</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggqw1m8jhaj31jy0u0gtz.jpg">支付流程</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Python亮点技术</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/亮点技术//" class="article-tag-list-link color5">亮点技术</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/02/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E5%8A%9F%E8%83%BD/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+ 
+
+
+
+  
+    <article id="post-luffy课程接口" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/07/30/luffy%E8%AF%BE%E7%A8%8B%E6%8E%A5%E5%8F%A3/">luffy前台课程接口</a>
+    </h1>
+  
+
+        
+        
+
+<a href="/2021/07/30/luffy%E8%AF%BE%E7%A8%8B%E6%8E%A5%E5%8F%A3/" class="archive-article-date">
+  	<time datetime="2021-07-30T11:48:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-30</time>
+</a>
+
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-所有课程接口-课程分类"><a href="#1-所有课程接口-课程分类" class="headerlink" title="1 所有课程接口  课程分类"></a>1 所有课程接口  课程分类</h2><h3 id="1-1-课程分类接口"><a href="#1-1-课程分类接口" class="headerlink" title="1.1 课程分类接口"></a>1.1 课程分类接口</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#视图类</span></span><br><span class="line"><span class="keyword">from</span> rest_framework.viewsets <span class="keyword">import</span> GenericViewSet</span><br><span class="line"><span class="keyword">from</span> rest_framework.mixins <span class="keyword">import</span> ListModelMixin</span><br><span class="line"><span class="keyword">from</span> course.serializer <span class="keyword">import</span> CourseCategorySerializer</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 课程类接口</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CourseCategoryView</span>(<span class="params">GenericViewSet, ListModelMixin</span>):</span></span><br><span class="line">    <span class="comment"># CourseCategory继承了BaseModel，带有过滤条件参数。</span></span><br><span class="line">    queryset = CourseCategory.objects.<span class="built_in">all</span>().<span class="built_in">filter</span>(is_delete=<span class="literal">False</span>, is_show=<span class="literal">True</span>).oder_by(<span class="string">&#x27;orders&#x27;</span>)</span><br><span class="line">    serializer_class = CourseCategorySerializer</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#####序列化类</span></span><br><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> serializers</span><br><span class="line"><span class="keyword">from</span> course.models <span class="keyword">import</span> CourseCategory</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 课程类序列化器</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CourseCategorySerializer</span>(<span class="params">serializers.ModelSerializer</span>):</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        model = CourseCategory</span><br><span class="line"></span><br><span class="line">    <span class="built_in">filter</span> = [<span class="string">&#x27;id&#x27;</span>, <span class="string">&#x27;name&#x27;</span>]</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="comment">#根路由</span></span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path, include</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;api/course/&#x27;</span>, include(<span class="string">&#x27;course.urls&#x27;</span>)),</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 子路由</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path, include</span><br><span class="line"><span class="keyword">from</span> rest_framework.routers <span class="keyword">import</span> SimpleRouter</span><br><span class="line"><span class="keyword">from</span> . <span class="keyword">import</span> views</span><br><span class="line"></span><br><span class="line">router = SimpleRouter()</span><br><span class="line">router.register(<span class="string">&#x27;category&#x27;</span>, views.CourseCategoryView, <span class="string">&#x27;category&#x27;</span>)</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;&#x27;</span>, include(router.urls)),</span><br><span class="line">]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学城项目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python项目//" class="article-tag-list-link color4">Python项目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/07/30/luffy%E8%AF%BE%E7%A8%8B%E6%8E%A5%E5%8F%A3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+ 
+
+
+
+  
     <article id="post-docker高级" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -749,190 +935,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/07/28/redis%E9%AB%98%E7%BA%A7/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
- 
-
-
-
-  
-    <article id="post-redis基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/28/redis%E5%9F%BA%E7%A1%80/">redis基础</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2021/07/28/redis%E5%9F%BA%E7%A1%80/" class="archive-article-date">
-  	<time datetime="2021-07-28T11:50:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-28</time>
-</a>
-
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="redis数据库基础"><a href="#redis数据库基础" class="headerlink" title="redis数据库基础"></a>redis数据库基础</h1><p>redis介绍   Python操作Redis ；Hash 操作；List 操作 ； Set 操作 ；<br>使用场景 ； 管道 （类似于MySQL的事务，保持一致性）；发布订阅</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/必备技能//" class="article-tag-list-link color5">必备技能</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/28/redis%E5%9F%BA%E7%A1%80/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
- 
-
-
-
-  
-    <article id="post-git协同使用2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/23/git%E5%8D%8F%E5%90%8C%E4%BD%BF%E7%94%A82/">git协同开发</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2021/07/23/git%E5%8D%8F%E5%90%8C%E4%BD%BF%E7%94%A82/" class="archive-article-date">
-  	<time datetime="2021-07-23T11:15:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-23</time>
-</a>
-
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1 git 远程仓库；2 采用ssh协议连接远程；3 项目创始者和项目开发者；</p>
-<p>4 协同开发 ；5 线上分支合并；6 本地分支合并推送到远程；7 pycharm操作git；</p>
-<p>8 企业git使用流程</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/必备技能//" class="article-tag-list-link color5">必备技能</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/23/git%E5%8D%8F%E5%90%8C%E4%BD%BF%E7%94%A82/">展开全文 >></a>
         </p>
       
 
