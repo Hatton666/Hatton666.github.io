@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2021 | Hexo</title>
+  <title>Django集成 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/2021/page/5/index.html">
+  <meta name="description" content="day 06django-redis 中文文档 目的：减少对数据库的访问，特别在高并发的情况下，提升系统的吞吐量。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django集成">
+<meta property="og:url" content="http://example.com/2021/08/22/Django%E9%9B%86%E6%88%90/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="day 06django-redis 中文文档 目的：减少对数据库的访问，特别在高并发的情况下，提升系统的吞吐量。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-22T01:58:14.000Z">
+<meta property="article:modified_time" content="2021-08-26T16:46:50.951Z">
 <meta property="article:author" content="Vivek">
+<meta property="article:tag" content="招聘系统项目">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -175,500 +180,281 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
+<article id="post-Django集成" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Django集成
+    </h1>
+  
+
+        
+        
+	<!-- 不蒜子统计 -->
+	<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+		  <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+
+<a href="/2021/08/22/Django%E9%9B%86%E6%88%90/" class="archive-article-date">
+  	<time datetime="2021-08-22T01:58:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-22</time>
+</a>
+
+        
+        
+          <span class="archive-article-date">
+            阅读量 <span id="busuanzi_value_page_pv"></span>
+          </span>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="day-06"><a href="#day-06" class="headerlink" title="day 06"></a>day 06</h3><p><a target="_blank" rel="noopener" href="https://django-redis-chs.readthedocs.io/zh_CN/latest/">django-redis 中文文档</a></p>
+<p>目的：减少对数据库的访问，特别在高并发的情况下，提升系统的吞吐量。</p>
+<span id="more"></span>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">Django集成Redis</span><br><span class="line"><span class="number">1</span>，目的：减少对数据库的访问，特别在高并发的情况下，提升系统的吞吐量。</span><br><span class="line"><span class="number">1</span>，启动Redis</span><br><span class="line">	-- redis-server</span><br><span class="line"><span class="number">2</span>, 项目中配置</span><br><span class="line"><span class="comment"># Redis做缓存</span></span><br><span class="line">CACHES = &#123;</span><br><span class="line">    <span class="string">&quot;default&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;BACKEND&quot;</span>: <span class="string">&quot;django_redis.cache.RedisCache&quot;</span>,</span><br><span class="line">        <span class="string">&quot;LOCATION&quot;</span>: <span class="string">&quot;redis://127.0.0.1:6379/1&quot;</span>,</span><br><span class="line">        <span class="string">&quot;TIMEOUT&quot;</span>: <span class="number">300</span>,</span><br><span class="line">        <span class="string">&quot;OPTIONS&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;CLIENT_CLASS&quot;</span>: <span class="string">&quot;django_redis.client.DefaultClient&quot;</span>,</span><br><span class="line">            <span class="string">&quot;SOCKET_CONNECT_TIMEOUT&quot;</span>: <span class="number">5</span>, <span class="comment"># 5seconds 连接超时时间</span></span><br><span class="line">            <span class="string">&quot;SOCKET_TIMEOUT&quot;</span>: <span class="number">5</span>, <span class="comment"># 每次读写数据超时时间</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>, 加整站缓存 ： </span><br><span class="line">	在 <span class="string">&#x27;CommonMiddleware&#x27;</span> 的中间件前后加两个中间件。</span><br><span class="line">	</span><br><span class="line">    然后更新缓存数据</span><br><span class="line">    <span class="string">&#x27;django.middleware.cache.UpdateCacheMiddleware&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;django.middleware.common.CommonMiddleware&#x27;</span>,</span><br><span class="line">    处理视图的时候，先从缓存中拿数据。</span><br><span class="line">    <span class="string">&#x27;django.middleware.cache.FetchFromCacheMiddleware&#x27;</span>,</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="number">4</span>，查看缓存效果</span><br><span class="line">	查看开发控制台，Response Header:</span><br><span class="line">        Cache-Control: <span class="built_in">max</span>-age=<span class="number">600</span>  600s 页面自带<span class="number">10</span>分钟缓存有效期</span><br><span class="line">        Date: Sat, <span class="number">21</span> Aug <span class="number">2021</span> <span class="number">12</span>:<span class="number">28</span>:<span class="number">14</span> GMT</span><br><span class="line">		Expires: Sat, <span class="number">21</span> Aug <span class="number">2021</span> <span class="number">12</span>:<span class="number">37</span>:<span class="number">29</span> GMT</span><br><span class="line">        X-Page-Duration-ms: <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line"> <span class="number">5</span>， 验证加了缓存，是否往数据库发请求。</span><br><span class="line"></span><br><span class="line">在查看职位详情的视图中加一个日志记录</span><br><span class="line"><span class="comment"># 页面在第一次请求时，需要去数据库拿数据</span></span><br><span class="line">	<span class="number">2021</span>-08-<span class="number">21</span> <span class="number">21</span>:<span class="number">15</span>:<span class="number">33</span>,<span class="number">731</span> jobs.views   <span class="number">46</span> INFO     job info fetched <span class="keyword">from</span> database jobid: <span class="number">2</span></span><br><span class="line"><span class="comment"># 之后重复访问，就直接去缓存拿页面数据。</span></span><br><span class="line"></span><br><span class="line">而且Django服务重新加载的时候，缓存还是有效的</span><br></pre></td></tr></table></figure>
+
+<h2 id="项目集成-Celery"><a href="#项目集成-Celery" class="headerlink" title="项目集成 Celery"></a>项目集成 Celery</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">-- 搭建Celery服务，启动了一个Celery的Worker,然后去创建一个异步任务，在Celery中运行完。</span><br><span class="line">-- 安装了Flower的监控系统，在Flower中去监控检查任务的执行状态。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">1</span>，celery:分布式的任务队列，可以把大量的任务分布到不同的机器上去，通过集群来运行大量的任务。</span><br><span class="line"><span class="number">2</span>,消息队列：消息的传输器，消息的代理。</span><br><span class="line">	-- RabbitMQ</span><br><span class="line">    -- Redis</span><br><span class="line">    -- 的消息队列</span><br><span class="line"><span class="number">1</span>，创建一个Celery的任务，</span><br><span class="line">app = Celery(<span class="string">&#x27;task&#x27;</span>,backend = <span class="string">&#x27;redis://127.0.0.1&#x27;</span>,broker = <span class="string">&#x27;redis://127.0.0.1&#x27;</span>)</span><br><span class="line"><span class="meta">@app.task</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">a, b,</span>):</span></span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line"></span><br><span class="line">backend存储：异步任务运行的结果存储在Redis中，也可以存储在数据库中，也可以用RPC的消息队列。</span><br><span class="line">broker:存储任务系统的代理，里面也是一个消息队列，也使用Redis。 </span><br><span class="line"> 	-- 消息队列，任务代理，后端任务运行的结构存储都使用了Redis。</span><br><span class="line">这样系统搭建起来比较简单，架构上也比较使用。Rdis本身也是具有很高的扩展性，和高可用的。</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Django中集成Celery,完成异步任务。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">2,查看异步任务运行的状态和结果</span><br><span class="line">利用监控： </span><br><span class="line">	-- 命令行监控：用inspect命令行去监控</span><br><span class="line">    -- 也可以使用Flower，另外的一个系统去监控。</span><br><span class="line">    默认的端口是5555</span><br><span class="line">    -- 监控Redis中的队列，用命令行去监控。</span><br><span class="line">    	result命令去检查任务运行状态</span><br><span class="line">        </span><br><span class="line"> 使用Flower，Web监控工具，可以查看任务的进展，跟任务的执行历史，包括任务的执行结果。</span><br><span class="line">broker也是Redis.</span><br><span class="line">启动celery</span><br><span class="line">celery -A task flower --broker= redis://@localhost:6379/0</span><br><span class="line">1，能看到任务处理结果，参数，结果，时间记录，还可以查看任务的详细信息。</span><br><span class="line">2，可以看Broker的情况，Monitord中可以看到成deng数，失败的任务数。</span><br></pre></td></tr></table></figure>
+
+<p>Django中集成Celery,完成定时任务。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">Celery管理定时任务流程：</span><br><span class="line">	Redis 来进行 任务管理，结果存储。</span><br><span class="line">    在Celery中Beat的调度进程，来管理和调度定时任务。</span><br><span class="line">    </span><br><span class="line">    Django Beat &gt;&gt; TaskScheduler 任务调度器&gt;&gt; Task Storage 任务存储</span><br><span class="line">    Beat首先调用Scheduler,去把任务找到，然后去检测任务的执行状态，如果这个任务，到了执行任务的时间，就会去执行，执行完了之后，会把任务的状态记下来，会存储下来。存储有两种方式，一种是 存储在文件里面（默认）。一种是存储在数据库里面。为了更容易维护定时任务，我们是使用的 数据库方式。</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"> <span class="number">1</span>,启动服务应用 <span class="number">2</span>，启动Redis <span class="number">3</span>, 启动Celery , <span class="number">4</span>, 环境变量下 运行start worker命令。</span><br><span class="line"><span class="number">5</span>， 启动Flower, source flower.start.sh  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">1</span>，Django 与 Celery 集成：定时任务</span><br><span class="line"></span><br><span class="line">	<span class="number">1</span>• 安装 beat: pip install django-celery-beat</span><br><span class="line">	<span class="number">2</span>• 数据库变更</span><br><span class="line">    -- 把Beat需要的库表建好</span><br><span class="line">	<span class="number">3</span>• 使用 DatabaseScheduler 启动 beat 或者在 配置中设置 beat_scheduler</span><br><span class="line">    <span class="number">4</span>-- 启动beat任务，同时指定使用数据库来作为Storage,或者在Django的配置里面，我们配置只要指定			          DatabaseStorage。</span><br><span class="line">    &gt;&gt;&gt; 直接写一个beat.start这个脚本,去完成这个脚本。</span><br><span class="line">    </span><br><span class="line">管理定时任务的方法    </span><br><span class="line"> 。在 Admin 后台添加管理定时任务</span><br><span class="line"> • 系统启动时自动注册定时任务</span><br><span class="line"> • 直接设置应用的 beat_schedule</span><br><span class="line"> 运行时添加定时任，直接添加到要执行的表里去。</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="文件和图片的上传下载功能"><a href="#文件和图片的上传下载功能" class="headerlink" title="文件和图片的上传下载功能"></a>文件和图片的上传下载功能</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">存储方案：</span><br><span class="line">	-- 使用服务器本地磁盘，使用本地的目录存储图片跟文件。</span><br><span class="line">    </span><br><span class="line">    添加简历页面，可以上传图片，用作头像，还可以上传简历附件。</span><br><span class="line">    同时在查看简历详情页面，可以下载文件，也可以删除文件，可以修改简历信息，也可以重新上传。</span><br><span class="line">    </span><br><span class="line">    缺点：使用多个服务器，在分布式的环境下，很难去扩展。也很难保证，不同的服务器，都有相同的文件和目录，</span><br><span class="line">    	去自动地复制，去做同步，成本太高了。</span><br><span class="line">    -- 自建分布式文件服务器： 使用分布式的文件系统来存。</span><br><span class="line">    -- 阿里云 OSS</span><br><span class="line">    使用现有的云服务来存，文件跟图片； 直接把文件图片传上去，可以随时随地访问，而且还能够利用到它的CDN加速。</span><br><span class="line">    </span><br><span class="line">• 安装 OSS 库</span><br><span class="line">• OSS 的依赖添加 django_oss_storage 到 APPS </span><br><span class="line">• settings 里面添加 OSS 设置</span><br><span class="line"></span><br><span class="line">配置，OSS_ACCESS_SECRET 和 OSS_BUCKET_NAME 和 END_POINT 指定使用的数据中心。</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>，创建Bucket:</span><br><span class="line"><span class="number">2</span>,创建 子用户的 AcckessKey,,即使丢了，影响不大，重新建，子账号的权限控制会比较小。</span><br><span class="line"><span class="number">3</span>，可以给子用户分组，和设置权限。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="多数据库路由，实现主从同步。"><a href="#多数据库路由，实现主从同步。" class="headerlink" title="多数据库路由，实现主从同步。"></a>多数据库路由，实现主从同步。</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">base.py中，配置 </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DatabaseRouter</span>:</span></span><br><span class="line">    <span class="comment"># 指定表</span></span><br><span class="line">    route_app_labels = &#123;<span class="string">&#x27;running&#x27;</span>&#125;</span><br><span class="line">	<span class="comment"># 读操作，访问哪个数据库</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">db_for_read</span>(<span class="params">self, model, **hints</span>):</span></span><br><span class="line">        <span class="keyword">if</span> model._meta.app_label <span class="keyword">in</span> self.route_app_labels:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;running&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;default&#x27;</span></span><br><span class="line">	<span class="comment"># 写操作，访问哪个数据库</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">db_for_write</span>(<span class="params">self, model, **hints</span>):</span></span><br><span class="line">        <span class="keyword">if</span> model._meta.app_label <span class="keyword">in</span> self.route_app_labels:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;running&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;default&#x27;</span></span><br><span class="line">	<span class="comment"># 表关系是否有关系</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">allow_relation</span>(<span class="params">self, obj1, obj2, **hints</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">	<span class="comment"># 书否允许做同步迁移</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">allow_migrate</span>(<span class="params">self, db, app_label, model_name=<span class="literal">None</span>, **hints</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        遗留数据库中的表不允许迁移</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> app_label <span class="keyword">in</span> self.route_app_labels:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">在读方法和写方法中，如果lable属于<span class="string">&#x27;running&#x27;</span>数据库中，返回<span class="string">&#x27;running&#x27;</span>，否则直接返回默认数据库。</span><br><span class="line">就是说，除了在running这个应用下的model之外，其他都使用默认数据库。</span><br><span class="line">例子一： 默认的数据库，管理账号的权限，职位，简历信息，等都在默认的数据库。running库，另外引用的一个</span><br><span class="line">在线上运行的数据库，应用环境中的一个业务库，两个库不是同一个库，内容和库表也都不一样。</span><br><span class="line"></span><br><span class="line">例子二： 系统需要做读写分离的时候，让用户创建数据修改数据的操作走写的数据库，走主数据库；让所有的查询操作，读操作都走从数据库。这样也可以使用数据库的路由来实现的。这样去做一个主从同步；这样其实是一个数据库，不同的副本。</span><br></pre></td></tr></table></figure>
+
+<h3 id="大数据量的关联外健"><a href="#大数据量的关联外健" class="headerlink" title="大数据量的关联外健"></a>大数据量的关联外健</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">依赖外键数据量过大导致管理后台卡顿甚至死机。</span><br><span class="line">• 比如添加一个员工，员工的出生地依赖于城市表，全球的城市数据有1w多；</span><br><span class="line">• 添加员工的时候，要从上万的城市中选择出生地。</span><br><span class="line">• Django 默认会把依赖外键中的所有数据全部加载， 浏览器会停顿乃至没有反应，导致死机</span><br><span class="line">• 关系：Province 依赖于 Country, City 从属于 Province</span><br><span class="line">• 期望：选择依赖的数据时（比如员工所属城市），可输入字符查找</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">准备：设置 Province， City 的外键依赖</span><br><span class="line">countryid = models.ForeignKey(Country, db_column=<span class="string">&#x27;countryid&#x27;</span>, null=<span class="literal">True</span>, </span><br><span class="line">on_delete=models.SET_NULL)</span><br><span class="line"><span class="comment"># 在城市的model的Admin里面去设置autocomplete_fields。</span></span><br><span class="line">• 设置自动完成的关联外键 (admin.py)</span><br><span class="line">autocomplete_fields = [<span class="string">&#x27;provinceid’]</span></span><br><span class="line"><span class="string">• 依赖的 model Admin 类中设置可以搜索的字段</span></span><br><span class="line"><span class="string">  # 定义     search_fields                </span></span><br><span class="line"><span class="string">class CountryAdmin(admin.ModelAdmin):</span></span><br><span class="line"><span class="string">search_fields = (&#x27;</span>chn_name<span class="string">&#x27;, &#x27;</span>eng_name<span class="string">&#x27;,)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">class CityAdmin(ReadOnlyAdmin):</span></span><br><span class="line"><span class="string">    autocomplete_fields = [&#x27;</span>provinceid<span class="string">&#x27;,&#x27;</span>countryid<span class="string">&#x27;,]</span></span><br></pre></td></tr></table></figure>
+
+<p>继承自定义的ReadOnlyAdmin,实现页面只读权限限制。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ReadOnlyAdmin</span>(<span class="params">admin.ModelAdmin</span>):</span></span><br><span class="line">    readonly_fields = []</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_list_display</span>(<span class="params">self, request</span>):</span></span><br><span class="line">        <span class="keyword">return</span> [field.name <span class="keyword">for</span> field <span class="keyword">in</span> self.model._meta.concrete_fields]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_readonly_fields</span>(<span class="params">self, request, obj=<span class="literal">None</span></span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">list</span>(self.readonly_fields) + \</span><br><span class="line">               [field.name <span class="keyword">for</span> field <span class="keyword">in</span> obj._meta.fields] + \</span><br><span class="line">               [field.name <span class="keyword">for</span> field <span class="keyword">in</span> obj._meta.many_to_many]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">has_add_permission</span>(<span class="params">self, request</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">has_delete_permission</span>(<span class="params">self, request, obj=<span class="literal">None</span></span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">	</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">has_change_permission</span>(<span class="params">self, request, obj=<span class="literal">None</span></span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"> 以上是 ：再Django里面，自定义权限覆盖的方法，实现禁止用户的添加删除修改操作。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@admin.register(<span class="params">Province</span>)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ProvinceAdmin</span>(<span class="params">ReadOnlyAdmin</span>):</span></span><br><span class="line">    search_fields = (<span class="string">&#x27;chn_name&#x27;</span>, <span class="string">&#x27;eng_name&#x27;</span>,)</span><br><span class="line">    </span><br><span class="line"><span class="meta">@admin.register(<span class="params">City</span>)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CityAdmin</span>(<span class="params">ReadOnlyAdmin</span>):</span></span><br><span class="line">    autocomplete_fields = [<span class="string">&#x27;provinceid&#x27;</span>,<span class="string">&#x27;countryid&#x27;</span>,]</span><br><span class="line"></span><br><span class="line">    list_display = (<span class="string">&#x27;cityid&#x27;</span>, <span class="string">&#x27;countryid&#x27;</span>, <span class="string">&#x27;areaid&#x27;</span>, <span class="string">&#x27;provinceid&#x27;</span>, <span class="string">&#x27;chn_name&#x27;</span>, <span class="string">&#x27;eng_name&#x27;</span>)</span><br><span class="line"></span><br><span class="line">然后，CityAdmin,ProvinceAdmin,继承ReadOnlyAdmin。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Python中的动态类"><a href="#Python中的动态类" class="headerlink" title="Python中的动态类"></a>Python中的动态类</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Python 的动态 model</span><br><span class="line">• Python中类也是对象</span><br><span class="line">• 使用 Python 的动态特性</span><br><span class="line">• 使用 <span class="built_in">type</span>()函数来动态定义一个类</span><br><span class="line"></span><br><span class="line"><span class="comment"># Python中，单独一个class，不能继承多个类，通过type()来定义，让一个类继承多个类。</span></span><br><span class="line">model = <span class="built_in">type</span>(name, (models.Model,), attrs)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 普通的类定义：</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>(<span class="params">model.Model</span>):</span></span><br><span class="line">    first_name = models.CharField(max_length=<span class="number">255</span>)</span><br><span class="line">    last_name = models.CharField(max_length=<span class="number">255</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 等同于如下的动态类定义：</span></span><br><span class="line">Person = <span class="built_in">type</span>(<span class="string">&#x27;Person&#x27;</span>,(model.Model,),&#123;</span><br><span class="line">    <span class="string">&#x27;first_name&#x27;</span> : models.CharField(max_length=<span class="number">255</span>),</span><br><span class="line">    <span class="string">&#x27;last_name&#x27;</span> : models.CharField(max_length=<span class="number">255</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">字段用<span class="string">&#x27;&#x27;</span>引用，是动态的，我们就可以从数据库里去遍历这个数据库里有那些表，每一张表有哪些字段，每一张字段有什么类型，能够把这些类型，通过传参的方式，传给<span class="built_in">type</span>,这样就可以来动态构建Person的model。</span><br><span class="line">通过代码，自动把model自动注册到Django里面去，这样就可以对这些model做一个维护功能。</span><br></pre></td></tr></table></figure>
+
+<h3 id="Django中的Signals信号使用"><a href="#Django中的Signals信号使用" class="headerlink" title="Django中的Signals信号使用"></a>Django中的Signals信号使用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">应用保存的时候，修改的时候，在审批流程通过的时候，在提交一条数据的时候，去自动触发不同的动作。</span><br><span class="line">Django中内置信号发送器，信号发送器在整个框架里面，当某个动作发生的时候，应用框架里面会检测到，进而触发其他的一系列的动作。当动作发生时，允许特定的信号发送者发送消息到一系列的消息接收者。同步调用。</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2，信号的应用场景</span></span><br><span class="line">• 系统解耦；代码复用：实现统一处理逻辑的框架中间件； -&gt; 可维护性提升</span><br><span class="line"><span class="comment">## 在中间件里面实现，性能分析的功能，去实现日志的功能，去实现异常处理的功能，使得系统的可维护性大幅提升。</span></span><br><span class="line">• 记录操作日志，增加/清除缓存，数据变化接入审批流程；评论通知；</span><br><span class="line">• 关联业务变化通知，</span><br><span class="line">• 例：通讯录变化的异步事件处理，比如员工入职时发送消息通知团队新人入职，员工离</span><br><span class="line">职时异步清理员工的权限等等；</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Signals 类的子类 （Django内置的常用信号）</span><br><span class="line">• django.db.models.signals.pre_init 模型实例初始化前</span><br><span class="line">• django.db.models.signals.post_init 模型实例初始化后</span><br><span class="line">• django.db.models.signals.pre_save 模型保存前</span><br><span class="line">• django.db.models.signals.post_save 模型保存后</span><br><span class="line">• django.db.models.signals.pre_delete 模型删除前</span><br><span class="line">• django.db.models.signals.post_delete 模型删除后</span><br><span class="line">• django.db.models.signals.m2m_changed 多对多字段被修改</span><br><span class="line">• django.core.signals.request_started 接收到 HTTP 请求</span><br><span class="line">• django.core.signals.request_finished HTTP 请求处理完毕</span><br><span class="line">所有的 Signals 都是 django.dispatch.Signal 的实例/子类</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="注册一个信号量"><a href="#注册一个信号量" class="headerlink" title="注册一个信号量"></a>注册一个信号量</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">如何注册信号处理器/接收器</span><br><span class="line">调用 Signals 任意一个子类的 connect方法</span><br><span class="line"></span><br><span class="line">Signal.connect(receiver,sendr=<span class="literal">None</span>,weak =<span class="literal">True</span>,dispatch_uid=<span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>receiver : 信号接收器，一个回调函数，即处理信号的函数</span><br><span class="line">    sender: 信号的发送源，哪个发送方发送的信号。</span><br><span class="line">    weak: 是否是弱引用，默认是弱引用；当receiver 为局部变量时，接收器可能会被回收。</span><br><span class="line">    dispatch_uid : 信号接收器的唯一标识符，用来避免接收器被重复使用。</span><br><span class="line">    除了使用 Signal.connect() 方法注册处理器外，也可以使用 @receiver 的装饰器来注册</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 使用装饰器来注册，修改数据时，发送消息通知到钉钉</span></span><br><span class="line">Django之美：Signals信号及其使用场景</span><br><span class="line">示例：使用装饰器来注册，修改数据时，发送消息通知到钉钉</span><br><span class="line">在apps 的 ready() 函数中加载信号处理器</span><br><span class="line">settings 中使用完整的名称注册 AppConfig，去掉原先注册的 jobs 应用。</span><br><span class="line">示例： 使用 @receiver 装饰器来注册信号处理器: 删除投递的简历时发送通知</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line"><span class="number">1</span>）定义信号： 在项目根目录新建文件self_signal.py</span><br><span class="line"><span class="keyword">import</span> django.dispatch</span><br><span class="line">my_signal = django.dispatch.Signals(providing_args=[<span class="string">&quot;argument1&quot;</span>,<span class="string">&quot;argument2&quot;</span>])</span><br><span class="line"><span class="number">2</span>）触发信号：业务逻辑中触发信息</span><br><span class="line"><span class="keyword">from</span> self_signal <span class="keyword">import</span> my_signal</span><br><span class="line">my_signal.send(sender=<span class="string">&quot;Recruitment&quot;</span>, argument1=<span class="number">111</span>, argument2=<span class="number">2</span>)</span><br><span class="line"><span class="number">3</span>）注册信号处理器/接收器</span><br><span class="line"><span class="keyword">from</span> self_signal <span class="keyword">import</span> my_signal</span><br><span class="line">my_signal.connect(callback_of_my_signal)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/222.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-
-<a href="/2021/07/14/%E7%AE%97%E6%B3%95%E9%9B%86/" class="archive-article-date">
-  	<time datetime="2021-07-14T07:12:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-14</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/14/%E7%AE%97%E6%B3%95%E9%9B%86/">排序算法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法和数据结构</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">招聘系统项目</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/计算机基础//" class="article-tag-list-link color1">计算机基础</a>
+        			<a href="/categories/Python项目//" class="article-tag-list-link color4">Python项目</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://vivek-666.github.io/021/08/22/Django%E9%9B%86%E6%88%90/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
+<nav id="article-nav">
+  
+    <a href="/2021/08/26/Django%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Django总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/08/21/Django%E4%BB%8B%E7%BB%8D/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Django介绍</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
-<a href="/2021/07/14/CBV%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="archive-article-date">
-  	<time datetime="2021-07-14T00:59:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-14</time>
-</a>
 
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/14/CBV%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">CBV源码分析</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Django</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python框架//" class="article-tag-list-link color4">Python框架</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#day-06"><span class="toc-number">1.</span> <span class="toc-text">day 06</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E9%9B%86%E6%88%90-Celery"><span class="toc-number"></span> <span class="toc-text">项目集成 Celery</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%92%8C%E5%9B%BE%E7%89%87%E7%9A%84%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD%E5%8A%9F%E8%83%BD"><span class="toc-number">1.</span> <span class="toc-text">文件和图片的上传下载功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%95%B0%E6%8D%AE%E5%BA%93%E8%B7%AF%E7%94%B1%EF%BC%8C%E5%AE%9E%E7%8E%B0%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5%E3%80%82"><span class="toc-number"></span> <span class="toc-text">多数据库路由，实现主从同步。</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%87%8F%E7%9A%84%E5%85%B3%E8%81%94%E5%A4%96%E5%81%A5"><span class="toc-number">1.</span> <span class="toc-text">大数据量的关联外健</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Python%E4%B8%AD%E7%9A%84%E5%8A%A8%E6%80%81%E7%B1%BB"><span class="toc-number">2.</span> <span class="toc-text">Python中的动态类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Django%E4%B8%AD%E7%9A%84Signals%E4%BF%A1%E5%8F%B7%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">Django中的Signals信号使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E4%B8%80%E4%B8%AA%E4%BF%A1%E5%8F%B7%E9%87%8F"><span class="toc-number">4.</span> <span class="toc-text">注册一个信号量</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-
-<a href="/2021/07/09/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" class="archive-article-date">
-  	<time datetime="2021-07-09T11:31:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-09</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/09/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">面向对象</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">面向对象</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python基础//" class="article-tag-list-link color4">Python基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
 
-<a href="/2021/07/08/RBAC/" class="archive-article-date">
-  	<time datetime="2021-07-08T11:31:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-08</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/08/RBAC/">RBAC</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">开发规范</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/开发相关//" class="article-tag-list-link color5">开发相关</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-
-<a href="/2021/07/07/DRF%E5%85%A5%E9%97%A804/" class="archive-article-date">
-  	<time datetime="2021-07-07T14:31:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-07</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/07/DRF%E5%85%A5%E9%97%A804/">DRF之分页及接口文档</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DRF</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python框架//" class="article-tag-list-link color4">Python框架</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-
-<a href="/2021/07/07/DRF%E5%85%A5%E9%97%A803/" class="archive-article-date">
-  	<time datetime="2021-07-07T14:30:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-07</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/07/DRF%E5%85%A5%E9%97%A803/">DRF组件及异常处理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DRF</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python框架//" class="article-tag-list-link color4">Python框架</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-
-<a href="/2021/07/07/DRF%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%9D%83%E9%99%90/" class="archive-article-date">
-  	<time datetime="2021-07-07T14:30:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-07</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/07/DRF%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%9D%83%E9%99%90/">DRF之路由及常用组件</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DRF</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python框架//" class="article-tag-list-link color4">Python框架</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-
-<a href="/2021/07/07/DRF%E5%85%A5%E9%97%A801/" class="archive-article-date">
-  	<time datetime="2021-07-07T14:29:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-07</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/07/DRF%E5%85%A5%E9%97%A801/">三层视图及视图集</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DRF</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Python框架//" class="article-tag-list-link color4">Python框架</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-
-<a href="/2021/07/05/restful%E8%AE%BE%E8%AE%A1%E9%A3%8E%E6%A0%BC/" class="archive-article-date">
-  	<time datetime="2021-07-05T09:25:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-05</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/07/05/restful%E8%AE%BE%E8%AE%A1%E9%A3%8E%E6%A0%BC/">restful设计风格</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">开发规范</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/开发相关//" class="article-tag-list-link color5">开发相关</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2021/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/archives/2021/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2021/page/3/">3</a><a class="page-number" href="/archives/2021/page/4/">4</a><span class="page-number current">5</span>
-    </nav>
+  
+
+  
+
+  
+ 
+
+  
+      <section id="comments" class="comments">
+        <style>
+          .comments{margin:30px;padding:10px;background:#fff}
+          @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+        </style>
+        <div id="vcomment" class="comment"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var notify = 'false' == true ? true : false;
+  var verify = 'false' == true ? true : false;
+  new Valine({
+    av: AV,
+    el: '#vcomment',
+    notify: notify,
+    app_id: "4078A2Bntfkxp8EVq5TtPO1P-gzGzoHsz",
+    app_key: "2wBAkBOnl2RpsnGy3dYaEPlN",
+    placeholder: "Just go go",
+    avatar: "mm",
+  });
+</script>
+
+    </section>
   
 
 
-
-<!-- 添加代码  -->
-<span id="busuanzi_container_page_pv">
-  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-</span>
 
 
           </div>
@@ -703,8 +489,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

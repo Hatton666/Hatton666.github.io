@@ -176,6 +176,380 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-招聘管理系统4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/18/%E6%8B%9B%E8%81%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F4/">招聘管理系统4</a>
+    </h1>
+  
+
+        
+        
+
+<a href="/2021/08/18/%E6%8B%9B%E8%81%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F4/" class="archive-article-date">
+  	<time datetime="2021-08-18T05:49:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-18</time>
+</a>
+
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>python ./manage.py runserver 127.0.0.1:800 –settings=settings.local</p>
+<p>python manage.py shell –settings=settings.local</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">招聘系统项目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python项目//" class="article-tag-list-link color4">Python项目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/18/%E6%8B%9B%E8%81%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F4/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+ 
+
+
+
+  
+    <article id="post-招聘管理系统3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/18/%E6%8B%9B%E8%81%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F3/">招聘管理系统3</a>
+    </h1>
+  
+
+        
+        
+
+<a href="/2021/08/18/%E6%8B%9B%E8%81%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F3/" class="archive-article-date">
+  	<time datetime="2021-08-18T05:48:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-18</time>
+</a>
+
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Day05"><a href="#Day05" class="headerlink" title="Day05"></a>Day05</h2><h3 id="一：替换Django-admin的主题风格-django-grappelli"><a href="#一：替换Django-admin的主题风格-django-grappelli" class="headerlink" title="一：替换Django admin的主题风格:  django-grappelli"></a>一：替换Django admin的主题风格:  django-grappelli</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">• 安装 django-grappelli 风格</span><br><span class="line">	• pip install django-grappelli</span><br><span class="line"></span><br><span class="line">• settings.py 中配置</span><br><span class="line"></span><br><span class="line">	• INSTALLED_APPS = ( <span class="string">&#x27;grappelli&#x27;</span>, <span class="string">&#x27;django.contrib.admin&#x27;</span>, )</span><br><span class="line">	</span><br><span class="line">• urls.py 中添加 URL 映射</span><br><span class="line">	urlpatterns = [ </span><br><span class="line">	path(<span class="string">&#x27;grappelli/&#x27;</span>, include(<span class="string">&#x27;grappelli.urls&#x27;</span>)), </span><br><span class="line">	path(<span class="string">&#x27;admin/&#x27;</span>, admin.site.urls), <span class="comment"># admin site</span></span><br><span class="line">	]</span><br></pre></td></tr></table></figure>
+
+<p><a href="!%5Bimage-20210811164227629%5D(C:%5CUsers%5Clenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210811164227629.png)">django-grappelli风格展示</a></p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">招聘系统项目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python项目//" class="article-tag-list-link color4">Python项目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/18/%E6%8B%9B%E8%81%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+ 
+
+
+
+  
+    <article id="post-招聘管理系统2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/18/%E6%8B%9B%E8%81%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F2/">招聘管理系统2</a>
+    </h1>
+  
+
+        
+        
+
+<a href="/2021/08/18/%E6%8B%9B%E8%81%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F2/" class="archive-article-date">
+  	<time datetime="2021-08-18T05:48:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-18</time>
+</a>
+
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="day-04"><a href="#day-04" class="headerlink" title="day 04"></a>day 04</h2><h4 id="LDAP学习"><a href="#LDAP学习" class="headerlink" title="LDAP学习"></a>LDAP学习</h4><p>目标：</p>
+<p>​    – 目录结构搞清楚</p>
+<p>​    – 会应用</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">招聘系统项目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python项目//" class="article-tag-list-link color4">Python项目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/18/%E6%8B%9B%E8%81%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+ 
+
+
+
+  
+    <article id="post-招聘管理系统1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/08/12/%E6%8B%9B%E8%81%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F1/">招聘管理系统</a>
+    </h1>
+  
+
+        
+        
+
+<a href="/2021/08/12/%E6%8B%9B%E8%81%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F1/" class="archive-article-date">
+  	<time datetime="2021-08-12T03:42:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-12</time>
+</a>
+
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="招聘管理系统"><a href="#招聘管理系统" class="headerlink" title="招聘管理系统"></a>招聘管理系统</h1><h2 id="day-01"><a href="#day-01" class="headerlink" title="day 01"></a>day 01</h2><p>​    – 确定开发项目课题，简单的招聘系统。</p>
+<p>​    – 查找招聘相关课题资料（B站，Gitee，CSDN官网，百度文档）</p>
+<p>​    – 整理开题报告 （功能分析，开发平台，开发流程，任务定制）</p>
+<p>​    – 建立 角色，权限，表关系</p>
+<p>​    – 整理路飞学诚项目技术点</p>
+<p>​    – 复习Django admin 后台管理 的使用 </p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">招聘系统项目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python项目//" class="article-tag-list-link color4">Python项目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/08/12/%E6%8B%9B%E8%81%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+ 
+
+
+
+  
     <article id="post-支付宝支付功能" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -362,613 +736,9 @@
 
 
   
-    <article id="post-docker高级" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/29/docker%E9%AB%98%E7%BA%A7/">docker高级</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2021/07/29/docker%E9%AB%98%E7%BA%A7/" class="archive-article-date">
-  	<time datetime="2021-07-29T10:52:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-29</time>
-</a>
-
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="docker-compose-编排工具"><a href="#docker-compose-编排工具" class="headerlink" title="docker-compose 编排工具"></a>docker-compose 编排工具</h2><h3 id="安装-docker-compose"><a href="#安装-docker-compose" class="headerlink" title="安装 docker-compose"></a><strong>安装 docker-compose</strong></h3><p>安装 docker-compose</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载pip软件</span></span><br><span class="line">yum install -y python2-pip</span><br><span class="line"><span class="comment"># 下载 docker-compose</span></span><br><span class="line">pip install docker-compose</span><br></pre></td></tr></table></figure>
-
-
-
-<p>国内开启 pip 下载加速：<a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/help/pypi">https://mirrors.aliyun.com/help/pypi</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/.pip/</span><br><span class="line">cat &gt; ~/.pip/pip.conf &lt;&lt;<span class="string">&#x27;EOF&#x27;</span></span><br><span class="line">[<span class="keyword">global</span>]</span><br><span class="line">index-url = https://mirrors.aliyun.com/pypi/simple/</span><br><span class="line">[install]</span><br><span class="line">trusted-host=mirrors.aliyun.com</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="编排启动镜像"><a href="#编排启动镜像" class="headerlink" title="编排启动镜像"></a><strong>编排启动镜像</strong></h3><p>1、创建文件目录</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@docker01 ~]<span class="comment"># mkdir /opt/my_wordpress/</span></span><br><span class="line">[root@docker01 ~]<span class="comment"># cd /opt/my_wordpress/</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>2、编写编排文件</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@docker01 my_wordpress]<span class="comment"># vim docker-compose.yml</span></span><br><span class="line">version: <span class="string">&#x27;3&#x27;</span></span><br><span class="line">services:</span><br><span class="line">   db:</span><br><span class="line">     image: mysql:<span class="number">5.7</span></span><br><span class="line">     volumes:</span><br><span class="line">       - /data/db_data:/var/lib/mysql</span><br><span class="line">     restart: always</span><br><span class="line">     environment:</span><br><span class="line">       MYSQL_ROOT_PASSWORD: somewordpress</span><br><span class="line">       MYSQL_DATABASE: wordpress</span><br><span class="line">       MYSQL_USER: wordpress</span><br><span class="line">       MYSQL_PASSWORD: wordpress</span><br><span class="line">   wordpress:</span><br><span class="line">     depends_on:</span><br><span class="line">       - db</span><br><span class="line">     image: wordpress:latest</span><br><span class="line">     volumes:</span><br><span class="line">       - /data/web_data:/var/www/html</span><br><span class="line">     ports: </span><br><span class="line">       - <span class="string">&quot;8000:80&quot;</span></span><br><span class="line">     restart: always</span><br><span class="line">     environment:</span><br><span class="line">       WORDPRESS_DB_HOST: db:<span class="number">3306</span></span><br><span class="line">       WORDPRESS_DB_USER: wordpress</span><br><span class="line">       WORDPRESS_DB_PASSWORD: wordpress</span><br></pre></td></tr></table></figure>
-
-
-
-<p>3、启动</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@docker01 my_wordpress]<span class="comment"># docker-compose up</span></span><br><span class="line">　　<span class="comment">#启动方法：docker-compose up</span></span><br><span class="line">　　<span class="comment">#后台启动方法：docker-compose up -d</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>4、浏览器上访问 <a href="http://10.0.0.100:8000，进行">http://10.0.0.100:8000，进行</a> wordpress 的安装即可</p>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h3 id="haproxy-代理后端-docker-容器"><a href="#haproxy-代理后端-docker-容器" class="headerlink" title="haproxy 代理后端 docker 容器"></a><strong>haproxy 代理后端 docker 容器</strong></h3><p>1、修改编排脚本</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@docker01 my_wordpress]<span class="comment"># cat docker-compose.yml </span></span><br><span class="line">version: <span class="string">&#x27;3&#x27;</span></span><br><span class="line">services:</span><br><span class="line">   db:</span><br><span class="line">     image: mysql:<span class="number">5.7</span></span><br><span class="line">     volumes:</span><br><span class="line">       - /data/db_data:/var/lib/mysql</span><br><span class="line">     restart: always</span><br><span class="line">     environment:</span><br><span class="line">       MYSQL_ROOT_PASSWORD: somewordpress</span><br><span class="line">       MYSQL_DATABASE: wordpress</span><br><span class="line">       MYSQL_USER: wordpress</span><br><span class="line">       MYSQL_PASSWORD: wordpress</span><br><span class="line">   wordpress:</span><br><span class="line">     depends_on:</span><br><span class="line">       - db</span><br><span class="line">     image: wordpress:latest</span><br><span class="line">     volumes:</span><br><span class="line">       - /data/web_data:/var/www/html</span><br><span class="line">     ports: </span><br><span class="line">       - <span class="string">&quot;80&quot;</span></span><br><span class="line">     restart: always</span><br><span class="line">     environment:</span><br><span class="line">       WORDPRESS_DB_HOST: db:<span class="number">3306</span></span><br><span class="line">       WORDPRESS_DB_USER: wordpress</span><br><span class="line">       WORDPRESS_DB_PASSWORD: wordpress</span><br></pre></td></tr></table></figure>
-
-
-
-<p>2、同时启动两台 wordpress</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@docker01 my_wordpress]<span class="comment"># docker-compose scale wordpress=2 </span></span><br><span class="line">WARNING: The scale command <span class="keyword">is</span> deprecated. Use the up command <span class="keyword">with</span> the --scale flag instead.</span><br><span class="line">Starting mywordpress_wordpress_1 ... done</span><br><span class="line">Creating mywordpress_wordpress_2 ... done</span><br></pre></td></tr></table></figure>
-
-
-
-<p>3、安装 haproxy</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@docker01 ~]<span class="comment"># yum install haproxy -y</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>4、修改 haproxy 配置文件</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">[root@docker01 ~]<span class="comment">#cp /etc/haproxy/haproxy.cfg&#123;,.bak&#125;</span></span><br><span class="line">[root@docker01 ~]<span class="comment"># vim /etc/haproxy/haproxy.cfg</span></span><br><span class="line"><span class="keyword">global</span></span><br><span class="line">    log         <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> local2</span><br><span class="line">    chroot      /var/lib/haproxy</span><br><span class="line">    pidfile     /var/run/haproxy.pid</span><br><span class="line">    maxconn     <span class="number">4000</span></span><br><span class="line">    user        haproxy</span><br><span class="line">    group       haproxy</span><br><span class="line">    daemon</span><br><span class="line">    stats socket /var/lib/haproxy/stats level admin  <span class="comment">#支持命令行控制</span></span><br><span class="line">defaults</span><br><span class="line">    mode                    http</span><br><span class="line">    log                     <span class="keyword">global</span></span><br><span class="line">    option                  httplog</span><br><span class="line">    option                  dontlognull</span><br><span class="line">    option http-server-close</span><br><span class="line">    option forwardfor       <span class="keyword">except</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.0</span>/<span class="number">8</span></span><br><span class="line">    option                  redispatch</span><br><span class="line">    retries                 <span class="number">3</span></span><br><span class="line">    timeout http-request    10s</span><br><span class="line">    timeout queue           1m</span><br><span class="line">    timeout connect         10s</span><br><span class="line">    timeout client          1m</span><br><span class="line">    timeout server          1m</span><br><span class="line">    timeout http-keep-alive 10s</span><br><span class="line">    timeout check           10s</span><br><span class="line">    maxconn                 <span class="number">3000</span></span><br><span class="line">listen stats</span><br><span class="line">    mode http</span><br><span class="line">    bind <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">8888</span></span><br><span class="line">    stats enable</span><br><span class="line">    stats uri     /haproxy-status </span><br><span class="line">    stats auth    admin:<span class="number">123456</span></span><br><span class="line">frontend frontend_www_example_com</span><br><span class="line">    bind <span class="number">10.0</span><span class="number">.0</span><span class="number">.100</span>:<span class="number">8000</span></span><br><span class="line">    mode http</span><br><span class="line">    option httplog</span><br><span class="line">    log <span class="keyword">global</span></span><br><span class="line">    default_backend backend_www_example_com</span><br><span class="line">backend backend_www_example_com</span><br><span class="line">    option forwardfor header X-REAL-IP</span><br><span class="line">    option httpchk HEAD / HTTP/<span class="number">1.0</span></span><br><span class="line">    balance roundrobin</span><br><span class="line">    server web-node1  <span class="number">10.0</span><span class="number">.0</span><span class="number">.100</span>:<span class="number">32768</span> check inter <span class="number">2000</span> rise <span class="number">30</span> fall <span class="number">15</span></span><br><span class="line">    server web-node2  <span class="number">10.0</span><span class="number">.0</span><span class="number">.100</span>:<span class="number">32769</span> check inter <span class="number">2000</span> rise <span class="number">30</span> fall <span class="number">15</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>5、启动 haproxy</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start haproxy</span><br><span class="line">systemctl enable haproxy</span><br></pre></td></tr></table></figure>
-
-
-
-<p>6、使用浏览器访问 hapeoxy 监听的 8000 端口可以看到负载的情况</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/WlIksv5EUJkhkuE70FRxhYFYlJEibIynaJ8K46SCfknmVxOrAW5icw1QcTTDPYVhAXsLGtoBdhZXnK3DDmYMk0oQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
-<p>7、使用浏览器访问：<a target="_blank" rel="noopener" href="http://10.0.0.100:8888/haproxy-status">http://10.0.0.100:8888/haproxy-status</a></p>
-<p>可以看到后端节点的监控状况</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/WlIksv5EUJkhkuE70FRxhYFYlJEibIynaKauhg5o5mQp7OXiceDVMI9VZDG0R6J27f26j7Z0TTQPs31yEIJjAp3A/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
-<h3 id="安装-socat-直接操作-socket-控制-haproxy"><a href="#安装-socat-直接操作-socket-控制-haproxy" class="headerlink" title="安装 socat 直接操作 socket 控制 haproxy"></a><strong>安装 socat 直接操作 socket 控制 haproxy</strong></h3><p>1、安装软件</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install socat.x86_64 -y</span><br></pre></td></tr></table></figure>
-
-
-
-<p>2、查看帮助</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@docker01 web_data]<span class="comment"># echo &quot;help&quot;|socat stdio /var/lib/haproxy/stats</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>3、下线后端节点</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo <span class="string">&quot;disable server backend_www_example_com/web-node2&quot;</span>|socat stdio /var/lib/haproxy/stats</span><br></pre></td></tr></table></figure>
-
-
-
-<p>4、上线后端节点</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo <span class="string">&quot;enable server backend_www_example_com/web-node3&quot;</span>|socat stdio /var/lib/haproxy/stats</span><br></pre></td></tr></table></figure>
-
-
-
-<p>5、编写 php 测试页，放到 /data/web_data 下，在浏览器中访问可以查看当前的节点</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@docker01 web_data]<span class="comment"># vim check.php</span></span><br><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;title&gt;PHP测试&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;?php  echo <span class="string">&#x27;&lt;p&gt;Hello World &lt;/p&gt;&#x27;</span>; ?&gt;</span><br><span class="line">        &lt;?php  echo <span class="string">&quot;访问的服务器地址是:&quot;</span>.<span class="string">&quot;&lt;fontcolor=red&gt;&quot;</span>.$_SERVER[<span class="string">&#x27;SERVER_ADDR&#x27;</span>].<span class="string">&quot;&lt;/font&gt;&quot;</span>.<span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">        echo<span class="string">&quot;访问的服务器域名是:&quot;</span>.<span class="string">&quot;&lt;fontcolor=red&gt;&quot;</span>.$_SERVER[<span class="string">&#x27;SERVER_NAME&#x27;</span>].<span class="string">&quot;&lt;/font&gt;&quot;</span>.<span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line">        ?&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="重启-docker-服务，容器全部退出的解决办法"><a href="#重启-docker-服务，容器全部退出的解决办法" class="headerlink" title="重启 docker 服务，容器全部退出的解决办法"></a>重启 docker 服务，容器全部退出的解决办法</h2><h3 id="在启动是指定自动重启"><a href="#在启动是指定自动重启" class="headerlink" title="在启动是指定自动重启"></a><strong>在启动是指定自动重启</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run  --restart=always</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="修改-docker-默认配置文件"><a href="#修改-docker-默认配置文件" class="headerlink" title="修改 docker 默认配置文件"></a><strong>修改 docker 默认配置文件</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加上下面这行</span></span><br><span class="line"><span class="string">&quot;live-restore&quot;</span>: true</span><br></pre></td></tr></table></figure>
-
-
-
-<p>docker server 配置文件 /etc/docker/daemon.json 参考</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@docker02 ~]<span class="comment"># cat  /etc/docker/daemon.json </span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;registry-mirrors&quot;</span>: [<span class="string">&quot;https://registry.docker-cn.com&quot;</span>],</span><br><span class="line">  <span class="string">&quot;graph&quot;</span>: <span class="string">&quot;/opt/mydocker&quot;</span>, <span class="comment"># 修改数据的存放目录到/opt/mydocker/，原/var/lib/docker/</span></span><br><span class="line">  <span class="string">&quot;insecure-registries&quot;</span>: [<span class="string">&quot;10.0.0.100:5000&quot;</span>],</span><br><span class="line">  <span class="string">&quot;live-restore&quot;</span>: true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>重启生效，只对在此之后启动的容器生效</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@docker01 ~]<span class="comment"># systemctl restart  docker.service</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="Docker-网络类型"><a href="#Docker-网络类型" class="headerlink" title="Docker 网络类型"></a>Docker 网络类型</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_png/WlIksv5EUJkhkuE70FRxhYFYlJEibIynamzWfWib7yWBnhk9jPMI8HX1EdR0OPNSmzaIHZDHicoAFXOhboaiaNNk2w/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
-<h3 id="docker-的网络类型"><a href="#docker-的网络类型" class="headerlink" title="docker 的网络类型"></a><strong>docker 的网络类型</strong></h3><p><img src="https://mmbiz.qpic.cn/mmbiz_png/WlIksv5EUJkhkuE70FRxhYFYlJEibIynaLlgIrT9BKCzOHCfRqjOic1zuOAn0GQ0sjPLFglsAeEzyrhbhWoEicbeA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
-<p>Bridge 默认 docker 网络隔离基于网络命名空间，在物理机上创建 docker 容器时会为每一个 docker 容器分配网络命名空间，并且把容器 IP 桥接到物理机的虚拟网桥上。</p>
-<h3 id="不为容器配置网络功能"><a href="#不为容器配置网络功能" class="headerlink" title="不为容器配置网络功能"></a><strong>不为容器配置网络功能</strong></h3><p>此模式下创建容器是不会为容器配置任何网络参数的，如：容器网卡、IP、通信路由等，全部需要自己去配置。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@docker01 ~]<span class="comment"># docker run  -it --network none busybox:latest  /bin/sh </span></span><br><span class="line">/ <span class="comment"># ip a</span></span><br><span class="line"><span class="number">1</span>: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu <span class="number">65536</span> qdisc noqueue </span><br><span class="line">    link/loopback <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> brd <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span></span><br><span class="line">    inet <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>/<span class="number">8</span> scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="与其他容器共享网络配置"><a href="#与其他容器共享网络配置" class="headerlink" title="与其他容器共享网络配置"></a><strong>与其他容器共享网络配置</strong></h3><p>此模式和 host 模式很类似，只是此模式创建容器共享的是其他容器的 IP 和端口而不是物理机，此模式容器自身是不会配置网络和端口，创建此模式容器进去后，你会发现里边的 IP 是你所指定的那个容器 IP 并且端口也是共享的，而且其它还是互相隔离的，如进程等。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@docker01 ~]<span class="comment"># docker run  -it --network container:mywordpress_db_1  busybox:latest  /bin/sh </span></span><br><span class="line">/ <span class="comment"># ip a</span></span><br><span class="line"><span class="number">1</span>: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu <span class="number">65536</span> qdisc noqueue </span><br><span class="line">    link/loopback <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span> brd <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span></span><br><span class="line">    inet <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>/<span class="number">8</span> scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line"><span class="number">105</span>: eth0@if106: &lt;BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN&gt; mtu <span class="number">1500</span> qdisc noqueue </span><br><span class="line">    link/ether 02:<span class="number">42</span>:ac:<span class="number">12</span>:<span class="number">00</span>:03 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet <span class="number">172.18</span><span class="number">.0</span><span class="number">.3</span>/<span class="number">16</span> brd <span class="number">172.18</span><span class="number">.255</span><span class="number">.255</span> scope <span class="keyword">global</span> eth0</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="使用宿主机网络"><a href="#使用宿主机网络" class="headerlink" title="使用宿主机网络"></a><strong>使用宿主机网络</strong></h3><p>此模式创建的容器没有自己独立的网络命名空间，是和物理机共享一个 Network Namespace，并且共享物理机的所有端口与 IP，并且这个模式认为是不安全的。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@docker01 ~]<span class="comment"># docker run  -it --network host  busybox:latest  /bin/sh</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="查看网络列表"><a href="#查看网络列表" class="headerlink" title="查看网络列表"></a><strong>查看网络列表</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@docker01 ~]<span class="comment"># docker network list </span></span><br><span class="line">NETWORK ID          NAME                  DRIVER              SCOPE</span><br><span class="line">b15e8a720d3b        bridge                bridge              local</span><br><span class="line">345d65b4c2a0        host                  host                local</span><br><span class="line">bc5e2a32bb55        mywordpress_default   bridge              local</span><br><span class="line">ebf76eea91bb        none                  null                local</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="用-PIPEWORK-为-docker-容器配置独立-IP"><a href="#用-PIPEWORK-为-docker-容器配置独立-IP" class="headerlink" title="用 PIPEWORK 为 docker 容器配置独立 IP"></a><strong>用 PIPEWORK 为 docker 容器配置独立 IP</strong></h3><p>1、安装 pipework</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/jpetazzo/pipework/archive/master.<span class="built_in">zip</span></span><br><span class="line">unzip master.<span class="built_in">zip</span> </span><br><span class="line">cp pipework-master/pipework  /usr/local/<span class="built_in">bin</span>/</span><br><span class="line">chmod +x /usr/local/<span class="built_in">bin</span>/pipework</span><br></pre></td></tr></table></figure>
-
-
-
-<p>2、配置桥接网卡</p>
-<p>安装桥接工具</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install bridge-utils.x86_64 -y</span><br></pre></td></tr></table></figure>
-
-
-
-<p>修改网卡配置，实现桥接</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改eth0配置，让br0实现桥接</span></span><br><span class="line">[root@docker01 ~]<span class="comment"># cat /etc/sysconfig/network-scripts/ifcfg-eth0 </span></span><br><span class="line">TYPE=Ethernet</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">NAME=eth0</span><br><span class="line">DEVICE=eth0</span><br><span class="line">ONBOOT=yes</span><br><span class="line">BRIDGE=br0</span><br><span class="line">[root@docker01 ~]<span class="comment"># cat /etc/sysconfig/network-scripts/ifcfg-br0 </span></span><br><span class="line">TYPE=Bridge</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">NAME=br0</span><br><span class="line">DEVICE=br0</span><br><span class="line">ONBOOT=yes</span><br><span class="line">IPADDR=<span class="number">10.0</span><span class="number">.0</span><span class="number">.100</span></span><br><span class="line">NETMASK=<span class="number">255.255</span><span class="number">.255</span><span class="number">.0</span></span><br><span class="line">GATEWAY=<span class="number">10.0</span><span class="number">.0</span><span class="number">.254</span></span><br><span class="line">DNS1=<span class="number">223.5</span><span class="number">.5</span><span class="number">.5</span></span><br><span class="line"><span class="comment"># 重启网络</span></span><br><span class="line">[root@docker01 ~]<span class="comment"># /etc/init.d/network restart</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>3、运行一个容器镜像测试：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pipework br0 $(docker run -d -it -p <span class="number">6880</span>:<span class="number">80</span> --name  httpd_pw httpd) <span class="number">10.0</span><span class="number">.0</span><span class="number">.220</span>/<span class="number">24</span>@<span class="number">10.0</span><span class="number">.0</span><span class="number">.254</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>在其他主机上测试端口及连通性</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@docker01 ~]<span class="comment"># curl 10.0.0.220</span></span><br><span class="line">&lt;html&gt;&lt;body&gt;&lt;h1&gt;It works!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;</span><br><span class="line">[root@docker01 ~]<span class="comment"># ping 10.0.0.220 -c 1</span></span><br><span class="line">PING <span class="number">10.0</span><span class="number">.0</span><span class="number">.220</span> (<span class="number">10.0</span><span class="number">.0</span><span class="number">.220</span>) <span class="number">56</span>(<span class="number">84</span>) <span class="built_in">bytes</span> of data.</span><br><span class="line"><span class="number">64</span> <span class="built_in">bytes</span> <span class="keyword">from</span> <span class="number">10.0</span><span class="number">.0</span><span class="number">.220</span>: icmp_seq=<span class="number">1</span> ttl=<span class="number">64</span> time=<span class="number">0.043</span> ms</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4</span>、再运行一个容器，设置网路类型为 none：</span><br><span class="line">pipework br0 $(docker run -d -it --net=none --name test httpd:<span class="number">2.4</span>) <span class="number">10.0</span><span class="number">.0</span><span class="number">.221</span>/<span class="number">24</span>@<span class="number">10.0</span><span class="number">.0</span><span class="number">.254</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>进行访问测试</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@docker01 ~]<span class="comment"># curl 10.0.0.221</span></span><br><span class="line">&lt;html&gt;&lt;body&gt;&lt;h1&gt;It works!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>5、重启容器后需要再次指定：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pipework br0 testduliip  <span class="number">172.16</span><span class="number">.146</span><span class="number">.113</span>/<span class="number">24</span>@<span class="number">172.16</span><span class="number">.146</span><span class="number">.1</span></span><br><span class="line">pipework br0 testduliip01  <span class="number">172.16</span><span class="number">.146</span><span class="number">.112</span>/<span class="number">24</span>@<span class="number">172.16</span><span class="number">.146</span><span class="number">.1</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Docker-跨主机通信之-macvlan"><a href="#Docker-跨主机通信之-macvlan" class="headerlink" title="Docker 跨主机通信之 macvlan"></a><strong>Docker 跨主机通信之 macvlan</strong></h3><p>创建网络</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@docker01 ~]<span class="comment"># docker network  create --driver macvlan  --subnet 10.1.0.0/24 --gateway 10.1.0.254 -o parent=eth0  macvlan_1</span></span><br><span class="line">33a1f41dcc074f91b5bd45e7dfedabfb2b8ec82db16542f05213839a119b62ca</span><br></pre></td></tr></table></figure>
-
-
-
-<p>设置网卡为混杂模式</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip link <span class="built_in">set</span> eth0 promisc on</span><br></pre></td></tr></table></figure>
-
-
-
-<p>创建使用 macvlan 网络容器</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@docker02 ~]<span class="comment"># docker run  -it --network macvlan_1  --ip=10.1.0.222 busybox /b</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="docker-企业级镜像仓库-harbor"><a href="#docker-企业级镜像仓库-harbor" class="headerlink" title="docker 企业级镜像仓库 harbor"></a>docker 企业级镜像仓库 harbor</h2><p>容器管理</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@docker01 harbor]<span class="comment"># pwd</span></span><br><span class="line">/opt/harbor</span><br><span class="line">[root@docker01 harbor]<span class="comment"># docker-compose stop</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>1、安装 docker、docker-compose、下载 harbor</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /opt &amp;&amp; https://storage.googleapis.com/harbor-releases/harbor-offline-installer-v1<span class="number">.3</span><span class="number">.0</span>.tgz</span><br><span class="line">tar xf harbor-offline-installer-v1<span class="number">.3</span><span class="number">.0</span>.tgz</span><br></pre></td></tr></table></figure>
-
-
-
-<p>2、修改主机及web界面密码</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@docker01 harbor]<span class="comment"># vim harbor.cfg </span></span><br><span class="line">    ···</span><br><span class="line">    hostname = <span class="number">10.0</span><span class="number">.0</span><span class="number">.100</span></span><br><span class="line">    harbor_admin_password = Harbor12345</span><br><span class="line">    ···</span><br></pre></td></tr></table></figure>
-
-
-
-<p>3、执行安装脚本</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@docker01 harbor]<span class="comment"># ./install.sh</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>浏览器访问 <a target="_blank" rel="noopener" href="http://10.0.0.11/">http://10.0.0.11</a></p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/WlIksv5EUJkhkuE70FRxhYFYlJEibIynawdCc81Mq5FpkPKibMwvj8jrUsVKnA572tTUJ1AboiaEOUdvltA0a4QzQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> </p>
-<p>添加一个项目</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/WlIksv5EUJkhkuE70FRxhYFYlJEibIyna2QqC99Y3nnZCu1tDjKUogEDibbQcLiaCqazTVKgZOSx1jpPUjEtjdIkQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
-<p>4、镜像推送到仓库的指定项目</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@docker02 ~]<span class="comment"># docker  tag centos:6.8  10.0.0.100/clsn/centos6.8:1.0</span></span><br><span class="line">[root@docker02 ~]<span class="comment">#  </span></span><br><span class="line">[root@docker02 ~]<span class="comment"># docker images </span></span><br><span class="line">REPOSITORY                  TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">busybox                     latest              5b0d59026729        <span class="number">8</span> days ago          <span class="number">1.15</span>MB</span><br><span class="line"><span class="number">10.0</span><span class="number">.0</span><span class="number">.100</span>/clsn/centos6<span class="number">.8</span>   <span class="number">1.0</span>                 6704d778b3ba        <span class="number">2</span> months ago        195MB</span><br><span class="line">centos                      <span class="number">6.8</span>                 6704d778b3ba        <span class="number">2</span> months ago        195MB</span><br><span class="line">[root@docker02 ~]<span class="comment"># docker login 10.0.0.100</span></span><br><span class="line">Username: admin</span><br><span class="line">Password: </span><br><span class="line">Login Succeeded</span><br></pre></td></tr></table></figure>
-
-
-
-<p>5、推送镜像</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@docker02 ~]<span class="comment"># docker push 10.0.0.100/clsn/centos6.8 </span></span><br><span class="line">The push refers to repository [<span class="number">10.0</span><span class="number">.0</span><span class="number">.100</span>/clsn/centos6<span class="number">.8</span>]</span><br><span class="line">e00c9229b481: Pushing  <span class="number">13.53</span>MB/<span class="number">194.5</span>MB</span><br></pre></td></tr></table></figure>
-
-
-
-<p>6、在 web 界面里查看</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/WlIksv5EUJkhkuE70FRxhYFYlJEibIynaibLAfoRKlzU92f5277ibBPGfanFuJqEBzLa2PVDsqqXnWz3G0IiaE4ZcQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"> </p>
-<h3 id="使用容器的建议"><a href="#使用容器的建议" class="headerlink" title="使用容器的建议"></a><strong>使用容器的建议</strong></h3><p>\1. 不要以拆分方式进行应用程序发布</p>
-<p>\2. 不要创建大型镜像</p>
-<p>\3. 不要在单个容器中运行多个进程</p>
-<p>\4. 不要再镜像内保存凭证，不要依赖 IP 地址</p>
-<p>\5. 以非 root 用户运行进程</p>
-<p>\6. 不要使用“最新”标签</p>
-<p>\7. 不要利用运行中的容器创建镜像</p>
-<p>\8. 不要使用单层镜像</p>
-<p>\9. 不要将数据存放在容器内</p>
-<h3 id="-1"><a href="#-1" class="headerlink" title=""></a></h3><h3 id="关于-Docker-容器的监控"><a href="#关于-Docker-容器的监控" class="headerlink" title="关于 Docker 容器的监控"></a><strong>关于 Docker 容器的监控</strong></h3><p><strong>容器的基本信息</strong></p>
-<ul>
-<li>包括容器的数量、ID、名称、镜像、启动命令、端口等信息</li>
-</ul>
-<p><strong>容器的运行状态</strong></p>
-<ul>
-<li>统计各状态的容器的数量，包括运行中、暂停、停止及异常退出</li>
-</ul>
-<p><strong>容器的用量信息</strong></p>
-<ul>
-<li>统计容器的 CPU 使用率、内存使用量、块设备 I/O 使用量、网络使用情况等资源的使用情况</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/必备技能//" class="article-tag-list-link color5">必备技能</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/29/docker%E9%AB%98%E7%BA%A7/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
- 
-
-
-
-  
-    <article id="post-docker中级" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/29/docker%E4%B8%AD%E7%BA%A7/">docker中级</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2021/07/29/docker%E4%B8%AD%E7%BA%A7/" class="archive-article-date">
-  	<time datetime="2021-07-29T10:52:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-29</time>
-</a>
-
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Dockerfile-自动构建-docker-镜像"><a href="#Dockerfile-自动构建-docker-镜像" class="headerlink" title="Dockerfile 自动构建 docker 镜像"></a>Dockerfile 自动构建 docker 镜像</h2><h3 id="Dockerfile-指令集"><a href="#Dockerfile-指令集" class="headerlink" title="Dockerfile 指令集"></a><strong>Dockerfile 指令集</strong></h3><p>dockerfile主要组成部分：</p>
-<ul>
-<li>基础镜像信息 FROM centos:6.8</li>
-<li>制作镜像操作指令 RUN yum insatll openssh-server -y</li>
-<li>容器启动时执行指令 CMD [“/bin/bash”]</li>
-</ul>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/必备技能//" class="article-tag-list-link color5">必备技能</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/29/docker%E4%B8%AD%E7%BA%A7/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
- 
-
-
-
-  
-    <article id="post-docker基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/29/docker%E5%9F%BA%E7%A1%80/">docker基础</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2021/07/29/docker%E5%9F%BA%E7%A1%80/" class="archive-article-date">
-  	<time datetime="2021-07-29T10:38:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-29</time>
-</a>
-
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="容器简介"><a href="#容器简介" class="headerlink" title="容器简介"></a>容器简介</h2><h3 id="什么是-Linux-容器"><a href="#什么是-Linux-容器" class="headerlink" title="什么是 Linux 容器"></a><strong>什么是 Linux 容器</strong></h3><p>Linux 容器是与系统其他部分隔离开的一系列进程，从另一个镜像运行，并由该镜像提供支持进程所需的全部文件。</p>
-<p>容器提供的镜像包含了应用的所有依赖项，因而在从开发到测试再到生产的整个过程中，它都具有可移植性和一致性。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/必备技能//" class="article-tag-list-link color5">必备技能</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/29/docker%E5%9F%BA%E7%A1%80/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
- 
-
-
-
-  
-    <article id="post-redis高级" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/28/redis%E9%AB%98%E7%BA%A7/">Redis基础</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2021/07/28/redis%E9%AB%98%E7%BA%A7/" class="archive-article-date">
-  	<time datetime="2021-07-28T12:07:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-28</time>
-</a>
-
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Redis基础2"><a href="#Redis基础2" class="headerlink" title="Redis基础2"></a>Redis基础2</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介#"></a>简介<a target="_blank" rel="noopener" href="http://101.34.78.44/Hina/article/58#3162606107">#</a></h2><p>redis是一个key-value存储系统。和Memcached类似，它支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、zset(sorted set —有序集合)和hash（哈希类型）。这些数据类型都支持push/pop、add/remove及取交集并集和差集及更丰富的操作，而且这些操作都是原子性的。在此基础上，redis支持各种不同方式的排序。与memcached一样，为了保证效率，数据都是缓存在内存中。区别的是redis会周期性的把更新的数据写入磁盘或者把修改操作写入追加的记录文件，并且在此基础上实现了master-slave(主从)同步</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/必备技能//" class="article-tag-list-link color5">必备技能</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/28/redis%E9%AB%98%E7%BA%A7/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
- 
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
     </nav>
   
 
