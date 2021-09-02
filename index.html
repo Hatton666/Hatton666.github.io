@@ -278,22 +278,22 @@
 
 
   
-    <article id="post-SQL语句使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-事务的隔离机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/09/01/SQL%E8%AF%AD%E5%8F%A5%E4%BD%BF%E7%94%A8/">SQL语句使用</a>
+      <a class="article-title" href="/2021/09/02/%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E6%9C%BA%E5%88%B6/">事务的隔离机制</a>
     </h1>
   
 
         
         
 
-<a href="/2021/09/01/SQL%E8%AF%AD%E5%8F%A5%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2021-09-01T15:17:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-01</time>
+<a href="/2021/09/02/%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E6%9C%BA%E5%88%B6/" class="archive-article-date">
+  	<time datetime="2021-09-02T00:27:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-02</time>
 </a>
 
         
@@ -302,145 +302,236 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
-      
+        <h1 id="一-事务隔离机制-级别介绍"><a href="#一-事务隔离机制-级别介绍" class="headerlink" title="一 事务隔离机制/级别介绍"></a>一 事务隔离机制/级别介绍</h1><p>事务具有原子性、一致性、隔离性、持久性四大特性，而隔离性顾名思义指的就是事务彼此之间隔离开，多个事务在同时处理一个数据时彼此之间互相不影响，如如果隔离的不够好就有可能会产生脏读、不可重复度、幻读等读现象，为此，隔离性总共分为四种级别</p>
+<p>由低到高依次为Read uncommitted 、Read committed 、Repeatable read 、Serializable ，这四个级别可以逐个解决脏读 、不可重复读 、幻读 这几类问题。</p>
+<p>√: 可能出现  ×: 不会出现</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>特点</th>
+<th>脏读</th>
+<th>不可重复读</th>
+<th>幻读</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Read uncommitted（独立提交，未提交读）</td>
+<td>允许事务查看其他事务所进行的未提交更改</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Read committed（提交读）</td>
+<td>允许其他事务查看已经提交的事务</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Repeatable read（可重复读，innodb引擎默认）</td>
+<td>确保每个事务的 SELECT 输出一致 InnoDB 的默认级别 #commit之后，其他窗口看不到数据，必须退出重新登录查看</td>
+<td>×</td>
+<td>×</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Serializable（可序列化、串行化）</td>
+<td>将一个事务于其他事务完全隔离，即串行化  #当一个事务没有提交，查询也不行。例如：我改微信头像的时候你不能看我的信息，我看你朋友圈的时候你不能发朋友圈也不能看朋友圈</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+</tr>
+</tbody></table>
+<p>需要强调的是：我们确实可以采用提高事务的隔离级别的方式来解决脏读、不可重复读、幻读等问题，但与此同时，事务的隔离级别越高，并发能力也就越低。所以，还需要读者根据业务需要进行权衡。</p>
+<h1 id="二-未提交读-Read-uncommitted"><a href="#二-未提交读-Read-uncommitted" class="headerlink" title="二 未提交读(Read uncommitted)"></a>二 未提交读(Read uncommitted)</h1><p>未提交读(READ UNCOMMITTED)是最低的隔离级别。通过名字我们就可以知道，在这种事务隔离级别下，一个事务可以读到另外一个事务未提交的数据。</p>
+<p><strong>未提交读的数据库锁情况（实现原理）</strong></p>
+<blockquote>
+<p>事务在读数据的时候并未对数据加锁。</p>
+<p>务在修改数据的时候只对数据增加行级共享锁。</p>
+</blockquote>
+<p>现象：</p>
+<blockquote>
+<p>事务1读取某行记录时，事务2也能对这行记录进行读取、更新（因为事务一并未对数据增加任何锁）</p>
+<p>当事务2对该记录进行更新时，事务1再次读取该记录，能读到事务2对该记录的修改版本（因为事务二只增加了共享读锁，事务一可以再增加共享读锁读取数据），即使该修改尚未被提交，若此时事务2回滚，那事务1读到的就脏数据了，这就引发了脏读现象</p>
+<p>事务1更新某行记录时，事务2不能对这行记录做更新，直到事务1结束。（因为事务一对数据增加了共享读锁，事务二不能增加排他写锁进行数据的修改）</p>
+</blockquote>
+<p><strong>举例</strong></p>
+<p>下面还是借用我在数据库的读现象浅析一文中举的例子来说明在未提交读的隔离级别中两个事务之间的隔离情况。</p>
+<table>
+<thead>
+<tr>
+<th>事务一</th>
+<th>事务二</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/* Query 1 */</code> <code>SELECT age FROM users WHERE id = 1;</code> <code>/* will read 20 */</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>/* Query 2 */</code> <code>UPDATE users SET age = 21 WHERE id = 1;</code> <code>/* No commit here */</code></td>
+</tr>
+<tr>
+<td><code>/* Query 1 */</code> <code>SELECT age FROM users WHERE id = 1;</code> <code>/* will read 21 */</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>ROLLBACK;</code> <code>/* lock-based DIRTY READ */</code></td>
+</tr>
+</tbody></table>
+<p>事务一共查询了两次，在两次查询的过程中，事务二对数据进行了修改，并未提交（commit）。但是事务一的第二次查询查到了事务二的修改结果。在数据库的读现象浅析中我们介绍过，这种现象我们称之为脏读。</p>
+<p>所以，未提交读会导致脏读</p>
+<h1 id="三-提交读-Read-committed"><a href="#三-提交读-Read-committed" class="headerlink" title="三 提交读(Read committed)"></a>三 提交读(Read committed)</h1><p>提交读(READ COMMITTED)也可以翻译成读已提交，通过名字也可以分析出，在一个事务修改数据过程中，如果事务还没提交，其他事务不能读该数据。</p>
+<p><strong>提交读的数据库锁情况</strong></p>
+<blockquote>
+<p>事务对当前被读取的数据加 行级共享锁（当读到时才加锁），一旦读完该行，立即释放该行级共享锁；</p>
+<p>事务在更新某数据的瞬间（就是发生更新的瞬间），必须先对其加 行级排他锁，直到事务结束才释放。</p>
+</blockquote>
+<p>现象：</p>
+<blockquote>
+<p>事务1在读取某行记录的整个过程中，事务2都可以对该行记录进行读取（因为事务一对该行记录增加行级共享锁的情况下，事务二同样可以对该数据增加共享锁来读数据。）。</p>
+<p>事务1读取某行的一瞬间，事务2不能修改该行数据，但是，只要事务1读取完改行数据，事务2就可以对该行数据进行修改。（事务一在读取的一瞬间会对数据增加共享锁，任何其他事务都不能对该行数据增加排他锁。但是事务一只要读完该行数据，就会释放行级共享锁，一旦锁释放，事务二就可以对数据增加排他锁并修改数据）</p>
+<p>事务1更新某行记录时，事务2不能对这行记录做更新，直到事务1结束。（事务一在更新数据的时候，会对该行数据增加排他锁，知道事务结束才会释放锁，所以，在事务二没有提交之前，事务一都能不对数据增加共享锁进行数据的读取。所以，提交读可以解决<code>脏读</code>的现象）</p>
+</blockquote>
+<p><strong>举例</strong></p>
+<table>
+<thead>
+<tr>
+<th>事务一</th>
+<th>事务二</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/* Query 1 */</code> <code>SELECT * FROM users WHERE id = 1;</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>/* Query 2 */</code> <code>UPDATE users SET age = 21 WHERE id = 1;</code> <code>COMMIT;</code> <code>/* in multiversion concurrencycontrol, or lock-based READ COMMITTED */</code></td>
+</tr>
+<tr>
+<td><code>/* Query 1 */</code> <code>SELECT * FROM users WHERE id = 1;</code> <code>COMMIT;</code> <code>/*lock-based REPEATABLE READ */</code></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>在提交读隔离级别中，在事务二提交之前，事务一不能读取数据。只有在事务二提交之后，事务一才能读数据。</p>
+<p>但是从上面的例子中我们也看到，事务一两次读取的结果并不一致，所以提交读不能解决不可重复读的读现象。</p>
+<p>简而言之，提交读这种隔离级别保证了读到的任何数据都是提交的数据，避免了脏读(dirty reads)。但是不保证事务重新读的时候能读到相同的数据，因为在每次数据读完之后其他事务可以修改刚才读到的数据。</p>
+<h1 id="四-可重复读-Repeatable-reads"><a href="#四-可重复读-Repeatable-reads" class="headerlink" title="四 可重复读(Repeatable reads)"></a>四 可重复读(Repeatable reads)</h1><p>可重复读(REPEATABLE READS),由于提交读隔离级别会产生不可重复读的读现象。所以，比提交读更高一个级别的隔离级别就可以解决不可重复读的问题。这种隔离级别就叫可重复读（这名字起的是不是很任性！！）</p>
+<p><strong>可重复读的数据库锁情况</strong></p>
+<blockquote>
+<p>事务在读取某数据的瞬间（就是开始读取的瞬间），必须先对其加 行级共享锁，直到事务结束才释放；</p>
+<p>事务在更新某数据的瞬间（就是发生更新的瞬间），必须先对其加 行级排他锁，直到事务结束才释放。</p>
+</blockquote>
+<p>现象</p>
+<blockquote>
+<p>事务1在读取某行记录的整个过程中，事务2都可以对该行记录进行读取（因为事务一对该行记录增加行级共享锁的情况下，事务二同样可以对该数据增加共享锁来读数据。）。</p>
+<p>事务1在读取某行记录的整个过程中，事务2都不能修改该行数据（事务一在读取的整个过程会对数据增加共享锁，直到事务提交才会释放锁，所以整个过程中，任何其他事务都不能对该行数据增加排他锁。所以，可重复读能够解决<code>不可重复读</code>的读现象）</p>
+<p>事务1更新某行记录时，事务2不能对这行记录做更新，直到事务1结束。（事务一在更新数据的时候，会对该行数据增加排他锁，知道事务结束才会释放锁，所以，在事务二没有提交之前，事务一都能不对数据增加共享锁进行数据的读取。所以，提交读可以解决<code>脏读</code>的现象）</p>
+</blockquote>
+<p><strong>举例</strong></p>
+<table>
+<thead>
+<tr>
+<th>事务一</th>
+<th>事务二</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/* Query 1 */</code> <code>SELECT * FROM users WHERE id = 1;</code> <code>COMMIT;</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>/* Query 2 */</code> <code>UPDATE users SET age = 21 WHERE id = 1;</code> <code>COMMIT;</code> <code>/* in multiversion concurrencycontrol, or lock-based READ COMMITTED */</code></td>
+</tr>
+</tbody></table>
+<p>在上面的例子中，只有在事务一提交之后，事务二才能更改该行数据。所以，只要在事务一从开始到结束的这段时间内，无论他读取该行数据多少次，结果都是一样的。</p>
+<p>从上面的例子中我们可以得到结论：可重复读隔离级别可以解决不可重复读的读现象。但是可重复读这种隔离级别中，还有另外一种读现象他解决不了，那就是幻读。看下面的例子：</p>
+<table>
+<thead>
+<tr>
+<th>事务一</th>
+<th>事务二</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/* Query 1 */</code> <code>SELECT * FROM usersWHERE age BETWEEN 10 AND 30;</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>/* Query 2 */</code> <code>INSERT INTO users VALUES ( 3, &#39;Bob&#39;, 27 );</code> <code>COMMIT;</code></td>
+</tr>
+<tr>
+<td><code>/* Query 1 */</code> <code>SELECT * FROM usersWHERE age BETWEEN 10 AND 30;</code></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>上面的两个事务执行情况及现象如下：</p>
+<p>1.事务一的第一次查询条件是<code>age BETWEEN 10 AND 30;</code>如果这是有十条记录符合条件。这时，他会给符合条件的这十条记录增加行级共享锁。任何其他事务无法更改这十条记录。</p>
+<p>2.事务二执行一条sql语句，语句的内容是向表中插入一条数据。因为此时没有任何事务对表增加表级锁，所以，该操作可以顺利执行。</p>
+<p>3.事务一再次执行<code>SELECT * FROM users WHERE age BETWEEN 10 AND 30;</code>时，结果返回的记录变成了十一条，比刚刚增加了一条，增加的这条正是事务二刚刚插入的那条。</p>
+<p>所以，事务一的两次范围查询结果并不相同。这也就是我们提到的幻读</p>
+<h1 id="五-可序列化-Serializable"><a href="#五-可序列化-Serializable" class="headerlink" title="五 可序列化(Serializable)"></a>五 可序列化(Serializable)</h1><p>可序列化(Serializable)是最高的隔离级别，前面提到的所有的隔离级别都无法解决的幻读，在可序列化的隔离级别中可以解决。</p>
+<p>我们说过，产生幻读的原因是事务一在进行范围查询的时候没有增加范围锁(range-locks：给SELECT 的查询中使用一个“WHERE”子句描述范围加锁），所以导致幻读。</p>
+<p><strong>可序列化的数据库锁情况</strong></p>
+<blockquote>
+<p>事务在读取数据时，必须先对其加 表级共享锁 ，直到事务结束才释放；</p>
+<p>事务在更新数据时，必须先对其加 表级排他锁 ，直到事务结束才释放。</p>
+</blockquote>
+<p>现象</p>
+<blockquote>
+<p>事务1正在读取A表中的记录时，则事务2也能读取A表，但不能对A表做更新、新增、删除，直到事务1结束。(因为事务一对表增加了表级共享锁，其他事务只能增加共享锁读取数据，不能进行其他任何操作）</p>
+<p>事务1正在更新A表中的记录时，则事务2不能读取A表的任意记录，更不可能对A表做更新、新增、删除，直到事务1结束。（事务一对表增加了表级排他锁，其他事务不能对表增加共享锁或排他锁，也就无法进行任何操作）</p>
+</blockquote>
+<p>虽然可序列化解决了脏读、不可重复读、幻读等读现象。但是序列化事务会产生以下效果：</p>
+<p>1.无法读取其它事务已修改但未提交的记录。</p>
+<p>2.在当前事务完成之前，其它事务不能修改目前事务已读取的记录。</p>
+<p>3.在当前事务完成之前，其它事务所插入的新记录，其索引键值不能在当前事务的任何语句所读取的索引键范围中。</p>
+<hr>
+<p>四种事务隔离级别从隔离程度上越来越高，但同时在并发性上也就越来越低。之所以有这么几种隔离级别，就是为了方便开发人员在开发过程中根据业务需要选择最合适的隔离级别。</p>
+<h1 id="六-InnoDB存储引擎"><a href="#六-InnoDB存储引擎" class="headerlink" title="六 InnoDB存储引擎"></a>六 InnoDB存储引擎</h1><p>前文我们提到过InnoDB支持行锁（锁定字段含有索引的情况下，否则走表锁），但锁定方式并非简单的锁定指定行上的索引，而是分为3种锁定算法：<br>1）记录锁（Record Locks）：锁定指定行的索引项<br>2）Gap Locks：锁定某一个范围内的索引，但不包括记录本身<br>3）间隙锁定（Next-Key Locks）：锁定一个范围内的索引，并且锁定记录本身  Next-Key Locks = Record Locks + Gap Locks<br>A next-key lock is a combination of a record lock on the index record and a gap lock on the gap before the index record</p>
+<p>而InnoDB 存储引擎默认隔离级别为可重复读（Repeatable Read），该隔离级别下，对于索引的查询采用 next-key locks。这样做避免了幻读现象的产生。</p>
+<p><img src="https://img-blog.csdn.net/20170629164324742?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGVvbnBlbm4=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="img"></p>
+<h1 id="七-修改事务隔离级别"><a href="#七-修改事务隔离级别" class="headerlink" title="七 修改事务隔离级别"></a>七 修改事务隔离级别</h1><p>在 MySQL 中，可以通过show variables like ‘%tx_isolation%’或select @@tx_isolation;语句来查看当前事务隔离级别。</p>
+<p>查看当前事务隔离级别的 SQL 语句和运行结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show variables like &#x27;%tx_isolation%&#x27;;``+---------------+-----------------+``| Variable_name | Value   |``+---------------+-----------------+``| tx_isolation | REPEATABLE-READ |``+---------------+-----------------+``1 row in set, 1 warning (0.17 sec）``mysql&gt; select @@tx_isolation;``+-----------------+``| @@tx_isolation |``+-----------------+``| REPEATABLE-READ |``+-----------------+``1 row in set, 1 warning (0.00 sec)</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
+<p>结果显示，目前 MySQL 的事务隔离级别是 REPEATABLE-READ。</p>
+<p>另外，还可以使用下列语句分别查询全局和会话的事务隔离级别：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT` `@@``global``.tx_isolation;``SELECT` `@@session.tx_isolation;</span><br></pre></td></tr></table></figure>
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/09/01/SQL%E8%AF%AD%E5%8F%A5%E4%BD%BF%E7%94%A8/">展开全文 >></a>
-        </p>
-      
+<p>提示：在MySQL 8.0.3 中，tx_isolation 变量被 transaction_isolation 变量替换了。在 MySQL 8.0.3 版本中查询事务隔离级别，只要把上述查询语句中的 tx_isolation 变量替换成 transaction_isolation 变量即可。</p>
+<p><strong>修改事务隔离级别</strong></p>
+<p>MySQL 提供了 SET TRANSACTION 语句，该语句可以改变单个会话或全局的事务隔离级别。语法格式如下：</p>
+<blockquote>
+<p>SET [SESSION | GLOBAL] TRANSACTION ISOLATION LEVEL {READ UNCOMMITTED | READ COMMITTED | REPEATABLE READ | SERIALIZABLE}</p>
+</blockquote>
+<p>其中，SESSION 和 GLOBAL 关键字用来指定修改的事务隔离级别的范围：</p>
+<ul>
+<li>SESSION：表示修改的事务隔离级别将应用于当前 session（当前 cmd 窗口）内的所有事务；</li>
+<li>GLOBAL：表示修改的事务隔离级别将应用于所有 session（全局）中的所有事务，且当前已经存在的 session 不受影响；</li>
+<li>如果省略 SESSION 和 GLOBAL，表示修改的事务隔离级别将应用于当前 session 内的下一个还未开始的事务。</li>
+</ul>
+<p>任何用户都能改变会话的事务隔离级别，但是只有拥有 SUPER 权限的用户才能改变全局的事务隔离级别。</p>
+<p>如果使用普通用户修改全局事务隔离级别，就会提示需要超级权限才能执行此操作的错误信息，SQL 语句和运行结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;mysql -utestuser -p``Enter password: ******``Welcome to the MySQL monitor. Commands end with ; or \g.``Your MySQL connection id is 41``Server version: 5.7.29-log MySQL Community Server (GPL)`` ` `Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.`` ` `Oracle is a registered trademark of Oracle Corporation and/or its``affiliates. Other names may be trademarks of their respective``owners.`` ` `Type &#x27;help;&#x27; or &#x27;\h&#x27; for help. Type &#x27;\c&#x27; to clear the current input statement.`` ` `mysql&gt; SET GLOBAL TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;``ERROR 1227 (42000): Access denied; you need (at least one of) the SUPER privilege(s) for this operation``mysql&gt; SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;``Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure>
 
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
+<p>示例 1</p>
+<p>使用 SET TRANSACTION 语句分别修改 session 和全局的事务隔离级别SQL 语句和运行结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select @@session.tx_isolation;``+------------------------+``| @@session.tx_isolation |``+------------------------+``| SERIALIZABLE   |``+------------------------+``1 row in set, 1 warning (0.00 sec)` `mysql&gt; SET GLOBAL TRANSACTION ISOLATION LEVEL REPEATABLE READ;``Query OK, 0 rows affected (0.00 sec)` `mysql&gt; select @@global.tx_isolation;``+-----------------------+``| @@global.tx_isolation |``+-----------------------+``| REPEATABLE-READ  |``+-----------------------+``1 row in set, 1 warning (0.00 sec)</span><br></pre></td></tr></table></figure>
 
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
+<p>还可以使用 set tx_isolation 命令直接修改当前 session 的事务隔离级别，SQL 语句和运行结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; set tx_isolation=&#x27;READ-COMMITTED&#x27;;``Query OK, 0 rows affected, 1 warning (0.00 sec)` `mysql&gt; select @@session.tx_isolation;``+------------------------+``| @@session.tx_isolation |``+------------------------+``| READ-COMMITTED   |``+------------------------+``1 row in set, 1 warning (0.00 sec)</span><br></pre></td></tr></table></figure>
 
+<p> 永久修改如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# vim /etc/my.cnf</span><br><span class="line">[mysqld]</span><br><span class="line">transaction_isolation=read-uncommit</span><br></pre></td></tr></table></figure>
 
- 
-
-
-
-  
-    <article id="post-CMDB" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/27/CMDB/">CMDB</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2021/08/27/CMDB/" class="archive-article-date">
-  	<time datetime="2021-08-27T07:39:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-27</time>
-</a>
-
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/27/CMDB/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
- 
-
-
-
-  
-    <article id="post-Django总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/26/Django%E6%80%BB%E7%BB%93/">Django总结</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2021/08/26/Django%E6%80%BB%E7%BB%93/" class="archive-article-date">
-  	<time datetime="2021-08-26T08:40:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-26</time>
-</a>
-
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Celery"><a href="#Celery" class="headerlink" title="Celery"></a>Celery</h2><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggqw0f7bltj30q80c174d.jpg" alt="img"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">基本概念：</span><br><span class="line"> Task: 一个需要执行的任务，任务通常异步执行</span><br><span class="line"><span class="number">3</span>,Message Broker: 消息代理，临时存储，传输任务到工作节点的消息队列。</span><br><span class="line"><span class="number">4</span>，Worker 任务执行者 &gt;&gt; 从Broker中拿任务执行，结果丢给Backend的存储，并发的运行在分布式的系统节点中</span><br><span class="line"><span class="number">5</span>，Backend 任务结果厂库 &gt;&gt; Redis</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定时任务</span></span><br><span class="line">Result Store: 结果存储,用来存储Worker执行的任务的结果，包括AMQP, redis等</span><br><span class="line">Scheduler/Beat： 调度器进程, Beat是定时任务调度器</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">在Celery中Beat的调度进程，来管理和调度定时任务。</span><br><span class="line">    </span><br><span class="line">Django Beat &gt;&gt; TaskScheduler 任务调度器&gt;&gt; Task Storage 任务存储</span><br><span class="line">Beat首先调用Scheduler,去把任务找到，然后去检测任务的执行状态，如果这个任务，到了执行任务的时间，就会去执行，执行完了之后，会把任务的状态记下来，会存储下来。存储有两种方式，一种是 存储在文件里面（默认）。一种是存储在数据库里面。为了更容易维护定时任务，我们是使用的 数据库方式。</span><br></pre></td></tr></table></figure>
-        
       
 
       
@@ -453,7 +544,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">招聘系统项目</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
         		</li>
       		
 		</ul>
@@ -465,7 +556,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Python项目//" class="article-tag-list-link color4">Python项目</a>
+        			<a href="/categories/数据库//" class="article-tag-list-link color4">数据库</a>
         		</li>
       		
 		</ul>
@@ -474,7 +565,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/26/Django%E6%80%BB%E7%BB%93/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/09/02/%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E6%9C%BA%E5%88%B6/">展开全文 >></a>
         </p>
       
 
@@ -506,22 +597,22 @@
 
 
   
-    <article id="post-Django集成" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-数据库锁机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/22/Django%E9%9B%86%E6%88%90/">Django集成</a>
+      <a class="article-title" href="/2021/09/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%94%81%E6%9C%BA%E5%88%B6/">数据库锁机制</a>
     </h1>
   
 
         
         
 
-<a href="/2021/08/22/Django%E9%9B%86%E6%88%90/" class="archive-article-date">
-  	<time datetime="2021-08-22T01:58:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-22</time>
+<a href="/2021/09/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%94%81%E6%9C%BA%E5%88%B6/" class="archive-article-date">
+  	<time datetime="2021-09-02T00:26:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-02</time>
 </a>
 
         
@@ -530,9 +621,653 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="day-06"><a href="#day-06" class="headerlink" title="day 06"></a>day 06</h3><p><a target="_blank" rel="noopener" href="https://django-redis-chs.readthedocs.io/zh_CN/latest/">django-redis 中文文档</a></p>
-<p>目的：减少对数据库的访问，特别在高并发的情况下，提升系统的吞吐量。</p>
-        
+        <h3 id="一-数据库的锁机制"><a href="#一-数据库的锁机制" class="headerlink" title="一 数据库的锁机制"></a>一 数据库的锁机制</h3><p><strong>什么是锁？为何要加入锁机制？</strong></p>
+<blockquote>
+<p>锁是计算机协调多个进程或线程并发访问某一资源的机制，那为何要加入锁机制呢？</p>
+<p>因为在数据库中，除了传统的计算资源（如CPU、RAM、I/O等）的争用以外，数据也是一种供需要用户共享的资源。</p>
+<p>当并发事务同时访问一个共享的资源时，有可能导致数据不一致、数据无效等问题，</p>
+<p>例如我们在<a target="_blank" rel="noopener" href="https://www.cnblogs.com/linhaifeng/articles/14386774.html">数据库的读现象</a>中介绍过，在并发访问情况下，可能会出现脏读、不可重复读和幻读等读现象</p>
+<p>为了应对这些问题，主流数据库都提供了锁机制，以及事务隔离级别的概念，</p>
+<p>而锁机制可以将并发的数据访问顺序化，以保证数据库中数据的一致性与有效性</p>
+<p>此外，锁冲突也是影响数据库并发访问性能的一个重要因素，锁对数据库而言显得尤其重要，也更加复杂。</p>
+</blockquote>
+<p><strong>并发控制</strong></p>
+<blockquote>
+<p>在计算机科学，特别是程序设计、操作系统、多处理机和数据库等领域，并发控制（<code>Concurrency control</code>）是确保及时纠正由并发操作导致的错误的一种机制。</p>
+</blockquote>
+<p>数据库管理系统（DBMS）中的并发控制的任务是确保在多个事务同时存取数据库中同一数据时不破坏事务的隔离性和统一性以及数据库的统一性。下面举例说明并发操作带来的数据不一致性问题：</p>
+<p>现有两处火车票售票点，同时读取某一趟列车车票数据库中车票余额为 X。两处售票点同时卖出一张车票，同时修改余额为 X -1写回数据库，这样就造成了实际卖出两张火车票而数据库中的记录却只少了一张。 产生这种情况的原因是因为两个事务读入同一数据并同时修改，其中一个事务提交的结果破坏了另一个事务提交的结果，导致其数据的修改被丢失，破坏了事务的隔离性。并发控制要解决的就是这类问题。</p>
+<p>封锁、时间戳、乐观并发控制(乐观锁)和悲观并发控制（悲观锁）是并发控制主要采用的技术手段。</p>
+<h3 id="二-锁的分类"><a href="#二-锁的分类" class="headerlink" title="二 锁的分类"></a>二 锁的分类</h3><p><strong>锁的分类(oracle)</strong></p>
+<p>一、按锁的粒度划分，可分为<a target="_blank" rel="noopener" href="https://www.cnblogs.com/linhaifeng/articles/14386584.html#_label3"><code>行级锁</code>、<code>表级锁</code>、</a><code>页级锁。</code>（mysql支持）</p>
+<p>二、按锁级别划分，可分为<a target="_blank" rel="noopener" href="https://www.cnblogs.com/linhaifeng/articles/14386584.html#_label4"><code>共享锁</code>、<code>排他锁</code></a></p>
+<p>三、按使用方式划分，可分为<code>乐观锁</code>、<code>悲观锁</code></p>
+<p>四、按加锁方式划分，可分为<code>自动锁</code>、显式<code>锁</code></p>
+<p>五、按操作划分，可分为<code>DML锁</code>、<code>DDL锁</code></p>
+<p><em>DML锁（data locks，数据锁），用于保护数据的完整性，其中包括行级锁(Row Locks (TX锁))、表级锁(table lock(TM锁))。</em></p>
+<p><em>DDL锁（dictionary locks，数据字典锁），用于保护数据库对象的结构，如表、索引等的结构定义。其中包排他DDL锁（Exclusive DDL lock）、共享DDL锁（Share DDL lock）、可中断解析锁（Breakable parse locks）</em> </p>
+<p><em><strong><img src="https://img2020.cnblogs.com/blog/1036857/202102/1036857-20210220130519501-379925450.png" alt="img"></strong></em></p>
+<h3 id="三-MySQL中的行级锁-表级锁-页级锁（粒度）"><a href="#三-MySQL中的行级锁-表级锁-页级锁（粒度）" class="headerlink" title="三 MySQL中的行级锁,表级锁,页级锁（粒度）"></a>三 MySQL中的行级锁,表级锁,页级锁（粒度）</h3><p>在DBMS中，可以按照锁的粒度把数据库锁分为行级锁(INNODB引擎)、表级锁(MYISAM引擎)和页级锁(BDB引擎 )。</p>
+<p><strong>行级锁</strong></p>
+<p>行级锁是Mysql中锁定粒度最细的一种锁，表示只针对当前操作的行进行加锁。行级锁能大大减少数据库操作的冲突。其加锁粒度最小，但加锁的开销也最大。行级锁分为<code>共享锁</code> 和 <code>排他锁</code>。</p>
+<ul>
+<li>特点：开销大，加锁慢；会出现死锁；锁定粒度最小，发生锁冲突的概率最低，<strong>并发度也最高</strong>。</li>
+<li>支持引擎：InnoDB</li>
+<li>行级锁定分为行共享读锁（共享锁）与行独占写锁（排他锁） ，如下所示，用法详见下一小节</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">共享锁（S）：SELECT * FROM table_name WHERE ... LOCK IN SHARE MODE</span><br><span class="line">排他锁（X)：SELECT * FROM table_name WHERE ... FOR UPDATE</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>表级锁（偏向于读）</strong></p>
+<p>表级锁是MySQL中锁定粒度最大的一种锁，表示对当前操作的整张表加锁，它实现简单，资源消耗较少，被大部分MySQL引擎支持。最常使用的MYISAM与INNODB都支持表级锁定。表级锁定分为<code>表共享读锁</code>（共享锁）与<code>表独占写锁</code>（排他锁）。</p>
+<ul>
+<li>特点：开销小，加锁快；不会出现死锁；锁定粒度大，发出锁冲突的概率最高，<strong>并发度最低</strong>。</li>
+<li>支持引擎：MyISAM、MEMORY、InNoDB</li>
+<li>分类：表级锁定分为表共享读锁（共享锁）与表独占写锁（排他锁），如下所示</li>
+</ul>
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lock table 表名 read(write),表名 read(write)，.....;</span><br><span class="line">//给表加读锁或者写锁，例如</span><br></pre></td></tr></table></figure>
+
+<p>mysql&gt; lock table employee write;</p>
+<p>Query OK, 0 rows affected (0.00 sec)</p>
+<p>mysql&gt; show open tables where in_use&gt;= 1;</p>
+<p>+———-+———-+——–+————-+</p>
+<p>| Database | Table  | In_use | Name_locked |</p>
+<p>+———-+———-+——–+————-+</p>
+<p>| ttt   | employee |   1 |      0 |</p>
+<p>+———-+———-+——–+————-+</p>
+<p>1 row in set (0.00 sec)</p>
+<p>mysql&gt; unlock tables; – UNLOCK TABLES释放被当前会话持有的任何锁</p>
+<p>Query OK, 0 rows affected (0.00 sec)</p>
+<p>mysql&gt; show open tables where in_use&gt;= 1;</p>
+<p>Empty set (0.00 sec)</p>
+<p>mysql&gt; </p>
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<hr>
+<p><strong>页级锁</strong></p>
+<p>页级锁是MySQL中锁定粒度介于行级锁和表级锁中间的一种锁。表级锁速度快，但冲突多，行级冲突少，但速度慢。所以取了折衷的页级，一次锁定相邻的一组记录。BDB支持页级锁</p>
+<p>特点：开销和加锁时间界于表锁和行锁之间；会出现死锁；锁定粒度界于表锁和行锁之间，<strong>并发度一般。</strong></p>
+<hr>
+<h3 id="四-行级锁之共享锁与排他锁（级别）"><a href="#四-行级锁之共享锁与排他锁（级别）" class="headerlink" title="四 行级锁之共享锁与排他锁（级别）"></a>四 行级锁之共享锁与排他锁（级别）</h3><p>行级锁分为共享锁和排他锁两种。</p>
+<p>与行处理相关的sql有：insert、update、delete、select，这四类sql在操作记录行时，可以为行加上锁，但需要知道的是：</p>
+<p><strong>1、对于insert、update、delete语句，InnoDB会自动给涉及的数据加锁，而且是排他锁（X）；</strong></p>
+<p><strong>2、对于普通的select语句，InnoDB不会加任何锁，需要我们手动自己加，可以加两种类型的锁，如下所示</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 共享锁（S）：SELECT ... LOCK IN SHARE MODE;  -- 查出的记录行都会被锁住</span><br><span class="line"></span><br><span class="line"># 排他锁（X)：SELECT ... FOR UPDATE;  -- 查出的记录行都会被锁住</span><br></pre></td></tr></table></figure>
+
+<p>准备表和数据，sql如下</p>
+<p><img src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="img"> View Code</p>
+<p>实验：验证<strong>insert、update、delete是默认加排他锁的</strong></p>
+<p><strong>需要知道的是，针对事务，mysql是*<em>隐式开启、隐式提交，即mysql默认会把每条sql语句都放入一个事务中，并在该条sql语句执行完毕后自动提交，所以如果我们如果开启两个session，在一个session中直接运行update，很快就运行完毕并自动提交，而提交事务或回滚事务都会释放锁，这样话就无法验证效果了，所以我们采用手动开启事务方式进行验证，如此我们就可以自己控制事务的提交了（<a target="_blank" rel="noopener" href="https://www.cnblogs.com/linhaifeng/articles/14387841.html#_label3">如果忘记了该知识点，请点击这里</a>）*</em></strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>事务一</th>
+<th>事务二</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>步骤1</td>
+<td>start transaction;select name from employee where id = 1; – name 为 egon</td>
+<td>start transaction;select name from employee where id = 1; – name 为 egon</td>
+</tr>
+<tr>
+<td>步骤2</td>
+<td></td>
+<td>– 把小写的egon变为大写，此时的update会自动加锁 update employee set name = “EGON” where id = 1; – 立即查看修改结果，name变为EGON，但此时还没有commitselect name from employee where id = 1;</td>
+</tr>
+<tr>
+<td>步骤3</td>
+<td>– 此处的update会阻塞在原地，因为事务二并未提交事务，即尚未释放排他锁 update employee set name = concat(name,”_NB”) where id = 1;</td>
+<td></td>
+</tr>
+<tr>
+<td>步骤4</td>
+<td></td>
+<td>– 事务二一旦提交，事务一阻塞在步骤3的操作即会运行成功commit;– 查看修改结果，name变为大写的EGONselect name from employee where id = 1;</td>
+</tr>
+<tr>
+<td>步骤5</td>
+<td>– 此处查询到的结果为EGON_NBselect name from employee where id = 1;</td>
+<td></td>
+</tr>
+<tr>
+<td>步骤6</td>
+<td>– 提交之后，name持久化为EGON_NBcommit;select name from employee where id = 1;</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>共享锁(Share Lock)</strong> </p>
+<p>共享锁又称为读锁，简称S锁，顾名思义，共享锁就是多个事务对于同一数据可以共享一把锁，获准共享锁的事务只能读数据，不能修改数据直到已释放所有共享锁，所以共享锁可以支持并发读(参考下述实验三)。</p>
+<p>如果事务T对数据A加上共享锁后，则其他事务只能对A再加共享锁或不加锁（在其他事务里一定不能再加排他锁，但是在事务T自己里面是可以加的），反之亦然。</p>
+<p><strong>用法</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT ... LOCK IN SHARE MODE;</span><br></pre></td></tr></table></figure>
+
+<p>在查询语句后面增加<code>LOCK IN SHARE MODE</code>，Mysql会对查询结果中的每行都加共享锁，当没有其他线程对查询结果集中的任何一行使用排他锁时，可以成功申请共享锁，否则会被阻塞。其他线程也可以读取使用了共享锁的表，而且这些线程读取的是同一个版本的数据。</p>
+<p><strong>排他锁（eXclusive Lock）</strong></p>
+<p>排他锁又称为写锁，简称X锁，顾名思义，排他锁就是不能与其他所并存，如一个事务获取了一个数据行的排他锁，其他事务就不能再对该行加任何类型的其他他锁（共享锁和排他锁），但是获取排他锁的事务是可以对数据就行读取和修改。</p>
+<p><strong>用法</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT ... FOR UPDATE;</span><br></pre></td></tr></table></figure>
+
+<p>在查询语句后面增加<code>FOR UPDATE</code>，Mysql会对查询结果中的每行都加排他锁，当没有其他线程对查询结果集中的任何一行使用排他锁时，可以成功申请排他锁，否则会被阻塞。</p>
+<p><strong>特例：加过排他锁的数据行在其他事务种是不能修改数据的，也不能通过for update和lock in share mode锁的方式查询数据，但可以直接通过select …from…查询数据，因为普通select查询没有任何锁机制。</strong></p>
+<p>实验一：事务二获取了排他锁，在事务一中验证上述特例</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>事务一</th>
+<th>事务二</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>步骤1</td>
+<td>– 开启事务 start transaction;</td>
+<td>– 开启事务start transaction;</td>
+</tr>
+<tr>
+<td>步骤2</td>
+<td></td>
+<td>– 加排他锁，锁住id&lt;3的所有行 select * from employee where id &lt; 3 for update;</td>
+</tr>
+<tr>
+<td>步骤3</td>
+<td>– 阻塞在原地select * from employee where id = 1 for update; – 阻塞在原地select * from employee where id = 1 lock in share mode; – 我们看到开了排他锁查询和共享锁查询都会处于阻塞状态– 因为id=1的数据已经被加上了排他锁，此处阻塞是等待排他锁释放。</td>
+<td></td>
+</tr>
+<tr>
+<td>步骤4</td>
+<td>– ctrl+c终止步骤3的阻塞状态 – 注意： – 不要按多次ctrl+c多次按会结束链接，按一次就可以了 – 下述实验遇到阻塞都可以用采用ctrl+c的方式结束，或者等待锁超时</td>
+<td></td>
+</tr>
+<tr>
+<td>步骤5</td>
+<td>– 如果我们直接使用以下查询，即便id&lt;3的行都被事务二锁住了– 但此处仍可以查看到数据– 证明普通select查询没有任何锁机制select name from employee where id = 1;</td>
+<td></td>
+</tr>
+<tr>
+<td>步骤6</td>
+<td>– 提交一下事务，不要影响下一次实验commit;</td>
+<td>– 提交一下事务，不要影响下一次实验commit;</td>
+</tr>
+</tbody></table>
+<p>实验二：事务二获取了共享锁，在其他事务里也只能加共享锁或不加锁，在事务二中验证 </p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>事务一</th>
+<th>事务二</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>步骤1</td>
+<td>start transaction;</td>
+<td>– 开启事务、加共享锁，锁住id&lt;3的所有行start transaction;select * from employee where id &lt; 3 lock in share mode;</td>
+</tr>
+<tr>
+<td>步骤2</td>
+<td>– 加排他锁，会阻塞在原地select * from employee where id = 1 for update; – 加共享锁，可以查出结果，不会阻塞在原地select * from employee where id = 1 lock in share mode; – 不加锁，必然也可以查出结果，不会阻塞在原地select name from employee where id = 1;</td>
+<td></td>
+</tr>
+<tr>
+<td>步骤3</td>
+<td>– 提交一下事务，不要影响下一次实验commit;</td>
+<td>– 提交一下事务，不要影响下一次实验commit;</td>
+</tr>
+</tbody></table>
+<p>实验三：事务二获取了共享锁，在其他事务里也只能加共享锁或不加锁，反之亦然，并验证在多个事务加了共享锁后，大家对加锁的数据行只能读不能写</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>事务一</th>
+<th>事务二</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>步骤1</td>
+<td>start transaction;</td>
+<td>– 开启事务、加共享锁，锁住id&lt;3的所有行start transaction;select * from employee where id &lt; 3 lock in share mode;</td>
+</tr>
+<tr>
+<td>步骤2</td>
+<td></td>
+<td>– 此时尚未有其他事务为id&lt;3的行加过锁，所以在本事务里还是可以使用update的– 而update默认是加了排他锁update employee set name=”EGON” where id = 1;select name from employee where id = 1; – 修改成功，结果为EGON</td>
+</tr>
+<tr>
+<td>步骤3</td>
+<td>– 加排他锁，阻塞在原地，因为事务二刚在步骤2中对id=1的行加了排他锁– 一旦某一个事物对记录行加了排他锁后– 其他事务均无法加任何锁select name from employee where id = 1 for update; – 也无法加共享锁，加上共享锁，同样阻塞在原地select name from employee where id = 1 lock in share mode; – 普通select查询，不受锁影响，可以查查结果– 查询结果仍为修改前的结果，即EGON_NB– 因为事务二的update行为尚未提交select name from employee where id=1;</td>
+<td></td>
+</tr>
+<tr>
+<td>步骤4</td>
+<td></td>
+<td>– 释放事务一加过的所锁，包括update加的互斥锁，还有select加的共享锁rollback; – 手动开启事务的方式，在rollback之后事务就结束了，需要重新开启，切记start transaction;</td>
+</tr>
+<tr>
+<td>步骤5</td>
+<td></td>
+<td>– 重新对id&lt;3的行加共享锁select * from employee where id &lt; 3 lock in share mode;</td>
+</tr>
+<tr>
+<td>步骤6</td>
+<td>– 在事务1中也对id&lt;3的行加共享锁，可以加成功– 因为当一个事务（比如事务2）对记录加了共享锁后– 其他事务（比如事务1）只能对记录行加共享锁或不加锁select * from employee where id &lt; 3 lock in share mode;</td>
+<td></td>
+</tr>
+<tr>
+<td>步骤7</td>
+<td></td>
+<td>– <strong>事务一</strong>已经对id&lt;3的所有行都加了共享锁，id=1的行当然包含在内– 所以在<strong>事物二</strong>中只能对id=1行加共享锁或者不加锁– 而下述语句中update默认会加排他锁，所以会阻塞在原地，– 即只能读不能改了update employee set name=”EGON” where id=1;</td>
+</tr>
+<tr>
+<td>步骤8</td>
+<td>– <strong>注意：</strong>– <strong>需要在ctrl+c掉事务二的步骤7，或者等一会显示锁超时，再执行下述sql</strong>update employee set name=”EGON” where id=1; <strong>– 原因如下：</strong>– 因为如果在事务二的步骤7阻塞的同时，也在事务一里执行了下述sql，– 事务一会报死锁错误（详见5.3），事务一会因此结束，此时事务二原本– 的阻塞状态会立即执行成功，为啥？？？– 1、首先：为何会出现死锁？–   因为事务二中，步骤7的update语句是想获取互斥锁，–   会阻塞在原地，需要等待事务一先释放共享锁。–   而事务一执行下述了下述update语句同样是想获取互斥锁，–   同样需要等事务二先释放共享锁，至此双方互相锁死– 2、然后，事务一在抛出死锁异常之后，会被强行终止，只剩事务二自己–   因为不要有事务二以外的其他事务存在并对记录行加锁了–   于是事务二的sql不存在锁争抢问题，会立即执行成功–   此时，若想继续实验，则需要也rollback结束事务二，重新开启两个–   事务并加共享锁来进行试验 <strong>– 所以，根据上述分析，我们就先*<em>ctrl+c掉事务二的步骤7*</em></strong><em><strong>*–*</strong></em> 然后执行上述sql，该sql语句默认会加排他锁，所以会阻塞在原地<em><strong>*– 因为*</strong></em>– <strong>事务二</strong>已经对id&lt;3的所有行都加了共享锁，id=1的行当然包含在内– 所以在<strong>事务一</strong>中只能对id=1行加共享锁或者不加锁– 即只能读不能改了</td>
+<td></td>
+</tr>
+<tr>
+<td>步骤9</td>
+<td>– 提交一下事务，不要影响下一次实验commit;</td>
+<td>– 提交一下事务，不要影响下一次实验commit;</td>
+</tr>
+</tbody></table>
+<p><strong>意向锁</strong></p>
+<p>意向锁是表级锁，其设计目的主要是为了在一个事务中揭示下一行将要被请求锁的类型。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">意向锁的作用就是当一个事务在需要获取资源锁定的时候，如果遇到自己需要的资源已经被排他锁占用的时候，该事务可以需要锁定行的表上面添加一个合适的意向锁。</span><br><span class="line">如果自己需要一个共享锁，那么就在表上面添加一个意向共享锁。而如果自己需要的是某行（或者某些行）上面添加一个排他锁的话，则先在表上面添加一个意向排他锁</span><br></pre></td></tr></table></figure>
+
+<p>InnoDB中有两个意向锁（表锁）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">（1）意向共享锁（IS）：事务打算给数据行共享锁;，事务在给一个数据行加共享锁前必须先取得该表的IS锁</span><br><span class="line">（2）意向排他锁（IX）事务打算给数据行加排他锁;事务在给一个数据行加排他锁前必须先取得该表的IX锁</span><br></pre></td></tr></table></figure>
+
+<p>意向锁是InnoDB自动加的，不需要用户干预。</p>
+<h3 id="五-Innodb存储引擎的锁机制"><a href="#五-Innodb存储引擎的锁机制" class="headerlink" title="五 Innodb存储引擎的锁机制"></a>五 Innodb存储引擎的锁机制</h3><p>mysql常用存储引擎的锁机制</p>
+<blockquote>
+<p>MyISAM和MEMORY采用表级锁(table-level locking)</p>
+<p>BDB采用页面锁(page-level locking)或表级锁，默认为页面锁</p>
+<p><strong>InnoDB支持行级锁(row-level locking)和表级锁，默认为行级锁（偏向于写）</strong></p>
+</blockquote>
+<p>InnoDB的锁定模式实际上可以分为四种：共享锁（S），排他锁（X），意向共享锁（IS）和意向排他锁（IX），我们可以通过以下表格来总结上面这四种所的共存逻辑关系：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1036857/202102/1036857-20210210110953002-1326513926.png" alt="img"> </p>
+<p>如果一个事务请求的锁模式与当前的锁兼容，InnoDB就将请求的锁授予该事务；反之，如果两者不兼容，该事务就要等待锁释放。</p>
+<p><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html">innodb锁机制官网链接</a></p>
+<h4 id="5-1-行级锁与表级锁的使用区分"><a href="#5-1-行级锁与表级锁的使用区分" class="headerlink" title="5.1 行级锁与表级锁的使用区分"></a>5.1 行级锁与表级锁的使用区分</h4><p>MyISAM 操作数据都是使用表级锁，<strong>MyISAM总是一次性获得所需的全部锁</strong>，要么全部满足，要么全部等待。所以不会产生死锁，但是由于每操作一条记录就要锁定整个表，导致性能较低，并发不高。</p>
+<p><strong>InnoDB 与 MyISAM 的最大不同有两点：一是 InnoDB 支持事务；二是 InnoDB 采用了行级锁</strong>。也就是你需要修改哪行，就可以只锁定哪行。</p>
+<p><strong>在Mysql中，行级锁并不是直接锁记录，而是锁索引。InnoDB 行锁是通过给索引项加锁实现的</strong>，而索引分为主键索引和非主键索引两种</p>
+<p><strong>1、如果一条sql 语句操作了主键索引，Mysql 就会锁定这条语句命中的主键索引（或称聚簇索引）；</strong></p>
+<p><strong>2、如果一条语句操作了非主键索引（或称辅助索引），MySQL会先锁定该非主键索引，再锁定相关的主键索引。</strong></p>
+<p><strong>3、如果没有索引，InnoDB 会通过隐藏的聚簇索引来对记录加锁。</strong>也就是说：<strong>如果不通过索引条件检索数据，那么InnoDB将对表中所有数据加锁，实际效果跟表级锁一样。</strong></p>
+<p>在实际应用中，要特别注意InnoDB行锁的这一特性，不然的话，可能导致大量的锁冲突，从而影响并发性能。</p>
+<ul>
+<li><strong>1、在不通过索引条件查询的时候,InnoDB 的效果就相当于表锁</strong></li>
+<li><strong>2、当表有多个索引的时候,不同的事务可以使用不同的索引锁定不同的行,另外,不论 是使用主键索引、唯一索引或普通索引,InnoDB 都会使用行锁来对数据加锁。</strong></li>
+<li><strong>3、由于 MySQL 的行锁是针对索引加的锁,不是针对记录加的锁,所以即便你的sql语句访问的是不同的记录行,但如果命中的是相同的被锁住的索引键，也还是会出现锁冲突的。</strong></li>
+<li><strong>4、即便在条件中使用了索引字段,但是否使用索引来检索数据是由 MySQL 通过判断不同 执行计划的代价来决定的,如果 MySQL 认为全表扫 效率更高,比如对一些很小的表,它 就不会使用索引,这种情况下 InnoDB 将锁住所有行，相当于表锁。因此,在分析锁冲突时, 别忘了检查 SQL 的执行计划,以确认是否真正使用了索引，如下案例</strong></li>
+</ul>
+<p><strong>===============&gt;案例&lt;*<em>===============*</em></strong></p>
+<p><em><strong>*准备表和数据，sql如下*</strong></em> </p>
+<p><img src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="img"> View Code</p>
+<p><strong>步骤1、创建索引</strong> </p>
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from employee;</span><br><span class="line">+----+------------+-----+</span><br><span class="line">| id | name       | age |</span><br><span class="line">+----+------------+-----+</span><br><span class="line">|  1 | egon       |  16 |</span><br><span class="line">|  2 | alex       |  18 |</span><br><span class="line">|  3 | wupeiqi    |  18 |</span><br><span class="line">|  4 | yuanhao    |  18 |</span><br><span class="line">|  5 | liwenzhou  |  20 |</span><br><span class="line">|  6 | jingliyang |  20 |</span><br><span class="line">|  7 | jinxin     |  20 |</span><br><span class="line">|  8 | 成龙       |  20 |</span><br><span class="line">|  9 | 歪歪       |  20 |</span><br><span class="line">| 10 | 丫丫       |  20 |</span><br><span class="line">| 11 | 丁丁       |  20 |</span><br><span class="line">| 12 | 星星       |  20 |</span><br><span class="line">| 13 | 格格       |  20 |</span><br><span class="line">| 14 | 张野       |  20 |</span><br><span class="line">| 15 | 程咬金     |  20 |</span><br><span class="line">| 16 | 程咬银     |  20 |</span><br><span class="line">| 17 | 程咬铜     |  20 |</span><br><span class="line">| 18 | 程咬铁     |  20 |</span><br><span class="line">+----+------------+-----+</span><br><span class="line">18 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; explain select * from employee where age = 20;  -- age字段没有索引的情况下的查询计划，条件为age = 20</span><br><span class="line"></span><br><span class="line">+----+-------------+----------+------+---------------+------+---------+------+------+-------------+</span><br><span class="line"></span><br><span class="line">| id | select_type | table    | type | possible_keys | key  | key_len | ref  | rows | Extra       |</span><br><span class="line"></span><br><span class="line">+----+-------------+----------+------+---------------+------+---------+------+------+-------------+</span><br><span class="line"></span><br><span class="line">|  1 | SIMPLE      | employee | ALL  | NULL          | NULL | NULL    | NULL |   18 | Using where |</span><br><span class="line"></span><br><span class="line">+----+-------------+----------+------+---------------+------+---------+------+------+-------------+</span><br><span class="line"></span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; explain select * from employee where age = 18;  -- age字段没有索引的情况下的查询计划，条件为age = 18</span><br><span class="line"></span><br><span class="line">+----+-------------+----------+------+---------------+------+---------+------+------+-------------+</span><br><span class="line"></span><br><span class="line">| id | select_type | table    | type | possible_keys | key  | key_len | ref  | rows | Extra       |</span><br><span class="line"></span><br><span class="line">+----+-------------+----------+------+---------------+------+---------+------+------+-------------+</span><br><span class="line"></span><br><span class="line">|  1 | SIMPLE      | employee | ALL  | NULL          | NULL | NULL    | NULL |   18 | Using where |</span><br><span class="line"></span><br><span class="line">+----+-------------+----------+------+---------------+------+---------+------+------+-------------+</span><br><span class="line"></span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">mysql&gt; create index xxx on employee(age);  -- 为age字段添加索引</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.02 sec)</span><br><span class="line"></span><br><span class="line">Records: 0  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">mysql&gt; explain select * from employee where age = 20;  -- age字段没有索引的情况下的查询计划，条件为age = 20</span><br><span class="line"></span><br><span class="line">此时 满足age=20的行太多，即便是为age字段加了索引也是无法命中的，看下面的explain计划，key字段为NULL，证明虽然建立了索引，但压根没用上 </span><br><span class="line">+----+-------------+----------+------+---------------+------+---------+------+------+-------------+</span><br><span class="line"></span><br><span class="line">| id | select_type | table    | type | possible_keys | key  | key_len | ref  | rows | Extra       |</span><br><span class="line"></span><br><span class="line">+----+-------------+----------+------+---------------+------+---------+------+------+-------------+</span><br><span class="line"></span><br><span class="line">|  1 | SIMPLE      | employee | ALL  | xxx           | NULL | NULL    | NULL |   18 | Using where |</span><br><span class="line"></span><br><span class="line">+----+-------------+----------+------+---------------+------+---------+------+------+-------------+</span><br><span class="line"></span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">mysql&gt; explain select * from employee where age = 18;  -- -- age字段没有索引的情况下的查询计划，条件为age = 18</span><br><span class="line"></span><br><span class="line">查看计划，key字段为xxx，命中了索引，因为age=18的行总共才3行，其实我们通常就应该给那些区分度高的字段加索引，否则加了也是白加，跟没加一个鸟样</span><br><span class="line">+----+-------------+----------+------+---------------+------+---------+-------+------+-------+</span><br><span class="line"></span><br><span class="line">| id | select_type | table    | type | possible_keys | key  | key_len | ref   | rows | Extra |</span><br><span class="line"></span><br><span class="line">+----+-------------+----------+------+---------------+------+---------+-------+------+-------+</span><br><span class="line"></span><br><span class="line">|  1 | SIMPLE      | employee | ref  | xxx           | xxx  | 4       | const |    3 | NULL  |</span><br><span class="line"></span><br><span class="line">+----+-------------+----------+------+---------------+------+---------+-------+------+-------+</span><br><span class="line"></span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p><em><strong>*步骤2：验证未命中索引则锁表*</strong></em></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>事务一</th>
+<th>事务二</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>步骤1</td>
+<td>start transaction;</td>
+<td>start transaction;</td>
+</tr>
+<tr>
+<td>步骤2</td>
+<td></td>
+<td>– 因为条件age=20无法命中索引，所以会锁住整张表select * from employee where age = 20 for update;</td>
+</tr>
+<tr>
+<td>步骤3</td>
+<td>– 阻塞select * from employee where age = 16 for update; – 阻塞select * from employee where age = 18 for update; – 阻塞select * from employee where age = 20 for update;</td>
+<td></td>
+</tr>
+<tr>
+<td>步骤3</td>
+<td>– 提交一下事务，不要影响下一次实验commit;</td>
+<td>– 提交一下事务，不要影响下一次实验commit;</td>
+</tr>
+</tbody></table>
+<p><em><strong>*步骤3：验证命中索引则锁行*</strong></em></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>事务一</th>
+<th>事务二</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>步骤1</td>
+<td>start transaction;</td>
+<td>start transaction;</td>
+</tr>
+<tr>
+<td>步骤2</td>
+<td></td>
+<td>– 因为条件age=18命中了索引，所以会锁住行而不是表select * from employee where age = 18 for update;</td>
+</tr>
+<tr>
+<td>步骤3</td>
+<td>– 不阻塞select * from employee where age = 16 for update; – 阻塞，因为事务二里锁住了age=18的行select * from employee where age = 18 for update; – 阻塞，？？？，不是说只锁age=18的行吗！！！– 请看下一小节：Next-Key Lockselect * from employee where age = 20 for update;</td>
+<td></td>
+</tr>
+<tr>
+<td>步骤3</td>
+<td>– 提交一下事务，不要影响下一次实验commit;</td>
+<td>– 提交一下事务，不要影响下一次实验commit;</td>
+</tr>
+</tbody></table>
+<h4 id="5-2-三种行锁的算法"><a href="#5-2-三种行锁的算法" class="headerlink" title="5.2 三种行锁的算法"></a>5.2 三种行锁的算法</h4><p><strong>InnoDB有三种行锁的算法，都属于排他锁：</strong></p>
+<ul>
+<li><p>1、Record Lock：单个行记录上的锁。</p>
+</li>
+<li><p>2、Gap Lock：间隙锁，锁定一个范围，但不包括记录本身。GAP锁的目的，是为了防止同一事务的两次当前读，出现幻读的情况。</p>
+</li>
+<li><p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">当我们用范围条件而不是相等条件检索数据，并请求共享或排他锁时，InnoDB会给符合条件的已有数据记录的索引项加锁；</span><br><span class="line">对于键值在条件范围内但并不存在的记录，叫做“间隙（GAP)”，InnoDB也会对这个“间隙”加锁，这种锁机制就是所谓的间隙锁（Next-Key锁）。 </span><br><span class="line"></span><br><span class="line"># 例如</span><br><span class="line">例：假如employee表中只有101条记录，其depid的值分别是 1,2,...,100,101，下面的SQL：</span><br><span class="line">mysql&gt; select * from emp where depid &gt; 100 for update;是一个范围条件的检索，并且命中了索引，InnoDB不仅会对符合条件的empid值为101的记录加锁，也会对empid大于101（这些记录并不存在）的“间隙”加锁。</span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+</li>
+<li><p>3、Next-Key Lock：<strong>等于Record Lock结合Gap Lock，也就说Next-Key Lock既锁定记录本身也锁定一个范围</strong>，<strong>特别需要注意的是，InnoDB存储引擎还会对辅助索引下一个键值加上gap lock</strong>。</p>
+</li>
+</ul>
+<p>对于行查询，<em>*<em>*</em>*innodb采用的都是Next-Key Lock，主要目的是解决幻读的问题，以满足相关隔离级别以及恢复和复制的需要。****</em>*</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/linhaifeng/articles/14400199.html"><strong><em>*</em>***点击查看详解：记录锁，间隙锁，next-key*****</strong>*</a></p>
+<p>案例：</p>
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># 准备数据</span><br></pre></td></tr></table></figure>
+
+<p>create table t1(</p>
+<p>id int,</p>
+<p>key idx_id(id)</p>
+<p>)engine=innodb;</p>
+<p>insert t1</p>
+<p>values</p>
+<p>(1),</p>
+<p>(5),</p>
+<p>(7),</p>
+<p>(11);</p>
+<p>mysql&gt; explain select * from t1 where id=7 for update; – key字段为idx_id，命中索引，即会采用行锁而不是表锁</p>
+<p>+—-+————-+——-+——+—————+——–+———+——-+——+————-+</p>
+<p>| id | select_type | table | type | possible_keys | key  | key_len | ref  | rows | Extra    |</p>
+<p>+—-+————-+——-+——+—————+——–+———+——-+——+————-+</p>
+<p>| 1 | SIMPLE   | t1  | ref | idx_id    | idx_id | 5    | const |  1 | Using index |</p>
+<p>+—-+————-+——-+——+—————+——–+———+——-+——+————-+</p>
+<p>1 row in set (0.00 sec)</p>
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p>实验</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>事务一</th>
+<th>事务二</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>步骤1</td>
+<td>start transaction;</td>
+<td>– 开启事务start transaction;</td>
+</tr>
+<tr>
+<td>步骤2</td>
+<td></td>
+<td>– 加排他锁select * from t1 where id=7 for update; – 须知– 1、上述语句命中了索引，所以加的是行锁– 2、InnoDB对于行的查询都是采用了Next-Key Lock的算法，锁定的不是单个值，而是一个范围（GAP）表记录的索引值为1，5，7，11，其记录的GAP区间如下：（-∞,1]，(1,5]，(5,7]，(7,11]，(11,+∞）因为记录行默认就是按照主键自增的，所以是一个左开右闭的区间其中上述查询条件id=7处于区间(5,7]中，所以Next-Key lock会锁定该区间的记录，但是还没完– 3、<strong>InnoDB存储引擎还会对辅助索引下一个键值加上gap lock</strong>。区间(5,7]的下一个Gap是(7,11],所以(7,11]也会被锁定综上所述，最终确定5-11之间的值都会被锁定</td>
+</tr>
+<tr>
+<td>步骤3</td>
+<td>– 下述sql全都会阻塞在原地insert t1 values(5);insert t1 values(6);insert t1 values(7);insert t1 values(8);insert t1 values(9);insert t1 values(10); – 下述等sql均不会阻塞insert t1 values(11); insert t1 values(1); insert t1 values(2);insert t1 values(3);insert t1 values(4);</td>
+<td></td>
+</tr>
+<tr>
+<td>步骤4</td>
+<td>– 提交一下事务，不要影响下一次实验commit;</td>
+<td>– 提交一下事务，不要影响下一次实验commit;</td>
+</tr>
+</tbody></table>
+<p>插入超时失败后，会怎么样？</p>
+<p>超时时间的参数：innodb_lock_wait_timeout ，默认是50秒。<br>超时是否回滚参数：innodb_rollback_on_timeout 默认是OFF。</p>
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">section A:</span><br><span class="line">mysql&gt; start transaction;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; </span><br><span class="line">mysql&gt; select * from t1 where id=7 for update;</span><br><span class="line">section B:</span><br></pre></td></tr></table></figure>
+
+<p>mysql&gt; begin;</p>
+<p>Query OK, 0 rows affected (0.00 sec)</p>
+<p>mysql&gt; insert t1 values(2);</p>
+<p>Query OK, 1 row affected (0.00 sec)</p>
+<p>mysql&gt; </p>
+<p>mysql&gt; insert t1 values(7);</p>
+<p>ERROR 1205 (HY000): Lock wait timeout exceeded; try restarting transaction – 抛出超时异常</p>
+<p>mysql&gt; select * from t1; – 超时异常并不会被回滚</p>
+<p>+——+</p>
+<p>| id  |</p>
+<p>+——+</p>
+<p>|  1 |</p>
+<p>|  2 |</p>
+<p>|  5 |</p>
+<p>|  7 |</p>
+<p>|  11 |</p>
+<p>+——+</p>
+<p>5 rows in set (0.00 sec)</p>
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p>经过测试，不会回滚超时引发的异常，当参数innodb_rollback_on_timeout 设置成ON时，则可以回滚，会把插进去的12回滚掉。</p>
+<p>默认情况下，InnoDB存储引擎不会回滚超时引发的异常，死锁问题带来的超时异常除外。</p>
+<p>既然InnoDB有三种算法，那Record Lock什么时候用？还是用上面的列子，把辅助索引改成唯一属性的索引。</p>
+<p><strong>测试二：</strong></p>
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&gt;create table t(a int primary key)engine =innodb;</span><br><span class="line">Query OK, 0 rows affected (0.19 sec)</span><br><span class="line"></span><br><span class="line">&gt;insert into t values(1),(3),(5),(8),(11);</span><br><span class="line">Query OK, 5 rows affected (0.00 sec)</span><br><span class="line">Records: 5  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">&gt;select * from t;</span><br><span class="line">+----+</span><br><span class="line">| a  |</span><br><span class="line">+----+</span><br><span class="line">|  1 |</span><br><span class="line">|  3 |</span><br><span class="line">|  5 |</span><br><span class="line">|  8 |</span><br><span class="line">| 11 |</span><br><span class="line">+----+</span><br><span class="line">5 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">section A:</span><br><span class="line">&gt;start transaction;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">&gt;select * from t where a = 8 for update;</span><br><span class="line">+---+</span><br><span class="line">| a |</span><br><span class="line">+---+</span><br><span class="line">| 8 |</span><br><span class="line">+---+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">section B:</span><br><span class="line"></span><br><span class="line">&gt;start transaction;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">&gt;insert into t values(6);</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">&gt;insert into t values(7);</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">&gt;insert into t values(9);</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">&gt;insert into t values(10);</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p><strong>问题：</strong></p>
+<p>为什么section B上面的插入语句可以正常，和测试一不一样？</p>
+<p><strong>分析：</strong></p>
+<p>因为InnoDB对于行的查询都是采用了Next-Key Lock的算法，锁定的不是单个值，而是一个范围，按照这个方法是会和第一次测试结果一样。但是，当查询的索引含有唯一属性的时候，Next-Key Lock 会进行优化，将其降级为Record Lock，即仅锁住索引本身，不是范围。</p>
+<p>注意：通过主键或则唯一索引来锁定不存在的值，也会产生GAP锁定。即： </p>
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">会话1：</span><br><span class="line">&gt;show create table t\G</span><br><span class="line">*************************** 1. row ***************************</span><br><span class="line">       Table: t</span><br><span class="line">Create Table: CREATE TABLE `t` (</span><br><span class="line">  `id` int(11) NOT NULL,</span><br><span class="line">  `name` varchar(10) DEFAULT NULL,</span><br><span class="line">  PRIMARY KEY (`id`)</span><br><span class="line">) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">&gt;start transaction;</span><br><span class="line"></span><br><span class="line">&gt;select * from t where id = 15 for update;</span><br><span class="line">Empty set (0.00 sec)</span><br><span class="line"></span><br><span class="line">会话2：</span><br><span class="line">&gt;insert into t(id,name) values(10,&#x27;k&#x27;);</span><br><span class="line">Query OK, 1 row affected (0.01 sec)</span><br><span class="line"></span><br><span class="line">&gt;insert into t(id,name) values(12,&#x27;k&#x27;);</span><br><span class="line">^CCtrl-C -- sending &quot;KILL QUERY 9851&quot; to server ...</span><br><span class="line">Ctrl-C -- query aborted.</span><br><span class="line">ERROR 1317 (70100): Query execution was interrupted</span><br><span class="line">&gt;insert into t(id,name) values(16,&#x27;kxx&#x27;);</span><br><span class="line">^CCtrl-C -- sending &quot;KILL QUERY 9851&quot; to server ...</span><br><span class="line">Ctrl-C -- query aborted.</span><br><span class="line">ERROR 1317 (70100): Query execution was interrupted</span><br><span class="line">&gt;insert into t(id,name) values(160,&#x27;kxx&#x27;);</span><br><span class="line">^CCtrl-C -- sending &quot;KILL QUERY 9851&quot; to server ...</span><br><span class="line">Ctrl-C -- query aborted.</span><br><span class="line">ERROR 1317 (70100): Query execution was interrupted </span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p>如何让测试一不阻塞？可以显式的关闭Gap Lock：</p>
+<p>1：把事务隔离级别改成：Read Committed，提交读、不可重复读。SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED;</p>
+<p>2：修改参数：innodb_locks_unsafe_for_binlog 设置为1。</p>
+<h4 id="5-3-死锁问题"><a href="#5-3-死锁问题" class="headerlink" title="5.3 死锁问题"></a>5.3 死锁问题</h4><p>MyISAM中是不会产生死锁的，因为MyISAM总是一次性获得所需的全部锁，要么全部满足，要么全部等待。而在InnoDB中，锁是逐步获得的，就造成了死锁的可能。</p>
+<p>　　下面，来看看两个死锁的例子 (一个是两个Session的两条SQL产生死锁；另一个是两个Session的一条SQL，产生死锁)：</p>
+<p>　　　　<strong><img src="https://images2015.cnblogs.com/blog/569491/201605/569491-20160531131107930-1938279375.jpg" alt="img"></strong></p>
+<p> 　   </p>
+<p>　　　　<img src="https://images2015.cnblogs.com/blog/569491/201605/569491-20160531131120930-2048731464.jpg" alt="img"></p>
+<p>　　上面的两个死锁用例。第一个非常好理解，也是最常见的死锁，每个事务执行两条SQL，分别持有了一把锁，然后加另一把锁，产生死锁。</p>
+<p>　　第二个用例，只有多个事务同时运行的情况下才可能出现，但隐蔽性极强，虽然每个Session都只有一条语句，仍旧会产生死锁。要分析这个死锁，首先必须用到本文前面提到的MySQL加锁的规则。针对Session 1，从name索引出发，读到的[hdc, 1]，[hdc, 6]均满足条件，不仅会加name索引上的记录X锁，而且会加聚簇索引上的记录X锁，加锁顺序为先[1,hdc,100]，后[6,hdc,10]。而Session 2，从pubtime索引出发，[10,6],[100,1]均满足过滤条件，同样也会加聚簇索引上的记录X锁，加锁顺序为[6,hdc,10]，后[1,hdc,100]。发现没有，跟Session 1的加锁顺序正好相反，如果两个Session恰好都持有了第一把锁，请求加第二把锁，死锁就发生了。　　</p>
+<p><img src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="img"> 示例代码</p>
+<p>　　<strong>结论：</strong></p>
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 1、关于死锁问题需要储备的知识</span><br><span class="line">在MySQL中，行级锁并不是直接锁记录，而是锁索引。索引分为主键索引和非主键索引两种，如果一条sql语句操作了主键索引，MySQL就会锁定这条主键索引；如果一条语句操作了非主键索引，MySQL会先锁定该非主键索引，再锁定相关的主键索引。 在UPDATE、DELETE操作时，MySQL不仅锁定WHERE条件扫描过的所有索引记录，而且会锁定相邻的键值，即所谓的next-key locking。</span><br><span class="line"></span><br><span class="line"># 2、死锁产生的本质原理死锁的发生与否，并不在于事务中有多少条SQL语句，死锁的关键在于：两个(或以上)的Session加锁的顺序不一致。而使用本文上面提到的，分析MySQL每条SQL语句的加锁规则，分析出每条语句的加锁顺序，然后检查多个并发SQL间是否存在以相反的顺序加锁的情况，就可以分析出各种潜在的死锁情况，也可以分析出线上死锁发生的原因。</span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p>发生死锁后，InnoDB一般都可以检测到，并使一个事务释放锁回退，另一个获取锁完成事务。</p>
+<p>有多种方法可以避免死锁，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">（1）如果不同程序会并发存取多个表，尽量约定以相同的顺序访问表，可以大大降低死锁机会。</span><br><span class="line">（2）在同一个事务中，尽可能做到一次锁定所需要的所有资源，减少死锁产生概率；</span><br><span class="line">（3）对于非常容易产生死锁的业务部分，可以尝试使用升级锁定颗粒度，通过表级锁定来减少死锁产生的概率；</span><br><span class="line">（4）在程序以批量方式处理数据的时候，如果事先对数据排序，保证每个线程按固定的顺序来处理记录，也可以大大降低出现死锁的可能。</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-4-什么时候使用表锁"><a href="#5-4-什么时候使用表锁" class="headerlink" title="5.4 什么时候使用表锁"></a>5.4 什么时候使用表锁</h4><p>绝大部分情况使用行锁，但在个别特殊事务中,也可以考虑使用表锁</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1、事务需要更新大部分数据，表又较大</span><br><span class="line">若使用默认的行锁,不仅该事务执行效率低(因为需要对较多行加锁,加锁是需要耗时的); 而且可能造成其他事务长时间锁等待和锁冲突; 这种情况下可以考虑使用表锁来提高该事务的执行速度</span><br><span class="line">2、事务涉及多个表，较复杂，很可能引起死锁，造成大量事务回滚</span><br><span class="line">这种情况也可以考虑一次性锁定事务涉及的表，从而避免死锁、减少数据库因事务回滚带来的开销当然，应用中这两种事务不能太多，否则，就应该考虑使用ＭyISAＭ。</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-5-行锁优化建议"><a href="#5-5-行锁优化建议" class="headerlink" title="5.5 行锁优化建议"></a>5.5 行锁优化建议</h4><p>通过检查InnoDB_row_lock状态变量来分析系统上的行锁的争夺情况，在着手根据状态量来分析改善；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show status like &#x27;innodb_row_lock%&#x27;;//查看行锁的状态</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>尽可能让所有数据检索都通过索引来完成， 从而避免无索引行锁升级为表锁</li>
+<li>合理设计索引，尽量缩小锁的范围</li>
+<li>尽可能减少检索条件，避免间隙锁</li>
+<li>尽量控制事务大小，减少锁定资源量和时间长度</li>
+<li>尽可能低级别事务隔离，详见下一章节</li>
+</ul>
+<h2 id="六、乐观锁与悲观锁-使用方式"><a href="#六、乐观锁与悲观锁-使用方式" class="headerlink" title="六、乐观锁与悲观锁(使用方式)"></a>六、乐观锁与悲观锁(使用方式)</h2><p>数据库管理系统（DBMS）中的并发控制的任务是确保在多个事务同时存取数据库中同一数据时不破坏事务的隔离性和统一性以及数据库的统一性。</p>
+<p>乐观并发控制(乐观锁)和悲观并发控制（悲观锁）是并发控制主要采用的技术手段。</p>
+<p>无论是悲观锁还是乐观锁，都是人们定义出来的概念，可以认为是一种思想。其实不仅仅是关系型数据库系统中有乐观锁和悲观锁的概念，像memcache、hibernate、tair等都有类似的概念。</p>
+<p>针对于不同的业务场景，应该选用不同的并发控制方式。所以，不要把乐观并发控制和悲观并发控制狭义的理解为DBMS中的概念，更不要把他们和数据中提供的锁机制（行锁、表锁、排他锁、共享锁）混为一谈。其实，在DBMS中，悲观锁正是利用数据库本身提供的锁机制来实现的。</p>
+<p>下面来分别学习一下悲观锁和乐观锁。 </p>
+<h3 id="6-1、悲观锁"><a href="#6-1、悲观锁" class="headerlink" title="6.1、悲观锁"></a>6.1、悲观锁</h3><p><strong>悲观锁介绍</strong></p>
+<p>当我们要对一个数据库中的一条数据进行修改的时候，为了避免同时被其他人修改，最好的办法就是直接对该数据进行加锁以防止并发。</p>
+<p>这种借助数据库锁机制在修改数据之前先锁定，再修改的方式被称之为悲观并发控制（又名“悲观锁”，Pessimistic Concurrency Control，缩写“PCC”）。</p>
+<blockquote>
+<p>在关系数据库管理系统里，悲观并发控制（又名“悲观锁”，Pessimistic Concurrency Control，缩写“PCC”）是一种并发控制的方法。它可以阻止一个事务以影响其他用户的方式来修改数据。如果一个事务执行的操作都某行数据应用了锁，那只有当这个事务把锁释放，其他事务才能够执行与该锁冲突的操作。<br>悲观并发控制主要用于数据争用激烈的环境，以及发生并发冲突时使用锁保护数据的成本要低于回滚事务的成本的环境中。</p>
+</blockquote>
+<p>悲观锁，正如其名，它指的是对数据被外界（包括本系统当前的其他事务，以及来自外部系统的事务处理）修改持保守态度(悲观)，因此，在整个数据处理过程中，将数据处于锁定状态。 悲观锁的实现，往往依靠数据库提供的锁机制 （也只有数据库层提供的锁机制才能真正保证数据访问的排他性，否则，即使在本系统中实现了加锁机制，也无法保证外部系统不会修改数据），现在互联网高并发的架构中，受到fail-fast思路的影响，悲观锁已经非常少见了。</p>
+<p><strong>在数据库中，悲观锁的流程如下：</strong></p>
+<blockquote>
+<p>在对任意记录进行修改前，先尝试为该记录加上排他锁（exclusive locking）。</p>
+<p>如果加锁失败，说明该记录正在被修改，那么当前查询可能要等待或者抛出异常。 具体响应方式由开发者根据实际需要决定。</p>
+<p>如果成功加锁，那么就可以对记录做修改，事务完成后就会解锁了。</p>
+<p>其间如果有其他对该记录做修改或加排他锁的操作，都会等待我们解锁或直接抛出异常。</p>
+</blockquote>
+<p>ps：行锁、表锁、读锁、写锁都是在操作之前先上排他锁</p>
+<p><strong>在数据表中的实现</strong></p>
+<p>在MySQL中使用悲观锁，必须关闭MySQL的自动提交，set autocommit=0，因为MySQL默认使用自动提交autocommit模式，在执行完sql后会自动提交并释放锁</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set autocommit=0;</span><br></pre></td></tr></table></figure>
+
+<p>举例</p>
+<p>假设商品表中有一个字段quantity表示当前该商品的库存量。假设有一件Dulex套套，其id为100，quantity=8个；如果不使用锁，那么操作方法</p>
+<p>**如下：<br>**</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//step1: 查出商品剩余量</span><br><span class="line"> select quantity from items where id=100;</span><br><span class="line">//step2: 如果剩余量大于0，则根据商品信息生成订单</span><br><span class="line"> insert into orders(id,item_id) values(null,100);</span><br><span class="line"> //step3: 修改商品的库存</span><br><span class="line"> update Items set quantity=quantity-1 where id=100;</span><br></pre></td></tr></table></figure>
+
+<p>这样子的写法，在小作坊真的很正常，No Problems，但是在高并发环境下可能出现问题。</p>
+<p><img src="https://img2020.cnblogs.com/blog/1036857/202102/1036857-20210220132736806-925921632.png" alt="img"></p>
+<p>其实在step1或者step2环节，已经有人下单并且减完库存了，这个时候仍然去执行step3，就造成了<strong>超卖</strong>。</p>
+<p>但是使用悲观锁，就可以解决这个问题，在上面的场景中，商品信息从查询出来到修改，中间有一个生成订单的过程，使用悲观锁的原理就是，当我们在查询出items信息后就把当前的数据锁定，直到我们修改完毕后再解锁。那么在这个过程中，因为数据被锁定了，就不会出现有第三者来对其进行修改了。而这样做的前提是需要将要执行的SQL语句放在同一个事物中，否则达不到锁定数据行的目的。</p>
+<p>如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//step1: 查出商品状态</span><br><span class="line">select quantity from items where id=100 for update;</span><br><span class="line">//step2: 根据商品信息生成订单</span><br><span class="line">insert into orders(id,item_id) values(null,100);</span><br><span class="line">//step3: 修改商品的库存</span><br><span class="line">update Items set quantity=quantity-2 where id=100;</span><br></pre></td></tr></table></figure>
+
+<p><strong>select…for update</strong>是MySQL提供的实现悲观锁的方式。此时在items表中，id为100的那条数据就被我们锁定了，其它的要执行select quantity from items where id=100 for update的事务必须等本次事务提交之后才能执行。这样我们可以保证当前的数据不会被其它事务修改。</p>
+<p><strong>总结</strong></p>
+<p>悲观并发控制主要用于数据争用激烈的环境，以及发生并发冲突时使用锁保护数据的成本要低于回滚事务的成本的环境中。</p>
+<blockquote>
+<p>优点：</p>
+<p>  悲观并发控制实际上是“先取锁再访问”的保守策略，为数据处理的安全提供了保证。<br>缺点：<br> （a）在效率方面，处理加锁的机制会让数据库产生额外的开销，还有增加产生死锁的机会；<br> （b） 在只读型事务处理中由于不会产生冲突，也没必要使用锁，这样做只能增加系统负载；还有会降低了并行性，一个事务如果锁定了某行数据，其他事务就必须等待该事务处理完才可以处理那行数</p>
+</blockquote>
+<h3 id="6-2、乐观锁"><a href="#6-2、乐观锁" class="headerlink" title="6.2、乐观锁"></a>6.2、乐观锁</h3><p><strong>乐观锁介绍</strong></p>
+<blockquote>
+<p>在关系数据库管理系统里，乐观并发控制（又名“乐观锁”，Optimistic Concurrency Control，缩写“OCC”）是一种并发控制的方法。它假设多用户并发的事务在处理时不会彼此互相影响，各事务能够在不产生锁的情况下处理各自影响的那部分数据。在提交数据更新之前，每个事务会先检查在该事务读取数据后，有没有其他事务又修改了该数据。如果其他事务有更新的话，正在提交的事务会进行回滚。乐观事务控制最早是由孔祥重（H.T.Kung）教授提出。</p>
+</blockquote>
+<p>乐观锁（ Optimistic Locking ） 相对悲观锁而言，乐观锁假设认为数据一般情况下不会造成冲突，所以在数据进行提交更新的时候，才会正式对数据的冲突与否进行检测，如果发现冲突了，则让返回用户错误的信息，让用户决定如何去做。</p>
+<p>相对于悲观锁，在对数据库进行处理的时候，乐观锁并不会使用数据库提供的锁机制。一般的实现乐观锁的方式就是记录数据版本。</p>
+<blockquote>
+<p>数据版本,为数据增加的一个版本标识。当读取数据时，将版本标识的值一同读出，数据每更新一次，同时对版本标识进行更新。当我们提交更新的时候，判断数据库表对应记录的当前版本信息与第一次取出来的版本标识进行比对，如果数据库表当前版本号与第一次取出来的版本标识值相等，则予以更新，否则认为是过期数据。</p>
+</blockquote>
+<p><strong>在数据库中，乐观锁的实现有两种方式</strong></p>
+<blockquote>
+<ul>
+<li>1、使用版本号实现</li>
+</ul>
+<p>每一行数据多一个字段version，每次更新数据对应版本号+1，<br>原理：读出数据，将版本号一同读出，之后更新，版本号+1，提交数据版本号大于数据库当前版本号，则予以更新，否则认为是过期数据，重新读取数据</p>
+<ul>
+<li>2、使用时间戳实现</li>
+</ul>
+<p>每一行数据多一个字段time<br>原理：读出数据，将时间戳一同读出，之后更新，提交数据时间戳等于数据库当前时间戳，则予以更新，否则认为是过期数据，重新读取数据 </p>
+</blockquote>
+<p><strong>乐观锁举例</strong></p>
+<p>1、需求：</p>
+<p>在使用mysql数据库存储数据的前提下，有一个抢任务系统，一个任务只能分配给n个人，如果有高并发请求，如何保证数据完整性？</p>
+<p> 2、一般做法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在不考虑到数据是否完整的情况下，我们一般只会按照以下思维开发：</span><br><span class="line">1、用户请求抢任务接口</span><br><span class="line">2、读取数据库剩余数量</span><br><span class="line">3、如果大于0，剩余数量减1，更新数据库剩余数量（update task set 4、4、count=count-1 where id=‘任务id’）</span><br><span class="line">5、返回数据</span><br></pre></td></tr></table></figure>
+
+<p>3、出现的问题提以及乐观锁的应用</p>
+<p>为什么上面的做法不对呢？我们举个例子，假设用户1和用户2同时调用请求抢任务接口，并且数据库只剩下一个任务可抢，任务剩余数量使用count字段保存；<br>用户1和用户2请求接口情况模拟，表格的每一行表示一个时间点</p>
+<table>
+<thead>
+<tr>
+<th>用户1</th>
+<th>用户2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>执行1</td>
+<td>执行1</td>
+</tr>
+<tr>
+<td>执行2</td>
+<td>执行2</td>
+</tr>
+<tr>
+<td>执行3（更新count为0）</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>执行3（更新count为-1）</td>
+</tr>
+<tr>
+<td>执行4</td>
+<td>执行4</td>
+</tr>
+</tbody></table>
+<p>通过以上的问题，我们不难知道，本来只有一个任务可抢的，现在被两个用户同时抢了，而且数据库还出现了-1的情况，而这种情况再高并发的时候经常会遇到。</p>
+<p>要解决高并发带来的问题，就可以利用乐观锁的概念来解决。<br>将上面中的第3个步骤中是sql语句改为（update task set count=count-1 where id=1 and count=1）<br>当然，其中的count=1中的1是步骤2读取出来的数据总数。<br>或者可以给表加一个版本号version字段，默认为1，每次执行更新的时候自增1，并在where语句后带上读取到的版本号，以免再读取和更新数据之间，有第三者更新了数据库。</p>
+<table>
+<thead>
+<tr>
+<th>用户1</th>
+<th>用户2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>执行1</td>
+<td>执行1</td>
+</tr>
+<tr>
+<td>执行2</td>
+<td>执行2</td>
+</tr>
+<tr>
+<td>执行3（更新count，dao层返回1，表示更新成功）</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>执行3（更新count，dao层返回0，表示更新失败）</td>
+</tr>
+<tr>
+<td>执行4</td>
+<td>执行4</td>
+</tr>
+</tbody></table>
+<p>最后结果</p>
+<ol>
+<li>用户请求抢任务接口</li>
+<li>读取数据库剩余数量</li>
+<li>如果大于0，剩余数量减1，更新数据库剩余数量（update task set count=count-1 where id=‘任务id’ and count=‘读取到的剩余数量’）</li>
+<li>返回数据</li>
+</ol>
+<p>以上SQL其实还是有一定的问题的，就是一旦发上高并发的时候，就只有一个线程可以修改成功，那么就会存在大量的失败。</p>
+<p>对于像淘宝这样的电商网站，高并发是常有的事，总让用户感知到失败显然是不合理的。所以，还是要想办法减少乐观锁的粒度的。</p>
+<p>有一条比较好的建议，可以减小乐观锁力度，最大程度的提升吞吐率，提高并发能力！如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//修改商品库存 update task set count=count-1 where id=‘任务id’ and count=‘读取到的剩余数量’ and count-1 &gt;= 0;</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+<p>以上SQL语句中，通过count-1&gt;0的方式进行乐观锁控制，商品个数count至少要有1件才可以。</p>
+<p>以上update语句，在执行过程中，会在一次原子操作中自己查询一遍count的值，并将其扣减掉1。</p>
+<p>没错！<strong>你参加过的天猫、淘宝秒杀、聚划算，跑的就是上述这条SQL</strong>，通过挑选乐观锁，可以减小锁力度，从而提升吞吐～</p>
+<p>乐观锁需要灵活运用</p>
+<blockquote>
+<p>现在互联网高并发的架构中，受到fail-fast思路的影响，悲观锁已经非常少见了。</p>
+</blockquote>
+<p><strong>优点与不足</strong></p>
+<p>乐观并发控制相信事务之间的数据竞争(data race)的概率是比较小的，因此尽可能直接做下去，直到提交的时候才去锁定，所以不会产生任何锁和死锁。</p>
+<p><strong>如何选择</strong></p>
+<p>在乐观锁与悲观锁的选择上面，主要看下两者的区别以及适用场景就可以了。</p>
+<p>1、乐观锁并未真正加锁，效率高。一旦锁的粒度掌握不好，更新失败的概率就会比较高，容易发生业务失败。</p>
+<p>2、悲观锁依赖数据库锁，效率低。更新失败的概率比较低。</p>
+<p>随着互联网三高架构（高并发、高性能、高可用）的提出，悲观锁已经越来越少的被使用到生产环境中了，尤其是并发量比较大的业务场景。 </p>
+
       
 
       
@@ -545,7 +1280,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">招聘系统项目</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
         		</li>
       		
 		</ul>
@@ -557,7 +1292,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Python项目//" class="article-tag-list-link color4">Python项目</a>
+        			<a href="/categories/数据库//" class="article-tag-list-link color4">数据库</a>
         		</li>
       		
 		</ul>
@@ -566,7 +1301,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/22/Django%E9%9B%86%E6%88%90/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/09/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%94%81%E6%9C%BA%E5%88%B6/">展开全文 >></a>
         </p>
       
 
@@ -598,22 +1333,22 @@
 
 
   
-    <article id="post-Django介绍" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-数据量读写现象" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/21/Django%E4%BB%8B%E7%BB%8D/">Django介绍</a>
+      <a class="article-title" href="/2021/09/02/%E6%95%B0%E6%8D%AE%E9%87%8F%E8%AF%BB%E5%86%99%E7%8E%B0%E8%B1%A1/">数据库读写现象</a>
     </h1>
   
 
         
         
 
-<a href="/2021/08/21/Django%E4%BB%8B%E7%BB%8D/" class="archive-article-date">
-  	<time datetime="2021-08-21T11:06:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-21</time>
+<a href="/2021/09/02/%E6%95%B0%E6%8D%AE%E9%87%8F%E8%AF%BB%E5%86%99%E7%8E%B0%E8%B1%A1/" class="archive-article-date">
+  	<time datetime="2021-09-02T00:24:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-02</time>
 </a>
 
         
@@ -622,7 +1357,92 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="一-数据库读现象"><a href="#一-数据库读现象" class="headerlink" title="一 数据库读现象"></a>一 数据库读现象</h1><p>数据库管理软件的“读现象”指的是当多个事务并发执行时，在读取数据方面可能碰到的问题，包括有脏读、不可重复读和幻读。</p>
+<p>ps：对于一些数据库管理软件会自带相应的机制去解决脏读、不可重复读、幻读等问题，因为这些自带的机制，下述的一些实验现象可能在某一数据库管理软件的默认机制下并不成立，即我们并不能在所有数据库管理软件中看到所有的读现象。所以此处我们暂且抛开具体的某个数据库管理软件的默认机制的干扰，暂时假设没有附加任何机制为前提，单纯地去理解数据库的读现象。</p>
+<h2 id="1-1、脏读-dirty-read"><a href="#1-1、脏读-dirty-read" class="headerlink" title="1.1、脏读 (dirty read)"></a>1.1、脏读 (dirty read)</h2><p>事务T2更新了一行记录的内容，但是并没有提交所做的修改。</p>
+<p>事务T1读取更新后的行，然后T1执行回滚操作，取消了刚才所做的修改。此时T1所读取的行就无效了，称之为脏数据。</p>
+<p>举例</p>
+<table>
+<thead>
+<tr>
+<th>事务一</th>
+<th>事务二</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/* Query 1 */</code> <code>SELECT age FROM users WHERE id = 1;</code> <code>/* will read 20 */</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>/* Query 2 */</code> <code>UPDATE users SET age = 21 WHERE id = 1;</code> <code>/* No commit here */</code></td>
+</tr>
+<tr>
+<td><code>/* Query 1 */</code> <code>SELECT age FROM users WHERE id = 1;</code> <code>/* will read 21 */</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>ROLLBACK;</code> <code>/* lock-based DIRTY READ */</code></td>
+</tr>
+</tbody></table>
+<p>在这个例子中，事务2回滚后就没有id是1，age是21的数据了。所以，事务一读到了一条脏数据。</p>
+<h2 id="1-2、不可重复读取-nonrepeatable-read"><a href="#1-2、不可重复读取-nonrepeatable-read" class="headerlink" title="1.2、不可重复读取 (nonrepeatable read)"></a>1.2、不可重复读取 (nonrepeatable read)</h2><p>事务T1读取一行记录，紧接着事务T2修改了T1刚才读取的那一行记录并且提交了。</p>
+<p>然后T1又再次读取这行记录，发现与刚才读取的结果不同。这就称为“不可重复”读，因为T1原来读取的那行记录已经发生了变化。</p>
+<p>举例</p>
+<p>在基于锁的并发控制中“不可重复读(non-repeatable read)”现象发生在当执行SELECT 操作时没有获得读锁(read locks)或者SELECT操作执行完后马上释放了读锁； 多版本并发控制中当没有要求一个提交冲突的事务回滚也会发生“不可重复读(non-repeatable read)”现象。</p>
+<table>
+<thead>
+<tr>
+<th>事务一</th>
+<th>事务二</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/* Query 1 */</code> <code>SELECT * FROM users WHERE id = 1;</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>/* Query 2 */</code> <code>UPDATE users SET age = 21 WHERE id = 1;</code> <code>COMMIT;</code> <code>/* in multiversion concurrencycontrol, or lock-based READ COMMITTED */</code></td>
+</tr>
+<tr>
+<td><code>/* Query 1 */</code> <code>SELECT * FROM users WHERE id = 1;</code> <code>COMMIT;</code> <code>/*lock-based REPEATABLE READ */</code></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>在这个例子中，事务2提交成功，因此他对id为1的行的修改就对其他事务可见了。但是事务1在此前已经从这行读到了另外一个“age”的值。</p>
+<h2 id="1-3、幻像读取-phantom-read"><a href="#1-3、幻像读取-phantom-read" class="headerlink" title="1.3、幻像读取 (phantom read)"></a>1.3、幻像读取 (phantom read)</h2><p>幻读(phantom read)”是不可重复读(Non-repeatable reads)的一种特殊场景:<br>当事务没有获取范围锁的情况下执行SELECT … WHERE操作有可能会发生“幻影读(phantom read)”。</p>
+<p>事务T1读取或修改了指定的WHERE子句所返回的结果集。</p>
+<p>然后事务T2新插入一行记录，这行记录恰好可以满足T1所使用的查询条件中的WHERE 子句的条件。</p>
+<p>然后T1又使用相同的查询再次对表进行检索，但是此时却看到了事务T2刚才插入的新行或者发现了处于WHRE子句范围内，但却未曾修改过的记录。就好像“幻觉”一样，因为对T1来说这一行就像突然出现的一样。</p>
+<p>一般解决幻读的方法是增加范围锁RangeS，锁定检锁范围为只读，这样就避免了幻读。</p>
+<p>举例</p>
+<p>当事务1两次执行SELECT … WHERE检索一定范围内数据的操作中间，事务2在这个表中创建了(如INSERT)了一行新数据，这条新数据正好满足事务1的“WHERE”子句。</p>
+<table>
+<thead>
+<tr>
+<th>事务一</th>
+<th>事务二</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/* Query 1 */</code> <code>SELECT * FROM usersWHERE age BETWEEN 10 AND 30;</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>/* Query 2 */</code> <code>INSERT INTO users VALUES ( 3, &#39;Bob&#39;, 27 );</code> <code>COMMIT;</code></td>
+</tr>
+<tr>
+<td><code>/* Query 1 */</code> <code>SELECT * FROM usersWHERE age BETWEEN 10 AND 30;</code></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>在这个例子中，事务一执行了两次相同的查询操作。但是两次操作中间事务二向数据库中增加了一条符合事务一的查询条件的数据，导致幻读。</p>
+<h1 id="二-解决方案"><a href="#二-解决方案" class="headerlink" title="二 解决方案"></a>二 解决方案</h1><p>其实，脏写、脏读、不可重复读、幻读，都是因为业务系统会多线程并发执行，每个线程可能都会开启一个事务，每个事务都会执行增删改查操作。然后数据库会并发执行多个事务，多个事务可能会并发地对缓存页里的同一批数据进行增删改查操作，于是这个并发增删改查同一批数据的问题，可能就会导致我们说的脏写、脏读、不可重复读、幻读这些问题。</p>
+<p>所以这些问题的本质，都是数据库的多事务并发问题，那么为了解决多事务并发带来的脏读、不可重复读、幻读等读等问题，数据库才设计了<a target="_blank" rel="noopener" href="https://www.cnblogs.com/linhaifeng/articles/14386584.html">锁机制</a>、<a target="_blank" rel="noopener" href="https://www.cnblogs.com/linhaifeng/articles/14387903.html">事务隔离机制</a>、MVCC 多版本隔离机制，用一整套机制来解决多事务并发问题，下面我们来分别介绍一下它们</p>
+
       
 
       
@@ -630,11 +1450,430 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据库//" class="article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/21/Django%E4%BB%8B%E7%BB%8D/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/09/02/%E6%95%B0%E6%8D%AE%E9%87%8F%E8%AF%BB%E5%86%99%E7%8E%B0%E8%B1%A1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+ 
+
+
+
+  
+    <article id="post-事务中的redo与undo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/02/%E4%BA%8B%E5%8A%A1%E4%B8%AD%E7%9A%84redo%E4%B8%8Eundo/">事务中的redo与undo</a>
+    </h1>
+  
+
+        
+        
+
+<a href="/2021/09/02/%E4%BA%8B%E5%8A%A1%E4%B8%AD%E7%9A%84redo%E4%B8%8Eundo/" class="archive-article-date">
+  	<time datetime="2021-09-02T00:23:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-02</time>
+</a>
+
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="MySQL事务中的redo与undo"><a href="#MySQL事务中的redo与undo" class="headerlink" title="MySQL事务中的redo与undo"></a><strong>MySQL事务中的redo与undo</strong></h2><h2 id="一-前言"><a href="#一-前言" class="headerlink" title="一 前言"></a><strong>一 前言</strong></h2><p> 众所周知<strong>InnoDB 是一个事务性的存储引擎</strong>，在上一小节我们提到事务有4种特性：原子性、一致性、隔离性和持久性，在事务中的操作，要么全部执行，要么全部不做，这就是事务的目的。</p>
+<p> 那么事务的四种特性到底是基于什么机制实现呢？？？</p>
+<ul>
+<li><p>1、事务的原子性、隔离性由锁机制实现，我们将在后续章节《数据库锁机制》中介绍</p>
+</li>
+<li><p>2、而事务的一致性和持久性由事务的 redo 日志和undo 日志来保证。<br>redo log 是重做日志，提供再写入操作，实现事务的持久性；<br>undo log 是回滚日志，提供回滚操作，保证事务的一致性。</p>
+</li>
+</ul>
+<p>本文将讨论关于事务中的redo和undo的几个问题：</p>
+<ul>
+<li>redo 日志与undo日志分别用于记录什么？</li>
+<li>redo 如何保证事务的持久性？</li>
+<li>undo 如何保证事务的一致性？</li>
+<li>undo log 是否是redo log的逆过程？</li>
+</ul>
+<h2 id="二-Redo-log"><a href="#二-Redo-log" class="headerlink" title="二 Redo log"></a><strong>二 Redo log</strong></h2><h3 id="2-1-redo的作用"><a href="#2-1-redo的作用" class="headerlink" title="2.1 redo的作用"></a><strong>2.1 redo的作用</strong></h3><p>记录的是尚未完成的操作，数据库崩溃则用其重做</p>
+<h3 id="2-2-redo的组成"><a href="#2-2-redo的组成" class="headerlink" title="2.2 redo的组成"></a><strong>2.2 redo的组成</strong></h3><p>Redo log可以简单分为以下两个部分：</p>
+<ul>
+<li>保存在内存中重做日志的缓冲 (redo log buffer),是易失的</li>
+<li>保存在硬盘中重做日志文件 (redo log file)，是持久的</li>
+</ul>
+<h3 id="2-3-redo工作流程"><a href="#2-3-redo工作流程" class="headerlink" title="2.3 redo工作流程"></a><strong>2.3 redo工作流程</strong></h3><p><img src="https://pic3.zhimg.com/80/v2-5d8a64c0d163fedf4118b314145d0da2_720w.jpg" alt="img"></p>
+<p><strong>InnoDB 的更新操作采用的是 Write Ahead Log (预先日志持久化)策略，即先写日志，再写入磁盘。</strong></p>
+<p>当一条记录更新时，redo流程大致如下</p>
+<p>在内存更新数据后，会把更新后的记录写入到 redo log buffer 中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">第一步：InnoDB 会先把记录从硬盘读入内存</span><br><span class="line">第二部：修改数据的内存拷贝</span><br><span class="line">第三步：生成一条重做日志并写入redo log buffer，记录的是数据被修改后的值</span><br><span class="line">第四步：当事务commit时，将redo log buffer中的内容刷新到 redo log file，对 redo log file采用追加写的方式</span><br><span class="line">第五步：定期将内存中修改的数据刷新到磁盘中(注意注意注意，不是从redo log file刷入磁盘，而是从内存刷入磁盘，redo log file只在崩溃恢复数据时才用)，如果数据库崩溃，则依据redo log buffer、redo log file进行重做，恢复数据,这才是redo log file的价值所在</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-Write-Ahead-Log"><a href="#2-4-Write-Ahead-Log" class="headerlink" title="2.4 Write Ahead Log"></a><strong>2.4 Write Ahead Log</strong></h3><p>redo是如何保证事务的持久性的呢？？？</p>
+<p>答案是<strong>Force Log at Commit 机制</strong>，即当事务commit提交时，innodb引擎先将 redo log buffer 写入到 redo log file 进行持久化，待事务的commit操作完成时才算完成。这种做法也被称为 **Write-Ahead Log(预先日志持久化)**，在持久化一个数据页之前，先将内存中相应的日志页持久化。</p>
+<p>问题1：为何不直接将修改的数据写入磁盘，而是要write ahead log呢？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">答案：用于崩溃恢复</span><br><span class="line">详解：</span><br><span class="line">undo日志是对原始数据的备份</span><br><span class="line">redo日志是对原始数据的修改</span><br><span class="line"></span><br><span class="line">原始数据的按照既定的数据结构存放在磁盘上，写入磁盘是要耗费巨大成本的，而写入redo相对容易一些，因为redo里毕竟只需要考虑存放改动的数据即可，所以内存数据写写入redo log file，然后内存数据才能写入磁盘，如此，在内存数据再写入磁盘时因为某种原因比如断电崩溃，那么还可以依据redo log file恢复数据，如下图所示。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pic4.zhimg.com/80/v2-2fcec4fa5bfaf02ca31ce85ed7318a73_720w.jpg" alt="img"></p>
+<p>问题2：如何保证每次修改的数据都能写入redo log file呢？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 储备知识1</span><br><span class="line">O_DIRECT选项是在Linux系统中的选项，使用该选项后，对文件进行直接IO操作，不经过文件系统缓存，直接写入磁盘</span><br><span class="line"></span><br><span class="line"># 储备知识2</span><br><span class="line">redo log又称之为重做日志，因重做日志打开并没有O_DIRECT选项，所以重做日志先写入到文件系统缓存，然后才会刷入硬盘，即</span><br><span class="line">Redo log buffer---&gt;os cache(文件系统缓存)---&gt;redo log file</span><br><span class="line"></span><br><span class="line">如果在刷入redo log file前断电，则会丢失文件系统缓存中数据，数据未写入redo log file，</span><br><span class="line">因为由内存写入redo log file在前，而由内存写入磁盘在后，所以redo log file写入失败，则数据丢失</span><br><span class="line"></span><br><span class="line"># 那如何保证每次的修改都记入日志文件redo log file呢？？？</span><br><span class="line">答案是fsync操作</span><br><span class="line">在每次将redo buffer写入os cache文件系统缓存后，InnoDB存储引擎都需要调用一次 fsync操作,保证立即由os cache文件系统缓存写入redo log file</span><br><span class="line"></span><br><span class="line">fsync是一种系统调用操作，其fsync的效率取决于磁盘的性能，因此磁盘的性能也影响了事务提交的性能，也就是数据库的性能。</span><br></pre></td></tr></table></figure>
+
+<p>问题3：脏页何时刷入磁盘呢？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 储备知识：脏页</span><br><span class="line">Buffer Pool 中更新的数据未刷新到磁盘中，该内存页我们称之为脏页。最终脏页的数据会刷新到磁盘中，将磁盘中的数据覆盖，这个过程与 redo log 不一定有关系。</span><br><span class="line"></span><br><span class="line"># 答案</span><br><span class="line">redo log 日志满了的情况下，会主动触发脏页刷新到磁盘</span><br></pre></td></tr></table></figure>
+
+<p>问题4：脏页只在redo log满的情况下才会刷入磁盘吗？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">答案：no，以下几种情况同样会触发脏页的刷新</span><br><span class="line"></span><br><span class="line">- 1、系统内存不足时，需要将一部分数据页淘汰掉，如果淘汰的是脏页，需要先将脏页同步到磁盘；</span><br><span class="line">- 2、MySQL 认为空闲的时间，这种情况没有性能问题；</span><br><span class="line">- 3、MySQL 正常关闭之前，会把所有的脏页刷入到磁盘，这种情况也没有性能问题。</span><br></pre></td></tr></table></figure>
+
+<p>问题5：脏页刷入会带来性能问题吗？ [rml_read_more]：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在生产环境中，如果我们开启了慢 SQL 监控，你会发现偶尔会出现一些用时稍长的 SQL。**这是因为脏页在刷新到磁盘时可能会给数据库带来性能开销，**导致数据库操作抖动。</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-5-参数innodb-flush-log-at-trx-commit"><a href="#2-5-参数innodb-flush-log-at-trx-commit" class="headerlink" title="2.5 参数innodb_flush_log_at_trx_commit"></a><strong>2.5 参数innodb_flush_log_at_trx_commit</strong></h3><p>上面提到的<strong>Force Log at Commit机制</strong>就是靠InnoDB存储引擎提供的参数<code>innodb_flush_log_at_trx_commit</code>来控制的</p>
+<p>该参数控制 commit提交事务 时，<strong>如何将 redo log buffer 中的日志刷新到 redo log file 中。</strong></p>
+<ul>
+<li>1、当设置参数为1时，（默认为1，建议），表示事务提交时必须调用一次 <code>fsync</code> 操作，最安全的配置，保障持久性</li>
+<li>2、当设置参数为2时，则在事务提交时只做 <strong>write</strong> 操作，只保证将redo log buffer写到系统的页面缓存中，不进行fsync操作，因此如果MySQL数据库宕机时 不会丢失事务，但操作系统宕机则可能丢失事务</li>
+<li>3、当设置参数为0时，表示事务提交时不进行写入redo log操作，这个操作仅在master thread 中完成，而在master thread中每1秒进行一次重做日志的fsync操作，因此实例 crash 最多丢失1秒钟内的事务。（master thread是负责将缓冲池中的数据异步刷新到磁盘，保证数据的一致性）</li>
+</ul>
+<p>拓展阅读</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我们需要注意的是 InnoDB 的 redo log 的大小是固定的，分别有多个日志文件采用循环方式组成一个循环闭环，当写到结尾时，会回到开头循环写日志。我们可以通过参数 innodb_log_files_in_group 和 innodb_log_file_size 配置日志文件数量和每个日志文件的大小。</span><br></pre></td></tr></table></figure>
+
+<h2 id="三-Undo-log"><a href="#三-Undo-log" class="headerlink" title="三 Undo log"></a><strong>三 Undo log</strong></h2><h3 id="3-1-作用"><a href="#3-1-作用" class="headerlink" title="3.1 作用"></a><strong>3.1 作用</strong></h3><p>undo即撤销还原。</p>
+<p>用于记录更改前的一份copy，在操作出错时，可以用于回滚、撤销还原，只将数据库逻辑地恢复到原来的样子</p>
+<p>undo日志记录了什么？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">比如有两个用户访问数据库，当然并发罗。A是更改，B是查询。</span><br><span class="line"></span><br><span class="line">--A更改还没有提交，B查询的话，数据肯定为历史数据，这个历史数据就是来源于UNDO段，</span><br><span class="line"></span><br><span class="line">--A更改未提交，需要回滚rollback，回滚rollback的数据也来至于UNDO段。</span><br><span class="line"></span><br><span class="line">结论：为了并发时读一致性成功，那么DML操作，肯定先写UNDO段。</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-undo的存储位置"><a href="#3-2-undo的存储位置" class="headerlink" title="3.2 undo的存储位置"></a><strong>3.2 undo的存储位置</strong></h3><p>在InnoDB存储引擎中，undo存储在回滚段(Rollback Segment)中,每个回滚段记录了1024个undo log segment，而在每个undo log segment段中进行undo 页的申请，在5.6以前，Rollback Segment是在共享表空间里的，5.6.3之后，可通过 innodb_undo_tablespace设置undo存储的位置。</p>
+<h3 id="3-3-undo的类型"><a href="#3-3-undo的类型" class="headerlink" title="3.3 undo的类型"></a><strong>3.3 undo的类型</strong></h3><p>在InnoDB存储引擎中，undo log分为：</p>
+<ul>
+<li>insert undo log</li>
+<li>update undo log</li>
+</ul>
+<p>insert undo log是指在insert 操作中产生的undo log，因为insert操作的记录，只对事务本身可见，对其他事务不可见。故该undo log可以在事务提交后直接删除，不需要进行purge操作。</p>
+<p>而update undo log记录的是对delete 和update操作产生的undo log，该undo log可能需要提供MVCC机制，因此不能再事务提交时就进行删除。提交时放入undo log链表，等待purge线程进行最后的删除。</p>
+<p>补充：purge线程两个主要作用是：清理undo页和清除page里面带有Delete_Bit标识的数据行。在InnoDB中，事务中的Delete操作实际上并不是真正的删除掉数据行，而是一种Delete Mark操作，在记录上标识Delete_Bit，而不删除记录。是一种”假删除”,只是做了个标记，真正的删除工作需要后台purge线程去完成。</p>
+<h3 id="3-4-undo-log-是否是redo-log的逆过程？"><a href="#3-4-undo-log-是否是redo-log的逆过程？" class="headerlink" title="3.4 undo log 是否是redo log的逆过程？"></a><strong>3.4 undo log 是否是redo log的逆过程？</strong></h3><p><img src="https://pic3.zhimg.com/80/v2-5d8a64c0d163fedf4118b314145d0da2_720w.jpg" alt="img"></p>
+<p>undo log 是否是redo log的逆过程？其实从前文就可以得出答案了，undo log是逻辑日志，对事务回滚时，只是将数据库逻辑地恢复到原来的样子，而redo log是物理日志，记录的是数据页的物理变化，显然undo log不是redo log的逆过程。</p>
+<h3 id="3-5-redo-amp-undo总结"><a href="#3-5-redo-amp-undo总结" class="headerlink" title="3.5 redo &amp; undo总结"></a><strong>3.5 redo &amp; undo总结</strong></h3><p>下面是redo log + undo log的简化过程，便于理解两种日志的过程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">假设有A、B两个数据，值分别为1,2.</span><br><span class="line">1. 事务开始</span><br><span class="line">2. 记录A=1到undo log</span><br><span class="line">3. 修改A=3</span><br><span class="line">4. 记录A=3到 redo log</span><br><span class="line">5. 记录B=2到 undo log</span><br><span class="line">6. 修改B=4</span><br><span class="line">7. 记录B=4到redo log</span><br><span class="line">8. 将redo log写入磁盘</span><br><span class="line">9. 事务提交</span><br></pre></td></tr></table></figure>
+
+<p>实际上，在insert/update/delete操作中，redo和undo分别记录的内容都不一样，量也不一样。在InnoDB内存中，一般的顺序如下：</p>
+<ul>
+<li>写undo的redo</li>
+<li>写undo</li>
+<li>修改数据页</li>
+<li>写Redo</li>
+</ul>
+<p>因为，数据在没有commit前，是随时从内存中写入到表数据块的，属于脏数据。 数据库崩溃后即使使用redo流程进行redo操作，但是脏数据还在，脏数据怎么处理，就只能靠undo流程，使用undo数据块的旧数据覆盖了。</p>
+<p>undo与redo的联系：但是不管是脏的还是旧的，都在redo日志中复制了一份。</p>
+<ul>
+<li>1.undo是一种“数据文件datafile”，具有表空间，当然具有块block;</li>
+<li>2.redo是一种“文件file”，没有表空间。</li>
+<li>3.数据库在DML事务时，先创建undo</li>
+<li>4.读一致性与一致性(scn相同）的区别</li>
+<li>5.undo与rollback的区别：在undo（撤销还原流程）中会使用rollback（回滚）这个动作</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据库//" class="article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/09/02/%E4%BA%8B%E5%8A%A1%E4%B8%AD%E7%9A%84redo%E4%B8%8Eundo/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+ 
+
+
+
+  
+    <article id="post-事务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/02/%E4%BA%8B%E5%8A%A1/">事务</a>
+    </h1>
+  
+
+        
+        
+
+<a href="/2021/09/02/%E4%BA%8B%E5%8A%A1/" class="archive-article-date">
+  	<time datetime="2021-09-02T00:20:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-02</time>
+</a>
+
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>innodb存储引擎核心特性之事务</p>
+<p><a href="https://link.zhihu.com/?target=https://www.cnblogs.com/linhaifeng/articles/14387841.html">https://www.cnblogs.com/linhaifeng/articles/14387841.html</a></p>
+<p>Redo用来保证事务的原子性和持久性，Undo能保证事务的一致性，两者也是系统恢复的基础前提。</p>
+<p>比如有两个用户访问数据库，当然并发罗。A是更改，B是查询。 –A更改还没有提交，B查询的话，数据肯定为历史数据，这个历史数据就是来源于UNDO段， –A更改未提交，需要回滚rollback，回滚rollback的数据也来至于UNDO段。 结论：为了并发时读一致性成功，那么DML操作，肯定先写UNDO段。</p>
+<p><strong>1、什么是事务:</strong></p>
+<p>事务(Transaction)，顾名思义就是要做的或所做的事情，数据库事务指的则是作为单个逻辑工作单元执行的一系列操作（SQL语句）。这些操作要么全部执行，要么全部不执行。</p>
+<p><strong>2、为什么需要事务</strong></p>
+<p>把一系列sql放入一个事务中有两个目的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1、为数据库操作提供了一个从失败中恢复到正常状态的方法，同时提供了数据库即使在异常状态下仍能保持一致性的方法。</span><br><span class="line">2、当多个应用程序在并发访问数据库时，可以在这些应用程序之间提供一个隔离方法，以防止彼此的操作互相干扰。</span><br></pre></td></tr></table></figure>
+
+<p>当一个事务被提交给了DBMS（数据库管理系统），则DBMS需要确保该事务中的所有操作都成功完成且其结果被永久保存在数据库中，如果事务中有的操作没有成功完成，则事务中的所有操作都需要被回滚，回到事务执行前的状态（要么全执行，要么全都不执行）;同时，该事务对数据库或者其他事务的执行无影响，所有的事务都好像在独立的运行。</p>
+<p>但在现实情况下，失败的风险很高。在一个数据库事务的执行过程中，有可能会遇上事务操作失败、数据库系统/操作系统失败，甚至是存储介质失败等情况。这便需要DBMS对一个执行失败的事务执行恢复操作，将其数据库状态恢复到一致状态（数据的一致性得到保证的状态）。为了实现将数据库状态恢复到一致状态的功能，DBMS通常需要维护事务日志以追踪事务中所有影响数据库数据的操作。</p>
+<p>经典的银行转账例子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A账户转给B账户10元，数据库操作需要两步，第一步A账户减10元，第二步B账户加10元，如果没有事务并且在两步中间发生异常，</span><br><span class="line">就会导致A的账户少了10元，但B的账户没有变化，如果不能保证这两步操作统一，银行的转账业务也没法进行展开了。</span><br></pre></td></tr></table></figure>
+
+<p>事务管理是每个数据库（oracle、mysql、db等）都必须实现的。</p>
+<h3 id="二-事务的4个特性"><a href="#二-事务的4个特性" class="headerlink" title="二 事务的4个特性"></a>二 事务的4个特性</h3><p><em><strong>这四个特性通常称为ACID特性</strong></em></p>
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 1、原子性（Atomicity）</span><br><span class="line">事务作为一个整体被执行，包含在其中的对数据库的操作要么全部被执行，要么都不执行。</span><br><span class="line"></span><br><span class="line"># 2、一致性（Consistency）</span><br><span class="line">事务应确保数据库的状态从一个一致状态转变为另一个一致状态，例如转账行为中，一个人减了50元，另外一个人就应该加上这50元，而不能是40元。</span><br><span class="line">其他一致状态的含义是数据库中的数据应满足完整性约束,例如字段约束不能为负数，事务执行完毕后的该字段也同样不是负数</span><br><span class="line"></span><br><span class="line"># 3、隔离性（Isolation）</span><br><span class="line">多个事务并发执行时，一个事务的执行不应影响其他事务的执行。</span><br><span class="line"></span><br><span class="line"># 4、持久性（Durability）</span><br><span class="line">一个事务一旦提交，他对数据库的修改应该永久保存在数据库中。</span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p><strong>举例说明ACID</strong></p>
+<p>用一个常用的“A账户向B账号汇钱”的例子来说明如何通过数据库事务保证数据的准确性和完整性。熟悉关系型数据库事务的都知道从帐号A到帐号B需要6个操作：</p>
+<p>1、从A账号中把余额读出来（500）。<br>2、对A账号做减法操作（500-100）。<br>3、把结果写回A账号中（400）。<br>4、从B账号中把余额读出来（500）。<br>5、对B账号做加法操作（500+100）。<br>6、把结果写回B账号中（600）。</p>
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># 1、原子性：</span><br><span class="line">保证1-6所有过程要么都执行，要么都不执行。一旦在执行某一步骤的过程中发生问题，就需要执行回滚操作。 假如执行到第五步的时候，B账户突然不可用（比如被注销），那么之前的所有操作都应该回滚到执行事务之前的状态。</span><br><span class="line"></span><br><span class="line"># 2、一致性</span><br><span class="line">在转账之前，A和B的账户中共有500+500=1000元钱。在转账之后，A和B的账户中共有400+600=1000元。也就是说，数据的状态在执行该事务操作之后从一个状态改变到了另外一个状态。同时一致性还能保证账户余额不会变成负数等。</span><br><span class="line"></span><br><span class="line"># 3、隔离性</span><br><span class="line">在A向B转账的整个过程中，只要事务还没有提交（commit），查询A账户和B账户的时候，两个账户里面的钱的数量都不会有变化。</span><br><span class="line">如果在A给B转账的同时，有另外一个事务执行了C给B转账的操作并提交了，虽然A给B转账的事务里看不到最新修改的数据，但是当两个事务都提交完的时候，B账户里面的钱应该是A转给B的钱加上C转给B的钱再加上自己原有的钱。</span><br><span class="line"></span><br><span class="line"># 4、持久性</span><br><span class="line">一旦转账成功（事务提交），两个账户的里面的钱就会真的发生变化（会把数据写入数据库做持久化保存）！</span><br><span class="line"></span><br><span class="line"># 强调：原子性与隔离性</span><br><span class="line">一致性与原子性是密切相关的,原子性的破坏可能导致数据库的不一致，数据的一致性问题并不都和原子性有关。</span><br><span class="line">比如刚刚的例子，在第五步的时候，对B账户做加法时只加了50元。那么该过程可以符合原子性，但是数据的一致性就出现了问题。</span><br><span class="line"></span><br><span class="line">因此，事务的原子性与一致性缺一不可。</span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p>案例：验证事务的一致性 </p>
+<p>准备表：</p>
+<p><img src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="img"> sql</p>
+<p>实验：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>事务一</strong></th>
+<th><strong>事务二</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>步骤1</td>
+<td>start transaction;select * from employee where name = “egon”; – 对应的age = 18</td>
+<td>start transaction;select * from employee where name = “egon”; – 对应的age = 18</td>
+</tr>
+<tr>
+<td>步骤2</td>
+<td></td>
+<td>update employee set age=age+1 where name = “egon”;commit; – 修改egon的年龄为19岁，并提交select * from employee where name = “egon”; – 对应的age变为19</td>
+</tr>
+<tr>
+<td>步骤3</td>
+<td>– 在事务二commit之后，重新查询，发现对应的age 仍为18 select * from employee where name = “egon”;</td>
+<td></td>
+</tr>
+<tr>
+<td>步骤4</td>
+<td>– 虽然看到的age仍为18，但因为事务的一致性原则，其实此处的修改是在age=19的基础上进行的 update employee set age=age+1 where name = “egon”;  – 查看到age变为20select * from employee where name = “egon”;</td>
+<td></td>
+</tr>
+<tr>
+<td>步骤5</td>
+<td>commit;select * from employee where name = “egon”; – age =20</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="三-MySQL事务的3种运行模式"><a href="#三-MySQL事务的3种运行模式" class="headerlink" title="三 MySQL事务的3种运行模式"></a>三 MySQL事务的3种运行模式</h3><p>隐式 == 自动</p>
+<p>显式 == 手动</p>
+<p><strong>1、*<em>自动提交事务（隐式开启、隐式提交）*</em></strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">此乃mysql默认的事务运行模式</span><br><span class="line"></span><br><span class="line">mysql默认为每条sql开启事务，并且会在本条sql执行完毕后自动执行commit提交</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>*2、隐式事务**（隐式开启、显式提交）**</em>*</strong></p>
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">既然mysql默认是为每条sql都开启了事务并且在该sql运行完毕后会自动提交那么我只需要将自动提交关闭即可变成“隐式开启、显式提交”</span><br><span class="line"></span><br><span class="line">#1.临时关闭</span><br><span class="line">set autocommit =0;</span><br><span class="line">show variables like &#x27;autocommit&#x27;;  -- 查看</span><br><span class="line"></span><br><span class="line">#2.永久关闭</span><br><span class="line">[root@db01 ~]# vim /etc/my.cnf</span><br><span class="line">[mysqld]</span><br><span class="line">autocommit=0</span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p><strong><em>*3、显式事务**（显式开启、显式提交）**</em>*</strong></p>
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">手动开启的事务里默认不会自动提交所以我们可以将要执行的sql语句放在我们自己手动开启的事务里，如此便是显式开启、显式提交</span><br><span class="line">start transaction;</span><br><span class="line"></span><br><span class="line">update test.t1 set id=33 where name = &quot;jack&quot;;</span><br><span class="line"></span><br><span class="line">commit;</span><br><span class="line"></span><br><span class="line"># 注意，重要的事说三遍</span><br><span class="line">这种方式在当你使用commit或者rollback后，事务就结束了</span><br><span class="line">再次进入事务状态需要再次start transaction</span><br><span class="line"># 注意，重要的事说三遍</span><br><span class="line">这种方式在当你使用commit或者rollback后，事务就结束了</span><br><span class="line">再次进入事务状态需要再次start transaction</span><br><span class="line"></span><br><span class="line"># 注意，重要的事说三遍</span><br><span class="line">这种方式在当你使用commit或者rollback后，事务就结束了</span><br><span class="line">再次进入事务状态需要再次start transaction</span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p>无论事务是显式开启还是隐式开启，事务会在某些情况下被隐式提交</p>
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 隐式提交触发条件</span><br><span class="line">1.执行事务没有commit时，如果使用了DDL或者DCL会自动提交上一条事务</span><br><span class="line">2.执行事务没有commit时，如果你手动执行begin，会自动提交上一条事务</span><br><span class="line">3.执行事务没有commit时，如果执行锁表（lock tables）或者解锁（unlock tables），会自动提交上一条事务</span><br><span class="line">4.load data infile（导数据）会自动提交上一条事务</span><br><span class="line">5.select for update 加锁</span><br><span class="line">6.在autocommit=1的时候，会自动提交上一条事务</span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p><img src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="img"> 拓展阅读</p>
+<p>案例：</p>
+<p><img src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="img"> View Code</p>
+<p><img src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="img"> pymysql实现事务处理</p>
+<h3 id="四-事务保存点"><a href="#四-事务保存点" class="headerlink" title="四 事务保存点"></a>四 事务保存点</h3><p>savepoint和虚拟机中的快照类似，用于事务中，没设置一个savepoint就是一个保存点，当事务结束时会自动删除定义的所有保存点，在事务没有结束前可以回退到任意保存点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1、设置保存点savepoint 保存点名字</span><br><span class="line">2、回滚到某个保存点，该保存点之后的操作无效，rollback 某个保存点名</span><br><span class="line">3、取消全部事务，删除所有保存点rollback</span><br><span class="line"></span><br><span class="line"># 注意：rollback和commit都会结束掉事务，这之后无法再回退到某个保存点</span><br></pre></td></tr></table></figure>
+
+<p>实验</p>
+<p>1、设置保存点</p>
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from employee;</span><br><span class="line">+----+-----------+-----+</span><br><span class="line">| id | name      | age |</span><br><span class="line">+----+-----------+-----+</span><br><span class="line">|  1 | egon      |  16 |</span><br><span class="line">|  2 | alex      |  18 |</span><br><span class="line">|  3 | wupeiqi   |  18 |</span><br><span class="line">|  4 | yuanhao   |  18 |</span><br><span class="line">|  5 | liwenzhou |  20 |</span><br><span class="line">+----+-----------+-----+</span><br><span class="line">5 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; begin;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; update employee set name=&quot;EGON_NB&quot; where id=1;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line">Rows matched: 1  Changed: 1  Warnings: 0</span><br><span class="line"></span><br><span class="line">mysql&gt; update employee set name=&quot;ALEX_SB&quot; where id=2;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line">Rows matched: 1  Changed: 1  Warnings: 0</span><br><span class="line"></span><br><span class="line">mysql&gt; update employee set name=&quot;WXX&quot; where id=3;</span><br><span class="line">Query OK, 1 row affected (0.01 sec)</span><br><span class="line">Rows matched: 1  Changed: 1  Warnings: 0</span><br><span class="line"></span><br><span class="line">mysql&gt; savepoint one;  -- 保存点one</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select * from employee;</span><br><span class="line">+----+-----------+-----+</span><br><span class="line">| id | name      | age |</span><br><span class="line">+----+-----------+-----+</span><br><span class="line">|  1 | EGON_NB   |  16 |</span><br><span class="line">|  2 | ALEX_SB   |  18 |</span><br><span class="line">|  3 | WXX       |  18 |</span><br><span class="line">|  4 | yuanhao   |  18 |</span><br><span class="line">|  5 | liwenzhou |  20 |</span><br><span class="line">+----+-----------+-----+</span><br><span class="line">5 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; update employee set name=&quot;yxx_sb&quot; where id=4;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line">Rows matched: 1  Changed: 1  Warnings: 0</span><br><span class="line"></span><br><span class="line">mysql&gt; update employee set name=&quot;lxx&quot; where id=5;</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line">Rows matched: 1  Changed: 1  Warnings: 0</span><br><span class="line"></span><br><span class="line">mysql&gt; savepoint two;  -- 保存点two</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select * from employee;</span><br><span class="line">+----+---------+-----+</span><br><span class="line">| id | name    | age |</span><br><span class="line">+----+---------+-----+</span><br><span class="line">|  1 | EGON_NB |  16 |</span><br><span class="line">|  2 | ALEX_SB |  18 |</span><br><span class="line">|  3 | WXX     |  18 |</span><br><span class="line">|  4 | yxx_sb  |  18 |</span><br><span class="line">|  5 | lxx     |  20 |</span><br><span class="line">+----+---------+-----+</span><br><span class="line">5 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; insert into employee values(6,&quot;egonxxx&quot;,19);</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; savepoint three;  -- 保存点three</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select * from employee;</span><br><span class="line">+----+---------+-----+</span><br><span class="line">| id | name    | age |</span><br><span class="line">+----+---------+-----+</span><br><span class="line">|  1 | EGON_NB |  16 |</span><br><span class="line">|  2 | ALEX_SB |  18 |</span><br><span class="line">|  3 | WXX     |  18 |</span><br><span class="line">|  4 | yxx_sb  |  18 |</span><br><span class="line">|  5 | lxx     |  20 |</span><br><span class="line">|  6 | egonxxx |  19 |</span><br><span class="line">+----+---------+-----+</span><br><span class="line">6 rows in set (0.00 sec)</span><br><span class="line">mysql&gt; insert into employee values(7,&quot;egon666&quot;,20);</span><br><span class="line">Query OK, 1 row affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; savepoint four;  -- 保存点four</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select * from employee;</span><br><span class="line">+----+---------+-----+</span><br><span class="line">| id | name    | age |</span><br><span class="line">+----+---------+-----+</span><br><span class="line">|  1 | EGON_NB |  16 |</span><br><span class="line">|  2 | ALEX_SB |  18 |</span><br><span class="line">|  3 | WXX     |  18 |</span><br><span class="line">|  4 | yxx_sb  |  18 |</span><br><span class="line">|  5 | lxx     |  20 |</span><br><span class="line">|  6 | egonxxx |  19 |</span><br><span class="line">|  7 | egon666 |  20 |</span><br><span class="line">+----+---------+-----+</span><br><span class="line">7 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; </span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p>回退到指定保存点，注意一旦回退到某个保存点，该保存点之后的操作都撤销了包括保存点，例如</p>
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; rollback to three;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select * from employee;</span><br><span class="line">+----+---------+-----+</span><br><span class="line">| id | name    | age |</span><br><span class="line">+----+---------+-----+</span><br><span class="line">|  1 | EGON_NB |  16 |</span><br><span class="line">|  2 | ALEX_SB |  18 |</span><br><span class="line">|  3 | WXX     |  18 |</span><br><span class="line">|  4 | yxx_sb  |  18 |</span><br><span class="line">|  5 | lxx     |  20 |</span><br><span class="line">|  6 | egonxxx |  19 |</span><br><span class="line">+----+---------+-----+</span><br><span class="line">6 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; rollback to four;  -- 保存点four不复存在</span><br><span class="line">ERROR 1305 (42000): SAVEPOINT four does not exist</span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p>可以跨越n个保存点</p>
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; rollback to one;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select * from employee;</span><br><span class="line">+----+-----------+-----+</span><br><span class="line">| id | name      | age |</span><br><span class="line">+----+-----------+-----+</span><br><span class="line">|  1 | EGON_NB   |  16 |</span><br><span class="line">|  2 | ALEX_SB   |  18 |</span><br><span class="line">|  3 | WXX       |  18 |</span><br><span class="line">|  4 | yuanhao   |  18 |</span><br><span class="line">|  5 | liwenzhou |  20 |</span><br><span class="line">+----+-----------+-----+</span><br><span class="line">5 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p>回退所有</p>
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; rollback;</span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select * from employee;</span><br><span class="line">+----+-----------+-----+</span><br><span class="line">| id | name      | age |</span><br><span class="line">+----+-----------+-----+</span><br><span class="line">|  1 | egon      |  16 |</span><br><span class="line">|  2 | alex      |  18 |</span><br><span class="line">|  3 | wupeiqi   |  18 |</span><br><span class="line">|  4 | yuanhao   |  18 |</span><br><span class="line">|  5 | liwenzhou |  20 |</span><br><span class="line">+----+-----------+-----+</span><br><span class="line">5 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p>最后总结一下事务的控制语句</p>
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">START TRANSACTION（或 BEGIN）：显式开始一个新事务                #开启事务</span><br><span class="line">SAVEPOINT：分配事务过程中的一个位置，以供将来引用                  #临时存档</span><br><span class="line">COMMIT：永久记录当前事务所做的更改                               #提交</span><br><span class="line">ROLLBACK：取消当前事务所做的更改                                #回滚</span><br><span class="line">ROLLBACK TO SAVEPOINT：取消在 savepoint 之后执行的更改          #回到存档点</span><br><span class="line">RELEASE SAVEPOINT：删除 savepoint 标识符                       #删除临时存档</span><br><span class="line">SET AUTOCOMMIT：为当前连接禁用或启用默认 autocommit 模式</span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<h3 id="五-事务的使用原则"><a href="#五-事务的使用原则" class="headerlink" title="五 事务的使用原则"></a>五 事务的使用原则</h3><ol>
+<li><strong>保持事务短小</strong></li>
+<li><strong>尽量避免事务中rollback</strong></li>
+<li><strong>尽量避免savepoint</strong></li>
+<li><strong>显式声明打开事务</strong></li>
+<li><strong>默认情况下，依赖于悲观锁，为吞吐量要求苛刻的事务考虑乐观锁</strong></li>
+<li><strong>锁的行越少越好，锁的时间越短越好</strong></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据库//" class="article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/09/02/%E4%BA%8B%E5%8A%A1/">展开全文 >></a>
         </p>
       
 
@@ -668,7 +1907,7 @@
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -849,6 +2088,30 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
               </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Docker安装</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ES</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Python技术亮点</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">SQL过关</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
@@ -924,10 +2187,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           
             <li class="search-li">
               <a href="http://liushao.vip/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>刘洋</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="https://huang_zhao.gitee.io/task/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>黄钊</a>
             </li>
           
         </ul>

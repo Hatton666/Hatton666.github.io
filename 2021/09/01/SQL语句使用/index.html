@@ -8,14 +8,17 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>SQL语句使用 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
+  <meta name="description" content="引言做为一个web开发者，不与数据库打交道几乎是不可能的！由此可见，掌握SQL语句对于一个web开发人员来说是多么的重要。下面是我在整理电脑时，找到的资料，觉得还不错就拿出来与大家分享。不废话了，好不好你看了就知道。进入主题，本文的主要内容如下：  问题背景  SQL查询54问？">
+<meta property="og:type" content="article">
 <meta property="og:title" content="SQL语句使用">
 <meta property="og:url" content="http://example.com/2021/09/01/SQL%E8%AF%AD%E5%8F%A5%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="引言做为一个web开发者，不与数据库打交道几乎是不可能的！由此可见，掌握SQL语句对于一个web开发人员来说是多么的重要。下面是我在整理电脑时，找到的资料，觉得还不错就拿出来与大家分享。不废话了，好不好你看了就知道。进入主题，本文的主要内容如下：  问题背景  SQL查询54问？">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-09-01T15:17:15.000Z">
-<meta property="article:modified_time" content="2021-09-01T15:17:15.903Z">
+<meta property="article:modified_time" content="2021-09-01T15:25:44.104Z">
 <meta property="article:author" content="Vivek">
+<meta property="article:tag" content="SQL过关">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -210,7 +213,507 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a><strong>引言</strong></h4><p>做为一个web开发者，不与数据库打交道几乎是不可能的！由此可见，掌握SQL语句对于一个web开发人员来说是多么的重要。下面是我在整理电脑时，找到的资料，觉得还不错就拿出来与大家分享。不废话了，好不好你看了就知道。进入主题，本文的主要内容如下：</p>
+<ul>
+<li><p>问题背景</p>
+</li>
+<li><p>SQL查询54问？</p>
+<span id="more"></span></li>
+</ul>
+<h4 id="1、问题背景"><a href="#1、问题背景" class="headerlink" title="1、问题背景"></a><strong>1、问题背景</strong></h4><p>本文中的SQL语句都是基于下面几张表的，这也是比较经典的用于数据库教学的数据库例子。</p>
+<p>（1）/*员工人事表employee */</p>
+<table>
+<thead>
+<tr>
+<th>emp_no</th>
+<th>char(5)</th>
+<th>Not null</th>
+<th><strong>primary key</strong></th>
+<th>员工编号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>emp_name</td>
+<td>char(10)</td>
+<td>Not null</td>
+<td></td>
+<td>员工姓名</td>
+</tr>
+<tr>
+<td>sex</td>
+<td>char(1)</td>
+<td>Not null</td>
+<td></td>
+<td>性别</td>
+</tr>
+<tr>
+<td>dept</td>
+<td>char(4)</td>
+<td>Not null</td>
+<td></td>
+<td>所属部门</td>
+</tr>
+<tr>
+<td>title</td>
+<td>char(6)</td>
+<td>Not null</td>
+<td></td>
+<td>职称</td>
+</tr>
+<tr>
+<td>date_hired</td>
+<td>datetime</td>
+<td>Not null</td>
+<td></td>
+<td>到职日</td>
+</tr>
+<tr>
+<td>birthday</td>
+<td>datetime</td>
+<td>Null</td>
+<td></td>
+<td>生日</td>
+</tr>
+<tr>
+<td>salary</td>
+<td>int</td>
+<td>Not null</td>
+<td></td>
+<td>薪水</td>
+</tr>
+<tr>
+<td>addr</td>
+<td>char(50)</td>
+<td>null</td>
+<td></td>
+<td>住址</td>
+</tr>
+<tr>
+<td>Mod­_date</td>
+<td>datetime</td>
+<td>Default(getdate())</td>
+<td>操作者</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>（2）/*客户表customer */</p>
+<table>
+<thead>
+<tr>
+<th>cust_id</th>
+<th>char(5)</th>
+<th>Not null</th>
+<th><strong>primary key</strong></th>
+<th>客户号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cust_name</td>
+<td>char(20)</td>
+<td>Not null,</td>
+<td></td>
+<td>客户名称</td>
+</tr>
+<tr>
+<td>addr</td>
+<td>char(40)</td>
+<td>Not null,</td>
+<td></td>
+<td>客户住址</td>
+</tr>
+<tr>
+<td>tel_no</td>
+<td>char(10)</td>
+<td>Not null,</td>
+<td></td>
+<td>客户电话</td>
+</tr>
+<tr>
+<td>zip</td>
+<td>char(6)</td>
+<td>null</td>
+<td></td>
+<td>邮政编码</td>
+</tr>
+</tbody></table>
+<p>（3）/*销售主表sales */</p>
+<table>
+<thead>
+<tr>
+<th>order_no</th>
+<th>int</th>
+<th>Not null</th>
+<th><strong>primary key</strong></th>
+<th>订单编号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cust_id</td>
+<td>char(5)</td>
+<td>Not null,</td>
+<td></td>
+<td>客户号</td>
+</tr>
+<tr>
+<td>sale_id</td>
+<td>char(5)</td>
+<td>Not null,</td>
+<td></td>
+<td>业务员编号</td>
+</tr>
+<tr>
+<td>tot_amt</td>
+<td>numeric(9,2)</td>
+<td>Not null,</td>
+<td></td>
+<td>订单金额</td>
+</tr>
+<tr>
+<td>order_date</td>
+<td>datetime</td>
+<td>Not null,</td>
+<td></td>
+<td>订货日期</td>
+</tr>
+<tr>
+<td>ship_date</td>
+<td>datetime</td>
+<td>Not null,</td>
+<td></td>
+<td>出货日期</td>
+</tr>
+<tr>
+<td>invoice_no</td>
+<td>char(10)</td>
+<td>Not null</td>
+<td></td>
+<td>发票号码</td>
+</tr>
+</tbody></table>
+<p>（4）/*销货明细表sale_item */</p>
+<table>
+<thead>
+<tr>
+<th>order_no</th>
+<th>int</th>
+<th>Not null,</th>
+<th><strong>primary key</strong></th>
+<th>订单编号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>prod_id</td>
+<td>char(5)</td>
+<td>Not null,</td>
+<td>产品编号</td>
+<td></td>
+</tr>
+<tr>
+<td>qty</td>
+<td>int</td>
+<td>Not null</td>
+<td></td>
+<td>销售数量</td>
+</tr>
+<tr>
+<td>unit_price</td>
+<td>numeric(7,2)</td>
+<td>Not null</td>
+<td></td>
+<td>单价</td>
+</tr>
+<tr>
+<td>order_date</td>
+<td>datetime</td>
+<td>null</td>
+<td></td>
+<td>订单日期</td>
+</tr>
+</tbody></table>
+<p>（5）/*产品名称表product */</p>
+<table>
+<thead>
+<tr>
+<th>prod_id</th>
+<th>char(5)</th>
+<th>Not null</th>
+<th><strong>primary key</strong></th>
+<th>产品编号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>prod_name</td>
+<td>char(20)</td>
+<td>Not null</td>
+<td></td>
+<td>产品名称</td>
+</tr>
+</tbody></table>
+<h4 id="2、各种查询的SQL语句"><a href="#2、各种查询的SQL语句" class="headerlink" title="2、各种查询的SQL语句"></a><strong>2、各种查询的SQL语句</strong></h4><p>问题1、查找员工的编号、姓名、部门和出生日期，如果出生日期为空值，显示日期不详,并按部门排序输出,日期格式为yyyy-mm-dd。</p>
+<p>问题2、查找与喻自强在同一个单位的员工姓名、性别、部门和职称</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select emp_no ,emp_name ,dept ,</span><br><span class="line">       isnull(convert(char(<span class="number">10</span>),birthday,<span class="number">120</span>),<span class="string">&#x27;日期不详&#x27;</span>) birthday</span><br><span class="line"><span class="keyword">from</span> employee</span><br><span class="line">order by dept</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题3、按部门进行汇总，统计每个部门的总工资</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select dept,<span class="built_in">sum</span>(salary)</span><br><span class="line"><span class="keyword">from</span> employee</span><br><span class="line">group by dept</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题4、查找商品名称为14寸显示器商品的销售情况，显示该商品的编号、销售数量、单价和金额</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select a.prod_id,qty,unit_price,unit_price*qty totprice</span><br><span class="line"><span class="keyword">from</span> sale_item a,product b</span><br><span class="line">where a.prod_id=b.prod_id <span class="keyword">and</span> prod_name=<span class="string">&#x27;14寸显示器&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题5、在销售明细表中按产品编号进行汇总，统计每种产品的销售数量和金额</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select prod_id,<span class="built_in">sum</span>(qty) totqty,<span class="built_in">sum</span>(qty*unit_price) totprice</span><br><span class="line"><span class="keyword">from</span> sale_item</span><br><span class="line">group by prod_id</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题6、使用convert函数按客户编号统计每个客户1996年的订单总金额</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select cust_id,<span class="built_in">sum</span>(tot_amt) totprice</span><br><span class="line"><span class="keyword">from</span> sales</span><br><span class="line">where convert(char(<span class="number">4</span>),order_date,<span class="number">120</span>)=<span class="string">&#x27;1996&#x27;</span></span><br><span class="line">group by cust_id</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题7、查找有销售记录的客户编号、名称和订单总额</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select a.cust_id,cust_name,<span class="built_in">sum</span>(tot_amt) totprice</span><br><span class="line"><span class="keyword">from</span> customer a,sales b</span><br><span class="line">where a.cust_id=b.cust_id</span><br><span class="line">group by a.cust_id,cust_name</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题8、查找在1997年中有销售记录的客户编号、名称和订单总额</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select a.cust_id,cust_name,<span class="built_in">sum</span>(tot_amt) totprice</span><br><span class="line"><span class="keyword">from</span> customer a,sales b</span><br><span class="line">where a.cust_id=b.cust_id <span class="keyword">and</span> convert(char(<span class="number">4</span>),order_date,<span class="number">120</span>)=<span class="string">&#x27;1997&#x27;</span></span><br><span class="line">group by a.cust_id,cust_name</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题9、查找一次销售最大的销售记录</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select order_no,cust_id,sale_id,tot_amt</span><br><span class="line"><span class="keyword">from</span> sales</span><br><span class="line">where tot_amt=</span><br><span class="line">   (select <span class="built_in">max</span>(tot_amt)</span><br><span class="line">    <span class="keyword">from</span> sales)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题10、查找至少有3次销售的业务员名单和销售日期</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select emp_name,order_date</span><br><span class="line"><span class="keyword">from</span> employee a,sales b </span><br><span class="line">where emp_no=sale_id <span class="keyword">and</span> a.emp_no <span class="keyword">in</span></span><br><span class="line">  (select sale_id</span><br><span class="line">   <span class="keyword">from</span> sales</span><br><span class="line">   group by sale_id</span><br><span class="line">   having count(*)&gt;=<span class="number">3</span>)</span><br><span class="line">order by emp_name</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题11、用存在量词查找没有订货记录的客户名称</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">select cust_name</span><br><span class="line"><span class="keyword">from</span> customer a</span><br><span class="line">where <span class="keyword">not</span> exists</span><br><span class="line">   (select *</span><br><span class="line">    <span class="keyword">from</span> sales b</span><br><span class="line">    where a.cust_id=b.cust_id)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题12、使用左外连接查找每个客户的客户编号、名称、订货日期、订单金额；订货日期不要显示时间，日期格式为yyyy-mm-dd；按客户编号排序，同一客户再按订单降序排序输出</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select a.cust_id,cust_name,convert(char(<span class="number">10</span>),order_date,<span class="number">120</span>),tot_amt</span><br><span class="line"><span class="keyword">from</span> customer a left outer join sales b on a.cust_id=b.cust_id</span><br><span class="line">order by a.cust_id,tot_amt desc</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题13、查找16M DRAM的销售情况，要求显示相应的销售员的姓名、性别，销售日期、销售数量和金额，其中性别用男、女表示</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">select emp_name 姓名, 性别= case a.sex  when <span class="string">&#x27;m&#x27;</span> then <span class="string">&#x27;男&#x27;</span></span><br><span class="line">                                       when <span class="string">&#x27;f&#x27;</span> then <span class="string">&#x27;女&#x27;</span> </span><br><span class="line">                                       <span class="keyword">else</span> <span class="string">&#x27;未&#x27;</span></span><br><span class="line">                                       end,</span><br><span class="line">        销售日期= isnull(convert(char(<span class="number">10</span>),c.order_date,<span class="number">120</span>),<span class="string">&#x27;日期不详&#x27;</span>),</span><br><span class="line">        qty 数量, qty*unit_price <span class="keyword">as</span> 金额</span><br><span class="line"><span class="keyword">from</span> employee a, sales b, sale_item c,product d</span><br><span class="line">where d.prod_name=<span class="string">&#x27;16M DRAM&#x27;</span> <span class="keyword">and</span> d.pro_id=c.prod_id <span class="keyword">and</span></span><br><span class="line">      a.emp_no=b.sale_id <span class="keyword">and</span> b.order_no=c.order_no</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题14、查找每个人的销售记录，要求显示销售员的编号、姓名、性别、产品名称、数量、单价、金额和销售日期</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select emp_no 编号,emp_name 姓名, 性别= case a.sex when <span class="string">&#x27;m&#x27;</span> then <span class="string">&#x27;男&#x27;</span></span><br><span class="line">                                       when <span class="string">&#x27;f&#x27;</span> then <span class="string">&#x27;女&#x27;</span> </span><br><span class="line">                                       <span class="keyword">else</span> <span class="string">&#x27;未&#x27;</span></span><br><span class="line">                                       end,</span><br><span class="line">      prod_name 产品名称,销售日期= isnull(convert(char(<span class="number">10</span>),c.order_date,<span class="number">120</span>),<span class="string">&#x27;日期不详&#x27;</span>),</span><br><span class="line">      qty 数量, qty*unit_price <span class="keyword">as</span> 金额</span><br><span class="line"><span class="keyword">from</span> employee a left outer join sales b on a.emp_no=b.sale_id , sale_item c,product d</span><br><span class="line">where d.pro_id=c.prod_id <span class="keyword">and</span> b.order_no=c.order_no</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题15、查找销售金额最大的客户名称和总货款</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">select cust_name,d.cust_sum</span><br><span class="line"><span class="keyword">from</span>   customer a,</span><br><span class="line">       (select cust_id,cust_sum</span><br><span class="line">        <span class="keyword">from</span> (select cust_id, <span class="built_in">sum</span>(tot_amt) <span class="keyword">as</span> cust_sum</span><br><span class="line">              <span class="keyword">from</span> sales</span><br><span class="line">              group by cust_id ) b</span><br><span class="line">        where b.cust_sum = </span><br><span class="line">               ( select <span class="built_in">max</span>(cust_sum)</span><br><span class="line">                 <span class="keyword">from</span> (select cust_id, <span class="built_in">sum</span>(tot_amt) <span class="keyword">as</span> cust_sum</span><br><span class="line">                       <span class="keyword">from</span> sales</span><br><span class="line">                       group by cust_id ) c )</span><br><span class="line">        ) d</span><br><span class="line">where a.cust_id=d.cust_id</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题16、查找销售总额少于1000元的销售员编号、姓名和销售额</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">select emp_no,emp_name,d.sale_sum</span><br><span class="line"><span class="keyword">from</span>   employee a,</span><br><span class="line">       (select sale_id,sale_sum</span><br><span class="line">        <span class="keyword">from</span> (select sale_id, <span class="built_in">sum</span>(tot_amt) <span class="keyword">as</span> sale_sum</span><br><span class="line">              <span class="keyword">from</span> sales</span><br><span class="line">              group by sale_id ) b</span><br><span class="line">        where b.sale_sum &lt;<span class="number">1000</span>               </span><br><span class="line">        ) d</span><br><span class="line">where a.emp_no=d.sale_id</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题17、查找至少销售了3种商品的客户编号、客户名称、商品编号、商品名称、数量和金额</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">select a.cust_id,cust_name,b.prod_id,prod_name,d.qty,d.qty*d.unit_price</span><br><span class="line"><span class="keyword">from</span> customer a, product b, sales c, sale_item d</span><br><span class="line">where a.cust_id=c.cust_id <span class="keyword">and</span> d.prod_id=b.prod_id <span class="keyword">and</span> </span><br><span class="line">      c.order_no=d.order_no <span class="keyword">and</span> a.cust_id <span class="keyword">in</span> (</span><br><span class="line">      select cust_id</span><br><span class="line">      <span class="keyword">from</span>  (select cust_id,count(distinct prod_id) prodid</span><br><span class="line">             <span class="keyword">from</span> (select cust_id,prod_id</span><br><span class="line">                   <span class="keyword">from</span> sales e,sale_item f</span><br><span class="line">                   where e.order_no=f.order_no) g</span><br><span class="line">             group by cust_id</span><br><span class="line">             having count(distinct prod_id)&gt;=<span class="number">3</span>) h )</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题18、查找至少与世界技术开发公司销售相同的客户编号、名称和商品编号、商品名称、数量和金额</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">select a.cust_id,cust_name,d.prod_id,prod_name,qty,qty*unit_price</span><br><span class="line"><span class="keyword">from</span> customer a, product b, sales c, sale_item d</span><br><span class="line">where a.cust_id=c.cust_id <span class="keyword">and</span> d.prod_id=b.prod_id <span class="keyword">and</span> </span><br><span class="line">      c.order_no=d.order_no  <span class="keyword">and</span> <span class="keyword">not</span> exists</span><br><span class="line">  (select f.*</span><br><span class="line">   <span class="keyword">from</span> customer x ,sales e, sale_item f</span><br><span class="line">   where cust_name=<span class="string">&#x27;世界技术开发公司&#x27;</span> <span class="keyword">and</span> x.cust_id=e.cust_id <span class="keyword">and</span></span><br><span class="line">         e.order_no=f.order_no <span class="keyword">and</span> <span class="keyword">not</span> exists</span><br><span class="line">           ( select g.*</span><br><span class="line">             <span class="keyword">from</span> sale_item g, sales  h</span><br><span class="line">             where g.prod_id = f.prod_id <span class="keyword">and</span> g.order_no=h.order_no <span class="keyword">and</span></span><br><span class="line">                   h.cust_id=a.cust_id)</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题19、查找表中所有姓刘的职工的工号，部门，薪水</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select emp_no,emp_name,dept,salary</span><br><span class="line"><span class="keyword">from</span> employee</span><br><span class="line">where emp_name like <span class="string">&#x27;刘%&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题20、查找所有定单金额高于20000的所有客户编号</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select cust_id</span><br><span class="line"><span class="keyword">from</span> sales</span><br><span class="line">where tot_amt&gt;<span class="number">20000</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题21、统计表中员工的薪水在40000-60000之间的人数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select count(*)<span class="keyword">as</span> 人数</span><br><span class="line"><span class="keyword">from</span> employee</span><br><span class="line">where salary between <span class="number">40000</span> <span class="keyword">and</span> <span class="number">60000</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题22、查询表中的同一部门的职工的平均工资，但只查询＂住址＂是＂上海市＂的员工</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select avg(salary) avg_sal,dept </span><br><span class="line"><span class="keyword">from</span> employee </span><br><span class="line">where addr like <span class="string">&#x27;上海市%&#x27;</span></span><br><span class="line">group by dept</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题23、将表中住址为”上海市”的员工住址改为”北京市”</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">update employee  </span><br><span class="line"><span class="built_in">set</span> addr like <span class="string">&#x27;北京市&#x27;</span></span><br><span class="line">where addr like <span class="string">&#x27;上海市&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题24、查找业务部或会计部的女员工的基本信息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select emp_no,emp_name,dept</span><br><span class="line"><span class="keyword">from</span> employee </span><br><span class="line">where sex=<span class="string">&#x27;F&#x27;</span><span class="keyword">and</span> dept <span class="keyword">in</span> (<span class="string">&#x27;业务&#x27;</span>,<span class="string">&#x27;会计&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题25、显示每种产品的销售金额总和，并依销售金额由大到小输出</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select prod_id ,<span class="built_in">sum</span>(qty*unit_price)</span><br><span class="line"><span class="keyword">from</span> sale_item </span><br><span class="line">group by prod_id</span><br><span class="line">order by <span class="built_in">sum</span>(qty*unit_price) desc</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题26、选取编号界于‘C0001’和‘C0004’的客户编号、客户名称、客户地址。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select CUST_ID,cust_name,addr</span><br><span class="line"><span class="keyword">from</span> customer </span><br><span class="line">where cust_id between <span class="string">&#x27;C0001&#x27;</span> AND <span class="string">&#x27;C0004&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题27、计算出一共销售了几种产品</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select count(distinct prod_id) <span class="keyword">as</span> <span class="string">&#x27;共销售产品数&#x27;</span></span><br><span class="line"><span class="keyword">from</span> sale_item</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题28、将业务部员工的薪水上调3%</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">update employee</span><br><span class="line"><span class="built_in">set</span> salary=salary*<span class="number">1.03</span></span><br><span class="line">where dept=<span class="string">&#x27;业务&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题29、由employee表中查找出薪水最低的员工信息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select *</span><br><span class="line"><span class="keyword">from</span> employee</span><br><span class="line">where salary=</span><br><span class="line">       (select <span class="built_in">min</span>(salary )</span><br><span class="line">        <span class="keyword">from</span> employee )</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题30、使用join查询客户姓名为”客户丙”所购货物的”客户名称”,”定单金额”,”定货日期”,”电话号码”</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select a.cust_id,b.tot_amt,b.order_date,a.tel_no</span><br><span class="line"><span class="keyword">from</span> customer a join sales b</span><br><span class="line">on a.cust_id=b.cust_id <span class="keyword">and</span> cust_name like <span class="string">&#x27;客户丙&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题31、由sales表中查找出订单金额大于“E0013业务员在1996/10/15这天所接每一张订单的金额”的所有订单</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select *</span><br><span class="line"><span class="keyword">from</span> sales</span><br><span class="line">where tot_amt&gt;<span class="built_in">all</span></span><br><span class="line">       (select tot_amt </span><br><span class="line">        <span class="keyword">from</span> sales </span><br><span class="line">        where sale_id=<span class="string">&#x27;E0013&#x27;</span><span class="keyword">and</span> order_date=<span class="string">&#x27;1996/10/15&#x27;</span>)</span><br><span class="line">order by tot_amt</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题32、计算’P0001’产品的平均销售单价</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select avg(unit_price)</span><br><span class="line"><span class="keyword">from</span> sale_item</span><br><span class="line">where prod_id=<span class="string">&#x27;P0001&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题33、找出公司女员工所接的定单</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select sale_id,tot_amt</span><br><span class="line"><span class="keyword">from</span> sales</span><br><span class="line">where sale_id <span class="keyword">in</span> </span><br><span class="line">(select sale_id <span class="keyword">from</span> employee</span><br><span class="line">where sex=<span class="string">&#x27;F&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题34、找出同一天进入公司服务的员工</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select a.emp_no,a.emp_name,a.date_hired</span><br><span class="line"><span class="keyword">from</span> employee a</span><br><span class="line">join employee b</span><br><span class="line">on (a.emp_no!=b.emp_no <span class="keyword">and</span> a.date_hired=b.date_hired)</span><br><span class="line">order by a.date_hired</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题35、找出目前业绩超过232000元的员工编号和姓名</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select emp_no,emp_name</span><br><span class="line"><span class="keyword">from</span> employee </span><br><span class="line">where emp_no <span class="keyword">in</span></span><br><span class="line">(select sale_id</span><br><span class="line"><span class="keyword">from</span> sales </span><br><span class="line">group by sale_id</span><br><span class="line">having <span class="built_in">sum</span>(tot_amt)&lt;<span class="number">232000</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题36、查询出employee表中所有女职工的平均工资和住址在＂上海市＂的所有女职工的平均工资</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select avg(salary)</span><br><span class="line"><span class="keyword">from</span> employee</span><br><span class="line">where sex like <span class="string">&#x27;f&#x27;</span></span><br><span class="line">union</span><br><span class="line">select avg(salary)</span><br><span class="line"><span class="keyword">from</span> employee</span><br><span class="line">where sex like <span class="string">&#x27;f&#x27;</span> <span class="keyword">and</span> addr like <span class="string">&#x27;上海市%&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题37、在employee表中查询薪水超过员工平均薪水的员工信息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Select * <span class="keyword">from</span> employee where salary&gt;(select avg(salary)  <span class="keyword">from</span> employee)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题38、找出目前销售业绩超过40000元的业务员编号及销售业绩，并按销售业绩从大到小排序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Select sale_id ,<span class="built_in">sum</span>(tot_amt)</span><br><span class="line"><span class="keyword">from</span> sales </span><br><span class="line">group by sale_id </span><br><span class="line">having <span class="built_in">sum</span>(tot_amt)&gt;<span class="number">40000</span></span><br><span class="line">order by <span class="built_in">sum</span>(tot_amt) desc</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题39、找出公司男业务员所接且订单金额超过2000元的订单号及订单金额</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Select order_no,tot_amt</span><br><span class="line">From sales ,employee</span><br><span class="line">Where sale_id=emp_no <span class="keyword">and</span> sex=<span class="string">&#x27;M&#x27;</span> <span class="keyword">and</span> tot_amt&gt;<span class="number">2000</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题40、查询sales表中订单金额最高的订单号及订单金额</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Select order_no,tot_amt <span class="keyword">from</span> sales where tot_amt=(select <span class="built_in">max</span>(tot_amt)  <span class="keyword">from</span> sales)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题41、查询在每张订单中订购金额超过24000元的客户名及其地址</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Select cust_name,addr <span class="keyword">from</span> customer a,sales b where a.cust_id=b.cust_id <span class="keyword">and</span> tot_amt&gt;<span class="number">24000</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题42、求出每位客户的总订购金额，显示出客户号及总订购金额，并按总订购金额降序排列</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Select cust_id,<span class="built_in">sum</span>(tot_amt) <span class="keyword">from</span> sales</span><br><span class="line">Group by cust_id </span><br><span class="line">Order by <span class="built_in">sum</span>(tot_amt) desc</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题43、求每位客户订购的每种产品的总数量及平均单价，并按客户号，产品号从小到大排列</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Select cust_id,prod_id,<span class="built_in">sum</span>(qty),<span class="built_in">sum</span>(qty*unit_price)/<span class="built_in">sum</span>(qty)</span><br><span class="line">From sales a, sale_item b</span><br><span class="line">Where a.order_no=b.order_no</span><br><span class="line">Group by cust_id,prod_id</span><br><span class="line">Order by cust_id,prod_id</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题44、查询订购了三种以上产品的订单号</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Select order_no <span class="keyword">from</span> sale_item</span><br><span class="line">Group by order_no</span><br><span class="line">Having count(*)&gt;<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题45、查询订购的产品至少包含了订单10003中所订购产品的订单</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Select  distinct order_no</span><br><span class="line">From sale_item a</span><br><span class="line">Where  order_no&lt;&gt;<span class="string">&#x27;10003&#x27;</span><span class="keyword">and</span>  <span class="keyword">not</span> exists ( </span><br><span class="line">       Select *  <span class="keyword">from</span> sale_item b where order_no =<span class="string">&#x27;10003&#x27;</span>  <span class="keyword">and</span> <span class="keyword">not</span> exists </span><br><span class="line">              (select *  <span class="keyword">from</span> sale_item c where c.order_no=a.order_no  <span class="keyword">and</span>  c.prod_id=b.prod_id))</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题46、在sales表中查找出订单金额大于“E0013业务员在1996/11/10这天所接每一张订单的金额”的所有订单，并显示承接这些订单的业务员和该订单的金额</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Select sale_id,tot_amt </span><br><span class="line"><span class="keyword">from</span> sales</span><br><span class="line">where tot_amt&gt;<span class="built_in">all</span>(select tot_amt <span class="keyword">from</span> sales where sale_id=<span class="string">&#x27;E0013&#x27;</span> <span class="keyword">and</span> order_date=<span class="string">&#x27;1996/11/10&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题47、查询末承接业务的员工的信息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Select *</span><br><span class="line">From employee a</span><br><span class="line">Where <span class="keyword">not</span> exists </span><br><span class="line">         (select * <span class="keyword">from</span>  sales b where  a.emp_no=b.sale_id)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题48、查询来自上海市的客户的姓名，电话、订单号及订单金额</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Select cust_name,tel_no,order_no,tot_amt</span><br><span class="line">From customer a ,sales b</span><br><span class="line">Where a.cust_id=b.cust_id <span class="keyword">and</span> addr=<span class="string">&#x27;上海市&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题49、查询每位业务员各个月的业绩，并按业务员编号、月份降序排序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Select sale_id,month(order_date), <span class="built_in">sum</span>(tot_amt) </span><br><span class="line"><span class="keyword">from</span> sales </span><br><span class="line">group by sale_id,month(order_date)</span><br><span class="line">order by sale_id,month(order_date) desc</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题50、求每种产品的总销售数量及总销售金额，要求显示出产品编号、产品名称，总数量及总金额，并按产品号从小到大排列</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Select a.prod_id,prod_name,<span class="built_in">sum</span>(qty),<span class="built_in">sum</span>(qty*unit_price)</span><br><span class="line">From sale_item a,product b</span><br><span class="line">Where a.prod_id=b.prod_id </span><br><span class="line">Group by a.prod_id,prod_name</span><br><span class="line">Order by a.prod_id</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题51、查询总订购金额超过’C0002’客户的总订购金额的客户号，客户名及其住址</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Select cust_id, cust_name,addr</span><br><span class="line">From customer</span><br><span class="line">Where cust_id  <span class="keyword">in</span> (select cust_id <span class="keyword">from</span> sales </span><br><span class="line">Group by cust_id</span><br><span class="line">Having <span class="built_in">sum</span>(tot_amt)&gt;</span><br><span class="line">        (Select <span class="built_in">sum</span>(tot_amt) <span class="keyword">from</span> sales  where cust_id=<span class="string">&#x27;C0002&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题52、查询业绩最好的的业务员号、业务员名及其总销售金额</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">select emp_no,emp_name,<span class="built_in">sum</span>(tot_amt)</span><br><span class="line"><span class="keyword">from</span> employee a,sales b</span><br><span class="line">where a.emp_no=b.sale_id</span><br><span class="line">group by emp_no,emp_name</span><br><span class="line">having <span class="built_in">sum</span>(tot_amt)=</span><br><span class="line">         (select <span class="built_in">max</span>(totamt)</span><br><span class="line">          <span class="keyword">from</span> (select sale_id,<span class="built_in">sum</span>(tot_amt) totamt</span><br><span class="line">               <span class="keyword">from</span> sales</span><br><span class="line">               group by sale_id) c)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题53、查询每位客户所订购的每种产品的详细清单，要求显示出客户号，客户名，产品号，产品名，数量及单价</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select a.cust_id, cust_name,c.prod_id,prod_name,qty, unit_price</span><br><span class="line"><span class="keyword">from</span> customer a,sales b, sale_item c ,product d</span><br><span class="line">where a.cust_id=b.cust_id <span class="keyword">and</span> b.order_no=c.order_no <span class="keyword">and</span> c.prod_id=d.prod_id</span><br></pre></td></tr></table></figure>
+
+
+
+<p>问题54、求各部门的平均薪水，要求按平均薪水从小到大排序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select dept,avg(salary) <span class="keyword">from</span> employee group by dept order by avg(salary)</span><br></pre></td></tr></table></figure>
+
+
       
 
       
@@ -249,7 +752,29 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SQL过关</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据库//" class="article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -313,6 +838,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2021/09/02/Redis%E5%9F%BA%E7%A1%80-0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Redis基础
+        
+      </div>
+    </a>
+  
   
     <a href="/2021/08/27/CMDB/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">CMDB</div>
@@ -342,7 +876,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E9%97%AE%E9%A2%98%E8%83%8C%E6%99%AF"><span class="toc-number">2.</span> <span class="toc-text">1、问题背景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E5%90%84%E7%A7%8D%E6%9F%A5%E8%AF%A2%E7%9A%84SQL%E8%AF%AD%E5%8F%A5"><span class="toc-number">3.</span> <span class="toc-text">2、各种查询的SQL语句</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -563,6 +1097,30 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
               </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Docker安装</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ES</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Python技术亮点</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">SQL过关</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
@@ -638,10 +1196,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           
             <li class="search-li">
               <a href="http://liushao.vip/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>刘洋</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="https://huang_zhao.gitee.io/task/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>黄钊</a>
             </li>
           
         </ul>
