@@ -176,194 +176,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-数据库安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/09/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E8%A3%85/">MySQL数据库安装</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2021/09/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E8%A3%85/" class="archive-article-date">
-  	<time datetime="2021-09-01T23:54:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-02</time>
-</a>
-
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="MySQL数据库多种安装方式"><a href="#MySQL数据库多种安装方式" class="headerlink" title="MySQL数据库多种安装方式"></a><strong>MySQL数据库多种安装方式</strong></h2><p>数据库官网下载地址 <a href="https://link.zhihu.com/?target=https://downloads.mysql.com/archives/community/">https://downloads.mysql.com/archives/community/</a></p>
-<h2 id="一-linux系统"><a href="#一-linux系统" class="headerlink" title="一 linux系统"></a><strong>一 linux系统</strong></h2><h3 id="1-1-源码安装数据库（自定义安装目录）"><a href="#1-1-源码安装数据库（自定义安装目录）" class="headerlink" title="1.1 源码安装数据库（自定义安装目录）"></a><strong>1.1 源码安装数据库（自定义安装目录）</strong></h3><p><img src="https://pic2.zhimg.com/80/v2-6208111f437dad04cc1ab83e6b76dc19_720w.jpg" alt="img"></p>
-<h3 id="1）下载代码包"><a href="#1）下载代码包" class="headerlink" title="1）下载代码包"></a><strong>1）下载代码包</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# wget https://downloads.mysql.com/archives/get/p/23/file/mysql-5.6.46.tar.gz</span><br></pre></td></tr></table></figure>
-
-<h3 id="2）安装依赖"><a href="#2）安装依赖" class="headerlink" title="2）安装依赖"></a><strong>2）安装依赖</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# yum install -y ncurses-devel libaio-devel gcc gcc-c++ glibc cmake autoconf openssl openssl-devel</span><br></pre></td></tr></table></figure>
-
-<h3 id="3）解压"><a href="#3）解压" class="headerlink" title="3）解压"></a><strong>3）解压</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# tar xf mysql-5.6.46.tar.gz</span><br></pre></td></tr></table></figure>
-
-<h3 id="4）创建目录"><a href="#4）创建目录" class="headerlink" title="4）创建目录"></a><strong>4）创建目录</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# mkdir /service</span><br></pre></td></tr></table></figure>
-
-<h3 id="5）生成cmake"><a href="#5）生成cmake" class="headerlink" title="5）生成cmake"></a><strong>5）生成cmake</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# cd mysql-5.6.46/</span><br><span class="line">[root@db01 ~]# cmake . -DCMAKE_INSTALL_PREFIX=/service/mysql-5.6.46 \</span><br><span class="line">-DMYSQL_DATADIR=/service/mysql-5.6.46/data \</span><br><span class="line">-DMYSQL_UNIX_ADDR=/service/mysql-5.6.46/tmp/mysql.sock \</span><br><span class="line">-DDEFAULT_CHARSET=utf8 \</span><br><span class="line">-DDEFAULT_COLLATION=utf8_general_ci \</span><br><span class="line">-DWITH_EXTRA_CHARSETS=all \</span><br><span class="line">-DWITH_INNOBASE_STORAGE_ENGINE=1 \</span><br><span class="line">-DWITH_FEDERATED_STORAGE_ENGINE=1 \</span><br><span class="line">-DWITH_BLACKHOLE_STORAGE_ENGINE=1 \</span><br><span class="line">-DWITHOUT_EXAMPLE_STORAGE_ENGINE=1 \</span><br><span class="line">-DWITH_ZLIB=bundled \</span><br><span class="line">-DWITH_SSL=system \</span><br><span class="line">-DENABLED_LOCAL_INFILE=1 \</span><br><span class="line">-DWITH_EMBEDDED_SERVER=1 \</span><br><span class="line">-DENABLE_DOWNLOADS=1 \</span><br><span class="line">-DWITH_DEBUG=0</span><br><span class="line"></span><br><span class="line">#程序存放位置</span><br><span class="line">cmake . -DCMAKE_INSTALL_PREFIX=/service/mysql-5.6.46 \</span><br><span class="line">#数据存放位置</span><br><span class="line">-DMYSQL_DATADIR=/service/mysql-5.6.46/data \</span><br><span class="line">#socket文件存放位置</span><br><span class="line">-DMYSQL_UNIX_ADDR=/service/mysql-5.6.46/tmp/mysql.sock \</span><br><span class="line">#使用utf8字符集</span><br><span class="line">-DDEFAULT_CHARSET=utf8 \</span><br><span class="line">#校验规则</span><br><span class="line">-DDEFAULT_COLLATION=utf8_general_ci \</span><br><span class="line">#使用其他额外的字符集</span><br><span class="line">-DWITH_EXTRA_CHARSETS=all \</span><br><span class="line">#支持的存储引擎</span><br><span class="line">-DWITH_INNOBASE_STORAGE_ENGINE=1 \</span><br><span class="line">-DWITH_FEDERATED_STORAGE_ENGINE=1 \</span><br><span class="line">-DWITH_BLACKHOLE_STORAGE_ENGINE=1 \</span><br><span class="line">#禁用的存储引擎</span><br><span class="line">-DWITHOUT_EXAMPLE_STORAGE_ENGINE=1 \</span><br><span class="line">#启用zlib库支持（zib、gzib相关）</span><br><span class="line">-DWITH_ZLIB=bundled \</span><br><span class="line">#启用SSL库支持（安全套接层）</span><br><span class="line">-DWITH_SSL=bundled \</span><br><span class="line">#启用本地数据导入支持</span><br><span class="line">-DENABLED_LOCAL_INFILE=1 \</span><br><span class="line">#编译嵌入式服务器支持</span><br><span class="line">-DWITH_EMBEDDED_SERVER=1 \</span><br><span class="line"># mysql5.6支持了google的c++mock框架了，允许下载，否则会安装报错。</span><br><span class="line">-DENABLE_DOWNLOADS=1 \</span><br><span class="line">#禁用debug（默认为禁用）</span><br><span class="line">-DWITH_DEBUG=0</span><br><span class="line">#编译</span><br></pre></td></tr></table></figure>
-
-<h3 id="5）编译-make"><a href="#5）编译-make" class="headerlink" title="5）编译 make"></a><strong>5）编译 make</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 mysql-5.6.46]# make</span><br></pre></td></tr></table></figure>
-
-<h3 id="6）安装-make-install"><a href="#6）安装-make-install" class="headerlink" title="6）安装 make install"></a><strong>6）安装 make install</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 mysql-5.6.46]# make install</span><br></pre></td></tr></table></figure>
-
-<h3 id="7）做软连接"><a href="#7）做软连接" class="headerlink" title="7）做软连接"></a><strong>7）做软连接</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# ln -s /service/mysql-5.6.46 /service/mysql</span><br></pre></td></tr></table></figure>
-
-<h3 id="8）创建数据库用户"><a href="#8）创建数据库用户" class="headerlink" title="8）创建数据库用户"></a><strong>8）创建数据库用户</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# useradd mysql -s /sbin/nologin -M</span><br></pre></td></tr></table></figure>
-
-<h3 id="9）拷贝配置文件和启动文件"><a href="#9）拷贝配置文件和启动文件" class="headerlink" title="9）拷贝配置文件和启动文件"></a><strong>9）拷贝配置文件和启动文件</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#1.进入配置文件和脚本的目录</span><br><span class="line">[root@db01 ~]# cd /service/mysql/support-files/</span><br><span class="line"></span><br><span class="line">#2.拷贝配置文件</span><br><span class="line">[root@db01 support-files]# cp my-default.cnf /etc/my.cnf</span><br></pre></td></tr></table></figure>
-
-<h3 id="10）配置system管理MySQL服务"><a href="#10）配置system管理MySQL服务" class="headerlink" title="10）配置system管理MySQL服务"></a><strong>10）配置system管理MySQL服务</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#1.配置system管理MySQL</span><br><span class="line">[root@db01 ~]# vim /usr/lib/systemd/system/mysql.service</span><br><span class="line">[Unit]</span><br><span class="line">Description=MySQL Server</span><br><span class="line">Documentation=man:mysqld(8)</span><br><span class="line">Documentation=https://dev.mysql.com/doc/refman/en/using-systemd.html</span><br><span class="line">After=network.target</span><br><span class="line">After=syslog.target</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">[Service]</span><br><span class="line">User=mysql</span><br><span class="line">Group=mysql</span><br><span class="line">ExecStart=/service/mysql/bin/mysqld --defaults-file=/etc/my.cnf</span><br><span class="line">LimitNOFILE = 5000</span><br><span class="line"></span><br><span class="line">#2.重新加载启动文件列表</span><br><span class="line">[root@db01 ~]# systemctl daemon-reload</span><br></pre></td></tr></table></figure>
-
-<h3 id="11）初始化数据库"><a href="#11）初始化数据库" class="headerlink" title="11）初始化数据库"></a><strong>11）初始化数据库</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#1.进入初始化目录</span><br><span class="line">[root@db01 support-files]# cd /service/mysql/scripts/</span><br><span class="line"></span><br><span class="line">#2.执行初始化命令</span><br><span class="line">[root@db01 scripts]# ./mysql_install_db --user=mysql --basedir=/service/mysql --datadir=/service/mysql/data</span><br></pre></td></tr></table></figure>
-
-<h3 id="12）创建socket文件目录（二进制安装没有）"><a href="#12）创建socket文件目录（二进制安装没有）" class="headerlink" title="12）创建socket文件目录（二进制安装没有）"></a><strong>12）创建socket文件目录（二进制安装没有）</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#先创建tmp目录</span><br><span class="line">[root@db01 ~]# mkdir /service/mysql/tmp</span><br></pre></td></tr></table></figure>
-
-<h3 id="13）授权数据库目录"><a href="#13）授权数据库目录" class="headerlink" title="13）授权数据库目录"></a><strong>13）授权数据库目录</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# chown -R mysql.mysql /service/mysql</span><br><span class="line">[root@db01 ~]# chown -R mysql.mysql /service/mysql-5.6.46</span><br></pre></td></tr></table></figure>
-
-<h3 id="14）system管理启动MySQL"><a href="#14）system管理启动MySQL" class="headerlink" title="14）system管理启动MySQL"></a><strong>14）system管理启动MySQL</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# systemctl start mysql</span><br><span class="line">[root@db01 ~]# ps -ef | grep [m]ysql</span><br><span class="line">mysql     23509      1  3 22:36 ?        00:00:01 /usr/local/mysql/bin/mysqld --defaults-file=/etc/my.cnf</span><br><span class="line">[root@db01 ~]# netstat -lntp | grep 3306</span><br><span class="line">tcp6       0      0 :::3306                 :::*                    LISTEN      23509/mysqld</span><br></pre></td></tr></table></figure>
-
-<h3 id="15）配置环境变量直接使用mysql"><a href="#15）配置环境变量直接使用mysql" class="headerlink" title="15）配置环境变量直接使用mysql"></a><strong>15）配置环境变量直接使用mysql</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# vim /etc/profile.d/mysql.sh </span><br><span class="line">export PATH=/service/mysql/bin:$PATH</span><br><span class="line">[root@db01 ~]# source /etc/profile</span><br></pre></td></tr></table></figure>
-
-<h3 id="16）修改root用户密码"><a href="#16）修改root用户密码" class="headerlink" title="16）修改root用户密码"></a><strong>16）修改root用户密码</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# mysql -u root -p   #默认root用户密码为空，有多种方式重置root密码</span><br><span class="line">第一种：</span><br><span class="line">MySQL &gt; SET PASSWORD=PASSWORD(&#x27;123456&#x27;);</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">第二种：</span><br><span class="line">MySQL &gt; grant all privileges on *.* to root@&#x27;%&#x27; identified by &#x27;oldboy&#x27;;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">注意：两种重置密码方式有区别。</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-2-二进制安装（自定义安装目录）"><a href="#1-2-二进制安装（自定义安装目录）" class="headerlink" title="1.2 二进制安装（自定义安装目录）"></a><strong>1.2 二进制安装（自定义安装目录）</strong></h3><p><img src="https://pic4.zhimg.com/80/v2-01985a5d105287e3c81744cccca38743_720w.jpg" alt="img"></p>
-<h3 id="1）下载二进制包"><a href="#1）下载二进制包" class="headerlink" title="1）下载二进制包"></a><strong>1）下载二进制包</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# wget https://downloads.mysql.com/archives/get/p/23/file/mysql-5.6.46-linux-glibc2.12-x86_64.tar.gz</span><br></pre></td></tr></table></figure>
-
-<h3 id="2）安装依赖-1"><a href="#2）安装依赖-1" class="headerlink" title="2）安装依赖"></a><strong>2）安装依赖</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# yum install -y ncurses-devel libaio-devel gcc gcc-c++ glibc cmake autoconf</span><br></pre></td></tr></table></figure>
-
-<h3 id="3）解压安装包"><a href="#3）解压安装包" class="headerlink" title="3）解压安装包"></a><strong>3）解压安装包</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# tar xf mysql-5.6.46-linux-glibc2.12-x86_64.tar.gz</span><br></pre></td></tr></table></figure>
-
-<h3 id="4）创建自定义目录"><a href="#4）创建自定义目录" class="headerlink" title="4）创建自定义目录"></a><strong>4）创建自定义目录</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# mkdir /service</span><br></pre></td></tr></table></figure>
-
-<h3 id="5）移动目录并改名"><a href="#5）移动目录并改名" class="headerlink" title="5）移动目录并改名"></a><strong>5）移动目录并改名</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# mv mysql-5.6.46-linux-glibc2.12-x86_64 /service/mysql-5.6.46</span><br></pre></td></tr></table></figure>
-
-<h3 id="6）做软连接"><a href="#6）做软连接" class="headerlink" title="6）做软连接"></a><strong>6）做软连接</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# ln -s /service/mysql-5.6.46 /service/mysql</span><br></pre></td></tr></table></figure>
-
-<h3 id="7）创建数据库用户"><a href="#7）创建数据库用户" class="headerlink" title="7）创建数据库用户"></a><strong>7）创建数据库用户</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# useradd mysql -s /sbin/nologin -M</span><br></pre></td></tr></table></figure>
-
-<h3 id="8）拷贝配置文件和启动文件"><a href="#8）拷贝配置文件和启动文件" class="headerlink" title="8）拷贝配置文件和启动文件"></a><strong>8）拷贝配置文件和启动文件</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#1.进入配置文件和脚本的目录</span><br><span class="line">[root@db01 ~]# cd /service/mysql/support-files/</span><br><span class="line"></span><br><span class="line">#2.拷贝配置文件</span><br><span class="line">[root@db01 support-files]# cp my-default.cnf /etc/my.cnf</span><br><span class="line">cp: overwrite ‘/etc/my.cnf’? y</span><br><span class="line"></span><br><span class="line">#3.拷贝启动脚本</span><br><span class="line">[root@db01 support-files]# cp mysql.server /etc/init.d/mysqld</span><br></pre></td></tr></table></figure>
-
-<h3 id="9）初始化数据库"><a href="#9）初始化数据库" class="headerlink" title="9）初始化数据库"></a><strong>9）初始化数据库</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#1.进入初始化目录</span><br><span class="line">[root@db01 support-files]# cd /service/mysql/scripts/</span><br><span class="line"></span><br><span class="line">#2.执行初始化命令</span><br><span class="line">[root@db01 scripts]# ./mysql_install_db --user=mysql --basedir=/service/mysql --datadir=/service/mysql/data</span><br></pre></td></tr></table></figure>
-
-<h3 id="10）启动数据库"><a href="#10）启动数据库" class="headerlink" title="10）启动数据库"></a><strong>10）启动数据库</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 scripts]# /etc/init.d/mysqld start</span><br><span class="line">/etc/init.d/mysqld: line 244: my_print_defaults: command not found</span><br><span class="line">/etc/init.d/mysqld: line 264: cd: /usr/local/mysql: No such file or directory</span><br><span class="line">Starting MySQL ERROR! Couldn&#x27;t find MySQL server (/usr/local/mysql/bin/mysqld_safe)</span><br></pre></td></tr></table></figure>
-
-<h3 id="11）如果是二进制安装到自定义目录下需要修改脚本目录"><a href="#11）如果是二进制安装到自定义目录下需要修改脚本目录" class="headerlink" title="11）如果是二进制安装到自定义目录下需要修改脚本目录"></a><strong>11）如果是二进制安装到自定义目录下需要修改脚本目录</strong></h3><p>本例中就安装到了/service目录下，所以需要修改脚本中的默认路径</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 scripts]# sed -i &#x27;s#/usr/local#/service#g&#x27; /etc/init.d/mysqld /service/mysql/bin/mysqld_safe</span><br></pre></td></tr></table></figure>
-
-<h3 id="12）授权数据库目录"><a href="#12）授权数据库目录" class="headerlink" title="12）授权数据库目录"></a><strong>12）授权数据库目录</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# chown -R mysql.mysql /service/mysql</span><br><span class="line">[root@db01 ~]# chown -R mysql.mysql /service/mysql-5.6.46</span><br></pre></td></tr></table></figure>
-
-<h3 id="13）再次启动"><a href="#13）再次启动" class="headerlink" title="13）再次启动"></a><strong>13）再次启动</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 scripts]# /etc/init.d/mysqld start</span><br><span class="line">Starting MySQL.Logging to &#x27;/service/mysql/data/db04.err&#x27;.</span><br><span class="line"> SUCCESS! </span><br><span class="line">[root@db01 scripts]#</span><br></pre></td></tr></table></figure>
-
-<h3 id="14）检查进程和端口"><a href="#14）检查进程和端口" class="headerlink" title="14）检查进程和端口"></a><strong>14）检查进程和端口</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 scripts]# ps -ef | grep [m]ysql</span><br><span class="line">root      23083      1  0 20:36 pts/0    00:00:00 /bin/sh /usr/local/mysql/bin/mysqld_safe --datadir=/usr/local/mysql/data --pid-file=/usr/local/mysql/data/db02.pid</span><br><span class="line">mysql     23191  23083  0 20:36 pts/0    00:00:00 /usr/local/mysql/bin/mysqld --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data --plugin-dir=/usr/local/mysql/lib/plugin --user=mysql --log-error=db02.err --pid-file=/usr/local/mysql/data/db02.pid</span><br><span class="line">[root@db01 scripts]# netstat -lntp | grep 3306</span><br><span class="line">tcp6       0      0 :::3306                 :::*                    LISTEN      23191/mysqld        </span><br><span class="line">[root@db01 scripts]# </span><br></pre></td></tr></table></figure>
-
-<h3 id="15）配置system管理MySQL服务"><a href="#15）配置system管理MySQL服务" class="headerlink" title="15）配置system管理MySQL服务"></a><strong>15）配置system管理MySQL服务</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#1.配置system管理MySQL</span><br><span class="line">[root@db01 ~]# vim /usr/lib/systemd/system/mysql.service</span><br><span class="line">[Unit]</span><br><span class="line">Description=MySQL Server</span><br><span class="line">Documentation=man:mysqld(8)</span><br><span class="line">Documentation=https://dev.mysql.com/doc/refman/en/using-systemd.html</span><br><span class="line">After=network.target</span><br><span class="line">After=syslog.target</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">[Service]</span><br><span class="line">User=mysql</span><br><span class="line">Group=mysql</span><br><span class="line">ExecStart=/service/mysql/bin/mysqld --defaults-file=/etc/my.cnf</span><br><span class="line">LimitNOFILE = 5000</span><br><span class="line"></span><br><span class="line">#2.重新加载启动文件列表</span><br><span class="line">[root@db01 ~]# systemctl daemon-reload</span><br></pre></td></tr></table></figure>
-
-<h3 id="16）查看MySQL配置文件检索顺序"><a href="#16）查看MySQL配置文件检索顺序" class="headerlink" title="16）查看MySQL配置文件检索顺序"></a><strong>16）查看MySQL配置文件检索顺序</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 mysql]# /service/mysql/bin/mysql --help|grep &#x27;my.cnf&#x27;</span><br><span class="line">                      order of preference, my.cnf, $MYSQL_TCP_PORT,</span><br><span class="line">/etc/my.cnf /etc/mysql/my.cnf /usr/local/mysql/etc/my.cnf ~/.my.cnf </span><br></pre></td></tr></table></figure>
-
-<h3 id="17）配置my-cnf"><a href="#17）配置my-cnf" class="headerlink" title="17）配置my.cnf"></a><strong>17）配置my.cnf</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#1.配置指定数据库安装目录与数据目录</span><br><span class="line">[root@db01 scripts]# vim /etc/my.cnf</span><br><span class="line">[mysqld]</span><br><span class="line">basedir=/service/mysql</span><br><span class="line">datadir=/service/mysql/data</span><br><span class="line"></span><br><span class="line">#2.启动</span><br><span class="line">[root@db01 scripts]# systemctl start mysql</span><br></pre></td></tr></table></figure>
-
-<h3 id="19）配置环境变量直接使用mysql"><a href="#19）配置环境变量直接使用mysql" class="headerlink" title="19）配置环境变量直接使用mysql"></a><strong>19）配置环境变量直接使用mysql</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# vim /etc/profile.d/mysql.sh </span><br><span class="line">export PATH=/service/mysql/bin:$PATH</span><br><span class="line">[root@db01 ~]# source /etc/profile</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-3-YUM安装"><a href="#1-3-YUM安装" class="headerlink" title="1.3 YUM安装"></a><strong>1.3 YUM安装</strong></h3><h3 id="1）配置MySQL的yum源"><a href="#1）配置MySQL的yum源" class="headerlink" title="1）配置MySQL的yum源"></a><strong>1）配置MySQL的yum源</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# cat /etc/yum.repos.d/mysql-community.repo</span><br><span class="line"># Enable to use MySQL 5.6</span><br><span class="line">[mysql56-community]</span><br><span class="line">name=MySQL 5.6 Community Server</span><br><span class="line">baseurl=http://repo.mysql.com/yum/mysql-5.6-community/el/7/$basearch/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br></pre></td></tr></table></figure>
-
-<h3 id="2）检查存储库是否正确配置"><a href="#2）检查存储库是否正确配置" class="headerlink" title="2）检查存储库是否正确配置"></a><strong>2）检查存储库是否正确配置</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]#  yum repolist enabled | grep mysql</span><br></pre></td></tr></table></figure>
-
-<h3 id="3）禁用默认的MySQL模块"><a href="#3）禁用默认的MySQL模块" class="headerlink" title="3）禁用默认的MySQL模块"></a><strong>3）禁用默认的MySQL模块</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# sudo yum module disable mysql</span><br></pre></td></tr></table></figure>
-
-<h3 id="4）安装MySQL"><a href="#4）安装MySQL" class="headerlink" title="4）安装MySQL"></a><strong>4）安装MySQL</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# sudo yum install mysql-community-server</span><br></pre></td></tr></table></figure>
-
-<h3 id="5）启动MySQL"><a href="#5）启动MySQL" class="headerlink" title="5）启动MySQL"></a><strong>5）启动MySQL</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]#  sudo service mysqld start</span><br><span class="line">Starting mysqld (via systemctl):                           [  OK  ]</span><br></pre></td></tr></table></figure>
-
-<h3 id="6）检查MySQL运行状态"><a href="#6）检查MySQL运行状态" class="headerlink" title="6）检查MySQL运行状态"></a><strong>6）检查MySQL运行状态</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# sudo service mysqld status</span><br></pre></td></tr></table></figure>
-
-<h3 id="7）保护运行MySQL"><a href="#7）保护运行MySQL" class="headerlink" title="7）保护运行MySQL"></a><strong>7）保护运行MySQL</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# mysql_secure_installation</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-4-MySQL5-6与MySQL5-7安装的区别"><a href="#1-4-MySQL5-6与MySQL5-7安装的区别" class="headerlink" title="1.4 MySQL5.6与MySQL5.7安装的区别"></a><strong>1.4 MySQL5.6与MySQL5.7安装的区别</strong></h3><h3 id="1-4-1-cmake的时候加入了bostorg"><a href="#1-4-1-cmake的时候加入了bostorg" class="headerlink" title="1.4.1 cmake的时候加入了bostorg"></a><strong>1.4.1 cmake的时候加入了bostorg</strong></h3><p><em><strong>建议大家使用二进制的包安装，已经过了cmake阶段，已经把bostorg装好了</strong></em></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@db02 mysql-5.7.20]# yum install -y gcc gcc-c++ automake autoconf</span><br><span class="line">[root@db02 mysql-5.7.20]# yum install make cmake bison-devel ncurses-devel libaio-devel</span><br><span class="line">[root@db02 mysql-5.7.20]#</span><br><span class="line">wget httpss://dl.bintray.com/boostorg/release/1.65.1/source/boost_1_59_0.tar.gz</span><br><span class="line">#登录boost.org下载也可以</span><br><span class="line">[root@db02 mysql-5.7.20]# tar xf boost_1_59_0.tar.gz -C /usr/local/</span><br><span class="line">[root@db02 mysql-5.7.20]#</span><br><span class="line">cmake . -DCMAKE_INSTALL_PREFIX=/application/mysql-5.7.20 \</span><br><span class="line">-DMYSQL_DATADIR=/application/mysql-5.7.20/data \</span><br><span class="line">-DMYSQL_UNIX_ADDR=/application/mysql-5.7.20/tmp/mysql.sock \</span><br><span class="line">#安装bostorg</span><br><span class="line">-DDOWNLOAD_BOOST=1 \</span><br><span class="line">#安装的目录</span><br><span class="line">-DWITH_BOOST=/usr/local/boost_1_59_0 \</span><br><span class="line">-DDEFAULT_CHARSET=utf8 \</span><br><span class="line">-DDEFAULT_COLLATION=utf8_general_ci \</span><br><span class="line">-DWITH_EXTRA_CHARSETS=all \</span><br><span class="line">-DWITH_INNOBASE_STORAGE_ENGINE=1 \</span><br><span class="line">-DWITH_FEDERATED_STORAGE_ENGINE=1 \</span><br><span class="line">-DWITH_BLACKHOLE_STORAGE_ENGINE=1 \</span><br><span class="line">-DWITHOUT_EXAMPLE_STORAGE_ENGINE=1 \</span><br><span class="line">-DWITH_ZLIB=bundled \</span><br><span class="line">-DWITH_SSL=bundled \</span><br><span class="line">-DENABLED_LOCAL_INFILE=1 \</span><br><span class="line">-DWITH_EMBEDDED_SERVER=1 \</span><br><span class="line">-DENABLE_DOWNLOADS=1 \</span><br><span class="line">-DWITH_DEBUG=0 </span><br></pre></td></tr></table></figure>
-
-<h3 id="1-4-2-初始化时-使用的命令不一样了"><a href="#1-4-2-初始化时-使用的命令不一样了" class="headerlink" title="1.4.2 初始化时 使用的命令不一样了"></a><strong>1.4.2 初始化时 使用的命令不一样了</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#5.6初始化命令</span><br><span class="line">/service/mysql/scripts/mysql_install_db --user= --basedir= --datadir=</span><br><span class="line"></span><br><span class="line">#5.7初始化命令</span><br><span class="line">/usr/local/mysql/bin/mysqld --initialize --user= --basedir= --datadir=</span><br><span class="line">#初始--initialize会生成一个临时的随机密码，他会告诉你位置，你自己去找使用密码登录，而且修改密码也需要一个很复杂的密码，大小写数字特殊符号</span><br><span class="line"></span><br><span class="line">#想不让他生成密码的话，还可以用另外一个参数--initialize-insecure</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-4-3-mysql5-7初始密码"><a href="#1-4-3-mysql5-7初始密码" class="headerlink" title="1.4.3 mysql5.7初始密码"></a><strong>1.4.3 mysql5.7初始密码</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># yum安装完毕mysql5.7，首次初始启动msyql会生成root的随机密码</span><br><span class="line"># 可以通过下述命令查看</span><br><span class="line">grep &quot;temporary password&quot; /var/log/mysqld.log</span><br><span class="line"></span><br><span class="line"># 查看到随机密码后，登录，注意密码用单引号引起来，因为随机密码中可能有特殊字符</span><br><span class="line">mysql -uroot -p &#x27;随机密码&#x27;</span><br><span class="line"></span><br><span class="line"># 设置密码，密码已经不能再用弱密码了，弱密码会报错</span><br><span class="line">set password=password(&quot;Egon@123&quot;);</span><br></pre></td></tr></table></figure>
-
-<h2 id="二-Windows系统"><a href="#二-Windows系统" class="headerlink" title="二 Windows系统"></a><strong>二 Windows系统</strong></h2><h3 id="2-1-安装"><a href="#2-1-安装" class="headerlink" title="2.1 安装"></a><strong>2.1 安装</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#1、下载：MySQL Community Server 5.7.16</span><br><span class="line">http://dev.mysql.com/downloads/mysql/</span><br><span class="line"></span><br><span class="line">#2、解压</span><br><span class="line">如果想要让MySQL安装在指定目录，那么就将解压后的文件夹移动到指定目录，如：C:\mysql-5.7.16-winx64</span><br><span class="line"></span><br><span class="line">#3、添加环境变量</span><br><span class="line">【右键计算机】--》【属性】--》【高级系统设置】--》【高级】--》【环境变量】--》【在第二个内容框中找到 变量名为Path 的一行，双击】 --&gt; 【将MySQL的bin目录路径追加到变值值中，用 ； 分割】</span><br><span class="line"> </span><br><span class="line">#4、初始化</span><br><span class="line">mysqld --initialize-insecure</span><br><span class="line"></span><br><span class="line">#5、启动MySQL服务</span><br><span class="line">mysqld # 启动MySQL服务</span><br><span class="line"></span><br><span class="line">#6、启动MySQL客户端并连接MySQL服务</span><br><span class="line">mysql -u root -p # 连接MySQL服务器</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-2-将MySQL服务制作成windows系统服务"><a href="#2-2-将MySQL服务制作成windows系统服务" class="headerlink" title="2.2 将MySQL服务制作成windows系统服务"></a><strong>2.2 将MySQL服务制作成windows系统服务</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">上一步解决了一些问题，但不够彻底，因为在执行【mysqd】启动MySQL服务器时，当前终端会被hang住，那么做一下设置即可解决此问题：</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">注意：--install前，必须用mysql启动命令的绝对路径</span><br><span class="line"># 制作MySQL的Windows服务，在终端执行此命令：</span><br><span class="line">&quot;c:\mysql-5.7.16-winx64\bin\mysqld&quot; --install</span><br><span class="line"> </span><br><span class="line"># 移除MySQL的Windows服务，在终端执行此命令：</span><br><span class="line">&quot;c:\mysql-5.7.16-winx64\bin\mysqld&quot; --remove</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">注册成服务之后，以后再启动和关闭MySQL服务时，仅需执行如下命令：</span><br><span class="line"># 启动MySQL服务</span><br><span class="line">net start mysql</span><br><span class="line"> </span><br><span class="line"># 关闭MySQL服务</span><br><span class="line">net stop mysql</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/必备技能//" class="article-tag-list-link color5">必备技能</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/09/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E8%A3%85/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
- 
-
-
-
-  
     <article id="post-数据库多实例" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -978,9 +790,100 @@
 
 
   
+    <article id="post-Docker镜像命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/02/Docker%E9%95%9C%E5%83%8F%E5%91%BD%E4%BB%A4/">Docker镜像命令</a>
+    </h1>
+  
+
+        
+        
+
+<a href="/2021/09/02/Docker%E9%95%9C%E5%83%8F%E5%91%BD%E4%BB%A4/" class="archive-article-date">
+  	<time datetime="2021-09-01T23:40:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-02</time>
+</a>
+
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、常用镜像仓库"><a href="#一、常用镜像仓库" class="headerlink" title="一、常用镜像仓库"></a><strong>一、常用镜像仓库</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">官方仓库：hub.docker.com</span><br><span class="line">自己的私有仓库：Harbor</span><br><span class="line">阿里云私有仓库：registry.cn-hangzhou.aliyuncs.com</span><br></pre></td></tr></table></figure>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/必备技能//" class="article-tag-list-link color5">必备技能</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/09/02/Docker%E9%95%9C%E5%83%8F%E5%91%BD%E4%BB%A4/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+ 
+
+
+
+  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1099,15 +1002,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Django</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DRF</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Celery</a>
+                <a href="javascript:void(0)" class="js-tag color2">Django</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1115,7 +1014,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Go基础</a>
+                <a href="javascript:void(0)" class="js-tag color4">Docker安装</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">招聘系统项目</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1123,11 +1030,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">开发规范</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Celery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Go基础</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">开发规范</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1147,7 +1066,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">招聘系统项目</a>
+                <a href="javascript:void(0)" class="js-tag color1">Python技术亮点</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1160,30 +1079,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Docker安装</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ES</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Elasticsearch</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Python技术亮点</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">SQL过关</a>
               </li>
             
             <div class="clearfix"></div>
@@ -1260,6 +1155,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           
             <li class="search-li">
               <a href="http://liushao.vip/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>刘洋</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://www.zhihu.com/column/quickgo" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>lao钱go</a>
             </li>
           
         </ul>
