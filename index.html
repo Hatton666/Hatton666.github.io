@@ -176,6 +176,102 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-登录注册" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/16/%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C/">登录注册</a>
+    </h1>
+  
+
+        
+        
+
+<a href="/2021/09/16/%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C/" class="archive-article-date">
+  	<time datetime="2021-09-16T03:30:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-16</time>
+</a>
+
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>序列化文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> rest_framework <span class="keyword">import</span> serializers</span><br><span class="line"><span class="keyword">from</span> rest_framework.exceptions <span class="keyword">import</span> ValidationError</span><br><span class="line"><span class="keyword">from</span> django.core.cache <span class="keyword">import</span> cache</span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> User</span><br><span class="line"><span class="keyword">from</span> django.conf <span class="keyword">import</span> settings</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserModelSerializer</span>(<span class="params">serializers.ModelSerializer</span>):</span></span><br><span class="line">    username = serializers.CharField()</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        model = User</span><br><span class="line">        fields = [<span class="string">&#x27;username&#x27;</span>, <span class="string">&#x27;password&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">validate</span>(<span class="params">self, attrs</span>):</span></span><br><span class="line">        <span class="comment"># 获取用户</span></span><br><span class="line">        user = self._get_user(attrs)</span><br><span class="line">        self.user = user</span><br><span class="line">        <span class="comment"># 签发token</span></span><br><span class="line">        token = self._get_token(user)</span><br><span class="line"></span><br><span class="line">        self.context[<span class="string">&#x27;token&#x27;</span>] = token</span><br><span class="line">        self.context[<span class="string">&#x27;username&#x27;</span>] = user.username</span><br><span class="line">        self.context[<span class="string">&#x27;icon&#x27;</span>] = <span class="built_in">str</span>(user.icon)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> attrs</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_get_user</span>(<span class="params">self, attrs</span>):</span></span><br><span class="line">        <span class="keyword">import</span> re</span><br><span class="line">        username = attrs.get(<span class="string">&#x27;username&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> re.match(<span class="string">r&#x27;^1[3-9][0-9]&#123;9&#125;$&#x27;</span>, username):</span><br><span class="line">            user = User.objects.<span class="built_in">filter</span>(mobile=username).first()</span><br><span class="line">        <span class="keyword">elif</span> re.match(<span class="string">r&#x27;^[a-z0-9A-Z]+[- | a-z0-9A-Z . _]+@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-z]&#123;2,&#125;$&#x27;</span>, username):</span><br><span class="line">            user = User.objects.<span class="built_in">filter</span>(email=username).first()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            user = User.objects.<span class="built_in">filter</span>(username=username).first()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> user:</span><br><span class="line">            <span class="keyword">raise</span> ValidationError(&#123;<span class="string">&#x27;detail&#x27;</span>: <span class="string">&#x27;用户不存在&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line">        password = attrs.get(<span class="string">&#x27;password&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> user.check_password(password):  <span class="comment"># 用了auth的User表</span></span><br><span class="line">            <span class="keyword">raise</span> ValidationError(&#123;<span class="string">&#x27;detail&#x27;</span>: <span class="string">&#x27;密码错误&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># user.email_user()</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> user</span><br><span class="line">    </span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">_get_token</span>(<span class="params">self, user</span>):</span></span><br><span class="line">        <span class="keyword">from</span> rest_framework_jwt.serializers <span class="keyword">import</span> jwt_payload_handler, 		jwt_encode_handler</span><br><span class="line">        payload = jwt_payload_handler(user)</span><br><span class="line">        token = jwt_encode_handler(payload)</span><br><span class="line">        <span class="keyword">return</span> token</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">UserView</span>(<span class="params">ViewSet</span>):</span></span><br><span class="line"><span class="meta">    @action(<span class="params">methods=[<span class="string">&#x27;POST&#x27;</span>], detail=<span class="literal">False</span></span>)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">login</span>(<span class="params">self, request</span>):</span></span><br><span class="line">        ser = UserModelSerializer(data=request.data)</span><br><span class="line">        ser.is_valid(raise_exception=<span class="literal">True</span>)</span><br><span class="line">        <span class="comment"># ser.save()</span></span><br><span class="line">        token = ser.context.get(<span class="string">&#x27;token&#x27;</span>)</span><br><span class="line">        username = ser.context.get(<span class="string">&#x27;username&#x27;</span>)</span><br><span class="line">        icon = ser.context.get(<span class="string">&#x27;icon&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> APIResponse(token=token, username=username, icon=icon)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="keyword">from</span> rest_framework.response <span class="keyword">import</span> Response</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">APIResponse</span>(<span class="params">Response</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, code=<span class="number">100</span>, msg=<span class="string">&#x27;成功&#x27;</span>, status=<span class="literal">None</span>, headers=<span class="literal">None</span>, **kwargs</span>):</span></span><br><span class="line">        res_data = &#123;</span><br><span class="line">            <span class="string">&#x27;code&#x27;</span>: code,</span><br><span class="line">            <span class="string">&#x27;msg&#x27;</span>: msg,</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> kwargs:</span><br><span class="line">            res_data.update(kwargs)</span><br><span class="line">        <span class="built_in">super</span>().__init__(data=res_data, status=status, headers=headers)</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line"><span class="meta"> 	@action(<span class="params">methods=[<span class="string">&#x27;GET&#x27;</span>], detail=<span class="literal">False</span></span>)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">check_mobile</span>(<span class="params">self, request</span>):</span></span><br><span class="line">        mobile = request.query_params.get(<span class="string">&#x27;mobile&#x27;</span>, <span class="literal">None</span>)</span><br><span class="line">        <span class="keyword">if</span> mobile:</span><br><span class="line">            user = User.objects.<span class="built_in">filter</span>(mobile=mobile).first()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> user:</span><br><span class="line">                <span class="keyword">return</span> APIResponse(exisit=<span class="literal">True</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> APIResponse(exisit=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># return APIResponse(code=101,msg=&#x27;手机号没有传&#x27;)</span></span><br><span class="line">            <span class="keyword">raise</span> APIException(&#123;<span class="string">&#x27;detail&#x27;</span>: <span class="string">&#x27;手机号没有传&#x27;</span>&#125;)</span><br><span class="line">            <span class="comment"># raise Exception(&#x27;手机号不存在&#x27;)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @action(<span class="params">methods=[<span class="string">&#x27;GET&#x27;</span>], detail=<span class="literal">False</span></span>)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">send_sms</span>(<span class="params">self, request</span>):</span></span><br><span class="line">        mobile = request.query_params.get(<span class="string">&#x27;mobile&#x27;</span>, <span class="literal">None</span>)</span><br><span class="line">        <span class="keyword">if</span> mobile:</span><br><span class="line">            <span class="comment"># 手机号存在，发送短信</span></span><br><span class="line">            code = sms.get_code()</span><br><span class="line">            <span class="built_in">print</span>(code)</span><br><span class="line">            <span class="comment"># 发送短信（同步发送：等着腾讯发送成功或失败的返回，可能等很长时间）</span></span><br><span class="line">            <span class="comment"># 异步发送短信（不用等腾讯是否成功，直接给用户返回）</span></span><br><span class="line">            res = sms.send_sms(mobile, code)</span><br><span class="line">            <span class="keyword">if</span> res:</span><br><span class="line">                <span class="comment"># 发送成功后，短信验证码，放到缓存中(默认放内存中，实际项目要放到redis中)</span></span><br><span class="line">                cache.<span class="built_in">set</span>(settings.SMS_CACHE % mobile, code, <span class="number">60</span> * <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">                <span class="comment"># # 取出验证码</span></span><br><span class="line">                <span class="comment"># code=cache.get(settings.SMS_CACHE%mobile)</span></span><br><span class="line">                <span class="keyword">return</span> APIResponse(msg=<span class="string">&#x27;短信发送成功&#x27;</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">raise</span> APIException(&#123;<span class="string">&#x27;detail&#x27;</span>: <span class="string">&#x27;短信发送失败&#x27;</span>&#125;)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># return APIResponse(code=101,msg=&#x27;手机号没有传&#x27;)</span></span><br><span class="line">            <span class="keyword">raise</span> APIException(&#123;<span class="string">&#x27;detail&#x27;</span>: <span class="string">&#x27;手机号没有传&#x27;</span>&#125;)</span><br><span class="line">            <span class="comment"># raise Exception(&#x27;手机号不存在&#x27;)</span></span><br><span class="line">            </span><br><span class="line">         </span><br><span class="line">       </span><br><span class="line"><span class="meta">    @action(<span class="params">methods=[<span class="string">&#x27;POST&#x27;</span>], detail=<span class="literal">False</span></span>)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">mobile_login</span>(<span class="params">self, request</span>):</span></span><br><span class="line">        ser = UserMobileModelSerializer(data=request.data)</span><br><span class="line">        ser.is_valid(raise_exception=<span class="literal">True</span>)</span><br><span class="line">        token = ser.context.get(<span class="string">&#x27;token&#x27;</span>)</span><br><span class="line">        username = ser.context.get(<span class="string">&#x27;username&#x27;</span>)</span><br><span class="line">        icon = ser.context.get(<span class="string">&#x27;icon&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> APIResponse(token=token, username=username, icon=icon)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>注册</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path, include</span><br><span class="line"><span class="keyword">from</span> rest_framework.routers <span class="keyword">import</span> SimpleRouter</span><br><span class="line"><span class="keyword">from</span> .views <span class="keyword">import</span> UserView,UserRegisterView</span><br><span class="line">router=SimpleRouter()</span><br><span class="line">router.register(<span class="string">&#x27;&#x27;</span>,UserView,<span class="string">&#x27;user&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># api/user/register----&gt;post</span></span><br><span class="line">router.register(<span class="string">&#x27;register&#x27;</span>,UserRegisterView,<span class="string">&#x27;user_register&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    <span class="comment"># /api/user/login</span></span><br><span class="line">    path(<span class="string">&#x27;&#x27;</span>, include(router.urls)),</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RegisterModelSerializer</span>(<span class="params">serializers.ModelSerializer</span>):</span></span><br><span class="line">    <span class="comment"># code = serializers.CharField(max_length=4, min_length=4,write_only=True)</span></span><br><span class="line">    code = serializers.CharField(max_length=<span class="number">4</span>, min_length=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        model = User</span><br><span class="line">        fields = [<span class="string">&#x27;mobile&#x27;</span>, <span class="string">&#x27;code&#x27;</span>, <span class="string">&#x27;password&#x27;</span>]</span><br><span class="line">        extra_kwargs = &#123;</span><br><span class="line">            <span class="string">&#x27;password&#x27;</span>: &#123;<span class="string">&#x27;max_length&#x27;</span>: <span class="number">16</span>, <span class="string">&#x27;min_length&#x27;</span>: <span class="number">3</span>&#125;,</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># def validate_mobile(self, mobile):</span></span><br><span class="line">    <span class="comment">#     # 手机号是否在库中了</span></span><br><span class="line">    <span class="comment">#     import re</span></span><br><span class="line">    <span class="comment">#     return mobile</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">validate</span>(<span class="params">self, attrs</span>):</span></span><br><span class="line">        <span class="comment"># 验证码是否正确</span></span><br><span class="line">        self._check_code(attrs)</span><br><span class="line">        <span class="comment"># 直接返回attrs</span></span><br><span class="line">        <span class="comment"># code 剔除</span></span><br><span class="line">        attrs.pop(<span class="string">&#x27;code&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> attrs</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_check_code</span>(<span class="params">self, attrs</span>):</span></span><br><span class="line">        code = attrs.get(<span class="string">&#x27;code&#x27;</span>)</span><br><span class="line">        mobile = attrs.get(<span class="string">&#x27;mobile&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 有可能有的公司，测试阶段，有万能验证码</span></span><br><span class="line">        <span class="comment"># 获取放在缓存中的code</span></span><br><span class="line">        old_code = cache.get(settings.SMS_CACHE % mobile)</span><br><span class="line">        <span class="comment"># 删除缓存中的code</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> (old_code <span class="keyword">and</span> code == old_code):</span><br><span class="line">            <span class="keyword">raise</span> ValidationError(&#123;<span class="string">&#x27;detail&#x27;</span>: <span class="string">&#x27;验证码校验失败&#x27;</span>&#125;)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">create</span>(<span class="params">self, validated_data</span>):</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment"># username创建出来，使用手机号作为用户名</span></span><br><span class="line">        validated_data[<span class="string">&#x27;username&#x27;</span>] = validated_data.get(<span class="string">&#x27;mobile&#x27;</span>)</span><br><span class="line">        <span class="comment"># 使用User表的create_user方法新增用户（密码是密文的）</span></span><br><span class="line">        user = User.objects.create_user(**validated_data)</span><br><span class="line">        <span class="keyword">return</span> user</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserRegisterView</span>(<span class="params">GenericViewSet, CreateModelMixin</span>):</span></span><br><span class="line">    queryset = User.objects.<span class="built_in">all</span>()</span><br><span class="line">    serializer_class = RegisterModelSerializer</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">create</span>(<span class="params">self, request, *args, **kwargs</span>):</span></span><br><span class="line">        serializer = self.get_serializer(data=request.data)</span><br><span class="line">        serializer.is_valid(raise_exception=<span class="literal">True</span>)</span><br><span class="line">        self.perform_create(serializer)</span><br><span class="line">        <span class="keyword">return</span> APIResponse(msg=<span class="string">&#x27;注册成功&#x27;</span>)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span>(<span class="params">request</span>):</span></span><br><span class="line">    <span class="comment"># 给某人发短信（耗时操作）</span></span><br><span class="line">    res=send_sms.delay(<span class="string">&#x27;1895555555&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">&#x27;短信已经发送：%s&#x27;</span>%res)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>model</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create your models here.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> django.contrib.auth.models <span class="keyword">import</span> AbstractUser</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span>(<span class="params">AbstractUser</span>):</span></span><br><span class="line">    mobile = models.CharField(max_length=<span class="number">11</span>, unique=<span class="literal">True</span>)</span><br><span class="line">    <span class="comment"># 需要pillow包的支持</span></span><br><span class="line">    <span class="comment"># upload_to:传到哪个路径下</span></span><br><span class="line">    <span class="comment"># default：默认值</span></span><br><span class="line">    icon = models.ImageField(upload_to=<span class="string">&#x27;icon&#x27;</span>, default=<span class="string">&#x27;icon/default.png&#x27;</span>)  <span class="comment"># 必须安装pillow</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        db_table = <span class="string">&#x27;luffy_user&#x27;</span>  <span class="comment"># 表明</span></span><br><span class="line">        verbose_name = <span class="string">&#x27;用户表&#x27;</span>  <span class="comment"># 后台admin中显示的名字</span></span><br><span class="line">        verbose_name_plural = verbose_name</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.username</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/09/16/%E7%99%BB%E5%BD%95%E6%B3%A8%E5%86%8C/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+ 
+
+
+
+  
     <article id="post-事务的隔离机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1803,272 +1899,9 @@
 
 
   
-    <article id="post-索引与慢查询" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/09/02/%E7%B4%A2%E5%BC%95%E4%B8%8E%E6%85%A2%E6%9F%A5%E8%AF%A2/">索引与慢查询</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2021/09/02/%E7%B4%A2%E5%BC%95%E4%B8%8E%E6%85%A2%E6%9F%A5%E8%AF%A2/" class="archive-article-date">
-  	<time datetime="2021-09-02T00:19:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-02</time>
-</a>
-
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="索引原理与慢查询优化"><a href="#索引原理与慢查询优化" class="headerlink" title="索引原理与慢查询优化"></a><strong>索引原理与慢查询优化</strong></h2><h2 id="一-我们要搞明白的问题"><a href="#一-我们要搞明白的问题" class="headerlink" title="一 我们要搞明白的问题"></a><strong>一 我们要搞明白的问题</strong></h2><p>让我们带着以下问题展开对索引的探索</p>
-<p>1、为何索引叫key</p>
-<p>2、索引是如何加速查询的，它的原理是啥？</p>
-<p>索引模型/结构从二叉树-》平衡二叉树-》b树最后到b+树，每种树到底有什么问题最终演变成到了b+树</p>
-<p>3、为何b+树不仅能够加速等值查询，还能加速范围查询</p>
-<p>4、什么是聚集索引，什么是辅助索引</p>
-<p>5、什么情况下叫覆盖了索引</p>
-<p>6、什么情况下叫回表操作</p>
-<p>7、什么是联合索引，最左前缀匹配原则</p>
-<p>8、索引下推，查询优化</p>
-<p>9、如何正确使用索引？</p>
-<h2 id="二-索引介绍"><a href="#二-索引介绍" class="headerlink" title="二 索引介绍"></a><strong>二 索引介绍</strong></h2><h3 id="2-1-什么是索引"><a href="#2-1-什么是索引" class="headerlink" title="2.1 什么是索引"></a><strong>2.1 什么是索引</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">索引是存储引擎中一种数据结构，或者说数据的组织方式，又称之为键key，是存储引擎用于快速找到记录的一种数据结构。</span><br><span class="line">为数据建立索引就好比是为书建目录，或者说是为字典创建音序表，如果要查某个字，如果不使用音序表，则需要从几百页中逐页去查。</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-2-为何要用索引？"><a href="#2-2-为何要用索引？" class="headerlink" title="2.2 为何要用索引？"></a><strong>2.2 为何要用索引？</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">一般的应用系统，读写比例在10:1左右，而且插入操作和一般的更新操作很少出现性能问题，在生产环境中，我们遇到最多的、也是最容易出问题的，还是一些复杂的查询操作，因此对查询语句的优化显然是重中之重。说起加速查询，就不得不提到索引了。</span><br><span class="line"></span><br><span class="line">索引优化应该是对查询性能优化最有效的手段了。索引能够轻易将查询性能提高好几个数量级。</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-3-如何正确看待索引？"><a href="#2-3-如何正确看待索引？" class="headerlink" title="2.3 如何正确看待索引？"></a><strong>2.3 如何正确看待索引？</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 先说结论：</span><br><span class="line">索引不是越多越好，并且egon建议大家最好在提前创建好索引，而不是等火烧眉毛</span><br><span class="line"></span><br><span class="line"># 详解如下</span><br><span class="line">索引是应用程序设计和开发的一个重要方面。若索引太多，应用程序的性能可能会受到影响。而索引太少，对查询性能又会产生影响，要找到一个平衡点，这对应用程序的性能至关重要。</span><br><span class="line">一些开发人员总是在事后才想起添加索引----我一直认为，这源于一种错误的开发模式。如果知道数据的使用，从一开始就应该在需要处添加索引。开发人员往往对数据库的使用停留在应用的层面，比如编写SQL语句、存储过程之类，他们甚至可能不知道索引的存在，或认为事后让相关DBA加上即可。DBA往往不够了解业务的数据流，而添加索引需要通过监控大量的SQL语句进而从中找到问题，这个步骤所需的时间肯定是远大于初始添加索引所需的时间，并且可能会遗漏一部分的索引。当然索引也并不是越多越好，我曾经遇到过这样一个问题：某台MySQL服务器iostat显示磁盘使用率一直处于100%，经过分析后发现是由于开发人员添加了太多的索引，在删除一些不必要的索引之后，磁盘使用率马上下降为20%。可见索引的添加也是非常有技术含量的。</span><br></pre></td></tr></table></figure>
-
-<h2 id="三-理解索引的储备知识"><a href="#三-理解索引的储备知识" class="headerlink" title="三 理解索引的储备知识"></a><strong>三 理解索引的储备知识</strong></h2><p>要了解索引的数据结构我来先来储备一些知识</p>
-<p>1）储备知识1：机械磁盘一次IO的时间</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">机械磁盘一次io的时间 = 寻道时间 + 旋转延迟 + 传输时间</span><br><span class="line"></span><br><span class="line"># 寻道时间</span><br><span class="line">道时间指的是磁臂移动到指定磁道所需要的时间，主流磁盘一般在5ms以下</span><br><span class="line"></span><br><span class="line"># 旋转延迟</span><br><span class="line">旋转延迟就是我们经常听说的磁盘转速，比如一个磁盘7200转，表示每分钟能转7200次，也就是说1秒钟能转120次，旋转延迟就是1/120/2 = 4.17ms；</span><br><span class="line"></span><br><span class="line"># 传输时间</span><br><span class="line">传输时间指的是从磁盘读出或将数据写入磁盘的时间，一般在零点几毫秒，相对于前两个时间可以忽略不计</span><br><span class="line"></span><br><span class="line">所以访问一次磁盘的时间，即一次磁盘IO的时间约等于5+4.17 = 9ms左右</span><br><span class="line"></span><br><span class="line">这9ms对于人来说可能非常短，但对于计算机来可是非常长的一段时间，长到什么程度呢？</span><br><span class="line">一台500 -MIPS（Million Instructions Per Second）的机器每秒可以执行5亿条指令，因为指令依靠的是电的性质，换句话说执行一次IO的时间可以执行约450万条指令，数据库动辄十万百万乃至千万级数据，每次9毫秒的时间，显然是个灾难。</span><br></pre></td></tr></table></figure>
-
-<p>2）储备知识2：磁盘的预读</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 考虑到磁盘IO是非常高昂的操作，计算机操作系统做了一些优化：</span><br><span class="line">当一次IO时，不光把当前磁盘地址的数据，而是把相邻的数据也都读取到内存缓冲区内，因为局部预读性原理告诉我们，当计算机访问一个地址的数据的时候，与其相邻的数据也会很快被访问到。每一次IO读取的数据我们称之为一页(page)。具体一页有多大数据跟操作系统有关，一般为4k或8k，也就是我们读取一页内的数据时候，实际上才发生了一次IO，这个理论对于索引的数据结构设计非常有帮助。</span><br></pre></td></tr></table></figure>
-
-<p>3）储备知识3：索引原理精髓提炼</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">索引的目的在于提高查询效率，与我们查阅图书所用的目录是一个道理：先定位到章，然后定位到该章下的一个小节，然后找到页数。相似的例子还有：查字典，查火车车次，飞机航班等</span><br><span class="line"></span><br><span class="line">!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span><br><span class="line">本质都是：</span><br><span class="line">通过不断地缩小想要获取数据的范围来筛选出最终想要的结果，同时把随机的事件变成顺序的事件，也就是说，有了这种索引机制，我们可以总是用同一种查找方式来锁定数据。</span><br><span class="line">!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span><br><span class="line"></span><br><span class="line">数据库也是一样，但显然要复杂的多，因为不仅面临着等值查询，还有范围查询(&gt;、&lt;、between、in)、模糊查询(like)、并集查询(or)等等。数据库应该选择怎么样的方式来应对所有的问题呢？我们回想字典的例子，能不能把数据分成段，然后分段查询呢？最简单的如果1000条数据，1到100分成第一段，101到200分成第二段，201到300分成第三段......这样查第250条数据，只要找第三段就可以了，一下子去除了90%的无效数据。但如果是1千万的记录呢，分成几段比较好？稍有算法基础的同学会想到搜索树，其平均复杂度是lgN，具有不错的查询性能。但这里我们忽略了一个关键的问题，复杂度模型是基于每次相同的操作成本来考虑的。而数据库实现比较复杂，一方面数据是保存在磁盘上的，另外一方面为了提高性能，每次又可以把部分数据读入内存来计算，因为我们知道访问磁盘的成本大概是访问内存的十万倍左右，所以简单的搜索树难以满足复杂的应用场景。</span><br></pre></td></tr></table></figure>
-
-<h2 id="四-索引分类"><a href="#四-索引分类" class="headerlink" title="四 索引分类"></a><strong>四 索引分类</strong></h2><p>索引模型分为很多种类</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#===========B+树索引（等值查询与范围查询都快）</span><br><span class="line">二叉树-&gt;平衡二叉树-&gt;B树-&gt;B+树</span><br><span class="line">        </span><br><span class="line">#===========HASH索引(等值查询快，范围查询慢)</span><br><span class="line">将数据打散再去查询</span><br><span class="line"></span><br><span class="line">#===========FULLTEXT：全文索引 （只可以用在MyISAM引擎）</span><br><span class="line">通过关键字的匹配来进行查询，类似于like的模糊匹配</span><br><span class="line">like + %在文本比较少时是合适的</span><br><span class="line">但是对于大量的文本数据检索会非常的慢</span><br><span class="line">全文索引在大量的数据面前能比like快得多，但是准确度很低</span><br><span class="line">百度在搜索文章的时候使用的就是全文索引，但更有可能是ES</span><br></pre></td></tr></table></figure>
-
-<p>不同的存储引擎支持的索引类型也不一样</p>
-<ul>
-<li><p>InnoDB存储引擎<br>支持事务，支持行级别锁定，支持 B-tree（默认）、Full-text 等索引，不支持 Hash 索引；</p>
-</li>
-<li><p>MyISAM存储引擎<br>不支持事务，支持表级别锁定，支持 B-tree、Full-text 等索引，不支持 Hash 索引；</p>
-</li>
-<li><p>Memory存储引擎<br>不支持事务，支持表级别锁定，支持 B-tree、Hash 等索引，不支持 Full-text 索引；</p>
-</li>
-</ul>
-<p>因为mysql默认的存储引擎是innodb，而innodb存储引擎的索引模型/结构是B+树，所以我们着重介绍B+树，那么大家最关注的问题来了：</p>
-<p>B+树索引到底是如何加速查询的呢？</p>
-<h2 id="五-索引的数据结构"><a href="#五-索引的数据结构" class="headerlink" title="五 索引的数据结构"></a><strong>五 索引的数据结构</strong></h2><h3 id="5-1-创建索引的两大步骤"><a href="#5-1-创建索引的两大步骤" class="headerlink" title="5.1 创建索引的两大步骤"></a><strong>5.1 创建索引的两大步骤</strong></h3><p>为某个字段创建索引，即以某个字段的值为基础构建索引结构，那么如何构建呢？分为两大步骤</p>
-<ul>
-<li>1、提取每行记录中该字段的值，以该值当作key，至于key对的value是什么？每种索引结构各不相同</li>
-<li>2、然后以key值为基础构建索引结构</li>
-</ul>
-<p>以后的查询条件中使用了该字段，则会命中索引结构</p>
-<p>例</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 1、为user表的id字段创建索引，会以每条记录的id字段值为基础生成索引结构</span><br><span class="line">create index 索引名 on user(id);</span><br><span class="line"></span><br><span class="line">使用索引</span><br><span class="line">select * from user where id = xxx;</span><br><span class="line"></span><br><span class="line"># 2、为user表的name字段创建索引，会以每条记录的name字段值为基础生成索引结构</span><br><span class="line">create index 索引名 on user(id);</span><br><span class="line"></span><br><span class="line">使用索引</span><br><span class="line">select * from user where name = xxx;</span><br></pre></td></tr></table></figure>
-
-<p>那么索引的结构到底长什么样子，让其能够加速查询呢？</p>
-<p>innodb存储引擎默认的索引结构为B+树，而B+树是由二叉树、平衡二叉树、B树再到B+树一路演变过来的</p>
-<h3 id="5-2-二叉查找树"><a href="#5-2-二叉查找树" class="headerlink" title="5.2 二叉查找树"></a><strong>5.2 二叉查找树</strong></h3><p><img src="https://pic3.zhimg.com/80/v2-d7e9b2679df3b732309dabf9ab29c6ce_720w.jpg" alt="img"></p>
-<p>有user表，我们以id字段值为基础创建索引</p>
-<ul>
-<li><p>1、提取每一条记录的id值作为key值，value为本行完整记录，即<br>key value<br>10 (10,zs)<br>7 (7,ls)<br>13 (13,ls)<br>5 (5,ls)<br>8 (8,ls)<br>12 (12,ls)<br>17 (17,ls)</p>
-</li>
-<li><p>2、以key值的大小为基础构建二叉树，如上图所示<br>二叉查找树的特点就是任何节点的左子节点的键值都小于当前节点的键值，右子节点的键值都大于当前节点的键值。<br>顶端的节点我们称为根节点，没有子节点的节点我们称之为叶节点。</p>
-</li>
-</ul>
-<p>如果我们需要查找id=12的用户信息</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from user where id=12;</span><br></pre></td></tr></table></figure>
-
-<p>利用我们创建的二叉查找树索引，查找流程如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1、将根节点作为当前节点，把12与当前节点的键值10比较，12大于10，接下来我们把当前节点&gt;的右子节点作为当前节点。</span><br><span class="line"></span><br><span class="line">2、继续把12和当前节点的键值13比较，发现12小于13，把当前节点的左子节点作为当前节点。</span><br><span class="line"></span><br><span class="line">3、把12和当前节点的键值12对比，12等于12，满足条件，我们从当前节点中取出data，即id=1&gt;2,name=xm。</span><br></pre></td></tr></table></figure>
-
-<p>利用二叉查找树我们只需要3次即可找到匹配的数据。如果在表中一条条的查找的话，我们需要6次才能找到。</p>
-<h3 id="5-3-平衡二叉树"><a href="#5-3-平衡二叉树" class="headerlink" title="5.3 平衡二叉树"></a><strong>5.3 平衡二叉树</strong></h3><p>基于5.1所示的二叉树，我们确实可以快速地找到数据。</p>
-<p>但是，但是，但是让我们回到二叉查找树地特点上，只论二叉查找树，它的特点只是</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">任何节点的左子节点的键值都小于当前节点的键值，右子节点的键值都大于当前节点的键值。 </span><br></pre></td></tr></table></figure>
-
-<p>所以，依据二叉查找树的特点，二叉树可以是这样构造的</p>
-<p><img src="https://pic4.zhimg.com/80/v2-48360e291b7e0bdd68bdc37bad6f406b_720w.jpg" alt="img"></p>
-<p>这个时候可以看到我们的二叉查找树变成了一个链表。如果我们需要查找id=17的用户信息，我们需要查找7次，也就相当于全表扫描了。 导致这个现象的原因其实是二叉查找树变得不平衡了，也就是高度太高了，从而导致查找效率的不稳定。 为了解决这个问题，我们需要保证二叉查找树一直保持平衡，就需要用到平衡二叉树了。</p>
-<p>平衡二叉树又称AVL树，在满足二叉查找树特性的基础上，要求每个节点的左右子树的高度不能超过1。 下面是平衡二叉树和非平衡二叉树的对比：</p>
-<p><img src="https://pic3.zhimg.com/80/v2-2a6835169fd01d5e5554b980e7a0bcc6_720w.jpg" alt="img"></p>
-<p>由平衡二叉树的构造我们可以发现第一张图中的二叉树其实就是一棵平衡二叉树。平衡二叉树保证了树的构造是平衡的，当我们插入或删除数据导致不满足平衡二叉树不平衡时，平衡二叉树会进行调整树上的节点来保持平衡。具体的调整方式这里就不介绍了。平衡二叉树相比于二叉查找树来说，查找效率更稳定，总体的查找速度也更快。</p>
-<p>那么是不是说基于平衡二叉树构建索引的结构就可以了呢？答案是否！</p>
-<h3 id="5-4-B树"><a href="#5-4-B树" class="headerlink" title="5.4 B树"></a><strong>5.4 B树</strong></h3><p>那么直接用平衡二叉树这种数据结构来构建索引有什么问题？</p>
-<p>1、首先，因为内存的易失性。一般情况下，我们都会选择将user表中的数据和索引存储在磁盘这种外围设备中。但是和内存相比，从磁盘中读取数据的速度会慢上百倍千倍甚至万倍，所以，我们应当尽量减少从磁盘中读取数据的次数。</p>
-<p>2、另外，从磁盘中读取数据时，都是按照磁盘块来读取的，并不是一条一条的读。 如果我们能把尽量多的数据放进磁盘块中，那一次磁盘读取操作就会读取更多数据，那我们查找数据的时间也会大幅度降低。</p>
-<p>3、所以，如果我们单纯用平衡二叉树这种数据结构作为索引的数据结构，即每个磁盘块只放一个节点，每个节点中只存放一组键值对，此时如果数据量过大，二叉树的节点则会非常多，树的高度也随即变高，我们查找数据的也会进行很多次磁盘IO，查找数据的效率也会变得极低！</p>
-<p><img src="https://pic2.zhimg.com/80/v2-9d2a92c96af9cbc05a357b76de9f522d_720w.jpg" alt="img"></p>
-<p>综上，如果我们能够在平衡二叉的树的基础上，把更多的节点放入一个磁盘块中，那么平衡二叉树的弊端也就解决了。即构建一个单节点可以存储多个键值对的平衡树，这就是B树。</p>
-<p>B树（Balance Tree）即为平衡树的意思，下图即是一颗B树。</p>
-<p><img src="https://pic2.zhimg.com/80/v2-1c3d441a485f22816473ee52f3ed10c5_720w.jpg" alt="img"></p>
-<blockquote>
-<p>注意： – 1、图中的p节点为指向子节点的指针，二叉查找树和平衡二叉树其实也有，因为图的美观性，被省略了。<br>– 2、图中的每个节点里面放入了多组键值对，一个节点也称为一页，一页即一个磁盘块，在mysql中数据读取的基本单位都是页，即一次io读取一个页的数据，所以我们这里叫做页更符合mysql中索引的底层数据结构。</p>
-</blockquote>
-<p>从上图可以看出，B树相对于平衡二叉树，每个节点存储了更多的键值(key)和数据(data)，并且每个节点拥有更多的子节点，子节点的个数一般称为阶，上述图中的B树为3阶B树，高度也会很低。 基于这个特性，B树查找数据读取磁盘的次数将会很少，数据的查找效率也会比平衡二叉树高很多。 假如我们要查找id=28的用户信息，那么我们在上图B树中查找的流程如下：</p>
-<ul>
-<li>1、先找到根节点也就是页1，判断28在键值17和35之间，我们那么我们根据页1中的指针p2找到页3。</li>
-<li>2、将28和页3中的键值相比较，28在26和30之间，我们根据页3中的指针p2找到页8。</li>
-<li>3、将28和页8中的键值相比较，发现有匹配的键值28，键值28对应的用户信息为(28,bv)。</li>
-</ul>
-<p>注意：</p>
-<ul>
-<li>1、B树的构造是有一些规定的，但这不是本文的关注点，有兴趣的同学可以令行了解。</li>
-<li>2、B树也是平衡的，当增加或删除数据而导致B树不平衡时，也是需要进行节点调整的。</li>
-</ul>
-<p>那么B树是否就是索引的最终结构了呢？答案是no，B树只擅长做等值查询，而对于范围查询（范围查询的本质就是n次等值查询），或者说排序操作，B树也帮不了我们</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from user where id=3;  -- 擅长</span><br><span class="line">select * from user where id&gt;3;  -- 不擅长</span><br></pre></td></tr></table></figure>
-
-<p>上帝说要有光，于是有了B+树</p>
-<h3 id="5-5-B-树"><a href="#5-5-B-树" class="headerlink" title="5.5 B+树"></a><strong>5.5 B+树</strong></h3><p>B+树是对B树的进一步优化。让我们先来看下B+树的结构图：</p>
-<p><img src="https://pic1.zhimg.com/80/v2-b9c0d9daa0b6eda7f88168e4b7f0fb00_720w.jpg" alt="img"></p>
-<p>根据上图我们来看下B+树和B树有什么不同。</p>
-<p>1、B+树非叶子节点non-leaf node上是不存储数据的，仅存储键，而B树的非叶子节点中不仅存储键，也会存储数据。B+树之所以这么做的意义在于：树一个节点就是一个页，而数据库中页的大小是固定的，innodb存储引擎默认一页为16KB，所以在页大小固定的前提下，能往一个页中放入更多的节点，相应的树的阶数（节点的子节点树）就会更大，那么树的高度必然更矮更胖，如此一来我们查找数据进行磁盘的IO次数有会再次减少，数据查询的效率也会更快。</p>
-<p>2、B+树的阶数是等于键的数量的，例如上图，我们的B+树中每个节点可以存储3个键，3层B+树存可以存储<code>3*3*3</code>=9个数据。所以如果我们的B+树一个节点可以存储1000个键值，那么3层B+树可以存储1000×1000×1000=10亿个数据。而一般根节点是常驻内存的，所以一般我们查找10亿数据，只需要2次磁盘IO，真是屌炸天的设计。</p>
-<p>3、因为B+树索引的所有数据均存储在叶子节点leaf node，而且数据是按照顺序排列的。那么B+树使得范围查找，排序查找，分组查找以及去重查找变得异常简单。而B树因为数据分散在各个节点，要实现这一点是很不容易的。 而且B+树中各个页之间也是通过双向链表连接的，叶子节点中的数据是通过单向链表连接的。其实上面的B树我们也可以对各个节点加上链表。其实这些不是它们之前的区别，是因为在mysql的innodb存储引擎中，索引就是这样存储的。也就是说上图中的B+树索引就是innodb中B+树索引真正的实现方式，准确的说应该是聚集索引（聚集索引和非聚集索引下面会讲到）。</p>
-<p>通过上图可以看到，在innodb中，我们通过数据页之间通过双向链表连接以及叶子节点中数据之间通过单向链表连接的方式可以找到表中所有的数据。</p>
-<blockquote>
-<p>MyISAM中的B+树索引实现与innodb中的略有不同。在MyISAM中，B+树索引的叶子节点并不存储数据，而是存储数据的文件地址。</p>
-</blockquote>
-<h2 id="六-聚集索引于非聚集索引"><a href="#六-聚集索引于非聚集索引" class="headerlink" title="六 聚集索引于非聚集索引"></a><strong>六 聚集索引于非聚集索引</strong></h2><h3 id="6-1-什么是聚集索引，什么是非聚集索引"><a href="#6-1-什么是聚集索引，什么是非聚集索引" class="headerlink" title="6.1 什么是聚集索引，什么是非聚集索引"></a><strong>6.1 什么是聚集索引，什么是非聚集索引</strong></h3><p>在上节介绍B+树索引的时候，我们提到了图中的索引其实是聚集索引的实现方式。那什么是聚集索引呢？什么是又是非聚集索引呢？</p>
-<p>在MySQL中，B+树索引按照存储方式的不同分为聚集索引和非聚集索引。这里我们主要介绍innodb存储引擎中的聚集索引和非聚集索引。</p>
-<p>1、聚集索引（又称聚簇索引、主键索引，一张表必须有且只有一个）：以innodb作为存储引擎的表，表中的数据都会有一个主键，即使你不创建主键，系统也会帮你创建一个隐式的主键。这是因为innodb是把数据存放在B+树中的，而B+树的键用的就是主键，在B+树的叶子节点中，存储了表中所有的数据。这种以主键作为B+树索引的键值而构建的B+树索引，我们称之为聚集索引。</p>
-<p>2、非聚集索引（又称非聚簇索引、辅助索引，一张表可以创建多个辅助索引）：以主键以外的列值作为键值构建的B+树索引，我们称之为非聚集索引。非聚集索引与聚集索引的区别在于非聚集索引的叶子节点不存储表中的数据，而是存储该列对应的主键，想要查找数据我们还需要根据主键再去聚集索引中进行查找，这个再根据聚集索引查找数据的过程，我们称为回表。 明白了聚集索引和非聚集索引的定义，我们应该明白这样一句话：数据即索引，索引即数据。</p>
-<h3 id="6-2-利用聚集索引和非聚集索引查找数据"><a href="#6-2-利用聚集索引和非聚集索引查找数据" class="headerlink" title="6.2 利用聚集索引和非聚集索引查找数据"></a><strong>6.2 利用聚集索引和非聚集索引查找数据</strong></h3><p>前面我们讲解B+树索引的时候并没有去说怎么在B+树中进行数据的查找，主要就是因为还没有引出聚集索引和非聚集索引的概念。下面我们通过讲解如何通过聚集索引以及非聚集索引查找数据表中数据的方式介绍一下B+树索引查找数据方法。</p>
-<h3 id="6-2-1-利用聚集索引查找数据"><a href="#6-2-1-利用聚集索引查找数据" class="headerlink" title="6.2.1 利用聚集索引查找数据"></a><strong>6.2.1 利用聚集索引查找数据</strong></h3><p><img src="https://pic1.zhimg.com/80/v2-b9c0d9daa0b6eda7f88168e4b7f0fb00_720w.jpg" alt="img"></p>
-<p>还是这张B+树索引图，现在我们应该知道这就是聚集索引，表中的数据存储在其中。现在假设我们要查找id&gt;=18并且id&lt;40的用户数据。对应的sql语句为</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from user where id&gt;=18 and id &lt;40，</span><br></pre></td></tr></table></figure>
-
-<p>其中id为主键。具体的查找过程如下：</p>
-<p>1、一般根节点都是常驻内存的，也就是说页1已经在内存中了，此时不需要到磁盘中读取数据，直接从内存中读取即可。从内存中读取到页1，要查找这个id&gt;=18 and id &lt;40或者范围值，我们首先需要找到id=18的键值。从页1中我们可以找到键值18，此时我们需要根据指针p2，定位到页3。</p>
-<p>2、要从页3中查找数据，我们就需要拿着p2指针去磁盘中进行读取页3。从磁盘中读取页3后将页3放入内存中，然后进行查找，我们可以找到键值18，然后再拿到页3中的指针p1，定位到页8。</p>
-<p>3、同样的页8页不在内存中，我们需要再去磁盘中将页8读取到内存中。将页8读取到内存中后。因为页中的数据是链表进行连接的，而且键值是按照顺序存放的，此时可以根据二分查找法定位到键值18。此时因为已经到数据页了，此时我们已经找到一条满足条件的数据了，就是键值18对应的数据。因为是范围查找，而且此时所有的数据又都存在叶子节点，并且是有序排列的，那么我们就可以对页8中的键值依次进行遍历查找并匹配满足条件的数据。我们可以一直找到键值为22的数据，然后页8中就没有数据了，此时我们需要拿着页8中的p指针去读取页9中的数据。</p>
-<p>4、因为页9不在内存中，就又会加载页9到内存中，并通过和页8中一样的方式进行数据的查找，直到将页12加载到内存中，发现41大于40，此时不满足条件。那么查找到此终止。最终我们找到满足条件的所有数据为：(18,kl),(19,kl),(22,hj),(24,io),(25,vg),(29,jk),(31,jk),(33,rt),(34,ty),(35,yu),(37,rt),(39,rt)。总共12条记录。</p>
-<p>下面看下具体的查找流程图： [rml_read_more]：</p>
-<p><img src="https://pic3.zhimg.com/80/v2-f266e16bbf202718fcfcf62efa8e7aa2_720w.jpg" alt="img"></p>
-<h3 id="6-2-2-利用非聚集索引查找数据"><a href="#6-2-2-利用非聚集索引查找数据" class="headerlink" title="6.2.2 利用非聚集索引查找数据"></a><strong>6.2.2 利用非聚集索引查找数据</strong></h3><p><img src="https://pic3.zhimg.com/80/v2-836c4486f551c15598ac73b327d5d522_720w.jpg" alt="img"></p>
-<p>读者看到这张图的时候可能会蒙，这是啥东西啊？怎么都是数字。如果有这种感觉，请仔细看上图中红字的解释。什么？还看不懂？那我再来解释下吧。首先，这个非聚集索引表示的是用户幸运数字的索引（为什么是幸运数字？一时兴起想起来的），此时表结构是这样的。</p>
-<table>
-<thead>
-<tr>
-<th>id</th>
-<th>name</th>
-<th>luckyNum</th>
-</tr>
-</thead>
-<tbody><tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<p>在叶子节点中，不再存储所有的数据了，存储的是键和主键。对于叶子节点中的x-y，比如10-23。左边的10表示的是索引的键值，右边的23表示的其对应的主键值。如果我们要找到幸运数字为33的用户信息，对应的sql语句为</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from user where luckNum=33;</span><br></pre></td></tr></table></figure>
-
-<p>查找的流程跟聚集索引一样，这里就不详细介绍了。我们最终会找到主键值47，因为我们select要的是*，即所有字段值，在辅助索引中并不存在，所以找到主键后我们需要再到聚集索引中查找具体对应的数据信息，此时又回到了聚集索引的查找流程，着 下面看下具体的查找流程图：</p>
-<p><img src="https://pic3.zhimg.com/80/v2-139a02994d74cde2457c73168d5dbb02_720w.jpg" alt="img"></p>
-<blockquote>
-<p>在MyISAM中，聚集索引和非聚集索引的叶子节点都会存储数据的文件地址。</p>
-</blockquote>
-<h3 id="6-2-3-覆盖索引与回表操作"><a href="#6-2-3-覆盖索引与回表操作" class="headerlink" title="6.2.3 覆盖索引与回表操作"></a><strong>6.2.3 覆盖索引与回表操作</strong></h3><p>命中了辅助索引，然后要找的字段值不存在与辅助索引的叶子节点上，则需要根据拿到的主键值再去聚集索引中查询一遍，然后再聚集索引的叶子节点找到你想要的内容，这就叫回表操作</p>
-<p>例如</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create index xxx on user(name);</span><br><span class="line"></span><br><span class="line">下述语句，名中了辅助索引，但是select需要查询出的除了辅助索引叶子节点有的name字段值外还想要age字段的值，那么需要进行回表操作</span><br><span class="line">select name,age from user where name=&quot;egon&quot;; </span><br></pre></td></tr></table></figure>
-
-<p>命中了某棵索引树，然后在其叶子节点就找到了你想要的值，即不需要回表操作，就是覆盖了索引</p>
-<p>例1：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create index xxx on user(name);</span><br><span class="line"></span><br><span class="line">下述语句，覆盖了索引</span><br><span class="line">select name from user where name=&quot;egon&quot;; </span><br></pre></td></tr></table></figure>
-
-<p>例2：使用主键字段当作条件，百分百覆盖了索引，效率极高，推荐使用</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">如果id字段是主键，那么下述语句也覆盖了索引</span><br><span class="line">select * from user where id=3;</span><br></pre></td></tr></table></figure>
-
-<h2 id="七-MySQL索引管理"><a href="#七-MySQL索引管理" class="headerlink" title="七 MySQL索引管理"></a><strong>七 MySQL索引管理</strong></h2><p><a href="https://link.zhihu.com/?target=https://www.cnblogs.com/linhaifeng/articles/7274563.html%23_label5">https://www.cnblogs.com/linhaifeng/articles/7274563.html#_label5</a></p>
-<h2 id="八-测试索引"><a href="#八-测试索引" class="headerlink" title="八 测试索引"></a><strong>八 测试索引</strong></h2><p><a href="https://link.zhihu.com/?target=https://www.cnblogs.com/linhaifeng/articles/7274563.html%23_label6">https://www.cnblogs.com/linhaifeng/articles/7274563.html#_label6</a></p>
-<h2 id="九-正确使用索引"><a href="#九-正确使用索引" class="headerlink" title="九 正确使用索引"></a><strong>九 正确使用索引</strong></h2><p><a href="https://link.zhihu.com/?target=https://www.cnblogs.com/linhaifeng/articles/7274563.html%23_label7">https://www.cnblogs.com/linhaifeng/articles/7274563.html#_label7</a></p>
-<h2 id="十-联合索引与覆盖索引"><a href="#十-联合索引与覆盖索引" class="headerlink" title="十 联合索引与覆盖索引"></a><strong>十 联合索引与覆盖索引</strong></h2><p><a href="https://link.zhihu.com/?target=https://www.cnblogs.com/linhaifeng/articles/7274563.html%23_label8">https://www.cnblogs.com/linhaifeng/articles/7274563.html#_label8</a></p>
-<h2 id="十一-查询优化神器"><a href="#十一-查询优化神器" class="headerlink" title="十一 查询优化神器"></a><strong>十一 查询优化神器</strong></h2><p><a href="https://link.zhihu.com/?target=https://www.cnblogs.com/linhaifeng/articles/7274563.html%23_label9">https://www.cnblogs.com/linhaifeng/articles/7274563.html#_label9</a></p>
-<h2 id="十二-慢查询优化的基本步骤"><a href="#十二-慢查询优化的基本步骤" class="headerlink" title="十二 慢查询优化的基本步骤"></a><strong>十二 慢查询优化的基本步骤</strong></h2><p><a href="https://link.zhihu.com/?target=https://www.cnblogs.com/linhaifeng/articles/7274563.html%23_label10">https://www.cnblogs.com/linhaifeng/articles/7274563.html#_label10</a></p>
-<h2 id="十三-慢查询日志管理"><a href="#十三-慢查询日志管理" class="headerlink" title="十三 慢查询日志管理"></a><strong>十三 慢查询日志管理</strong></h2><p><a href="https://link.zhihu.com/?target=https://www.cnblogs.com/linhaifeng/articles/7274563.html%23_label11">https://www.cnblogs.com/linhaifeng/articles/7274563.html#_label11</a></p>
-<h2 id="十四-innodb存储引擎索引知识小节"><a href="#十四-innodb存储引擎索引知识小节" class="headerlink" title="十四 innodb存储引擎索引知识小节"></a><strong>十四 innodb存储引擎索引知识小节</strong></h2><p><a href="https://link.zhihu.com/?target=https://www.cnblogs.com/linhaifeng/articles/7274563.html%23_label12">https://www.cnblogs.com/linhaifeng/</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据库//" class="article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/09/02/%E7%B4%A2%E5%BC%95%E4%B8%8E%E6%85%A2%E6%9F%A5%E8%AF%A2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
- 
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -2264,6 +2097,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
             
             <div class="clearfix"></div>

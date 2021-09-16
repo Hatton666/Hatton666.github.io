@@ -176,6 +176,269 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-索引与慢查询" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/02/%E7%B4%A2%E5%BC%95%E4%B8%8E%E6%85%A2%E6%9F%A5%E8%AF%A2/">索引与慢查询</a>
+    </h1>
+  
+
+        
+        
+
+<a href="/2021/09/02/%E7%B4%A2%E5%BC%95%E4%B8%8E%E6%85%A2%E6%9F%A5%E8%AF%A2/" class="archive-article-date">
+  	<time datetime="2021-09-02T00:19:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-02</time>
+</a>
+
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="索引原理与慢查询优化"><a href="#索引原理与慢查询优化" class="headerlink" title="索引原理与慢查询优化"></a><strong>索引原理与慢查询优化</strong></h2><h2 id="一-我们要搞明白的问题"><a href="#一-我们要搞明白的问题" class="headerlink" title="一 我们要搞明白的问题"></a><strong>一 我们要搞明白的问题</strong></h2><p>让我们带着以下问题展开对索引的探索</p>
+<p>1、为何索引叫key</p>
+<p>2、索引是如何加速查询的，它的原理是啥？</p>
+<p>索引模型/结构从二叉树-》平衡二叉树-》b树最后到b+树，每种树到底有什么问题最终演变成到了b+树</p>
+<p>3、为何b+树不仅能够加速等值查询，还能加速范围查询</p>
+<p>4、什么是聚集索引，什么是辅助索引</p>
+<p>5、什么情况下叫覆盖了索引</p>
+<p>6、什么情况下叫回表操作</p>
+<p>7、什么是联合索引，最左前缀匹配原则</p>
+<p>8、索引下推，查询优化</p>
+<p>9、如何正确使用索引？</p>
+<h2 id="二-索引介绍"><a href="#二-索引介绍" class="headerlink" title="二 索引介绍"></a><strong>二 索引介绍</strong></h2><h3 id="2-1-什么是索引"><a href="#2-1-什么是索引" class="headerlink" title="2.1 什么是索引"></a><strong>2.1 什么是索引</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">索引是存储引擎中一种数据结构，或者说数据的组织方式，又称之为键key，是存储引擎用于快速找到记录的一种数据结构。</span><br><span class="line">为数据建立索引就好比是为书建目录，或者说是为字典创建音序表，如果要查某个字，如果不使用音序表，则需要从几百页中逐页去查。</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-为何要用索引？"><a href="#2-2-为何要用索引？" class="headerlink" title="2.2 为何要用索引？"></a><strong>2.2 为何要用索引？</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">一般的应用系统，读写比例在10:1左右，而且插入操作和一般的更新操作很少出现性能问题，在生产环境中，我们遇到最多的、也是最容易出问题的，还是一些复杂的查询操作，因此对查询语句的优化显然是重中之重。说起加速查询，就不得不提到索引了。</span><br><span class="line"></span><br><span class="line">索引优化应该是对查询性能优化最有效的手段了。索引能够轻易将查询性能提高好几个数量级。</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-如何正确看待索引？"><a href="#2-3-如何正确看待索引？" class="headerlink" title="2.3 如何正确看待索引？"></a><strong>2.3 如何正确看待索引？</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 先说结论：</span><br><span class="line">索引不是越多越好，并且egon建议大家最好在提前创建好索引，而不是等火烧眉毛</span><br><span class="line"></span><br><span class="line"># 详解如下</span><br><span class="line">索引是应用程序设计和开发的一个重要方面。若索引太多，应用程序的性能可能会受到影响。而索引太少，对查询性能又会产生影响，要找到一个平衡点，这对应用程序的性能至关重要。</span><br><span class="line">一些开发人员总是在事后才想起添加索引----我一直认为，这源于一种错误的开发模式。如果知道数据的使用，从一开始就应该在需要处添加索引。开发人员往往对数据库的使用停留在应用的层面，比如编写SQL语句、存储过程之类，他们甚至可能不知道索引的存在，或认为事后让相关DBA加上即可。DBA往往不够了解业务的数据流，而添加索引需要通过监控大量的SQL语句进而从中找到问题，这个步骤所需的时间肯定是远大于初始添加索引所需的时间，并且可能会遗漏一部分的索引。当然索引也并不是越多越好，我曾经遇到过这样一个问题：某台MySQL服务器iostat显示磁盘使用率一直处于100%，经过分析后发现是由于开发人员添加了太多的索引，在删除一些不必要的索引之后，磁盘使用率马上下降为20%。可见索引的添加也是非常有技术含量的。</span><br></pre></td></tr></table></figure>
+
+<h2 id="三-理解索引的储备知识"><a href="#三-理解索引的储备知识" class="headerlink" title="三 理解索引的储备知识"></a><strong>三 理解索引的储备知识</strong></h2><p>要了解索引的数据结构我来先来储备一些知识</p>
+<p>1）储备知识1：机械磁盘一次IO的时间</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">机械磁盘一次io的时间 = 寻道时间 + 旋转延迟 + 传输时间</span><br><span class="line"></span><br><span class="line"># 寻道时间</span><br><span class="line">道时间指的是磁臂移动到指定磁道所需要的时间，主流磁盘一般在5ms以下</span><br><span class="line"></span><br><span class="line"># 旋转延迟</span><br><span class="line">旋转延迟就是我们经常听说的磁盘转速，比如一个磁盘7200转，表示每分钟能转7200次，也就是说1秒钟能转120次，旋转延迟就是1/120/2 = 4.17ms；</span><br><span class="line"></span><br><span class="line"># 传输时间</span><br><span class="line">传输时间指的是从磁盘读出或将数据写入磁盘的时间，一般在零点几毫秒，相对于前两个时间可以忽略不计</span><br><span class="line"></span><br><span class="line">所以访问一次磁盘的时间，即一次磁盘IO的时间约等于5+4.17 = 9ms左右</span><br><span class="line"></span><br><span class="line">这9ms对于人来说可能非常短，但对于计算机来可是非常长的一段时间，长到什么程度呢？</span><br><span class="line">一台500 -MIPS（Million Instructions Per Second）的机器每秒可以执行5亿条指令，因为指令依靠的是电的性质，换句话说执行一次IO的时间可以执行约450万条指令，数据库动辄十万百万乃至千万级数据，每次9毫秒的时间，显然是个灾难。</span><br></pre></td></tr></table></figure>
+
+<p>2）储备知识2：磁盘的预读</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 考虑到磁盘IO是非常高昂的操作，计算机操作系统做了一些优化：</span><br><span class="line">当一次IO时，不光把当前磁盘地址的数据，而是把相邻的数据也都读取到内存缓冲区内，因为局部预读性原理告诉我们，当计算机访问一个地址的数据的时候，与其相邻的数据也会很快被访问到。每一次IO读取的数据我们称之为一页(page)。具体一页有多大数据跟操作系统有关，一般为4k或8k，也就是我们读取一页内的数据时候，实际上才发生了一次IO，这个理论对于索引的数据结构设计非常有帮助。</span><br></pre></td></tr></table></figure>
+
+<p>3）储备知识3：索引原理精髓提炼</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">索引的目的在于提高查询效率，与我们查阅图书所用的目录是一个道理：先定位到章，然后定位到该章下的一个小节，然后找到页数。相似的例子还有：查字典，查火车车次，飞机航班等</span><br><span class="line"></span><br><span class="line">!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span><br><span class="line">本质都是：</span><br><span class="line">通过不断地缩小想要获取数据的范围来筛选出最终想要的结果，同时把随机的事件变成顺序的事件，也就是说，有了这种索引机制，我们可以总是用同一种查找方式来锁定数据。</span><br><span class="line">!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span><br><span class="line"></span><br><span class="line">数据库也是一样，但显然要复杂的多，因为不仅面临着等值查询，还有范围查询(&gt;、&lt;、between、in)、模糊查询(like)、并集查询(or)等等。数据库应该选择怎么样的方式来应对所有的问题呢？我们回想字典的例子，能不能把数据分成段，然后分段查询呢？最简单的如果1000条数据，1到100分成第一段，101到200分成第二段，201到300分成第三段......这样查第250条数据，只要找第三段就可以了，一下子去除了90%的无效数据。但如果是1千万的记录呢，分成几段比较好？稍有算法基础的同学会想到搜索树，其平均复杂度是lgN，具有不错的查询性能。但这里我们忽略了一个关键的问题，复杂度模型是基于每次相同的操作成本来考虑的。而数据库实现比较复杂，一方面数据是保存在磁盘上的，另外一方面为了提高性能，每次又可以把部分数据读入内存来计算，因为我们知道访问磁盘的成本大概是访问内存的十万倍左右，所以简单的搜索树难以满足复杂的应用场景。</span><br></pre></td></tr></table></figure>
+
+<h2 id="四-索引分类"><a href="#四-索引分类" class="headerlink" title="四 索引分类"></a><strong>四 索引分类</strong></h2><p>索引模型分为很多种类</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#===========B+树索引（等值查询与范围查询都快）</span><br><span class="line">二叉树-&gt;平衡二叉树-&gt;B树-&gt;B+树</span><br><span class="line">        </span><br><span class="line">#===========HASH索引(等值查询快，范围查询慢)</span><br><span class="line">将数据打散再去查询</span><br><span class="line"></span><br><span class="line">#===========FULLTEXT：全文索引 （只可以用在MyISAM引擎）</span><br><span class="line">通过关键字的匹配来进行查询，类似于like的模糊匹配</span><br><span class="line">like + %在文本比较少时是合适的</span><br><span class="line">但是对于大量的文本数据检索会非常的慢</span><br><span class="line">全文索引在大量的数据面前能比like快得多，但是准确度很低</span><br><span class="line">百度在搜索文章的时候使用的就是全文索引，但更有可能是ES</span><br></pre></td></tr></table></figure>
+
+<p>不同的存储引擎支持的索引类型也不一样</p>
+<ul>
+<li><p>InnoDB存储引擎<br>支持事务，支持行级别锁定，支持 B-tree（默认）、Full-text 等索引，不支持 Hash 索引；</p>
+</li>
+<li><p>MyISAM存储引擎<br>不支持事务，支持表级别锁定，支持 B-tree、Full-text 等索引，不支持 Hash 索引；</p>
+</li>
+<li><p>Memory存储引擎<br>不支持事务，支持表级别锁定，支持 B-tree、Hash 等索引，不支持 Full-text 索引；</p>
+</li>
+</ul>
+<p>因为mysql默认的存储引擎是innodb，而innodb存储引擎的索引模型/结构是B+树，所以我们着重介绍B+树，那么大家最关注的问题来了：</p>
+<p>B+树索引到底是如何加速查询的呢？</p>
+<h2 id="五-索引的数据结构"><a href="#五-索引的数据结构" class="headerlink" title="五 索引的数据结构"></a><strong>五 索引的数据结构</strong></h2><h3 id="5-1-创建索引的两大步骤"><a href="#5-1-创建索引的两大步骤" class="headerlink" title="5.1 创建索引的两大步骤"></a><strong>5.1 创建索引的两大步骤</strong></h3><p>为某个字段创建索引，即以某个字段的值为基础构建索引结构，那么如何构建呢？分为两大步骤</p>
+<ul>
+<li>1、提取每行记录中该字段的值，以该值当作key，至于key对的value是什么？每种索引结构各不相同</li>
+<li>2、然后以key值为基础构建索引结构</li>
+</ul>
+<p>以后的查询条件中使用了该字段，则会命中索引结构</p>
+<p>例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 1、为user表的id字段创建索引，会以每条记录的id字段值为基础生成索引结构</span><br><span class="line">create index 索引名 on user(id);</span><br><span class="line"></span><br><span class="line">使用索引</span><br><span class="line">select * from user where id = xxx;</span><br><span class="line"></span><br><span class="line"># 2、为user表的name字段创建索引，会以每条记录的name字段值为基础生成索引结构</span><br><span class="line">create index 索引名 on user(id);</span><br><span class="line"></span><br><span class="line">使用索引</span><br><span class="line">select * from user where name = xxx;</span><br></pre></td></tr></table></figure>
+
+<p>那么索引的结构到底长什么样子，让其能够加速查询呢？</p>
+<p>innodb存储引擎默认的索引结构为B+树，而B+树是由二叉树、平衡二叉树、B树再到B+树一路演变过来的</p>
+<h3 id="5-2-二叉查找树"><a href="#5-2-二叉查找树" class="headerlink" title="5.2 二叉查找树"></a><strong>5.2 二叉查找树</strong></h3><p><img src="https://pic3.zhimg.com/80/v2-d7e9b2679df3b732309dabf9ab29c6ce_720w.jpg" alt="img"></p>
+<p>有user表，我们以id字段值为基础创建索引</p>
+<ul>
+<li><p>1、提取每一条记录的id值作为key值，value为本行完整记录，即<br>key value<br>10 (10,zs)<br>7 (7,ls)<br>13 (13,ls)<br>5 (5,ls)<br>8 (8,ls)<br>12 (12,ls)<br>17 (17,ls)</p>
+</li>
+<li><p>2、以key值的大小为基础构建二叉树，如上图所示<br>二叉查找树的特点就是任何节点的左子节点的键值都小于当前节点的键值，右子节点的键值都大于当前节点的键值。<br>顶端的节点我们称为根节点，没有子节点的节点我们称之为叶节点。</p>
+</li>
+</ul>
+<p>如果我们需要查找id=12的用户信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from user where id=12;</span><br></pre></td></tr></table></figure>
+
+<p>利用我们创建的二叉查找树索引，查找流程如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1、将根节点作为当前节点，把12与当前节点的键值10比较，12大于10，接下来我们把当前节点&gt;的右子节点作为当前节点。</span><br><span class="line"></span><br><span class="line">2、继续把12和当前节点的键值13比较，发现12小于13，把当前节点的左子节点作为当前节点。</span><br><span class="line"></span><br><span class="line">3、把12和当前节点的键值12对比，12等于12，满足条件，我们从当前节点中取出data，即id=1&gt;2,name=xm。</span><br></pre></td></tr></table></figure>
+
+<p>利用二叉查找树我们只需要3次即可找到匹配的数据。如果在表中一条条的查找的话，我们需要6次才能找到。</p>
+<h3 id="5-3-平衡二叉树"><a href="#5-3-平衡二叉树" class="headerlink" title="5.3 平衡二叉树"></a><strong>5.3 平衡二叉树</strong></h3><p>基于5.1所示的二叉树，我们确实可以快速地找到数据。</p>
+<p>但是，但是，但是让我们回到二叉查找树地特点上，只论二叉查找树，它的特点只是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">任何节点的左子节点的键值都小于当前节点的键值，右子节点的键值都大于当前节点的键值。 </span><br></pre></td></tr></table></figure>
+
+<p>所以，依据二叉查找树的特点，二叉树可以是这样构造的</p>
+<p><img src="https://pic4.zhimg.com/80/v2-48360e291b7e0bdd68bdc37bad6f406b_720w.jpg" alt="img"></p>
+<p>这个时候可以看到我们的二叉查找树变成了一个链表。如果我们需要查找id=17的用户信息，我们需要查找7次，也就相当于全表扫描了。 导致这个现象的原因其实是二叉查找树变得不平衡了，也就是高度太高了，从而导致查找效率的不稳定。 为了解决这个问题，我们需要保证二叉查找树一直保持平衡，就需要用到平衡二叉树了。</p>
+<p>平衡二叉树又称AVL树，在满足二叉查找树特性的基础上，要求每个节点的左右子树的高度不能超过1。 下面是平衡二叉树和非平衡二叉树的对比：</p>
+<p><img src="https://pic3.zhimg.com/80/v2-2a6835169fd01d5e5554b980e7a0bcc6_720w.jpg" alt="img"></p>
+<p>由平衡二叉树的构造我们可以发现第一张图中的二叉树其实就是一棵平衡二叉树。平衡二叉树保证了树的构造是平衡的，当我们插入或删除数据导致不满足平衡二叉树不平衡时，平衡二叉树会进行调整树上的节点来保持平衡。具体的调整方式这里就不介绍了。平衡二叉树相比于二叉查找树来说，查找效率更稳定，总体的查找速度也更快。</p>
+<p>那么是不是说基于平衡二叉树构建索引的结构就可以了呢？答案是否！</p>
+<h3 id="5-4-B树"><a href="#5-4-B树" class="headerlink" title="5.4 B树"></a><strong>5.4 B树</strong></h3><p>那么直接用平衡二叉树这种数据结构来构建索引有什么问题？</p>
+<p>1、首先，因为内存的易失性。一般情况下，我们都会选择将user表中的数据和索引存储在磁盘这种外围设备中。但是和内存相比，从磁盘中读取数据的速度会慢上百倍千倍甚至万倍，所以，我们应当尽量减少从磁盘中读取数据的次数。</p>
+<p>2、另外，从磁盘中读取数据时，都是按照磁盘块来读取的，并不是一条一条的读。 如果我们能把尽量多的数据放进磁盘块中，那一次磁盘读取操作就会读取更多数据，那我们查找数据的时间也会大幅度降低。</p>
+<p>3、所以，如果我们单纯用平衡二叉树这种数据结构作为索引的数据结构，即每个磁盘块只放一个节点，每个节点中只存放一组键值对，此时如果数据量过大，二叉树的节点则会非常多，树的高度也随即变高，我们查找数据的也会进行很多次磁盘IO，查找数据的效率也会变得极低！</p>
+<p><img src="https://pic2.zhimg.com/80/v2-9d2a92c96af9cbc05a357b76de9f522d_720w.jpg" alt="img"></p>
+<p>综上，如果我们能够在平衡二叉的树的基础上，把更多的节点放入一个磁盘块中，那么平衡二叉树的弊端也就解决了。即构建一个单节点可以存储多个键值对的平衡树，这就是B树。</p>
+<p>B树（Balance Tree）即为平衡树的意思，下图即是一颗B树。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-1c3d441a485f22816473ee52f3ed10c5_720w.jpg" alt="img"></p>
+<blockquote>
+<p>注意： – 1、图中的p节点为指向子节点的指针，二叉查找树和平衡二叉树其实也有，因为图的美观性，被省略了。<br>– 2、图中的每个节点里面放入了多组键值对，一个节点也称为一页，一页即一个磁盘块，在mysql中数据读取的基本单位都是页，即一次io读取一个页的数据，所以我们这里叫做页更符合mysql中索引的底层数据结构。</p>
+</blockquote>
+<p>从上图可以看出，B树相对于平衡二叉树，每个节点存储了更多的键值(key)和数据(data)，并且每个节点拥有更多的子节点，子节点的个数一般称为阶，上述图中的B树为3阶B树，高度也会很低。 基于这个特性，B树查找数据读取磁盘的次数将会很少，数据的查找效率也会比平衡二叉树高很多。 假如我们要查找id=28的用户信息，那么我们在上图B树中查找的流程如下：</p>
+<ul>
+<li>1、先找到根节点也就是页1，判断28在键值17和35之间，我们那么我们根据页1中的指针p2找到页3。</li>
+<li>2、将28和页3中的键值相比较，28在26和30之间，我们根据页3中的指针p2找到页8。</li>
+<li>3、将28和页8中的键值相比较，发现有匹配的键值28，键值28对应的用户信息为(28,bv)。</li>
+</ul>
+<p>注意：</p>
+<ul>
+<li>1、B树的构造是有一些规定的，但这不是本文的关注点，有兴趣的同学可以令行了解。</li>
+<li>2、B树也是平衡的，当增加或删除数据而导致B树不平衡时，也是需要进行节点调整的。</li>
+</ul>
+<p>那么B树是否就是索引的最终结构了呢？答案是no，B树只擅长做等值查询，而对于范围查询（范围查询的本质就是n次等值查询），或者说排序操作，B树也帮不了我们</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from user where id=3;  -- 擅长</span><br><span class="line">select * from user where id&gt;3;  -- 不擅长</span><br></pre></td></tr></table></figure>
+
+<p>上帝说要有光，于是有了B+树</p>
+<h3 id="5-5-B-树"><a href="#5-5-B-树" class="headerlink" title="5.5 B+树"></a><strong>5.5 B+树</strong></h3><p>B+树是对B树的进一步优化。让我们先来看下B+树的结构图：</p>
+<p><img src="https://pic1.zhimg.com/80/v2-b9c0d9daa0b6eda7f88168e4b7f0fb00_720w.jpg" alt="img"></p>
+<p>根据上图我们来看下B+树和B树有什么不同。</p>
+<p>1、B+树非叶子节点non-leaf node上是不存储数据的，仅存储键，而B树的非叶子节点中不仅存储键，也会存储数据。B+树之所以这么做的意义在于：树一个节点就是一个页，而数据库中页的大小是固定的，innodb存储引擎默认一页为16KB，所以在页大小固定的前提下，能往一个页中放入更多的节点，相应的树的阶数（节点的子节点树）就会更大，那么树的高度必然更矮更胖，如此一来我们查找数据进行磁盘的IO次数有会再次减少，数据查询的效率也会更快。</p>
+<p>2、B+树的阶数是等于键的数量的，例如上图，我们的B+树中每个节点可以存储3个键，3层B+树存可以存储<code>3*3*3</code>=9个数据。所以如果我们的B+树一个节点可以存储1000个键值，那么3层B+树可以存储1000×1000×1000=10亿个数据。而一般根节点是常驻内存的，所以一般我们查找10亿数据，只需要2次磁盘IO，真是屌炸天的设计。</p>
+<p>3、因为B+树索引的所有数据均存储在叶子节点leaf node，而且数据是按照顺序排列的。那么B+树使得范围查找，排序查找，分组查找以及去重查找变得异常简单。而B树因为数据分散在各个节点，要实现这一点是很不容易的。 而且B+树中各个页之间也是通过双向链表连接的，叶子节点中的数据是通过单向链表连接的。其实上面的B树我们也可以对各个节点加上链表。其实这些不是它们之前的区别，是因为在mysql的innodb存储引擎中，索引就是这样存储的。也就是说上图中的B+树索引就是innodb中B+树索引真正的实现方式，准确的说应该是聚集索引（聚集索引和非聚集索引下面会讲到）。</p>
+<p>通过上图可以看到，在innodb中，我们通过数据页之间通过双向链表连接以及叶子节点中数据之间通过单向链表连接的方式可以找到表中所有的数据。</p>
+<blockquote>
+<p>MyISAM中的B+树索引实现与innodb中的略有不同。在MyISAM中，B+树索引的叶子节点并不存储数据，而是存储数据的文件地址。</p>
+</blockquote>
+<h2 id="六-聚集索引于非聚集索引"><a href="#六-聚集索引于非聚集索引" class="headerlink" title="六 聚集索引于非聚集索引"></a><strong>六 聚集索引于非聚集索引</strong></h2><h3 id="6-1-什么是聚集索引，什么是非聚集索引"><a href="#6-1-什么是聚集索引，什么是非聚集索引" class="headerlink" title="6.1 什么是聚集索引，什么是非聚集索引"></a><strong>6.1 什么是聚集索引，什么是非聚集索引</strong></h3><p>在上节介绍B+树索引的时候，我们提到了图中的索引其实是聚集索引的实现方式。那什么是聚集索引呢？什么是又是非聚集索引呢？</p>
+<p>在MySQL中，B+树索引按照存储方式的不同分为聚集索引和非聚集索引。这里我们主要介绍innodb存储引擎中的聚集索引和非聚集索引。</p>
+<p>1、聚集索引（又称聚簇索引、主键索引，一张表必须有且只有一个）：以innodb作为存储引擎的表，表中的数据都会有一个主键，即使你不创建主键，系统也会帮你创建一个隐式的主键。这是因为innodb是把数据存放在B+树中的，而B+树的键用的就是主键，在B+树的叶子节点中，存储了表中所有的数据。这种以主键作为B+树索引的键值而构建的B+树索引，我们称之为聚集索引。</p>
+<p>2、非聚集索引（又称非聚簇索引、辅助索引，一张表可以创建多个辅助索引）：以主键以外的列值作为键值构建的B+树索引，我们称之为非聚集索引。非聚集索引与聚集索引的区别在于非聚集索引的叶子节点不存储表中的数据，而是存储该列对应的主键，想要查找数据我们还需要根据主键再去聚集索引中进行查找，这个再根据聚集索引查找数据的过程，我们称为回表。 明白了聚集索引和非聚集索引的定义，我们应该明白这样一句话：数据即索引，索引即数据。</p>
+<h3 id="6-2-利用聚集索引和非聚集索引查找数据"><a href="#6-2-利用聚集索引和非聚集索引查找数据" class="headerlink" title="6.2 利用聚集索引和非聚集索引查找数据"></a><strong>6.2 利用聚集索引和非聚集索引查找数据</strong></h3><p>前面我们讲解B+树索引的时候并没有去说怎么在B+树中进行数据的查找，主要就是因为还没有引出聚集索引和非聚集索引的概念。下面我们通过讲解如何通过聚集索引以及非聚集索引查找数据表中数据的方式介绍一下B+树索引查找数据方法。</p>
+<h3 id="6-2-1-利用聚集索引查找数据"><a href="#6-2-1-利用聚集索引查找数据" class="headerlink" title="6.2.1 利用聚集索引查找数据"></a><strong>6.2.1 利用聚集索引查找数据</strong></h3><p><img src="https://pic1.zhimg.com/80/v2-b9c0d9daa0b6eda7f88168e4b7f0fb00_720w.jpg" alt="img"></p>
+<p>还是这张B+树索引图，现在我们应该知道这就是聚集索引，表中的数据存储在其中。现在假设我们要查找id&gt;=18并且id&lt;40的用户数据。对应的sql语句为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from user where id&gt;=18 and id &lt;40，</span><br></pre></td></tr></table></figure>
+
+<p>其中id为主键。具体的查找过程如下：</p>
+<p>1、一般根节点都是常驻内存的，也就是说页1已经在内存中了，此时不需要到磁盘中读取数据，直接从内存中读取即可。从内存中读取到页1，要查找这个id&gt;=18 and id &lt;40或者范围值，我们首先需要找到id=18的键值。从页1中我们可以找到键值18，此时我们需要根据指针p2，定位到页3。</p>
+<p>2、要从页3中查找数据，我们就需要拿着p2指针去磁盘中进行读取页3。从磁盘中读取页3后将页3放入内存中，然后进行查找，我们可以找到键值18，然后再拿到页3中的指针p1，定位到页8。</p>
+<p>3、同样的页8页不在内存中，我们需要再去磁盘中将页8读取到内存中。将页8读取到内存中后。因为页中的数据是链表进行连接的，而且键值是按照顺序存放的，此时可以根据二分查找法定位到键值18。此时因为已经到数据页了，此时我们已经找到一条满足条件的数据了，就是键值18对应的数据。因为是范围查找，而且此时所有的数据又都存在叶子节点，并且是有序排列的，那么我们就可以对页8中的键值依次进行遍历查找并匹配满足条件的数据。我们可以一直找到键值为22的数据，然后页8中就没有数据了，此时我们需要拿着页8中的p指针去读取页9中的数据。</p>
+<p>4、因为页9不在内存中，就又会加载页9到内存中，并通过和页8中一样的方式进行数据的查找，直到将页12加载到内存中，发现41大于40，此时不满足条件。那么查找到此终止。最终我们找到满足条件的所有数据为：(18,kl),(19,kl),(22,hj),(24,io),(25,vg),(29,jk),(31,jk),(33,rt),(34,ty),(35,yu),(37,rt),(39,rt)。总共12条记录。</p>
+<p>下面看下具体的查找流程图： [rml_read_more]：</p>
+<p><img src="https://pic3.zhimg.com/80/v2-f266e16bbf202718fcfcf62efa8e7aa2_720w.jpg" alt="img"></p>
+<h3 id="6-2-2-利用非聚集索引查找数据"><a href="#6-2-2-利用非聚集索引查找数据" class="headerlink" title="6.2.2 利用非聚集索引查找数据"></a><strong>6.2.2 利用非聚集索引查找数据</strong></h3><p><img src="https://pic3.zhimg.com/80/v2-836c4486f551c15598ac73b327d5d522_720w.jpg" alt="img"></p>
+<p>读者看到这张图的时候可能会蒙，这是啥东西啊？怎么都是数字。如果有这种感觉，请仔细看上图中红字的解释。什么？还看不懂？那我再来解释下吧。首先，这个非聚集索引表示的是用户幸运数字的索引（为什么是幸运数字？一时兴起想起来的），此时表结构是这样的。</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>luckyNum</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>在叶子节点中，不再存储所有的数据了，存储的是键和主键。对于叶子节点中的x-y，比如10-23。左边的10表示的是索引的键值，右边的23表示的其对应的主键值。如果我们要找到幸运数字为33的用户信息，对应的sql语句为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from user where luckNum=33;</span><br></pre></td></tr></table></figure>
+
+<p>查找的流程跟聚集索引一样，这里就不详细介绍了。我们最终会找到主键值47，因为我们select要的是*，即所有字段值，在辅助索引中并不存在，所以找到主键后我们需要再到聚集索引中查找具体对应的数据信息，此时又回到了聚集索引的查找流程，着 下面看下具体的查找流程图：</p>
+<p><img src="https://pic3.zhimg.com/80/v2-139a02994d74cde2457c73168d5dbb02_720w.jpg" alt="img"></p>
+<blockquote>
+<p>在MyISAM中，聚集索引和非聚集索引的叶子节点都会存储数据的文件地址。</p>
+</blockquote>
+<h3 id="6-2-3-覆盖索引与回表操作"><a href="#6-2-3-覆盖索引与回表操作" class="headerlink" title="6.2.3 覆盖索引与回表操作"></a><strong>6.2.3 覆盖索引与回表操作</strong></h3><p>命中了辅助索引，然后要找的字段值不存在与辅助索引的叶子节点上，则需要根据拿到的主键值再去聚集索引中查询一遍，然后再聚集索引的叶子节点找到你想要的内容，这就叫回表操作</p>
+<p>例如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create index xxx on user(name);</span><br><span class="line"></span><br><span class="line">下述语句，名中了辅助索引，但是select需要查询出的除了辅助索引叶子节点有的name字段值外还想要age字段的值，那么需要进行回表操作</span><br><span class="line">select name,age from user where name=&quot;egon&quot;; </span><br></pre></td></tr></table></figure>
+
+<p>命中了某棵索引树，然后在其叶子节点就找到了你想要的值，即不需要回表操作，就是覆盖了索引</p>
+<p>例1：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create index xxx on user(name);</span><br><span class="line"></span><br><span class="line">下述语句，覆盖了索引</span><br><span class="line">select name from user where name=&quot;egon&quot;; </span><br></pre></td></tr></table></figure>
+
+<p>例2：使用主键字段当作条件，百分百覆盖了索引，效率极高，推荐使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">如果id字段是主键，那么下述语句也覆盖了索引</span><br><span class="line">select * from user where id=3;</span><br></pre></td></tr></table></figure>
+
+<h2 id="七-MySQL索引管理"><a href="#七-MySQL索引管理" class="headerlink" title="七 MySQL索引管理"></a><strong>七 MySQL索引管理</strong></h2><p><a href="https://link.zhihu.com/?target=https://www.cnblogs.com/linhaifeng/articles/7274563.html%23_label5">https://www.cnblogs.com/linhaifeng/articles/7274563.html#_label5</a></p>
+<h2 id="八-测试索引"><a href="#八-测试索引" class="headerlink" title="八 测试索引"></a><strong>八 测试索引</strong></h2><p><a href="https://link.zhihu.com/?target=https://www.cnblogs.com/linhaifeng/articles/7274563.html%23_label6">https://www.cnblogs.com/linhaifeng/articles/7274563.html#_label6</a></p>
+<h2 id="九-正确使用索引"><a href="#九-正确使用索引" class="headerlink" title="九 正确使用索引"></a><strong>九 正确使用索引</strong></h2><p><a href="https://link.zhihu.com/?target=https://www.cnblogs.com/linhaifeng/articles/7274563.html%23_label7">https://www.cnblogs.com/linhaifeng/articles/7274563.html#_label7</a></p>
+<h2 id="十-联合索引与覆盖索引"><a href="#十-联合索引与覆盖索引" class="headerlink" title="十 联合索引与覆盖索引"></a><strong>十 联合索引与覆盖索引</strong></h2><p><a href="https://link.zhihu.com/?target=https://www.cnblogs.com/linhaifeng/articles/7274563.html%23_label8">https://www.cnblogs.com/linhaifeng/articles/7274563.html#_label8</a></p>
+<h2 id="十一-查询优化神器"><a href="#十一-查询优化神器" class="headerlink" title="十一 查询优化神器"></a><strong>十一 查询优化神器</strong></h2><p><a href="https://link.zhihu.com/?target=https://www.cnblogs.com/linhaifeng/articles/7274563.html%23_label9">https://www.cnblogs.com/linhaifeng/articles/7274563.html#_label9</a></p>
+<h2 id="十二-慢查询优化的基本步骤"><a href="#十二-慢查询优化的基本步骤" class="headerlink" title="十二 慢查询优化的基本步骤"></a><strong>十二 慢查询优化的基本步骤</strong></h2><p><a href="https://link.zhihu.com/?target=https://www.cnblogs.com/linhaifeng/articles/7274563.html%23_label10">https://www.cnblogs.com/linhaifeng/articles/7274563.html#_label10</a></p>
+<h2 id="十三-慢查询日志管理"><a href="#十三-慢查询日志管理" class="headerlink" title="十三 慢查询日志管理"></a><strong>十三 慢查询日志管理</strong></h2><p><a href="https://link.zhihu.com/?target=https://www.cnblogs.com/linhaifeng/articles/7274563.html%23_label11">https://www.cnblogs.com/linhaifeng/articles/7274563.html#_label11</a></p>
+<h2 id="十四-innodb存储引擎索引知识小节"><a href="#十四-innodb存储引擎索引知识小节" class="headerlink" title="十四 innodb存储引擎索引知识小节"></a><strong>十四 innodb存储引擎索引知识小节</strong></h2><p><a href="https://link.zhihu.com/?target=https://www.cnblogs.com/linhaifeng/articles/7274563.html%23_label12">https://www.cnblogs.com/linhaifeng/</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/数据库//" class="article-tag-list-link color4">数据库</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/09/02/%E7%B4%A2%E5%BC%95%E4%B8%8E%E6%85%A2%E6%9F%A5%E8%AF%A2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+ 
+
+
+
+  
     <article id="post-存储引擎" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1449,197 +1712,9 @@
 
 
   
-    <article id="post-数据库安装" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/09/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E8%A3%85/">MySQL数据库安装</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2021/09/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E8%A3%85/" class="archive-article-date">
-  	<time datetime="2021-09-01T23:54:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-02</time>
-</a>
-
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="MySQL数据库多种安装方式"><a href="#MySQL数据库多种安装方式" class="headerlink" title="MySQL数据库多种安装方式"></a><strong>MySQL数据库多种安装方式</strong></h2><p>数据库官网下载地址 <a href="https://link.zhihu.com/?target=https://downloads.mysql.com/archives/community/">https://downloads.mysql.com/archives/community/</a></p>
-<h2 id="一-linux系统"><a href="#一-linux系统" class="headerlink" title="一 linux系统"></a><strong>一 linux系统</strong></h2><h3 id="1-1-源码安装数据库（自定义安装目录）"><a href="#1-1-源码安装数据库（自定义安装目录）" class="headerlink" title="1.1 源码安装数据库（自定义安装目录）"></a><strong>1.1 源码安装数据库（自定义安装目录）</strong></h3><p><img src="https://pic2.zhimg.com/80/v2-6208111f437dad04cc1ab83e6b76dc19_720w.jpg" alt="img"></p>
-<h3 id="1）下载代码包"><a href="#1）下载代码包" class="headerlink" title="1）下载代码包"></a><strong>1）下载代码包</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# wget https://downloads.mysql.com/archives/get/p/23/file/mysql-5.6.46.tar.gz</span><br></pre></td></tr></table></figure>
-
-<h3 id="2）安装依赖"><a href="#2）安装依赖" class="headerlink" title="2）安装依赖"></a><strong>2）安装依赖</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# yum install -y ncurses-devel libaio-devel gcc gcc-c++ glibc cmake autoconf openssl openssl-devel</span><br></pre></td></tr></table></figure>
-
-<h3 id="3）解压"><a href="#3）解压" class="headerlink" title="3）解压"></a><strong>3）解压</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# tar xf mysql-5.6.46.tar.gz</span><br></pre></td></tr></table></figure>
-
-<h3 id="4）创建目录"><a href="#4）创建目录" class="headerlink" title="4）创建目录"></a><strong>4）创建目录</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# mkdir /service</span><br></pre></td></tr></table></figure>
-
-<h3 id="5）生成cmake"><a href="#5）生成cmake" class="headerlink" title="5）生成cmake"></a><strong>5）生成cmake</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# cd mysql-5.6.46/</span><br><span class="line">[root@db01 ~]# cmake . -DCMAKE_INSTALL_PREFIX=/service/mysql-5.6.46 \</span><br><span class="line">-DMYSQL_DATADIR=/service/mysql-5.6.46/data \</span><br><span class="line">-DMYSQL_UNIX_ADDR=/service/mysql-5.6.46/tmp/mysql.sock \</span><br><span class="line">-DDEFAULT_CHARSET=utf8 \</span><br><span class="line">-DDEFAULT_COLLATION=utf8_general_ci \</span><br><span class="line">-DWITH_EXTRA_CHARSETS=all \</span><br><span class="line">-DWITH_INNOBASE_STORAGE_ENGINE=1 \</span><br><span class="line">-DWITH_FEDERATED_STORAGE_ENGINE=1 \</span><br><span class="line">-DWITH_BLACKHOLE_STORAGE_ENGINE=1 \</span><br><span class="line">-DWITHOUT_EXAMPLE_STORAGE_ENGINE=1 \</span><br><span class="line">-DWITH_ZLIB=bundled \</span><br><span class="line">-DWITH_SSL=system \</span><br><span class="line">-DENABLED_LOCAL_INFILE=1 \</span><br><span class="line">-DWITH_EMBEDDED_SERVER=1 \</span><br><span class="line">-DENABLE_DOWNLOADS=1 \</span><br><span class="line">-DWITH_DEBUG=0</span><br><span class="line"></span><br><span class="line">#程序存放位置</span><br><span class="line">cmake . -DCMAKE_INSTALL_PREFIX=/service/mysql-5.6.46 \</span><br><span class="line">#数据存放位置</span><br><span class="line">-DMYSQL_DATADIR=/service/mysql-5.6.46/data \</span><br><span class="line">#socket文件存放位置</span><br><span class="line">-DMYSQL_UNIX_ADDR=/service/mysql-5.6.46/tmp/mysql.sock \</span><br><span class="line">#使用utf8字符集</span><br><span class="line">-DDEFAULT_CHARSET=utf8 \</span><br><span class="line">#校验规则</span><br><span class="line">-DDEFAULT_COLLATION=utf8_general_ci \</span><br><span class="line">#使用其他额外的字符集</span><br><span class="line">-DWITH_EXTRA_CHARSETS=all \</span><br><span class="line">#支持的存储引擎</span><br><span class="line">-DWITH_INNOBASE_STORAGE_ENGINE=1 \</span><br><span class="line">-DWITH_FEDERATED_STORAGE_ENGINE=1 \</span><br><span class="line">-DWITH_BLACKHOLE_STORAGE_ENGINE=1 \</span><br><span class="line">#禁用的存储引擎</span><br><span class="line">-DWITHOUT_EXAMPLE_STORAGE_ENGINE=1 \</span><br><span class="line">#启用zlib库支持（zib、gzib相关）</span><br><span class="line">-DWITH_ZLIB=bundled \</span><br><span class="line">#启用SSL库支持（安全套接层）</span><br><span class="line">-DWITH_SSL=bundled \</span><br><span class="line">#启用本地数据导入支持</span><br><span class="line">-DENABLED_LOCAL_INFILE=1 \</span><br><span class="line">#编译嵌入式服务器支持</span><br><span class="line">-DWITH_EMBEDDED_SERVER=1 \</span><br><span class="line"># mysql5.6支持了google的c++mock框架了，允许下载，否则会安装报错。</span><br><span class="line">-DENABLE_DOWNLOADS=1 \</span><br><span class="line">#禁用debug（默认为禁用）</span><br><span class="line">-DWITH_DEBUG=0</span><br><span class="line">#编译</span><br></pre></td></tr></table></figure>
-
-<h3 id="5）编译-make"><a href="#5）编译-make" class="headerlink" title="5）编译 make"></a><strong>5）编译 make</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 mysql-5.6.46]# make</span><br></pre></td></tr></table></figure>
-
-<h3 id="6）安装-make-install"><a href="#6）安装-make-install" class="headerlink" title="6）安装 make install"></a><strong>6）安装 make install</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 mysql-5.6.46]# make install</span><br></pre></td></tr></table></figure>
-
-<h3 id="7）做软连接"><a href="#7）做软连接" class="headerlink" title="7）做软连接"></a><strong>7）做软连接</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# ln -s /service/mysql-5.6.46 /service/mysql</span><br></pre></td></tr></table></figure>
-
-<h3 id="8）创建数据库用户"><a href="#8）创建数据库用户" class="headerlink" title="8）创建数据库用户"></a><strong>8）创建数据库用户</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# useradd mysql -s /sbin/nologin -M</span><br></pre></td></tr></table></figure>
-
-<h3 id="9）拷贝配置文件和启动文件"><a href="#9）拷贝配置文件和启动文件" class="headerlink" title="9）拷贝配置文件和启动文件"></a><strong>9）拷贝配置文件和启动文件</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#1.进入配置文件和脚本的目录</span><br><span class="line">[root@db01 ~]# cd /service/mysql/support-files/</span><br><span class="line"></span><br><span class="line">#2.拷贝配置文件</span><br><span class="line">[root@db01 support-files]# cp my-default.cnf /etc/my.cnf</span><br></pre></td></tr></table></figure>
-
-<h3 id="10）配置system管理MySQL服务"><a href="#10）配置system管理MySQL服务" class="headerlink" title="10）配置system管理MySQL服务"></a><strong>10）配置system管理MySQL服务</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#1.配置system管理MySQL</span><br><span class="line">[root@db01 ~]# vim /usr/lib/systemd/system/mysql.service</span><br><span class="line">[Unit]</span><br><span class="line">Description=MySQL Server</span><br><span class="line">Documentation=man:mysqld(8)</span><br><span class="line">Documentation=https://dev.mysql.com/doc/refman/en/using-systemd.html</span><br><span class="line">After=network.target</span><br><span class="line">After=syslog.target</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">[Service]</span><br><span class="line">User=mysql</span><br><span class="line">Group=mysql</span><br><span class="line">ExecStart=/service/mysql/bin/mysqld --defaults-file=/etc/my.cnf</span><br><span class="line">LimitNOFILE = 5000</span><br><span class="line"></span><br><span class="line">#2.重新加载启动文件列表</span><br><span class="line">[root@db01 ~]# systemctl daemon-reload</span><br></pre></td></tr></table></figure>
-
-<h3 id="11）初始化数据库"><a href="#11）初始化数据库" class="headerlink" title="11）初始化数据库"></a><strong>11）初始化数据库</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#1.进入初始化目录</span><br><span class="line">[root@db01 support-files]# cd /service/mysql/scripts/</span><br><span class="line"></span><br><span class="line">#2.执行初始化命令</span><br><span class="line">[root@db01 scripts]# ./mysql_install_db --user=mysql --basedir=/service/mysql --datadir=/service/mysql/data</span><br></pre></td></tr></table></figure>
-
-<h3 id="12）创建socket文件目录（二进制安装没有）"><a href="#12）创建socket文件目录（二进制安装没有）" class="headerlink" title="12）创建socket文件目录（二进制安装没有）"></a><strong>12）创建socket文件目录（二进制安装没有）</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#先创建tmp目录</span><br><span class="line">[root@db01 ~]# mkdir /service/mysql/tmp</span><br></pre></td></tr></table></figure>
-
-<h3 id="13）授权数据库目录"><a href="#13）授权数据库目录" class="headerlink" title="13）授权数据库目录"></a><strong>13）授权数据库目录</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# chown -R mysql.mysql /service/mysql</span><br><span class="line">[root@db01 ~]# chown -R mysql.mysql /service/mysql-5.6.46</span><br></pre></td></tr></table></figure>
-
-<h3 id="14）system管理启动MySQL"><a href="#14）system管理启动MySQL" class="headerlink" title="14）system管理启动MySQL"></a><strong>14）system管理启动MySQL</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# systemctl start mysql</span><br><span class="line">[root@db01 ~]# ps -ef | grep [m]ysql</span><br><span class="line">mysql     23509      1  3 22:36 ?        00:00:01 /usr/local/mysql/bin/mysqld --defaults-file=/etc/my.cnf</span><br><span class="line">[root@db01 ~]# netstat -lntp | grep 3306</span><br><span class="line">tcp6       0      0 :::3306                 :::*                    LISTEN      23509/mysqld</span><br></pre></td></tr></table></figure>
-
-<h3 id="15）配置环境变量直接使用mysql"><a href="#15）配置环境变量直接使用mysql" class="headerlink" title="15）配置环境变量直接使用mysql"></a><strong>15）配置环境变量直接使用mysql</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# vim /etc/profile.d/mysql.sh </span><br><span class="line">export PATH=/service/mysql/bin:$PATH</span><br><span class="line">[root@db01 ~]# source /etc/profile</span><br></pre></td></tr></table></figure>
-
-<h3 id="16）修改root用户密码"><a href="#16）修改root用户密码" class="headerlink" title="16）修改root用户密码"></a><strong>16）修改root用户密码</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# mysql -u root -p   #默认root用户密码为空，有多种方式重置root密码</span><br><span class="line">第一种：</span><br><span class="line">MySQL &gt; SET PASSWORD=PASSWORD(&#x27;123456&#x27;);</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">第二种：</span><br><span class="line">MySQL &gt; grant all privileges on *.* to root@&#x27;%&#x27; identified by &#x27;oldboy&#x27;;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; flush privileges;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">注意：两种重置密码方式有区别。</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-2-二进制安装（自定义安装目录）"><a href="#1-2-二进制安装（自定义安装目录）" class="headerlink" title="1.2 二进制安装（自定义安装目录）"></a><strong>1.2 二进制安装（自定义安装目录）</strong></h3><p><img src="https://pic4.zhimg.com/80/v2-01985a5d105287e3c81744cccca38743_720w.jpg" alt="img"></p>
-<h3 id="1）下载二进制包"><a href="#1）下载二进制包" class="headerlink" title="1）下载二进制包"></a><strong>1）下载二进制包</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# wget https://downloads.mysql.com/archives/get/p/23/file/mysql-5.6.46-linux-glibc2.12-x86_64.tar.gz</span><br></pre></td></tr></table></figure>
-
-<h3 id="2）安装依赖-1"><a href="#2）安装依赖-1" class="headerlink" title="2）安装依赖"></a><strong>2）安装依赖</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# yum install -y ncurses-devel libaio-devel gcc gcc-c++ glibc cmake autoconf</span><br></pre></td></tr></table></figure>
-
-<h3 id="3）解压安装包"><a href="#3）解压安装包" class="headerlink" title="3）解压安装包"></a><strong>3）解压安装包</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# tar xf mysql-5.6.46-linux-glibc2.12-x86_64.tar.gz</span><br></pre></td></tr></table></figure>
-
-<h3 id="4）创建自定义目录"><a href="#4）创建自定义目录" class="headerlink" title="4）创建自定义目录"></a><strong>4）创建自定义目录</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# mkdir /service</span><br></pre></td></tr></table></figure>
-
-<h3 id="5）移动目录并改名"><a href="#5）移动目录并改名" class="headerlink" title="5）移动目录并改名"></a><strong>5）移动目录并改名</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# mv mysql-5.6.46-linux-glibc2.12-x86_64 /service/mysql-5.6.46</span><br></pre></td></tr></table></figure>
-
-<h3 id="6）做软连接"><a href="#6）做软连接" class="headerlink" title="6）做软连接"></a><strong>6）做软连接</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# ln -s /service/mysql-5.6.46 /service/mysql</span><br></pre></td></tr></table></figure>
-
-<h3 id="7）创建数据库用户"><a href="#7）创建数据库用户" class="headerlink" title="7）创建数据库用户"></a><strong>7）创建数据库用户</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# useradd mysql -s /sbin/nologin -M</span><br></pre></td></tr></table></figure>
-
-<h3 id="8）拷贝配置文件和启动文件"><a href="#8）拷贝配置文件和启动文件" class="headerlink" title="8）拷贝配置文件和启动文件"></a><strong>8）拷贝配置文件和启动文件</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#1.进入配置文件和脚本的目录</span><br><span class="line">[root@db01 ~]# cd /service/mysql/support-files/</span><br><span class="line"></span><br><span class="line">#2.拷贝配置文件</span><br><span class="line">[root@db01 support-files]# cp my-default.cnf /etc/my.cnf</span><br><span class="line">cp: overwrite ‘/etc/my.cnf’? y</span><br><span class="line"></span><br><span class="line">#3.拷贝启动脚本</span><br><span class="line">[root@db01 support-files]# cp mysql.server /etc/init.d/mysqld</span><br></pre></td></tr></table></figure>
-
-<h3 id="9）初始化数据库"><a href="#9）初始化数据库" class="headerlink" title="9）初始化数据库"></a><strong>9）初始化数据库</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#1.进入初始化目录</span><br><span class="line">[root@db01 support-files]# cd /service/mysql/scripts/</span><br><span class="line"></span><br><span class="line">#2.执行初始化命令</span><br><span class="line">[root@db01 scripts]# ./mysql_install_db --user=mysql --basedir=/service/mysql --datadir=/service/mysql/data</span><br></pre></td></tr></table></figure>
-
-<h3 id="10）启动数据库"><a href="#10）启动数据库" class="headerlink" title="10）启动数据库"></a><strong>10）启动数据库</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 scripts]# /etc/init.d/mysqld start</span><br><span class="line">/etc/init.d/mysqld: line 244: my_print_defaults: command not found</span><br><span class="line">/etc/init.d/mysqld: line 264: cd: /usr/local/mysql: No such file or directory</span><br><span class="line">Starting MySQL ERROR! Couldn&#x27;t find MySQL server (/usr/local/mysql/bin/mysqld_safe)</span><br></pre></td></tr></table></figure>
-
-<h3 id="11）如果是二进制安装到自定义目录下需要修改脚本目录"><a href="#11）如果是二进制安装到自定义目录下需要修改脚本目录" class="headerlink" title="11）如果是二进制安装到自定义目录下需要修改脚本目录"></a><strong>11）如果是二进制安装到自定义目录下需要修改脚本目录</strong></h3><p>本例中就安装到了/service目录下，所以需要修改脚本中的默认路径</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 scripts]# sed -i &#x27;s#/usr/local#/service#g&#x27; /etc/init.d/mysqld /service/mysql/bin/mysqld_safe</span><br></pre></td></tr></table></figure>
-
-<h3 id="12）授权数据库目录"><a href="#12）授权数据库目录" class="headerlink" title="12）授权数据库目录"></a><strong>12）授权数据库目录</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# chown -R mysql.mysql /service/mysql</span><br><span class="line">[root@db01 ~]# chown -R mysql.mysql /service/mysql-5.6.46</span><br></pre></td></tr></table></figure>
-
-<h3 id="13）再次启动"><a href="#13）再次启动" class="headerlink" title="13）再次启动"></a><strong>13）再次启动</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 scripts]# /etc/init.d/mysqld start</span><br><span class="line">Starting MySQL.Logging to &#x27;/service/mysql/data/db04.err&#x27;.</span><br><span class="line"> SUCCESS! </span><br><span class="line">[root@db01 scripts]#</span><br></pre></td></tr></table></figure>
-
-<h3 id="14）检查进程和端口"><a href="#14）检查进程和端口" class="headerlink" title="14）检查进程和端口"></a><strong>14）检查进程和端口</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 scripts]# ps -ef | grep [m]ysql</span><br><span class="line">root      23083      1  0 20:36 pts/0    00:00:00 /bin/sh /usr/local/mysql/bin/mysqld_safe --datadir=/usr/local/mysql/data --pid-file=/usr/local/mysql/data/db02.pid</span><br><span class="line">mysql     23191  23083  0 20:36 pts/0    00:00:00 /usr/local/mysql/bin/mysqld --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data --plugin-dir=/usr/local/mysql/lib/plugin --user=mysql --log-error=db02.err --pid-file=/usr/local/mysql/data/db02.pid</span><br><span class="line">[root@db01 scripts]# netstat -lntp | grep 3306</span><br><span class="line">tcp6       0      0 :::3306                 :::*                    LISTEN      23191/mysqld        </span><br><span class="line">[root@db01 scripts]# </span><br></pre></td></tr></table></figure>
-
-<h3 id="15）配置system管理MySQL服务"><a href="#15）配置system管理MySQL服务" class="headerlink" title="15）配置system管理MySQL服务"></a><strong>15）配置system管理MySQL服务</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#1.配置system管理MySQL</span><br><span class="line">[root@db01 ~]# vim /usr/lib/systemd/system/mysql.service</span><br><span class="line">[Unit]</span><br><span class="line">Description=MySQL Server</span><br><span class="line">Documentation=man:mysqld(8)</span><br><span class="line">Documentation=https://dev.mysql.com/doc/refman/en/using-systemd.html</span><br><span class="line">After=network.target</span><br><span class="line">After=syslog.target</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">[Service]</span><br><span class="line">User=mysql</span><br><span class="line">Group=mysql</span><br><span class="line">ExecStart=/service/mysql/bin/mysqld --defaults-file=/etc/my.cnf</span><br><span class="line">LimitNOFILE = 5000</span><br><span class="line"></span><br><span class="line">#2.重新加载启动文件列表</span><br><span class="line">[root@db01 ~]# systemctl daemon-reload</span><br></pre></td></tr></table></figure>
-
-<h3 id="16）查看MySQL配置文件检索顺序"><a href="#16）查看MySQL配置文件检索顺序" class="headerlink" title="16）查看MySQL配置文件检索顺序"></a><strong>16）查看MySQL配置文件检索顺序</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 mysql]# /service/mysql/bin/mysql --help|grep &#x27;my.cnf&#x27;</span><br><span class="line">                      order of preference, my.cnf, $MYSQL_TCP_PORT,</span><br><span class="line">/etc/my.cnf /etc/mysql/my.cnf /usr/local/mysql/etc/my.cnf ~/.my.cnf </span><br></pre></td></tr></table></figure>
-
-<h3 id="17）配置my-cnf"><a href="#17）配置my-cnf" class="headerlink" title="17）配置my.cnf"></a><strong>17）配置my.cnf</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#1.配置指定数据库安装目录与数据目录</span><br><span class="line">[root@db01 scripts]# vim /etc/my.cnf</span><br><span class="line">[mysqld]</span><br><span class="line">basedir=/service/mysql</span><br><span class="line">datadir=/service/mysql/data</span><br><span class="line"></span><br><span class="line">#2.启动</span><br><span class="line">[root@db01 scripts]# systemctl start mysql</span><br></pre></td></tr></table></figure>
-
-<h3 id="19）配置环境变量直接使用mysql"><a href="#19）配置环境变量直接使用mysql" class="headerlink" title="19）配置环境变量直接使用mysql"></a><strong>19）配置环境变量直接使用mysql</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# vim /etc/profile.d/mysql.sh </span><br><span class="line">export PATH=/service/mysql/bin:$PATH</span><br><span class="line">[root@db01 ~]# source /etc/profile</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-3-YUM安装"><a href="#1-3-YUM安装" class="headerlink" title="1.3 YUM安装"></a><strong>1.3 YUM安装</strong></h3><h3 id="1）配置MySQL的yum源"><a href="#1）配置MySQL的yum源" class="headerlink" title="1）配置MySQL的yum源"></a><strong>1）配置MySQL的yum源</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# cat /etc/yum.repos.d/mysql-community.repo</span><br><span class="line"># Enable to use MySQL 5.6</span><br><span class="line">[mysql56-community]</span><br><span class="line">name=MySQL 5.6 Community Server</span><br><span class="line">baseurl=http://repo.mysql.com/yum/mysql-5.6-community/el/7/$basearch/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0</span><br></pre></td></tr></table></figure>
-
-<h3 id="2）检查存储库是否正确配置"><a href="#2）检查存储库是否正确配置" class="headerlink" title="2）检查存储库是否正确配置"></a><strong>2）检查存储库是否正确配置</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]#  yum repolist enabled | grep mysql</span><br></pre></td></tr></table></figure>
-
-<h3 id="3）禁用默认的MySQL模块"><a href="#3）禁用默认的MySQL模块" class="headerlink" title="3）禁用默认的MySQL模块"></a><strong>3）禁用默认的MySQL模块</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# sudo yum module disable mysql</span><br></pre></td></tr></table></figure>
-
-<h3 id="4）安装MySQL"><a href="#4）安装MySQL" class="headerlink" title="4）安装MySQL"></a><strong>4）安装MySQL</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# sudo yum install mysql-community-server</span><br></pre></td></tr></table></figure>
-
-<h3 id="5）启动MySQL"><a href="#5）启动MySQL" class="headerlink" title="5）启动MySQL"></a><strong>5）启动MySQL</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]#  sudo service mysqld start</span><br><span class="line">Starting mysqld (via systemctl):                           [  OK  ]</span><br></pre></td></tr></table></figure>
-
-<h3 id="6）检查MySQL运行状态"><a href="#6）检查MySQL运行状态" class="headerlink" title="6）检查MySQL运行状态"></a><strong>6）检查MySQL运行状态</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# sudo service mysqld status</span><br></pre></td></tr></table></figure>
-
-<h3 id="7）保护运行MySQL"><a href="#7）保护运行MySQL" class="headerlink" title="7）保护运行MySQL"></a><strong>7）保护运行MySQL</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@db01 ~]# mysql_secure_installation</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-4-MySQL5-6与MySQL5-7安装的区别"><a href="#1-4-MySQL5-6与MySQL5-7安装的区别" class="headerlink" title="1.4 MySQL5.6与MySQL5.7安装的区别"></a><strong>1.4 MySQL5.6与MySQL5.7安装的区别</strong></h3><h3 id="1-4-1-cmake的时候加入了bostorg"><a href="#1-4-1-cmake的时候加入了bostorg" class="headerlink" title="1.4.1 cmake的时候加入了bostorg"></a><strong>1.4.1 cmake的时候加入了bostorg</strong></h3><p><em><strong>建议大家使用二进制的包安装，已经过了cmake阶段，已经把bostorg装好了</strong></em></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@db02 mysql-5.7.20]# yum install -y gcc gcc-c++ automake autoconf</span><br><span class="line">[root@db02 mysql-5.7.20]# yum install make cmake bison-devel ncurses-devel libaio-devel</span><br><span class="line">[root@db02 mysql-5.7.20]#</span><br><span class="line">wget httpss://dl.bintray.com/boostorg/release/1.65.1/source/boost_1_59_0.tar.gz</span><br><span class="line">#登录boost.org下载也可以</span><br><span class="line">[root@db02 mysql-5.7.20]# tar xf boost_1_59_0.tar.gz -C /usr/local/</span><br><span class="line">[root@db02 mysql-5.7.20]#</span><br><span class="line">cmake . -DCMAKE_INSTALL_PREFIX=/application/mysql-5.7.20 \</span><br><span class="line">-DMYSQL_DATADIR=/application/mysql-5.7.20/data \</span><br><span class="line">-DMYSQL_UNIX_ADDR=/application/mysql-5.7.20/tmp/mysql.sock \</span><br><span class="line">#安装bostorg</span><br><span class="line">-DDOWNLOAD_BOOST=1 \</span><br><span class="line">#安装的目录</span><br><span class="line">-DWITH_BOOST=/usr/local/boost_1_59_0 \</span><br><span class="line">-DDEFAULT_CHARSET=utf8 \</span><br><span class="line">-DDEFAULT_COLLATION=utf8_general_ci \</span><br><span class="line">-DWITH_EXTRA_CHARSETS=all \</span><br><span class="line">-DWITH_INNOBASE_STORAGE_ENGINE=1 \</span><br><span class="line">-DWITH_FEDERATED_STORAGE_ENGINE=1 \</span><br><span class="line">-DWITH_BLACKHOLE_STORAGE_ENGINE=1 \</span><br><span class="line">-DWITHOUT_EXAMPLE_STORAGE_ENGINE=1 \</span><br><span class="line">-DWITH_ZLIB=bundled \</span><br><span class="line">-DWITH_SSL=bundled \</span><br><span class="line">-DENABLED_LOCAL_INFILE=1 \</span><br><span class="line">-DWITH_EMBEDDED_SERVER=1 \</span><br><span class="line">-DENABLE_DOWNLOADS=1 \</span><br><span class="line">-DWITH_DEBUG=0 </span><br></pre></td></tr></table></figure>
-
-<h3 id="1-4-2-初始化时-使用的命令不一样了"><a href="#1-4-2-初始化时-使用的命令不一样了" class="headerlink" title="1.4.2 初始化时 使用的命令不一样了"></a><strong>1.4.2 初始化时 使用的命令不一样了</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#5.6初始化命令</span><br><span class="line">/service/mysql/scripts/mysql_install_db --user= --basedir= --datadir=</span><br><span class="line"></span><br><span class="line">#5.7初始化命令</span><br><span class="line">/usr/local/mysql/bin/mysqld --initialize --user= --basedir= --datadir=</span><br><span class="line">#初始--initialize会生成一个临时的随机密码，他会告诉你位置，你自己去找使用密码登录，而且修改密码也需要一个很复杂的密码，大小写数字特殊符号</span><br><span class="line"></span><br><span class="line">#想不让他生成密码的话，还可以用另外一个参数--initialize-insecure</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-4-3-mysql5-7初始密码"><a href="#1-4-3-mysql5-7初始密码" class="headerlink" title="1.4.3 mysql5.7初始密码"></a><strong>1.4.3 mysql5.7初始密码</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># yum安装完毕mysql5.7，首次初始启动msyql会生成root的随机密码</span><br><span class="line"># 可以通过下述命令查看</span><br><span class="line">grep &quot;temporary password&quot; /var/log/mysqld.log</span><br><span class="line"></span><br><span class="line"># 查看到随机密码后，登录，注意密码用单引号引起来，因为随机密码中可能有特殊字符</span><br><span class="line">mysql -uroot -p &#x27;随机密码&#x27;</span><br><span class="line"></span><br><span class="line"># 设置密码，密码已经不能再用弱密码了，弱密码会报错</span><br><span class="line">set password=password(&quot;Egon@123&quot;);</span><br></pre></td></tr></table></figure>
-
-<h2 id="二-Windows系统"><a href="#二-Windows系统" class="headerlink" title="二 Windows系统"></a><strong>二 Windows系统</strong></h2><h3 id="2-1-安装"><a href="#2-1-安装" class="headerlink" title="2.1 安装"></a><strong>2.1 安装</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#1、下载：MySQL Community Server 5.7.16</span><br><span class="line">http://dev.mysql.com/downloads/mysql/</span><br><span class="line"></span><br><span class="line">#2、解压</span><br><span class="line">如果想要让MySQL安装在指定目录，那么就将解压后的文件夹移动到指定目录，如：C:\mysql-5.7.16-winx64</span><br><span class="line"></span><br><span class="line">#3、添加环境变量</span><br><span class="line">【右键计算机】--》【属性】--》【高级系统设置】--》【高级】--》【环境变量】--》【在第二个内容框中找到 变量名为Path 的一行，双击】 --&gt; 【将MySQL的bin目录路径追加到变值值中，用 ； 分割】</span><br><span class="line"> </span><br><span class="line">#4、初始化</span><br><span class="line">mysqld --initialize-insecure</span><br><span class="line"></span><br><span class="line">#5、启动MySQL服务</span><br><span class="line">mysqld # 启动MySQL服务</span><br><span class="line"></span><br><span class="line">#6、启动MySQL客户端并连接MySQL服务</span><br><span class="line">mysql -u root -p # 连接MySQL服务器</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-2-将MySQL服务制作成windows系统服务"><a href="#2-2-将MySQL服务制作成windows系统服务" class="headerlink" title="2.2 将MySQL服务制作成windows系统服务"></a><strong>2.2 将MySQL服务制作成windows系统服务</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">上一步解决了一些问题，但不够彻底，因为在执行【mysqd】启动MySQL服务器时，当前终端会被hang住，那么做一下设置即可解决此问题：</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">注意：--install前，必须用mysql启动命令的绝对路径</span><br><span class="line"># 制作MySQL的Windows服务，在终端执行此命令：</span><br><span class="line">&quot;c:\mysql-5.7.16-winx64\bin\mysqld&quot; --install</span><br><span class="line"> </span><br><span class="line"># 移除MySQL的Windows服务，在终端执行此命令：</span><br><span class="line">&quot;c:\mysql-5.7.16-winx64\bin\mysqld&quot; --remove</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">注册成服务之后，以后再启动和关闭MySQL服务时，仅需执行如下命令：</span><br><span class="line"># 启动MySQL服务</span><br><span class="line">net start mysql</span><br><span class="line"> </span><br><span class="line"># 关闭MySQL服务</span><br><span class="line">net stop mysql</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/必备技能//" class="article-tag-list-link color5">必备技能</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/09/02/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E8%A3%85/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
- 
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1835,6 +1910,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
             
             <div class="clearfix"></div>
