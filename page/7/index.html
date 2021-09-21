@@ -176,22 +176,22 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Celery" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-支付宝支付功能" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/21/Celery/">Celery</a>
+      <a class="article-title" href="/2020/08/02/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E5%8A%9F%E8%83%BD/">支付宝（沙箱环境）</a>
     </h1>
   
 
         
         
 
-<a href="/2021/08/21/Celery/" class="archive-article-date">
-  	<time datetime="2021-08-21T09:03:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-21</time>
+<a href="/2020/08/02/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E5%8A%9F%E8%83%BD/" class="archive-article-date">
+  	<time datetime="2020-08-02T10:52:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-02</time>
 </a>
 
         
@@ -200,288 +200,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Celery"><a href="#Celery" class="headerlink" title="Celery"></a>Celery</h1><h3 id="官方"><a href="#官方" class="headerlink" title="官方"></a>官方</h3><p>Celery 官网：<a target="_blank" rel="noopener" href="http://www.celeryproject.org/">http://www.celeryproject.org/</a></p>
-<p>Celery 官方文档英文版：<a target="_blank" rel="noopener" href="http://docs.celeryproject.org/en/latest/index.html">http://docs.celeryproject.org/en/latest/index.html</a></p>
-<p>Celery 官方文档中文版：<a target="_blank" rel="noopener" href="http://docs.jinkan.org/docs/celery/">http://docs.jinkan.org/docs/celery/</a></p>
-<p>Celery是一个简单、灵活且可靠的，处理大量消息的分布式系统</p>
-<p>专注于实时处理的异步任务队列</p>
-<p>同时也支持任务调度</p>
-<p>注意：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Celery is a project with minimal funding, so we don’t support Microsoft Windows. Please don’t open any issues related to that platform.</span><br></pre></td></tr></table></figure>
-        
-      
+        <h2 id="熟悉支付宝"><a href="#熟悉支付宝" class="headerlink" title="熟悉支付宝"></a>熟悉支付宝</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">1）支付宝API：六大接口</span></span><br><span class="line"><span class="string">https://docs.open.alipay.com/270/105900/</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">2）支付宝工作流程(见下图)：</span></span><br><span class="line"><span class="string">https://docs.open.alipay.com/270/105898/</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">3）支付宝8次异步通知机制(支付宝对我们服务器发送POST请求，索要 success 7个字符)</span></span><br><span class="line"><span class="string">https://docs.open.alipay.com/270/105902/</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Celery</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<h3 id="支付宝沙箱环境使用"><a href="#支付宝沙箱环境使用" class="headerlink" title="支付宝沙箱环境使用"></a>支付宝沙箱环境使用</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 0，进入沙箱环境  </span></span><br><span class="line"><span class="comment"># 1、在沙箱环境下实名认证：https://openhome.alipay.com/platform/appDaily.htm?tab=info</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2、电脑网站支付API：https://docs.open.alipay.com/270/105900/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3、完成RSA密钥生成：https://docs.open.alipay.com/291/105971</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 4、在开发中心的沙箱应用下设置应用公钥：填入生成的公钥文件中的内容</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 5、Python支付宝开源框架：https://github.com/fzlee/alipay</span></span><br><span class="line"><span class="comment"># 在项目应用上安装 ，就可以进行测试了。</span></span><br><span class="line"><span class="comment"># &gt;: pip install python-alipay-sdk --upgrade</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 7、公钥私钥设置</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string"># alipay_public_key.pem</span></span><br><span class="line"><span class="string">-----BEGIN PUBLIC KEY-----</span></span><br><span class="line"><span class="string">支付宝公钥</span></span><br><span class="line"><span class="string">-----END PUBLIC KEY-----</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># app_private_key.pem</span></span><br><span class="line"><span class="string">-----BEGIN RSA PRIVATE KEY-----</span></span><br><span class="line"><span class="string">用户私钥</span></span><br><span class="line"><span class="string">-----END RSA PRIVATE KEY-----</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 8、支付宝链接</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">开发：https://openapi.alipay.com/gateway.do</span></span><br><span class="line"><span class="string">沙箱：https://openapi.alipaydev.com/gateway.do</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 清晰步骤：</span></span><br><span class="line"> 申请支付宝支付</span><br><span class="line">	-必须以企业申请（需要营业执照）</span><br><span class="line">    -沙箱环境（测试环境）</span><br><span class="line">    	-沙箱app</span><br><span class="line">        </span><br><span class="line">    -买家</span><br><span class="line">    买家账号bfxtlv8393@sandbox.com</span><br><span class="line">    登录密码<span class="number">111111</span></span><br><span class="line">    支付密码<span class="number">111111</span></span><br><span class="line">    </span><br><span class="line">  使用第三方sdk实现支付</span><br><span class="line">	-生成公钥私钥（非对称加密）</span><br><span class="line">		-非对称加密：加密和解密使用不同秘钥，加密使用公钥，解密使用私钥</span><br><span class="line">        -对称加密：加密解密使用同一个秘钥</span><br><span class="line">        </span><br><span class="line">    -生成公钥私钥</span><br><span class="line">    	-https://opendocs.alipay.com/<span class="built_in">open</span>/<span class="number">291</span>/introduce</span><br><span class="line">         <span class="comment"># 选中web模式，直接生成密钥。（非java使用）</span></span><br><span class="line"> GitHub开源框架       </span><br><span class="line"> <span class="comment"># https://github.com/fzlee/alipay </span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># ?</span></span><br><span class="line"> 使用第三sdk</span><br><span class="line">	-pip install python-alipay-sdk</span><br><span class="line">    -pip install pyOpenSsl</span><br></pre></td></tr></table></figure>
 
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/必备技能//" class="article-tag-list-link color5">必备技能</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<p><a target="_blank" rel="noopener" href="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggqw1m8jhaj31jy0u0gtz.jpg">支付流程</a></p>
 
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/21/Celery/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
- 
-
-
-
-  
-    <article id="post-接口幂等性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/21/%E6%8E%A5%E5%8F%A3%E5%B9%82%E7%AD%89%E6%80%A7/">接口幂等性</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2021/08/21/%E6%8E%A5%E5%8F%A3%E5%B9%82%E7%AD%89%E6%80%A7/" class="archive-article-date">
-  	<time datetime="2021-08-21T08:47:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-21</time>
-</a>
-
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="接口幂等性"><a href="#接口幂等性" class="headerlink" title="接口幂等性"></a>接口幂等性</h1><h2 id="接口的幂等性"><a href="#接口的幂等性" class="headerlink" title="接口的幂等性#"></a>接口的幂等性<a target="_blank" rel="noopener" href="http://101.34.78.44/Hina/article/1#3862745759">#</a></h2><h3 id="接口调用存在的问题："><a href="#接口调用存在的问题：" class="headerlink" title="接口调用存在的问题：#"></a>接口调用存在的问题：<a target="_blank" rel="noopener" href="http://101.34.78.44/Hina/article/1#2351315136">#</a></h3><p>现如今我们的系统大多拆分为分布式SOA，或者微服务，一套系统中包含了多个子系统服务，而一个子系统服务往往会去调用另一个服务，而服务调用服务无非就是使用RPC通信或者restful，既然是通信，那么就有可能在服务器处理完毕后返回结果的时候挂掉，这个时候用户端发现很久没有反应，那么就会多次点击按钮，这样请求有多次，那么处理数据的结果是否要统一呢？那是肯定的！尤其在支付场景。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">开发规范</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/开发相关//" class="article-tag-list-link color5">开发相关</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/21/%E6%8E%A5%E5%8F%A3%E5%B9%82%E7%AD%89%E6%80%A7/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
- 
-
-
-
-  
-    <article id="post-八股文" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/20/%E5%85%AB%E8%82%A1%E6%96%87/">网络八股文</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2021/08/20/%E5%85%AB%E8%82%A1%E6%96%87/" class="archive-article-date">
-  	<time datetime="2021-08-20T08:04:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-20</time>
-</a>
-
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="八股文"><a href="#八股文" class="headerlink" title="八股文"></a>八股文</h1><h3 id="简述TCP-IP五层协议"><a href="#简述TCP-IP五层协议" class="headerlink" title="简述TCP/IP五层协议#"></a>简述TCP/IP五层协议<a target="_blank" rel="noopener" href="http://101.34.78.44/Hina/article/2#3727981023">#</a></h3><p>TCP/IP五层协议包括：物理层，数据链路层，网络层，运输层，应用层</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/计算机基础//" class="article-tag-list-link color1">计算机基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/20/%E5%85%AB%E8%82%A1%E6%96%87/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
- 
-
-
-
-  
-    <article id="post-JWT" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/20/JWT/">JWT</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2021/08/20/JWT/" class="archive-article-date">
-  	<time datetime="2021-08-20T07:49:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-20</time>
-</a>
-
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>JWT介绍,  JWT快速使用, ;签发; 认证; auth表签发token自定制格式</p>
-        
       
 
       
@@ -515,7 +239,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/20/JWT/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/08/02/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E5%8A%9F%E8%83%BD/">展开全文 >></a>
         </p>
       
 
@@ -547,22 +271,22 @@
 
 
   
-    <article id="post-Docker部署Yapi" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-redis高级" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/20/Docker%E9%83%A8%E7%BD%B2Yapi/">Docker部署Yapi</a>
+      <a class="article-title" href="/2020/07/28/redis%E9%AB%98%E7%BA%A7/">Redis基础</a>
     </h1>
   
 
         
         
 
-<a href="/2021/08/20/Docker%E9%83%A8%E7%BD%B2Yapi/" class="archive-article-date">
-  	<time datetime="2021-08-19T16:13:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-20</time>
+<a href="/2020/07/28/redis%E9%AB%98%E7%BA%A7/" class="archive-article-date">
+  	<time datetime="2020-07-28T12:07:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-28</time>
 </a>
 
         
@@ -571,7 +295,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="docker部署Yapi"><a href="#docker部署Yapi" class="headerlink" title="docker部署Yapi"></a>docker部署Yapi</h1><p>docker部署Yapi</p>
+        <h1 id="Redis基础2"><a href="#Redis基础2" class="headerlink" title="Redis基础2"></a>Redis基础2</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介#"></a>简介<a target="_blank" rel="noopener" href="http://101.34.78.44/Hina/article/58#3162606107">#</a></h2><p>redis是一个key-value存储系统。和Memcached类似，它支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、zset(sorted set —有序集合)和hash（哈希类型）。这些数据类型都支持push/pop、add/remove及取交集并集和差集及更丰富的操作，而且这些操作都是原子性的。在此基础上，redis支持各种不同方式的排序。与memcached一样，为了保证效率，数据都是缓存在内存中。区别的是redis会周期性的把更新的数据写入磁盘或者把修改操作写入追加的记录文件，并且在此基础上实现了master-slave(主从)同步</p>
         
       
 
@@ -585,7 +309,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
         		</li>
       		
 		</ul>
@@ -606,7 +330,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/20/Docker%E9%83%A8%E7%BD%B2Yapi/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/07/28/redis%E9%AB%98%E7%BA%A7/">展开全文 >></a>
         </p>
       
 
@@ -638,22 +362,22 @@
 
 
   
-    <article id="post-基于Auth的User表发送邮件改密码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-redis基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/20/%E5%9F%BA%E4%BA%8EAuth%E7%9A%84User%E8%A1%A8%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E6%94%B9%E5%AF%86%E7%A0%81/">基于Auth的User表发邮件改密码</a>
+      <a class="article-title" href="/2020/07/28/redis%E5%9F%BA%E7%A1%80/">redis基础</a>
     </h1>
   
 
         
         
 
-<a href="/2021/08/20/%E5%9F%BA%E4%BA%8EAuth%E7%9A%84User%E8%A1%A8%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E6%94%B9%E5%AF%86%E7%A0%81/" class="archive-article-date">
-  	<time datetime="2021-08-19T16:00:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-20</time>
+<a href="/2020/07/28/redis%E5%9F%BA%E7%A1%80/" class="archive-article-date">
+  	<time datetime="2020-07-28T11:50:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-28</time>
 </a>
 
         
@@ -662,8 +386,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="基于Auth的User表发邮件改密码"><a href="#基于Auth的User表发邮件改密码" class="headerlink" title="基于Auth的User表发邮件改密码"></a>基于Auth的User表发邮件改密码</h1><p>​    基于Auth的User表发送邮件，改密码。</p>
-<p>​    1，<strong>实现一个发送邮件的接口</strong>；</p>
+        <h1 id="redis数据库基础"><a href="#redis数据库基础" class="headerlink" title="redis数据库基础"></a>redis数据库基础</h1><p>redis介绍   Python操作Redis ；Hash 操作；List 操作 ； Set 操作 ；<br>使用场景 ； 管道 （类似于MySQL的事务，保持一致性）；发布订阅</p>
         
       
 
@@ -677,7 +400,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Python亮点技术</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
         		</li>
       		
 		</ul>
@@ -689,7 +412,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/亮点技术//" class="article-tag-list-link color5">亮点技术</a>
+        			<a href="/categories/必备技能//" class="article-tag-list-link color5">必备技能</a>
         		</li>
       		
 		</ul>
@@ -698,7 +421,282 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/20/%E5%9F%BA%E4%BA%8EAuth%E7%9A%84User%E8%A1%A8%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E6%94%B9%E5%AF%86%E7%A0%81/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/07/28/redis%E5%9F%BA%E7%A1%80/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+ 
+
+
+
+  
+    <article id="post-CBV继承APIView源码分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/16/CBV%E7%BB%A7%E6%89%BFAPIView%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">CBV继承APIView源码分析</a>
+    </h1>
+  
+
+        
+        
+
+<a href="/2020/07/16/CBV%E7%BB%A7%E6%89%BFAPIView%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="archive-article-date">
+  	<time datetime="2020-07-15T16:15:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-16</time>
+</a>
+
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>​    CBV继承APIView源码分析</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DRF</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python框架//" class="article-tag-list-link color4">Python框架</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/16/CBV%E7%BB%A7%E6%89%BFAPIView%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+ 
+
+
+
+  
+    <article id="post-DRF入门04" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/07/DRF%E5%85%A5%E9%97%A804/">DRF之分页及接口文档</a>
+    </h1>
+  
+
+        
+        
+
+<a href="/2020/07/07/DRF%E5%85%A5%E9%97%A804/" class="archive-article-date">
+  	<time datetime="2020-07-07T14:31:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-07</time>
+</a>
+
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>​    1 频率组件源码分析（2星）; 2 分页功能（5星）;  2.4 继承APIView实现三种分页方式</p>
+<p>​    3 自动生成接口文档（3星）3.1 使用coreapi自动生成</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DRF</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python框架//" class="article-tag-list-link color4">Python框架</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/07/DRF%E5%85%A5%E9%97%A804/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+ 
+
+
+
+  
+    <article id="post-DRF入门03" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/07/DRF%E5%85%A5%E9%97%A803/">DRF组件及异常处理</a>
+    </h1>
+  
+
+        
+        
+
+<a href="/2020/07/07/DRF%E5%85%A5%E9%97%A803/" class="archive-article-date">
+  	<time datetime="2020-07-07T14:30:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-07</time>
+</a>
+
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>​    1 权限组件源码分析（2星）; 2 频率组件使用（5星）3 过滤和排序（4星）</p>
+<p>​    4异常处理（4星）</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DRF</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python框架//" class="article-tag-list-link color4">Python框架</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/07/DRF%E5%85%A5%E9%97%A803/">展开全文 >></a>
         </p>
       
 
@@ -851,11 +849,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Django</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DRF</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Django</a>
+                <a href="javascript:void(0)" class="js-tag color2">Celery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">招聘系统项目</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -871,7 +877,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">招聘系统项目</a>
+                <a href="javascript:void(0)" class="js-tag color5">Go基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -883,19 +889,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Celery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Go基础</a>
+                <a href="javascript:void(0)" class="js-tag color5">开发规范</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">开发规范</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -927,11 +925,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
               </li>
             
             <div class="clearfix"></div>

@@ -176,6 +176,97 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-CBV源码分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/14/CBV%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">CBV源码分析</a>
+    </h1>
+  
+
+        
+        
+
+<a href="/2019/07/14/CBV%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" class="archive-article-date">
+  	<time datetime="2019-07-14T00:59:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-14</time>
+</a>
+
+        
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Django的url是将一个请求分配给可调用的函数的，而不是一个class。<br>针对这个问题，class-based View提供了一个as_view()静态方法（也就是类方法），<br>调用这个方法，会创建一个类的实例，然后通过实例调用了View类的dispatch方法，<br>dispatch()方法会根据request的method的不同调用相应的方法来处理request（如get() , post()等）</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Django</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Python框架//" class="article-tag-list-link color4">Python框架</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/14/CBV%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+ 
+
+
+
+  
     <article id="post-RBAC" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -183,15 +274,15 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/08/RBAC/">RBAC</a>
+      <a class="article-title" href="/2019/07/08/RBAC/">RBAC</a>
     </h1>
   
 
         
         
 
-<a href="/2021/07/08/RBAC/" class="archive-article-date">
-  	<time datetime="2021-07-08T11:31:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-08</time>
+<a href="/2019/07/08/RBAC/" class="archive-article-date">
+  	<time datetime="2019-07-08T11:31:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-08</time>
 </a>
 
         
@@ -235,7 +326,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/08/RBAC/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/07/08/RBAC/">展开全文 >></a>
         </p>
       
 
@@ -267,22 +358,22 @@
 
 
   
-    <article id="post-DRF入门04" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-面向对象" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/07/DRF%E5%85%A5%E9%97%A804/">DRF之分页及接口文档</a>
+      <a class="article-title" href="/2018/10/09/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">面向对象</a>
     </h1>
   
 
         
         
 
-<a href="/2021/07/07/DRF%E5%85%A5%E9%97%A804/" class="archive-article-date">
-  	<time datetime="2021-07-07T14:31:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-07</time>
+<a href="/2018/10/09/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" class="archive-article-date">
+  	<time datetime="2018-10-09T11:31:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-09</time>
 </a>
 
         
@@ -291,8 +382,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>​    1 频率组件源码分析（2星）; 2 分页功能（5星）;  2.4 继承APIView实现三种分页方式</p>
-<p>​    3 自动生成接口文档（3星）3.1 使用coreapi自动生成</p>
+        <p>​    1, 基本概念；隐藏属性，装饰器property</p>
+<p>​     2，封装；派生与方法重用</p>
+<p>​     3，多态；鸭子类型，绑定方法与非绑定方法，反射</p>
+<p>​    4， 魔法方法 （内置方法）</p>
         
       
 
@@ -306,7 +399,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DRF</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">面向对象</a>
         		</li>
       		
 		</ul>
@@ -318,7 +411,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Python框架//" class="article-tag-list-link color4">Python框架</a>
+        			<a href="/categories/Python基础//" class="article-tag-list-link color4">Python基础</a>
         		</li>
       		
 		</ul>
@@ -327,7 +420,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/07/DRF%E5%85%A5%E9%97%A804/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/10/09/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">展开全文 >></a>
         </p>
       
 
@@ -359,22 +452,22 @@
 
 
   
-    <article id="post-DRF入门03" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-八股文" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/07/DRF%E5%85%A5%E9%97%A803/">DRF组件及异常处理</a>
+      <a class="article-title" href="/2018/08/20/%E5%85%AB%E8%82%A1%E6%96%87/">网络八股文</a>
     </h1>
   
 
         
         
 
-<a href="/2021/07/07/DRF%E5%85%A5%E9%97%A803/" class="archive-article-date">
-  	<time datetime="2021-07-07T14:30:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-07</time>
+<a href="/2018/08/20/%E5%85%AB%E8%82%A1%E6%96%87/" class="archive-article-date">
+  	<time datetime="2018-08-20T08:04:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-20</time>
 </a>
 
         
@@ -383,8 +476,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>​    1 权限组件源码分析（2星）; 2 频率组件使用（5星）3 过滤和排序（4星）</p>
-<p>​    4异常处理（4星）</p>
+        <h1 id="八股文"><a href="#八股文" class="headerlink" title="八股文"></a>八股文</h1><h3 id="简述TCP-IP五层协议"><a href="#简述TCP-IP五层协议" class="headerlink" title="简述TCP/IP五层协议#"></a>简述TCP/IP五层协议<a target="_blank" rel="noopener" href="http://101.34.78.44/Hina/article/2#3727981023">#</a></h3><p>TCP/IP五层协议包括：物理层，数据链路层，网络层，运输层，应用层</p>
         
       
 
@@ -398,7 +490,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DRF</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络基础</a>
         		</li>
       		
 		</ul>
@@ -410,7 +502,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Python框架//" class="article-tag-list-link color4">Python框架</a>
+        			<a href="/categories/计算机基础//" class="article-tag-list-link color1">计算机基础</a>
         		</li>
       		
 		</ul>
@@ -419,7 +511,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/07/DRF%E5%85%A5%E9%97%A803/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/08/20/%E5%85%AB%E8%82%A1%E6%96%87/">展开全文 >></a>
         </p>
       
 
@@ -451,22 +543,22 @@
 
 
   
-    <article id="post-DRF认证与权限" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-git协同使用2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/07/DRF%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%9D%83%E9%99%90/">DRF之路由及常用组件</a>
+      <a class="article-title" href="/2018/07/23/git%E5%8D%8F%E5%90%8C%E4%BD%BF%E7%94%A82/">git协同开发</a>
     </h1>
   
 
         
         
 
-<a href="/2021/07/07/DRF%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%9D%83%E9%99%90/" class="archive-article-date">
-  	<time datetime="2021-07-07T14:30:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-07</time>
+<a href="/2018/07/23/git%E5%8D%8F%E5%90%8C%E4%BD%BF%E7%94%A82/" class="archive-article-date">
+  	<time datetime="2018-07-23T11:15:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-23</time>
 </a>
 
         
@@ -475,7 +567,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>​    1 路由组件（4星）; 2 认证组件（5星）; 3  权限组件（4星）</p>
+        <p>1 git 远程仓库；2 采用ssh协议连接远程；3 项目创始者和项目开发者；</p>
+<p>4 协同开发 ；5 线上分支合并；6 本地分支合并推送到远程；7 pycharm操作git；</p>
+<p>8 企业git使用流程</p>
         
       
 
@@ -489,7 +583,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DRF</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
         		</li>
       		
 		</ul>
@@ -501,7 +595,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Python框架//" class="article-tag-list-link color4">Python框架</a>
+        			<a href="/categories/必备技能//" class="article-tag-list-link color5">必备技能</a>
         		</li>
       		
 		</ul>
@@ -510,7 +604,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/07/DRF%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%9D%83%E9%99%90/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/07/23/git%E5%8D%8F%E5%90%8C%E4%BD%BF%E7%94%A82/">展开全文 >></a>
         </p>
       
 
@@ -542,22 +636,22 @@
 
 
   
-    <article id="post-DRF入门01" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-git安装使用1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/07/DRF%E5%85%A5%E9%97%A801/">三层视图及视图集</a>
+      <a class="article-title" href="/2018/07/22/git%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A81/">git安装与运用</a>
     </h1>
   
 
         
         
 
-<a href="/2021/07/07/DRF%E5%85%A5%E9%97%A801/" class="archive-article-date">
-  	<time datetime="2021-07-07T14:29:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-07</time>
+<a href="/2018/07/22/git%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A81/" class="archive-article-date">
+  	<time datetime="2018-07-22T08:45:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-22</time>
 </a>
 
         
@@ -566,10 +660,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>1 两个视图基类 ; 2 五个视图扩展类 ; 3 多个视图子类(9个) ; 4 视图集</p>
-<p><strong>drf介绍和安装</strong></p>
-<p>​    -django的一个app，集成到django中可以方便我们快速写出符合restful规范的接口（有的公司可能没用）<br>​    -pip3 install djangorestframework</p>
-<p>​    -版本对应关系：最新的drf，只支持2.x 及3.x以上</p>
+        <h2 id="1-git介绍安装"><a href="#1-git介绍安装" class="headerlink" title="1 git介绍安装"></a>1 git介绍安装</h2><p><strong>git 主要功能</strong> 1，版本控制：协同开发（多人合作开发）2 ，合并代码。</p>
+<p>2 git 常用命令，3 git 过滤文件，4 git 分支操作。</p>
         
       
 
@@ -583,7 +675,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">DRF</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
         		</li>
       		
 		</ul>
@@ -595,7 +687,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Python框架//" class="article-tag-list-link color4">Python框架</a>
+        			<a href="/categories/必备技能//" class="article-tag-list-link color5">必备技能</a>
         		</li>
       		
 		</ul>
@@ -604,98 +696,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/07/DRF%E5%85%A5%E9%97%A801/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
- 
-
-
-
-  
-    <article id="post-restful设计风格" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/05/restful%E8%AE%BE%E8%AE%A1%E9%A3%8E%E6%A0%BC/">restful设计风格</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2021/07/05/restful%E8%AE%BE%E8%AE%A1%E9%A3%8E%E6%A0%BC/" class="archive-article-date">
-  	<time datetime="2021-07-05T09:25:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-05</time>
-</a>
-
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>​    1,web应用模式  2， restful设计风格</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">开发规范</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/开发相关//" class="article-tag-list-link color5">开发相关</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/07/05/restful%E8%AE%BE%E8%AE%A1%E9%A3%8E%E6%A0%BC/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/07/22/git%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A81/">展开全文 >></a>
         </p>
       
 
@@ -848,11 +849,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Django</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DRF</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Django</a>
+                <a href="javascript:void(0)" class="js-tag color2">Celery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">招聘系统项目</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -868,7 +877,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">招聘系统项目</a>
+                <a href="javascript:void(0)" class="js-tag color5">Go基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -880,19 +889,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Celery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Go基础</a>
+                <a href="javascript:void(0)" class="js-tag color5">开发规范</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">开发规范</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -924,11 +925,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
+                <a href="javascript:void(0)" class="js-tag color3">面试</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">面试</a>
+                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
               </li>
             
             <div class="clearfix"></div>
