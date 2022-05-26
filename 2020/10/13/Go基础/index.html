@@ -6,17 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>标签 | Hexo</title>
+  <title>Go基础 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="标签">
-<meta property="og:url" content="http://example.com/tags/index.html">
+  <meta name="description" content="Go基础变量2021-08-18阅读量  Go基础变量部署开发环境安装包的官网下载地址: Golang的国内镜像站地址: 环境&#x2F;安装包的目录结构Go 的开发包已经安装成功了，下面还需要设置一个重要的环境变量，这个环境变量就是 GOPATH，它指向一个目录，以后我们下载的第三方包和我们自己开发的程序代码包都要放在这个目录里面，它就是 Go 语言的工作目录。当你在源码里使用 import 语句导入一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go基础">
+<meta property="og:url" content="http://example.com/2020/10/13/Go%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Go基础变量2021-08-18阅读量  Go基础变量部署开发环境安装包的官网下载地址: Golang的国内镜像站地址: 环境&#x2F;安装包的目录结构Go 的开发包已经安装成功了，下面还需要设置一个重要的环境变量，这个环境变量就是 GOPATH，它指向一个目录，以后我们下载的第三方包和我们自己开发的程序代码包都要放在这个目录里面，它就是 Go 语言的工作目录。当你在源码里使用 import 语句导入一个">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-07-12T06:39:27.000Z">
-<meta property="article:modified_time" content="2021-07-12T17:08:53.347Z">
+<meta property="og:image" content="https://pic3.zhimg.com/v2-2d730e8edf3b83450177045f2243fabe_1440w.jpg?source=172ae18b">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-f3401c22bb93c26d269e30736e9ea4fe_720w.jpg">
+<meta property="article:published_time" content="2020-10-13T10:06:00.000Z">
+<meta property="article:modified_time" content="2021-12-16T12:37:10.081Z">
 <meta property="article:author" content="Vivek">
+<meta property="article:tag" content="Go基础">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic3.zhimg.com/v2-2d730e8edf3b83450177045f2243fabe_1440w.jpg?source=172ae18b">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -176,28 +182,266 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article class="article article-type-post show">
-    <header class="article-header" style="border-bottom: 1px solid #ccc">
-      <h1 class="article-title" itemprop="name">标签</h1>
-  
-    </header>
-  
+            
+<article id="post-Go基础" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-      <div class="tag-cloud">
-        <div class="tag-cloud-title">
-          TOTAl : 1
-          <br>
-          <br>
-        </div>
+      <header class="article-header">
+        
   
-        <div class="tag-cloud-tags"> 
-          <a href="/tags/Go%E5%9F%BA%E7%A1%80/" style="font-size: 12px; color: #555">Go基础</a>
+    <h1 class="article-title" itemprop="name">
+      Go基础
+    </h1>
+  
+
+        
+        
+	<!-- 不蒜子统计 -->
+	<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+		  <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+
+<a href="/2020/10/13/Go%E5%9F%BA%E7%A1%80/" class="archive-article-date">
+  	<time datetime="2020-10-13T10:06:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-13</time>
+</a>
+
+        
+        
+          <span class="archive-article-date">
+            阅读量 <span id="busuanzi_value_page_pv"></span>
+          </span>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Go基础变量"><a href="#Go基础变量" class="headerlink" title="Go基础变量"></a>Go基础变量</h1><p><a target="_blank" rel="noopener" href="https://vivek-666.github.io/2021/08/18/Go%E5%9F%BA%E7%A1%80%E5%8F%98%E9%87%8F/">2021-08-18</a>阅读量</p>
+<p><img src="https://pic3.zhimg.com/v2-2d730e8edf3b83450177045f2243fabe_1440w.jpg?source=172ae18b" alt="《快学 Go 语言》第 2 课 —— 变量基础"></p>
+<h1 id="Go基础变量-1"><a href="#Go基础变量-1" class="headerlink" title="Go基础变量"></a>Go基础变量</h1><h2 id="部署开发环境"><a href="#部署开发环境" class="headerlink" title="部署开发环境"></a>部署开发环境</h2><p><a target="_blank" rel="noopener" href="https://golang.org/dl/">安装包的官网下载地址:</a></p>
+<p><a target="_blank" rel="noopener" href="https://golang.google.cn/dl/">Golang的国内镜像站地址:</a></p>
+<h2 id="环境-安装包的目录结构"><a href="#环境-安装包的目录结构" class="headerlink" title="环境/安装包的目录结构"></a><strong>环境/安装包的目录结构</strong></h2><p>Go 的开发包已经安装成功了，下面还需要设置一个重要的环境变量，这个环境变量就是 GOPATH，它指向一个目录，以后我们下载的第三方包和我们自己开发的程序代码包都要放在这个目录里面，它就是 Go 语言的工作目录。当你在源码里使用 import 语句导入一个包时，编译器都会来 GOPATH 目录下面寻找这个包。</p>
+<p>GoPath // windows平台： 已自动配置；</p>
+<p>GoPath // mac平台:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.2</span> 配置</span><br><span class="line">为了开发项目方便和规范，在编译器安装成功之后，需要做如下几项配置：</span><br><span class="line"></span><br><span class="line">配置Go代码目录结构，为了方便管理以后自己开发的Go项目代码，在自己硬盘上最好为Go先做写目录结构的处理。</span><br><span class="line"></span><br><span class="line">第一步：创建一个文件夹用于存储以后的GO代码。</span><br><span class="line"></span><br><span class="line">  例如：在 /Users/wupeiqi/ 目录下去新建一个文件夹为 GolangProjects</span><br><span class="line">第二步：进入刚新建的文件夹，在内部再创建 bin、pkg、src <span class="number">3</span>个文件夹。</span><br><span class="line"></span><br><span class="line">  /Users/wupeiqi/GolangProjects/</span><br><span class="line">  ├── bin，用于存放编译后的可执行文件。</span><br><span class="line">  ├── pkg，用于存放编译后的包文件。</span><br><span class="line">  └── src，我们以后写的<span class="keyword">go</span>项目代码都写到这里去，在内部为每个项目创建一个文件夹。</span><br><span class="line">配置系统环境变量，将<span class="keyword">go</span>编译器的路径添加到系统环境变量，之后在终端<span class="keyword">go</span>命令可直接调用<span class="keyword">go</span>编译器。（安装时默认已执行）</span><br><span class="line"></span><br><span class="line">  # 在终端执行命令  export PATH=编译器安装目录/bin:$PATH</span><br><span class="line">  export PATH=/usr/local/<span class="keyword">go</span>/bin:$PATH</span><br><span class="line">配置Go安装目录，即：Go源码目录，用于调用<span class="keyword">go</span>相关源码。</span><br><span class="line"></span><br><span class="line">  # 在终端执行命令 export GOROOT=编译器安装目录</span><br><span class="line">  export GOROOT=/usr/local/<span class="keyword">go</span></span><br><span class="line">配置Go项目代码相关目录，将你以后写的<span class="keyword">go</span>代码及其编译生成的文件存放的目录。</span><br><span class="line"></span><br><span class="line">  # 在终端执行命令 export GOPATH=放置Go代码的相关目录</span><br><span class="line">  export GOPATH=/Users/wupeiqi/GolangProjects</span><br><span class="line">配置Go编译文件目录，Go是个编译型语言，当使用<span class="keyword">go</span> install命令对代码进行编译时，可执行文件会生成到这个目录。</span><br><span class="line"></span><br><span class="line">  # 在终端执行命令 export GOBIN=放置Go编译文件的目录</span><br><span class="line">  export GOBIN=/Users/wupeiqi/GolangProjects/bin</span><br><span class="line">最后，执行命令让刚才配置的那些 环境变量 立即生效</span><br><span class="line"></span><br><span class="line">  source /etc/profile</span><br><span class="line">使用上述方式只是临时修改环境变量，如果想要永久修改环境变量，可以把环境变量添加到 .bash_profile 文件中。即：vim ~/.bash_profile打开文件并写入如下内容。</span><br><span class="line"></span><br><span class="line">export PATH=/usr/local/<span class="keyword">go</span>/bin:$PATH</span><br><span class="line">export GOROOT=/usr/local/<span class="keyword">go</span></span><br><span class="line">export GOPATH=/Users/wupeiqi/GolangProjects</span><br><span class="line">export GOBIN=/Users/wupeiqi/GolangProjects/bin</span><br><span class="line">这样环境变量就永久有效了。</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式一：go run ，compile and run Go program ，其内部会【先编译】代码文件【再运行】（二合一）。</span></span><br><span class="line"><span class="comment">// 方式二：go build，compile packages and dependencies，其内部就是将go代码进行编译，然后手动执行。</span></span><br><span class="line"><span class="comment">// 方式三：go install，compile and install packages and dependencies，其内部就是编译go代码，并将可执行文件/包文件分别放到 bin 和 pkg目录。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// vim ~/.bash_profile </span></span><br><span class="line">打开 .bash_profile 文件</span><br><span class="line"><span class="comment">// aa </span></span><br><span class="line">文件内容追加</span><br><span class="line"><span class="comment">// 保存并退出</span></span><br><span class="line">ESC  :wq</span><br><span class="line"><span class="comment">// export GOPATH=/Users/wupeiqi/GolangProjects</span></span><br><span class="line">直接进入GolangProjects</span><br><span class="line">$ GOPATH</span><br><span class="line"><span class="comment">// 删除文件</span></span><br><span class="line">rm xx</span><br><span class="line"><span class="comment">// tree bin/</span></span><br><span class="line"><span class="comment">// tree </span></span><br><span class="line">查看文件结构</span><br></pre></td></tr></table></figure>
+
+
+
+<p>GoPath // Linux平台:</p>
+<p>bin // 掌握：Go环境工具所在地，我们要用的编译器go就在这里</p>
+<p>src // 掌握：我们基于Go语言开发程序时，要导入的内置包就存放在这里，也是包导入优先</p>
+<p><img src="https://pic3.zhimg.com/80/v2-f3401c22bb93c26d269e30736e9ea4fe_720w.jpg" alt="img"></p>
+<h2 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h2><p><a target="_blank" rel="noopener" href="https://www.jetbrains.com/go/download">Goland</a>推荐</p>
+<p>第一个Go程序，hello world。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main <span class="comment">// 首行声明：属于main包</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span> <span class="comment">// 导包&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// main 函数即为整个go程序的入口。</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行方式</span></span><br><span class="line">方法一：先编译得到可执行的二进制文件</span><br><span class="line">$ <span class="keyword">go</span> build s1.<span class="keyword">go</span> </span><br><span class="line">$ ./s1</span><br><span class="line">&gt;&gt;</span><br><span class="line">hello world</span><br><span class="line"></span><br><span class="line">方法二： 直接执行</span><br><span class="line">$ <span class="keyword">go</span> run s1.<span class="keyword">go</span></span><br><span class="line">&gt;&gt;</span><br><span class="line">hello world</span><br></pre></td></tr></table></figure>
+
+<p>编辑器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Plugins</span><br><span class="line"> - editor</span><br><span class="line">  - general 轮盘转换</span><br><span class="line">  - inlay  代码参数是否显示</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="变量基础"><a href="#变量基础" class="headerlink" title="变量基础"></a>变量基础</h2><h3 id="定义变量的三种方式"><a href="#定义变量的三种方式" class="headerlink" title="定义变量的三种方式"></a>定义变量的三种方式</h3><p>方法一： var 变量名 变量类型 = 值</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> s <span class="keyword">int</span> = <span class="number">42</span></span><br><span class="line">	fmt.Println(s)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>方法二：var 变量名 变量类型 = 值</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">数组与切片定义方式的区别</span><br><span class="line">指针：增删改查</span><br><span class="line">切片基于数组，是定义好的，还是自己生成的。</span><br><span class="line"><span class="built_in">copy</span>传递</span><br><span class="line"><span class="built_in">copy</span>函数基于<span class="built_in">copy</span>传递</span><br><span class="line">底层数组改变，会影响切片；切片的改变会影响数组。</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/222.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Go基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Golang//" class="article-tag-list-link color2">Golang</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
       </div>
-    
-    
-  </article>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://vivek-666.github.io/020/10/13/Go%E5%9F%BA%E7%A1%80/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
   
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Go%E5%9F%BA%E7%A1%80%E5%8F%98%E9%87%8F"><span class="toc-number">1.</span> <span class="toc-text">Go基础变量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Go%E5%9F%BA%E7%A1%80%E5%8F%98%E9%87%8F-1"><span class="toc-number">2.</span> <span class="toc-text">Go基础变量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="toc-number">2.1.</span> <span class="toc-text">部署开发环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83-%E5%AE%89%E8%A3%85%E5%8C%85%E7%9A%84%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-number">2.2.</span> <span class="toc-text">环境&#x2F;安装包的目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7"><span class="toc-number">2.3.</span> <span class="toc-text">开发工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E5%9F%BA%E7%A1%80"><span class="toc-number">2.4.</span> <span class="toc-text">变量基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">2.4.1.</span> <span class="toc-text">定义变量的三种方式</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
+  
+
+  
+
+  
+
+  
+ 
+
+  
+      <section id="comments" class="comments">
+        <style>
+          .comments{margin:30px;padding:10px;background:#fff}
+          @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+        </style>
+        <div id="vcomment" class="comment"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var notify = 'false' == true ? true : false;
+  var verify = 'false' == true ? true : false;
+  new Valine({
+    av: AV,
+    el: '#vcomment',
+    notify: notify,
+    app_id: "4078A2Bntfkxp8EVq5TtPO1P-gzGzoHsz",
+    app_key: "2wBAkBOnl2RpsnGy3dYaEPlN",
+    placeholder: "Just go go",
+    avatar: "mm",
+  });
+</script>
+
+    </section>
+  
+
+
+
+
           </div>
         </div>
       </div>
@@ -230,7 +474,7 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
