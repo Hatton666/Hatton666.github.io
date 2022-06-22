@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2020 | Hatton`sBlog</title>
+  <title>go基础之运算符 | Hatton`sBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hatton&#96;sBlog">
-<meta property="og:url" content="http://example.com/archives/2020/index.html">
+  <meta name="description" content="做好笔记，不用记，比着敲一遍就行了。 比葫芦画瓢ok呀！！！看看吧！！！  一元运算符；二元运算符；算数运算符；位运算符；赋值运算符；比较运算符；逻辑运算符">
+<meta property="og:type" content="article">
+<meta property="og:title" content="go基础之运算符">
+<meta property="og:url" content="http://example.com/2021/10/17/%E8%BF%90%E7%AE%97%E7%AC%A6/index.html">
 <meta property="og:site_name" content="Hatton&#96;sBlog">
+<meta property="og:description" content="做好笔记，不用记，比着敲一遍就行了。 比葫芦画瓢ok呀！！！看看吧！！！  一元运算符；二元运算符；算数运算符；位运算符；赋值运算符；比较运算符；逻辑运算符">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-17T14:19:32.000Z">
+<meta property="article:modified_time" content="2022-06-22T09:16:44.086Z">
 <meta property="article:author" content="Hatton">
+<meta property="article:tag" content="Go基础">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hatton`sBlog" type="application/atom+xml">
@@ -175,38 +180,405 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
+  <i class="fa fa-thumb-tack"></i>
+  <font color=7D26CD>置顶</font>
+  <span class="post-meta-divider">|</span>
 
-<a href="/2020/10/15/Go%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%87%BD%E6%95%B0%E9%87%8C%E7%9A%84%E5%AD%A6%E9%97%AE/" class="archive-article-date">
-  	<time datetime="2020-10-15T12:16:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-15</time>
-</a>
-
-        </div>
-    	 
+<article id="post-运算符" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/10/15/Go%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%87%BD%E6%95%B0%E9%87%8C%E7%9A%84%E5%AD%A6%E9%97%AE/">Go基础之函数里的学问</a>
+    <h1 class="article-title" itemprop="name">
+      go基础之运算符
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        
+	<!-- 不蒜子统计 -->
+	<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+		  <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+
+<a href="/2021/10/17/%E8%BF%90%E7%AE%97%E7%AC%A6/" class="archive-article-date">
+  	<time datetime="2021-10-17T14:19:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-17</time>
+</a>
+
+        
+        
+          <span class="archive-article-date">
+            阅读量 <span id="busuanzi_value_page_pv"></span>
+          </span>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>做好笔记，不用记，比着敲一遍就行了。</strong> <strong>比葫芦画瓢ok呀！！！看看吧！！！</strong> </p>
+<p>一元运算符；二元运算符；算数运算符；位运算符；赋值运算符；比较运算符；逻辑运算符 </p>
+ <span id="more"></span> 
+
+<h2 id="运算符介绍"><a href="#运算符介绍" class="headerlink" title="运算符介绍"></a><strong>运算符介绍</strong></h2><p>运算符用于在程序运行时执行数学或逻辑运算，Go 语言内置的运算符有：</p>
+<ul>
+<li><p>一元运算符</p>
+</li>
+<li><ul>
+<li><code>+</code>一元加法</li>
+<li><code>-</code>负数</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>二元运算符</p>
+</li>
+<li><ul>
+<li>算术运算符</li>
+<li>位运算符</li>
+<li>逻辑运算符</li>
+<li>比较运算符</li>
+</ul>
+</li>
+</ul>
+<p>Go语言中所有的二元运算符共有五种优先级，如下所示，它们按照优先级递减的顺序的排列：</p>
+<table>
+<thead>
+<tr>
+<th>优先级</th>
+<th>运算符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>5</td>
+<td>* / % &lt;&lt; &gt;&gt; &amp; &amp;^</td>
+</tr>
+<tr>
+<td>4</td>
+<td>+ - | ^</td>
+</tr>
+<tr>
+<td>3</td>
+<td>== != &lt; &lt;= &gt; &gt;=</td>
+</tr>
+<tr>
+<td>2</td>
+<td>&amp;&amp;</td>
+</tr>
+<tr>
+<td>1</td>
+<td>||</td>
+</tr>
+</tbody></table>
+<p>在同一个优先级，使用左优先结合规则，但是使用括号可以提升优先级，所以建议使用括号明确优先顺序。</p>
+<h2 id="一、-一元运算符"><a href="#一、-一元运算符" class="headerlink" title="一、 一元运算符"></a><strong>一、 一元运算符</strong></h2><table>
+<thead>
+<tr>
+<th>一元的加法和减法运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+</td>
+<td>一元加法 (无效果)</td>
+</tr>
+<tr>
+<td>-</td>
+<td>负数</td>
+</tr>
+</tbody></table>
+<p>对于整数、浮点数和复数，+x就是x，-x则是x 的负数。例如+(-8)得-8</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&amp;</td>
+<td>返回变量存储地址</td>
+<td>&a; 将给出变量的实际地址。</td>
+</tr>
+<tr>
+<td>*</td>
+<td>指针变量。</td>
+<td>*a; 是一个指针变量</td>
+</tr>
+</tbody></table>
+<h2 id="二、-二元运算符"><a href="#二、-二元运算符" class="headerlink" title="二、 二元运算符"></a><strong>二、 二元运算符</strong></h2><h3 id="2-1、算数运算符"><a href="#2-1、算数运算符" class="headerlink" title="2.1、算数运算符"></a><strong>2.1、算数运算符</strong></h3><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+</td>
+<td>相加</td>
+</tr>
+<tr>
+<td>-</td>
+<td>相减</td>
+</tr>
+<tr>
+<td>*</td>
+<td>相乘</td>
+</tr>
+<tr>
+<td>/</td>
+<td>相除</td>
+</tr>
+<tr>
+<td>%</td>
+<td>求余/取模</td>
+</tr>
+</tbody></table>
+<p><strong>注意：</strong></p>
+<p>1、算术运算符+、-、*和/可以在整数、浮点数和复数之间混用，但是取模运算符%仅用于整数间的运算</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fmt.Println(<span class="number">3</span> % <span class="number">2</span>) <span class="comment">// 1</span></span><br><span class="line">fmt.Println(<span class="number">3.1</span> % <span class="number">2</span>) <span class="comment">// 报错：operator % not defined on untyped float</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>2、在Go语言中，%取模运算符的符号和被取模数的符号总是一致的，因此<code>-5%3</code>和<code>-5%-3</code>结果都是-2。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 可以这做</span><br><span class="line">-(-5 % -3)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>3、除法运算符<code>/</code>的行为则依赖于操作数是否为全为整数，例如</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fmt.Println(<span class="number">8.0</span> / <span class="number">5.0</span>) <span class="comment">// 结果为1.6</span></span><br><span class="line">fmt.Println(<span class="number">8</span> / <span class="number">5.0</span>)  <span class="comment">// 结果为1.6</span></span><br><span class="line">fmt.Println(<span class="number">8.0</span> / <span class="number">5</span>) <span class="comment">// 结果为1.6</span></span><br><span class="line"></span><br><span class="line">fmt.Println(<span class="number">8</span> / <span class="number">5</span>)  <span class="comment">// 结果为1，因为整数除法会向着0方向截断余数。</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>4、因为除法运算符/会根据操作数的类型生成对应类型的结果，所以不同写法的常量除法表达式可能对应不同的结果：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f <span class="keyword">float64</span> = <span class="number">212</span></span><br><span class="line">fmt.Println((f - <span class="number">32</span>) * <span class="number">5</span> / <span class="number">9</span>)     <span class="comment">// &quot;100&quot;; (f - 32) * 5 is a float64</span></span><br><span class="line">fmt.Println(<span class="number">5</span> / <span class="number">9</span> * (f - <span class="number">32</span>))     <span class="comment">// &quot;0&quot;;   5/9 is an untyped integer, 结果为0</span></span><br><span class="line">fmt.Println(<span class="number">5.0</span> / <span class="number">9.0</span> * (f - <span class="number">32</span>)) <span class="comment">// &quot;100&quot;; 5.0/9.0 is an untyped float</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>5、针对一个算术运算的结果，不管是有符号还是无符号的，如果需要更多的bit位才能正确表示的话，就说明计算结果是溢出了，而超出的高位的bit位部分将被丢弃，也就是说如果原始的数值是有符号类型，而且最左边的bit为是1的话，那么最终结果就可能是负的，例如int8的例子：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> u <span class="keyword">uint8</span> = <span class="number">255</span></span><br><span class="line">fmt.Println(u, u+<span class="number">1</span>, u*u) <span class="comment">// &quot;255 0 1&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> i <span class="keyword">int8</span> = <span class="number">127</span></span><br><span class="line">fmt.Println(i, i+<span class="number">1</span>, i*i) <span class="comment">// &quot;127 -128 1&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>？？？为何出现128呢，egon来先扫一下盲，估计会扫死99%的人</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">问：8位二进制数可以表示的数值范围是多少，99%的人张口就来：-128~127</span><br><span class="line"></span><br><span class="line">• ok，8位二进制数，最高位需要用来表示符号，那么剩下的7位用来表示数值</span><br><span class="line"></span><br><span class="line">• 于是，最大数为1111 1111=&gt;+127，最小0111 1111=&gt;-127，卧槽，得出的结论是8位二进制数可以表示的数值范围是-127到+127，傻逼了吧你，哈哈哈</span><br><span class="line"></span><br><span class="line">• 灵魂拷问：-128到底怎么来的？？？</span><br><span class="line"></span><br><span class="line">• 真相是这样的：</span><br><span class="line"> 8位二进制数用7位表示数值，那么7位2进制数000 0000的值为0</span><br><span class="line"> 那么,它前面加上符号位0,还表示0吧?</span><br><span class="line"> 那好,如果它前面加上1呢,仍然表示0?这不是重复了么?</span><br><span class="line"> 一个0,怎么用两个值来表示呢！！！</span><br><span class="line"> 所以1000 0000就表示-128啦.</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>6、字符串也可以使用+运算符<br>其中+操作符将两个字符串链接构造一个新字符串：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fmt.Println(<span class="string">&quot;goodbye&quot;</span> + s[<span class="number">5</span>:]) <span class="comment">// &quot;goodbye, world&quot;</span></span><br><span class="line">字符串可以用==和&lt;进行比较；比较通过逐个字节比较完成的，因此比较的结果是字符串自然编码的顺序。</span><br><span class="line">字符串的值是不可变的：一个字符串包含的字节序列永远不会被改变，当然我们也可以给一个字符串变量分配一个新字符串值。可以像下面这样将一个字符串追加到另一个字符串：</span><br><span class="line">s := <span class="string">&quot;left foot&quot;</span></span><br><span class="line">t := s</span><br><span class="line">s += <span class="string">&quot;, right foot&quot;</span></span><br><span class="line">这并不会导致原始的字符串值被改变，但是变量s将因为+=语句持有一个新的字符串值，但是t依然是包含原先的字符串值。</span><br><span class="line">fmt.Println(s) <span class="comment">// &quot;left foot, right foot&quot;</span></span><br><span class="line">fmt.Println(t) <span class="comment">// &quot;left foot&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2、位运算符"><a href="#2-2、位运算符" class="headerlink" title="2.2、位运算符"></a><strong>2.2、位运算符</strong></h3><p>位运算符对整数在内存中的二进制位进行操作（详解附录：位运算）</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&lt;&lt;</td>
+<td>左移，左移n位就是乘以2的n次方。”a&lt;&lt;b”是把a的各二进位全部左移b位，高位丢弃，低位补0。</td>
+<td>A &lt;&lt; 2 结果为 240 ，二进制为 1111 0000</td>
+</tr>
+<tr>
+<td>&gt;&gt;</td>
+<td>右移，右移n位就是除以2的n次方。 “a&gt;&gt;b”是把a的各二进位全部右移b位。</td>
+<td>A &gt;&gt; 2 结果为 15 ，二进制为 0000 1111</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>位运算AND，参与运算的两数各对应的二进位相与。 （两位均为1才为1）</td>
+<td>(A &amp; B) 结果为 12, 二进制为 0000 1100</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>|</td>
+<td>|位运算OR，参与运算的两数各对应的二进位相或。 （两位有一个为1就为1）</td>
+<td>(A | B) 结果为 61, 二进制为 0011 1101</td>
+</tr>
+<tr>
+<td>^</td>
+<td>位运算XOR，参与运算的两数各对应的二进位相异或，当两对应的二进位相异时，结果为1。 （两位不一样则为1）</td>
+<td>(A ^ B) 结果为 49, 二进制为 0011 0001</td>
+</tr>
+<tr>
+<td>&amp;^</td>
+<td>位清空 (AND NOT)</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="2-3、赋值运算符"><a href="#2-3、赋值运算符" class="headerlink" title="2.3、赋值运算符"></a><strong>2.3、赋值运算符</strong></h3><p>对于算数运算符和位运算符，还结合赋值符号书写成简化的赋值语句，例如+运算符还有一个与赋值相结合的对应运算符+=</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>=</td>
+<td>简单的赋值运算符，将一个表达式的值赋给一个左值</td>
+</tr>
+<tr>
+<td>+=</td>
+<td>相加后再赋值</td>
+</tr>
+<tr>
+<td>-=</td>
+<td>相减后再赋值</td>
+</tr>
+<tr>
+<td>*=</td>
+<td>相乘后再赋值</td>
+</tr>
+<tr>
+<td>/=</td>
+<td>相除后再赋值</td>
+</tr>
+<tr>
+<td>%=</td>
+<td>求余后再赋值</td>
+</tr>
+<tr>
+<td>&lt;&lt;=</td>
+<td>左移后赋值</td>
+</tr>
+<tr>
+<td>&gt;&gt;=</td>
+<td>右移后赋值</td>
+</tr>
+<tr>
+<td>&amp;=</td>
+<td>按位与后赋值</td>
+</tr>
+<tr>
+<td>|=</td>
+<td>按位或后赋值</td>
+</tr>
+<tr>
+<td>^=</td>
+<td>按位异或后赋值</td>
+</tr>
+</tbody></table>
+<p><strong>注意1：</strong></p>
+<p>在Go语法中，变量初始化和变量赋值是两个不同的概念。下面为声明一个变量之后的赋值 过程：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> v <span class="keyword">int</span></span><br><span class="line">v = <span class="number">123</span></span><br></pre></td></tr></table></figure>
+
+<p>Go语言的变量赋值与多数语言一致，但Go语言中提供了C/C++程序员期盼多年的多重赋值功 能，比如下面这个交换i和j变量的语句：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">i, j = j, i</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在不支持多重赋值的语言中，交互两个变量的内容需要引入一个中间变量：</span></span><br><span class="line">t = i; i = j; j = t;</span><br></pre></td></tr></table></figure>
+
+<p>多重赋值的特性在Go语言库的实现中也被使用得相当充分，在介绍函数的多重返回值时， 将对其进行更加深入的介绍。总而言之，多重赋值功能让Go语言与C/C++语言相比可以非常明显 地减少代码行数。多重赋值细节和原理参照官方文档golang官网：<a href="https://link.zhihu.com/?target=https://golang.org/ref/spec%23Constants">https://golang.org/ref/spec#Constants</a></p>
+<p><strong>注意2：</strong> 数值变量也可以支持<code>++</code>递增和<code>--</code>递减语句（译注：自增和自减是语句，而不是表达式或运算符，因此<code>x = i++</code>之类的表达式是错误的。语句只是执行指令，表达式是在执行计算会有返回值）：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">x:=<span class="number">123</span></span><br><span class="line">y:=<span class="number">-3.1</span></span><br><span class="line"></span><br><span class="line">x--  <span class="comment">// 等价于 x = x - 1；x 变成 122 </span></span><br><span class="line">y++  <span class="comment">// 等级于 y = y + 1；y 变成 -2.1</span></span><br><span class="line"></span><br><span class="line">fmt.Println(x) <span class="comment">// 122</span></span><br><span class="line">fmt.Println(y) <span class="comment">// -2.1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4、比较运算符"><a href="#2-4、比较运算符" class="headerlink" title="2.4、比较运算符"></a><strong>2.4、比较运算符</strong></h3><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>==</td>
+<td>检查两个值是否相等，如果相等返回 True 否则返回 False。</td>
+</tr>
+<tr>
+<td>!=</td>
+<td>检查两个值是否不相等，如果不相等返回 True 否则返回 False。</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>检查左边值是否大于右边值，如果是返回 True 否则返回 False。</td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td>检查左边值是否大于等于右边值，如果是返回 True 否则返回 False。</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>检查左边值是否小于右边值，如果是返回 True 否则返回 False。</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>检查左边值是否小于等于右边值，如果是返回 True 否则返回 False。</td>
+</tr>
+</tbody></table>
+<p>两个相同的整数类型可以使用下面的二元比较运算符进行比较；比较表达式的结果是布尔类型。</p>
+<p>事实上，布尔型、数字类型和字符串等基本类型都是可比较的，也就是说两个相同类型的值可以用==和!=进行比较。此外，整数、浮点数和字符串可以根据比较结果排序。许多其它类型的值可能是不可比较的，因此也就可能是不可排序的。对于我们遇到的每种类型，我们需要保证规则的一致性。</p>
+<h3 id="2-5、逻辑运算符"><a href="#2-5、逻辑运算符" class="headerlink" title="2.5、逻辑运算符"></a><strong>2.5、逻辑运算符</strong></h3><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&amp;&amp;</td>
+<td>逻辑 AND 运算符。 如果两边的操作数都是 True，则为 True，否则为 False。</td>
+</tr>
+<tr>
+<td>||</td>
+<td>逻辑 OR 运算符。 如果两边的操作数有一个 True，则为 True，否则为 False。</td>
+</tr>
+<tr>
+<td>!</td>
+<td>逻辑 NOT 运算符。 如果条件为 True，则为 False，否则为 True。</td>
+</tr>
+</tbody></table>
+<h2 id="常见数学运算"><a href="#常见数学运算" class="headerlink" title="常见数学运算"></a>常见数学运算</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见数学运算</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span> <span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(math.Abs(<span class="number">-19</span>))				<span class="comment">// 取绝对值</span></span><br><span class="line">	fmt.Println(math.Floor(<span class="number">3.14</span>))			<span class="comment">// 向下取整</span></span><br><span class="line">	fmt.Println(math.Ceil(<span class="number">3.14</span>))			<span class="comment">// 向上取整</span></span><br><span class="line">	fmt.Println(math.Round(<span class="number">3.3478</span>))			<span class="comment">// 就近取整</span></span><br><span class="line">	fmt.Println(math.Round(<span class="number">3.3478</span>*<span class="number">100</span>)/<span class="number">100</span>) <span class="comment">// 保留小数点后两位</span></span><br><span class="line">	fmt.Println(math.Mod(<span class="number">11</span>,<span class="number">3</span>))				<span class="comment">// 取余数，同 11 % 3</span></span><br><span class="line">	fmt.Println(math.Pow(<span class="number">2</span>,<span class="number">5</span>))				<span class="comment">// 计算次方，如: 2的5次方</span></span><br><span class="line">	fmt.Println(math.Pow10(<span class="number">2</span>))				<span class="comment">// 计算10次方，如: 2的10次方</span></span><br><span class="line">	fmt.Println(math.Max(<span class="number">1</span>,<span class="number">3</span>))				<span class="comment">// 两个值，取较大值</span></span><br><span class="line">	fmt.Println(math.Min(<span class="number">1</span>,<span class="number">3</span>))				<span class="comment">// 两个值，取较小值</span></span><br><span class="line">	<span class="comment">//.......</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>祝你发财<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/222.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+        <div class="article-pop-out tagcloud">
+          <i class="icon-tuding"></i>
+          <a class="article-tag-list-link color3">置顶</a>
+        </div>
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -218,7 +590,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -231,24 +603,156 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://vivek-666.github.io/021/10/17/%E8%BF%90%E7%AE%97%E7%AC%A6/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2021/10/20/go%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          go基础之数据类型
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2021/10/17/Go%E9%9D%A2%E8%AF%95%E9%A2%98%E9%9B%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Go基础面试题集</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">运算符介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81-%E4%B8%80%E5%85%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">2.</span> <span class="toc-text">一、 一元运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81-%E4%BA%8C%E5%85%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">3.</span> <span class="toc-text">二、 二元运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1%E3%80%81%E7%AE%97%E6%95%B0%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">3.1.</span> <span class="toc-text">2.1、算数运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2%E3%80%81%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">3.2.</span> <span class="toc-text">2.2、位运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3%E3%80%81%E8%B5%8B%E5%80%BC%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">3.3.</span> <span class="toc-text">2.3、赋值运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4%E3%80%81%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">3.4.</span> <span class="toc-text">2.4、比较运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5%E3%80%81%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">3.5.</span> <span class="toc-text">2.5、逻辑运算符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97"><span class="toc-number">4.</span> <span class="toc-text">常见数学运算</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
+ 
+
+  
+      <section id="comments" class="comments">
+        <style>
+          .comments{margin:30px;padding:10px;background:#fff}
+          @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+        </style>
+        <div id="vcomment" class="comment"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var notify = 'false' == true ? true : false;
+  var verify = 'false' == true ? true : false;
+  new Valine({
+    av: AV,
+    el: '#vcomment',
+    notify: notify,
+    app_id: "4078A2Bntfkxp8EVq5TtPO1P-gzGzoHsz",
+    app_key: "2wBAkBOnl2RpsnGy3dYaEPlN",
+    placeholder: "Just go go",
+    avatar: "mm",
+  });
+</script>
+
+    </section>
+  
 
 
-
-<!-- 添加代码  -->
-<span id="busuanzi_container_page_pv">
-  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-</span>
 
 
           </div>
@@ -283,8 +787,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

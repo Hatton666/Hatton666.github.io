@@ -6,15 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Hatton`sBlog</title>
+  <title>Go基础之认识go程序 | Hatton`sBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hatton&#96;sBlog">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="函数里面才是基础的基础，比葫芦画瓢ok呀！！！看看吧！！！  变量；常量；函数；if–else语句；for循环；switch语句；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go基础之认识go程序">
+<meta property="og:url" content="http://example.com/2021/10/15/Go%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%AE%A4%E8%AF%86go%E7%A8%8B%E5%BA%8F/index.html">
 <meta property="og:site_name" content="Hatton&#96;sBlog">
+<meta property="og:description" content="函数里面才是基础的基础，比葫芦画瓢ok呀！！！看看吧！！！  变量；常量；函数；if–else语句；for循环；switch语句；">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic1.zhimg.com/v2-56ab20000e6e6b576c96144990dfea90_1440w.jpg?source=172ae18b">
+<meta property="og:image" content="d:/思维导图/go笔记/变量基础.png">
+<meta property="article:published_time" content="2021-10-15T12:16:08.000Z">
+<meta property="article:modified_time" content="2022-06-22T06:46:46.343Z">
 <meta property="article:author" content="Hatton">
+<meta property="article:tag" content="Go基础">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic1.zhimg.com/v2-56ab20000e6e6b576c96144990dfea90_1440w.jpg?source=172ae18b">
   
     <link rel="alternative" href="/atom.xml" title="Hatton`sBlog" type="application/atom+xml">
   
@@ -175,511 +183,38 @@
           </div>
           <div id="js-content" class="content-ll">
             
-  
-    <article id="post-Go面试题集" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <i class="fa fa-thumb-tack"></i>
+  <font color=7D26CD>置顶</font>
+  <span class="post-meta-divider">|</span>
+
+<article id="post-Go基础之认识go程序" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/17/Go%E9%9D%A2%E8%AF%95%E9%A2%98%E9%9B%86/">Go基础面试题集</a>
+    <h1 class="article-title" itemprop="name">
+      Go基础之认识go程序
     </h1>
   
 
         
         
+	<!-- 不蒜子统计 -->
+	<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+		  <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+	</span>
 
-<a href="/2021/10/17/Go%E9%9D%A2%E8%AF%95%E9%A2%98%E9%9B%86/" class="archive-article-date">
-  	<time datetime="2021-10-17T13:32:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-17</time>
-</a>
-
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> <strong>面试神器，面面俱到。比葫芦画瓢ok呀！！！看看吧！！！</strong> </p>
-<p> 不打无准备的仗，容易被问到的面试题。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-        <div class="article-pop-out tagcloud">
-          <i class="icon-tuding"></i>
-          <a class="article-tag-list-link color3">置顶</a>
-        </div>
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Go基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Golang//" class="article-tag-list-link color2">Golang</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/17/Go%E9%9D%A2%E8%AF%95%E9%A2%98%E9%9B%86/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
- 
-
-
-
-  
-    <article id="post-Go常见错误集" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/16/Go%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E9%9B%86/">Go基础常见错误集</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2021/10/16/Go%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E9%9B%86/" class="archive-article-date">
-  	<time datetime="2021-10-16T12:35:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-16</time>
-</a>
-
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> <strong>犯错只是为了不再犯错。比葫芦画瓢ok呀！！！看看吧！！！</strong> </p>
-<p>看看你有没有犯过错，哥犯过错，不要迷恋哥，哥也有bug。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-        <div class="article-pop-out tagcloud">
-          <i class="icon-tuding"></i>
-          <a class="article-tag-list-link color3">置顶</a>
-        </div>
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Go基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Golang//" class="article-tag-list-link color2">Golang</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/16/Go%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E9%9B%86/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
- 
-
-
-
-  
-    <article id="post-go基础之复合数据类型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/20/go%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">go基础之数据类型</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2021/10/20/go%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="archive-article-date">
-  	<time datetime="2021-10-20T14:21:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-20</time>
-</a>
-
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  <strong>跟着敲一遍，做好笔记，不必都记住。比葫芦画瓢ok呀！！！看看吧！！！</strong> </p>
-<p>字符串；数组；切片；</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-        <div class="article-pop-out tagcloud">
-          <i class="icon-tuding"></i>
-          <a class="article-tag-list-link color3">置顶</a>
-        </div>
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Go基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Golang//" class="article-tag-list-link color2">Golang</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/20/go%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
- 
-
-
-
-  
-    <article id="post-go基础之基本类型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/23/go%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/">go基础之基本数据类型</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2021/10/23/go%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/" class="archive-article-date">
-  	<time datetime="2021-10-23T13:12:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-23</time>
-</a>
-
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> <strong>了解底层，事半功倍。</strong> <strong>比葫芦画瓢ok呀！！！看看吧！！！</strong> </p>
-<p>进制；计算机中的单位；编码；数字类型；类型转换；</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-        <div class="article-pop-out tagcloud">
-          <i class="icon-tuding"></i>
-          <a class="article-tag-list-link color3">置顶</a>
-        </div>
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Go基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Golang//" class="article-tag-list-link color2">Golang</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/23/go%E5%9F%BA%E7%A1%80%E4%B9%8B%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
- 
-
-
-
-  
-    <article id="post-运算符" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/17/%E8%BF%90%E7%AE%97%E7%AC%A6/">go基础之运算符</a>
-    </h1>
-  
-
-        
-        
-
-<a href="/2021/10/17/%E8%BF%90%E7%AE%97%E7%AC%A6/" class="archive-article-date">
-  	<time datetime="2021-10-17T14:19:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-17</time>
-</a>
-
-        
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>做好笔记，不用记，比着敲一遍就行了。</strong> <strong>比葫芦画瓢ok呀！！！看看吧！！！</strong> </p>
-<p>一元运算符；二元运算符；算数运算符；位运算符；赋值运算符；比较运算符；逻辑运算符 </p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-        <div class="article-pop-out tagcloud">
-          <i class="icon-tuding"></i>
-          <a class="article-tag-list-link color3">置顶</a>
-        </div>
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Go基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Golang//" class="article-tag-list-link color2">Golang</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/17/%E8%BF%90%E7%AE%97%E7%AC%A6/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
- 
-
-
-
-  
-    <article id="post-Go基础之认识go程序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/15/Go%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%AE%A4%E8%AF%86go%E7%A8%8B%E5%BA%8F/">Go基础之认识go程序</a>
-    </h1>
-  
-
-        
-        
 
 <a href="/2021/10/15/Go%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%AE%A4%E8%AF%86go%E7%A8%8B%E5%BA%8F/" class="archive-article-date">
   	<time datetime="2021-10-15T12:16:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-15</time>
 </a>
 
         
+        
+          <span class="archive-article-date">
+            阅读量 <span id="busuanzi_value_page_pv"></span>
+          </span>
         
       </header>
     
@@ -689,9 +224,209 @@
 <p>变量；常量；函数；if–else语句；for循环；switch语句；</p>
 <p> <img src="https://pic1.zhimg.com/v2-56ab20000e6e6b576c96144990dfea90_1440w.jpg?source=172ae18b" alt="《快学 Go 语言》第 3 课 —— 分支与循环"> </p>
 <p><img src="D:\思维导图\go笔记\变量基础.png" alt="变量基础"></p>
-        
+<span id="more"></span> 
+
+<h2 id="定义变量"><a href="#定义变量" class="headerlink" title="定义变量"></a>定义变量</h2><p><strong>方法一： 完整格式 ;</strong>  </p>
+<p>1，<strong>全局变量</strong>偏好完整格式</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名 类型 = 变量的值  </span><br><span class="line"><span class="keyword">var</span> age <span class="keyword">int</span> = <span class="number">29</span> </span><br><span class="line"></span><br><span class="line">例如:</span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> age <span class="keyword">int</span> = <span class="number">29</span> <span class="comment">// 声明变量并初始化</span></span><br><span class="line"></span><br><span class="line">    fmt.Println(<span class="string">&quot;my age is&quot;</span>, age)</span><br><span class="line">&#125;</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><br><span class="line">my age is <span class="number">29</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>方法二 ： 类型推断</strong></p>
+<p>1，根据变量值，自动推断出变量的类型。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 变量名 = 变量值</span><br><span class="line"></span><br><span class="line">例如:</span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> s = <span class="number">42</span></span><br><span class="line">    fmt.Println(s)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>方法三 ： 简短声明</strong></p>
+<p>1，<strong>只有</strong> 该方式可用在 循环条件中的初始化语句中 </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">变量名 := 变量值</span><br><span class="line"></span><br><span class="line">例如:</span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    s := <span class="number">42</span></span><br><span class="line">    fmt.Println(s)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 循环条件中的初始化语句 i := 0</span></span><br><span class="line"><span class="keyword">for</span> i:=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++ &#123;</span><br><span class="line">    fmt.<span class="built_in">println</span>(<span class="string">&quot; &quot;</span>,i) </span><br><span class="line">&#125;</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>方法四 ：因式分解</strong></p>
+<p> <strong>一个语句中声明不同类型的变量</strong> </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> (</span><br><span class="line">        name   = <span class="string">&quot;naveen&quot;</span></span><br><span class="line">        age    = <span class="number">29</span></span><br><span class="line">        height <span class="keyword">int</span></span><br><span class="line">    )</span><br><span class="line">    fmt.Println(<span class="string">&quot;my name is&quot;</span>, name, <span class="string">&quot;, age is&quot;</span>, age, <span class="string">&quot;and height is&quot;</span>, height)</span><br><span class="line">&#125;</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><br><span class="line">my name is naveen , age is <span class="number">29</span> and height is <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="多变量声明"><a href="#多变量声明" class="headerlink" title="多变量声明"></a>多变量声明</h3><p>1， 多个局部变量声明</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">//一次性声明多个变量，int默认值</span></span><br><span class="line">    <span class="keyword">var</span> n1, n2, n3 <span class="keyword">int</span></span><br><span class="line">    fmt.Println(n1, n2, n3)</span><br><span class="line">    <span class="comment">//声明多个变量，且赋值</span></span><br><span class="line">    <span class="keyword">var</span> c1, c2, c3 = <span class="string">&quot;chaoge&quot;</span>, <span class="number">18</span>, <span class="number">99.99</span></span><br><span class="line">    fmt.Println(c1, c2, c3)</span><br><span class="line">    <span class="comment">//短声明多个变量</span></span><br><span class="line">    a1, a2, a3 := <span class="string">&quot;yu&quot;</span>, <span class="number">17</span>, <span class="number">100.0</span></span><br><span class="line">    fmt.Println(a1, a2, a3)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2,  一次性声明多个全局变量 </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"><span class="comment">//声明全局变量方式1</span></span><br><span class="line"><span class="keyword">var</span> n1 = <span class="number">100</span></span><br><span class="line"><span class="keyword">var</span> n2 = <span class="number">200</span></span><br><span class="line"><span class="keyword">var</span> n3 = <span class="number">300</span></span><br><span class="line"><span class="comment">//声明全局变量方式2</span></span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">    d1, d2, d3 = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span></span><br><span class="line">)</span><br><span class="line"><span class="comment">//声明全局变量方式3</span></span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">    c1 = <span class="number">100</span></span><br><span class="line">    c2 = <span class="number">200</span></span><br><span class="line">    c3 = <span class="number">300</span></span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;这里是函数体内&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3, 特殊变量，占位符 “_”</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Person</span><span class="params">(a1 <span class="keyword">int</span>, n1 <span class="keyword">string</span>)</span> <span class="params">(<span class="keyword">int</span>, <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a1, n1</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    _, name := Person(<span class="number">18</span>, <span class="string">&quot;好嗨哦&quot;</span>) <span class="comment">// &quot;_&quot;,可接收任何值</span></span><br><span class="line">    fmt.Println(name) </span><br><span class="line">&#125;</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><br><span class="line">好嗨哦</span><br></pre></td></tr></table></figure>
+
+<p>4，常见数据类型变量默认值</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 只声明变量，不赋值，只有默认值</span></span><br><span class="line">    <span class="keyword">var</span> age <span class="keyword">int</span></span><br><span class="line">    <span class="keyword">var</span> name <span class="keyword">string</span></span><br><span class="line">    <span class="keyword">var</span> gender <span class="keyword">bool</span></span><br><span class="line">    <span class="keyword">var</span> salary <span class="keyword">float64</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;age默认值 :&quot;</span>, age)</span><br><span class="line">    fmt.Println(<span class="string">&quot;name默认值 :&quot;</span>, name)</span><br><span class="line">    fmt.Println(<span class="string">&quot;gender默认值 :&quot;</span>, gender)</span><br><span class="line">    fmt.Println(<span class="string">&quot;salary默认值 :&quot;</span>, salary)</span><br><span class="line">&#125;</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><br><span class="line">age默认值: <span class="literal">nil</span></span><br><span class="line">name默认值: <span class="literal">nil</span></span><br><span class="line">gender默认值: <span class="literal">false</span></span><br><span class="line">salary默认值: <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><strong>变量是对内存中数据存储空间的表示</strong>，如同门牌号对应着房间，同样的，变量名字对应变量的值。 </li>
+<li>值都需要声明</li>
+<li> Go 是一门强类型语言，所有的变量必须有明确的类型 ，不同类型的变量不能相互赋值。</li>
+<li>var 的意思就是告诉读者「我很重要，你要注意」，:= 的意思是告诉读者「我很随意，别把我当回事」 </li>
+<li><strong>局部变量，它定义在函数内部</strong>，函数调用结束它就消亡了。与之对应的是<strong>全局变量它定义在函数外面</strong>，在程序运行期间，它一直存在。 <strong>内部的全局变量只有当前包内的代码可以访问，外面包的代码是不能看见的。</strong> </li>
+<li>由于 <strong>Go 是强类型</strong>（Strongly Typed）语言，因此不允许某一类型的变量赋值为其他类型的值。 </li>
+</ol>
+<h2 id="定义常量"><a href="#定义常量" class="headerlink" title="定义常量"></a>定义常量</h2><p>关键字 const，用于定义常量。常量可以是全局常量也可以是局部常量，全局常量的大小写规则和变量是一致的。</p>
+<p><strong>方法一 ： 有类型常量</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> 常量名 常量类型 = 常量值</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> globali <span class="keyword">int</span> = <span class="number">24</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">const</span> locali <span class="keyword">int</span> = <span class="number">42</span>  <span class="comment">// 定义常量 locali</span></span><br><span class="line">    fmt.Println(globali, locali)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>方法二： 无类型常量</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> 常量名 = 常量值</span><br><span class="line"><span class="keyword">const</span> hello = <span class="string">&quot;Hello World&quot;</span>  <span class="comment">// 常量hello 没有类型。</span></span><br><span class="line"></span><br><span class="line">随手写一个 ： <span class="number">20</span> ,  <span class="string">&quot;I love you&quot;</span>  <span class="literal">true</span>  ...... 这些都是常量， 他们就是他们，固定不变，在Go中他们自己本身就是无类型的常量。</span><br></pre></td></tr></table></figure>
+
+<p><strong>1，你不可以修改常量，常量必须初始化，因为它无法二次赋值。</strong></p>
+ <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;math&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    fmt.Println(<span class="string">&quot;Hello, playground&quot;</span>)</span><br><span class="line">    <span class="keyword">var</span> a = math.Sqrt(<span class="number">4</span>)   <span class="comment">// 允许</span></span><br><span class="line">    <span class="keyword">const</span> b = math.Sqrt(<span class="number">4</span>) <span class="comment">// 不允许 b是常量不能将函数的返回值赋值给常量。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2，常量有默认类型。</strong></p>
+<p> 无类型的常量有一个与<strong>它们相关联的默认类型</strong>，并且当且仅当一行代码需要时才提供它</p>
+<p><strong>字符串常量</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> hello = <span class="string">&quot;Hello World&quot;</span>  <span class="comment">// 常量hello 没有类型。但只能默认为字符串相关的数据类型。</span></span><br><span class="line"><span class="keyword">var</span> name <span class="keyword">string</span> = hello</span><br><span class="line">hello本身是无类型常量，但要赋值给<span class="keyword">string</span>类型的 name变量，常量hello就默认为了字符串类型。</span><br></pre></td></tr></table></figure>
+
+<p><strong>布尔常量</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">布尔常量和字符串常量没有什么不同。他们是两个无类型的常量 <span class="literal">true</span> 和 <span class="literal">false</span>。</span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    <span class="keyword">const</span> trueConst = <span class="literal">true</span></span><br><span class="line">    <span class="keyword">type</span> myBool <span class="keyword">bool</span></span><br><span class="line">    <span class="keyword">var</span> defaultBool = trueConst <span class="comment">// 允许  defaultBool类型为bool类型;</span></span><br><span class="line">    <span class="keyword">var</span> customBool myBool = trueConst <span class="comment">// 允许 customBool类型为myBool类型</span></span><br><span class="line">    defaultBool = customBool <span class="comment">// 不允许 因为类型不同，不能相互赋值。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="数字常量"><a href="#数字常量" class="headerlink" title="数字常量"></a>数字常量</h3><p>数字常量包含整数、浮点数和复数的常量。数字常量中有一些微妙之处。</p>
+<p>让我们看一些例子来说清楚。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    <span class="keyword">const</span> a = <span class="number">5</span></span><br><span class="line">    <span class="keyword">var</span> intVar <span class="keyword">int</span> = a</span><br><span class="line">    <span class="keyword">var</span> int32Var <span class="keyword">int32</span> = a</span><br><span class="line">    <span class="keyword">var</span> float64Var <span class="keyword">float64</span> = a</span><br><span class="line">    <span class="keyword">var</span> complex64Var <span class="keyword">complex64</span> = a</span><br><span class="line">    fmt.Println(<span class="string">&quot;intVar&quot;</span>,intVar, <span class="string">&quot;\nint32Var&quot;</span>, int32Var, <span class="string">&quot;\nfloat64Var&quot;</span>, float64Var, <span class="string">&quot;\ncomplex64Var&quot;</span>,complex64Var)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的程序，常量 <code>a</code> 是没有类型的，它的值是 <code>5</code> 。您可能想知道 <code>a</code> 的默认类型是什么，如果它确实有一个的话, 那么我们如何将它分配给不同类型的变量。答案在于 <code>a</code> 的语法。下面的程序将使事情更加清晰。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    <span class="keyword">var</span> i = <span class="number">5</span></span><br><span class="line">    <span class="keyword">var</span> f = <span class="number">5.6</span></span><br><span class="line">    <span class="keyword">var</span> c = <span class="number">5</span> + <span class="number">6i</span></span><br><span class="line">    fmt.Printf(<span class="string">&quot;i&#x27;s type %T, f&#x27;s type %T, c&#x27;s type %T&quot;</span>, i, f, c)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上面的程序中，每个变量的类型由数字常量的语法决定。<code>5</code> 在语法中是整数， <code>5.6</code> 是浮点数，<code>5+6i</code> 的语法是复数。当我们运行上面的程序，它会打印出 <code>i&#39;s type int, f&#39;s type float64, c&#39;s type complex128</code>。</p>
+<p>现在我希望下面的程序能够正确的工作。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    <span class="keyword">const</span> a = <span class="number">5</span></span><br><span class="line">    <span class="keyword">var</span> intVar <span class="keyword">int</span> = a</span><br><span class="line">    <span class="keyword">var</span> int32Var <span class="keyword">int32</span> = a</span><br><span class="line">    <span class="keyword">var</span> float64Var <span class="keyword">float64</span> = a</span><br><span class="line">    <span class="keyword">var</span> complex64Var <span class="keyword">complex64</span> = a</span><br><span class="line">    fmt.Println(<span class="string">&quot;intVar&quot;</span>,intVar, <span class="string">&quot;\nint32Var&quot;</span>, int32Var, <span class="string">&quot;\nfloat64Var&quot;</span>, float64Var, <span class="string">&quot;\ncomplex64Var&quot;</span>,complex64Var)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这个程序中， <code>a</code> 的值是 <code>5</code> ，<code>a</code> 的语法是通用的（它可以代表一个浮点数、整数甚至是一个没有虚部的复数），因此可以将其分配给任何兼容的类型。这些常量的默认类型可以被认为是根据上下文在运行中生成的。 <code>var intVar int = a</code> 要求 <code>a</code> 是 <code>int</code>，所以它变成一个 <code>int</code> 常量。 <code>var complex64Var complex64 = a</code> 要求 <code>a</code> 是 <code>complex64</code>，因此它变成一个复数类型。很简单的:)。</p>
+<h3 id="数字表达式"><a href="#数字表达式" class="headerlink" title="数字表达式"></a>数字表达式</h3><p>数字常量可以在表达式中自由混合和匹配，只有当它们被分配给变量或者在需要类型的代码中的任何地方使用时，才需要类型。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">5.9</span>/<span class="number">8</span></span><br><span class="line">    fmt.Printf(<span class="string">&quot;a&#x27;s type %T value %v&quot;</span>,a, a)</span><br><span class="line">&#125;</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><br><span class="line">a<span class="string">&#x27;s type float64 value 0.7375</span></span><br></pre></td></tr></table></figure>
+
+<p>在上面的程序中， <code>5.9</code> 在语法中是浮点型，<code>8</code> 是整型，<code>5.9/8</code> 是允许的，因为两个都是数字常量。除法的结果是 <code>0.7375</code> 是一个浮点型，所以 <code>a</code> 的类型是浮点型。这个程序的输出结果是: <code>a&#39;s type float64 value 0.7375</code>。</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="函数声明"><a href="#函数声明" class="headerlink" title="函数声明"></a>函数声明</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">functionname</span><span class="params">(parametername <span class="keyword">type</span>)</span> <span class="title">returntype</span></span> &#123;  </span><br><span class="line">    <span class="comment">// 函数体（具体实现的功能）</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数中的参数列表和返回值并非是必须的</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">functionname</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    <span class="comment">// 译注: 表示这个函数不需要输入参数，且没有返回值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> <strong>如果有连续若干个参数，它们的类型一致，那么我们无须一一罗列，只需在最后一个参数后添加该类型</strong> </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">calculateBill</span><span class="params">(price, no <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;  </span><br><span class="line">    <span class="keyword">var</span> totalPrice = price * no</span><br><span class="line">    <span class="keyword">return</span> totalPrice</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    price, no := <span class="number">90</span>, <span class="number">6</span> </span><br><span class="line">    totalPrice := calculateBill(price, no) <span class="comment">// 函数调用</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;Total price is&quot;</span>, totalPrice) </span><br><span class="line">&#125;</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><br><span class="line">Total price is <span class="number">540</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="多返回值"><a href="#多返回值" class="headerlink" title="多返回值"></a>多返回值</h3><p>矩形：</p>
+<ul>
+<li><code>面积 = 长 * 宽</code></li>
+<li><code>周长 = 2 * ( 长 + 宽 )</code></li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">rectProps</span><span class="params">(length, width <span class="keyword">float64</span>)</span><span class="params">(<span class="keyword">float64</span>, <span class="keyword">float64</span>)</span></span> &#123;  </span><br><span class="line">    <span class="keyword">var</span> area = length * width</span><br><span class="line">    <span class="keyword">var</span> perimeter = (length + width) * <span class="number">2</span></span><br><span class="line">    <span class="keyword">return</span> area, perimeter  <span class="comment">// 返回 面积和周长</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    area, perimeter := rectProps(<span class="number">10.8</span>, <span class="number">5.6</span>)</span><br><span class="line">    fmt.Printf(<span class="string">&quot;Area %f Perimeter %f&quot;</span>, area, perimeter) </span><br><span class="line">&#125;</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><br><span class="line">Area <span class="number">60.480000</span> Perimeter <span class="number">32.800000</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="命名返回值"><a href="#命名返回值" class="headerlink" title="命名返回值"></a>命名返回值</h3><p> 从函数中可以返回一个命名值。一旦命名了返回值，可以认为这些值在函数第一行就被声明为变量了。 </p>
+<p> 上面的 rectProps 函数也可用这个方式写成： </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">rectProps</span><span class="params">(length, width <span class="keyword">float64</span>)</span><span class="params">(area, perimeter <span class="keyword">float64</span>)</span></span> &#123;  </span><br><span class="line">    area = length * width</span><br><span class="line">    perimeter = (length + width) * <span class="number">2</span></span><br><span class="line">    <span class="keyword">return</span> <span class="comment">// 不需要明确指定返回值，默认返回 area, perimeter 的值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="空白符"><a href="#空白符" class="headerlink" title="空白符"></a>空白符</h3><p> 假使我们只需要计算面积，而并不关心周长的计算结果 </p>
+<p>上面的 main函数也可用这个方式写成： </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    area, _ := rectProps(<span class="number">10.8</span>, <span class="number">5.6</span>) <span class="comment">// 返回值周长被丢弃</span></span><br><span class="line">    fmt.Printf(<span class="string">&quot;Area %f &quot;</span>, area)</span><br><span class="line">&#125;</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><br><span class="line">Area <span class="number">60.480000</span></span><br><span class="line"></span><br><span class="line">在程序的 area, _ := rectProps(<span class="number">10.8</span>, <span class="number">5.6</span>) 这一行，我们看到空白符 _ 用来跳过不要的计算结果。</span><br></pre></td></tr></table></figure>
+
+<h2 id="命名规范"><a href="#命名规范" class="headerlink" title="命名规范"></a>命名规范</h2><h3 id="1-变量定义规范"><a href="#1-变量定义规范" class="headerlink" title="1,变量定义规范"></a>1,变量定义规范</h3><p>Go语言中的函数名、变量名、常量名、类型名、语句标号和包名等所有的命名，都遵循一个简单的命名规则：</p>
+<p>1 一个名字必须以一个字母（Unicode字母）或下划线开头，后面可以跟任意数量的字母、数字或下划线</p>
+<p>2 大写字母和小写字母是不同的：Name和name是两个不同的变量</p>
+<p>3 关键字和保留字都不建议用作变量名</p>
+<h3 id="2-关键字"><a href="#2-关键字" class="headerlink" title="2,关键字"></a>2,关键字</h3><p>Go语言中关键字有25个；关键字不能用于自定义名字，只能在特定语法结构中使用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">break      default       func     interface   selectcase       defer         go       map         structchan       else          goto     package     switchconst      fallthrough   if       range       typecontinue   for           import   return      var</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-保留字"><a href="#3-保留字" class="headerlink" title="3,保留字"></a>3,保留字</h3><p>go语言中有37个保留字，主要对应内建的常量、类型和函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">内建常量: true false iota nil内建类型:  int int8 int16 int32 int64          uint uint8 uint16 uint32 uint64 uintptr          float32 float64 complex128 complex64          bool byte rune string error内建函数: make len cap new append copy close delete          complex real imag          panic recover</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-注意"><a href="#4-注意" class="headerlink" title="4,注意"></a>4,注意</h3><ol>
+<li>这些保留字并不是关键字，可以在定义中重新使用它们。在一些特殊的场景中重新定义它们也是有意义的，但是也要注意避免过度而引起语义混乱</li>
+<li>如果一个名字是在函数内部定义，那么它就只在函数内部有效。如果是在函数外部定义，那么将在当前包的所有文件中都可以访问。名字的开头字母的大小写决定了名字在包外的可见性。如果一个名字是大写字母开头的（必须是在函数外部定义的包级名字；包级函数名本身也是包级名字），那么它将是导出的，也就是说可以被外部的包访问，例如fmt包的Printf函数就是导出的，可以在fmt包外部访问。包本身的名字一般总是用小写字母</li>
+<li>名字的长度没有逻辑限制，但是Go语言的风格是尽量使用短小的名字，对于局部变量尤其是这样；你会经常看到i之类的短名字，而不是冗长的theLoopIndex命名。通常来说，如果一个名字的作用域比较大，生命周期也比较长，那么用长的名字将会更有意义</li>
+<li>在习惯上，Go语言程序员推荐使用 <strong>驼峰式</strong> 命名，当名字由几个单词组成时优先使用大小写分隔，而不是优先用下划线分隔。因此，在标准库有QuoteRuneToASCII和parseRequestLine这样的函数命名，但是一般不会用quote_rune_to_ASCII和parse_request_line这样的命名。而像ASCII和HTML这样的缩略词则避免使用大小写混合的写法，它们可能被称为htmlEscape、HTMLEscape或escapeHTML，但不会是escapeHtml</li>
+<li>go文件的名字，建议用下划线的方式命名（参见go源码）</li>
+</ol>
+<h2 id="if–else语句"><a href="#if–else语句" class="headerlink" title="if–else语句"></a>if–else语句</h2><p><strong>基本格式</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> condition &#123;  </span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> condition &#123;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> <strong>编写一个简单的程序来判断数字大小所在的范围</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    num := <span class="number">99</span></span><br><span class="line">    <span class="keyword">if</span> num &lt;= <span class="number">50</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">&quot;number is less than or equal to 50&quot;</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> num &gt;= <span class="number">51</span> &amp;&amp; num &lt;= <span class="number">100</span> &#123;	<span class="comment">// 	 else if 语句</span></span><br><span class="line">        fmt.Println(<span class="string">&quot;number is between 51 and 100&quot;</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">&quot;number is greater than 100&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><br><span class="line">number is between <span class="number">51</span> and <span class="number">100</span></span><br></pre></td></tr></table></figure>
+
+<p> <strong><code>if</code> 还有另外一种形式，它包含一个 <code>statement</code> 可选语句部分，该组件在条件判断之前运行。                           语法如下：</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 判断数字奇偶性</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    <span class="keyword">if</span> num := <span class="number">10</span>; num % <span class="number">2</span> == <span class="number">0</span> &#123; <span class="comment">//checks if number is even</span></span><br><span class="line">        fmt.Println(num,<span class="string">&quot;is even&quot;</span>) </span><br><span class="line">    &#125;  <span class="keyword">else</span> &#123;</span><br><span class="line">        fmt.Println(num,<span class="string">&quot;is odd&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><br><span class="line"><span class="number">10</span> is even</span><br></pre></td></tr></table></figure>
+
+<p><strong>多重if嵌套</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    a := <span class="number">100</span></span><br><span class="line">    b := <span class="number">200</span></span><br><span class="line">    <span class="keyword">if</span> a == <span class="number">100</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> b == <span class="number">200</span> &#123;</span><br><span class="line">            fmt.Println(<span class="string">&quot;a为100,b为200&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">&quot;a或b有一个不匹配&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><br><span class="line">a为<span class="number">100</span>,b为<span class="number">200</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="goto-标签"><a href="#goto-标签" class="headerlink" title="goto 标签"></a>goto 标签</h4><p>指定跳转</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span> <span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		<span class="keyword">var</span> name <span class="keyword">string</span></span><br><span class="line">		fmt.Println(<span class="string">&quot;请输入你的名字：&quot;</span>)</span><br><span class="line">		fmt.Scanln(&amp;name)</span><br><span class="line">		<span class="keyword">if</span> name == <span class="string">&quot;hhh&quot;</span> &#123;</span><br><span class="line">			<span class="comment">// vip</span></span><br><span class="line">			<span class="keyword">goto</span> VIP <span class="comment">// 跳转到标签语句</span></span><br><span class="line">		&#125;<span class="keyword">else</span> <span class="keyword">if</span> name == <span class="string">&quot;ggg&quot;</span> &#123;</span><br><span class="line">			<span class="comment">// S</span></span><br><span class="line">			<span class="keyword">goto</span> SVIP</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		fmt.Println(<span class="string">&quot;one&quot;</span>)</span><br><span class="line">	VIP:</span><br><span class="line">		fmt.Println(<span class="string">&quot;second&quot;</span>)</span><br><span class="line">	SVIP:</span><br><span class="line">		fmt.Println(<span class="string">&quot;three&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Go-switch"><a href="#Go-switch" class="headerlink" title="Go switch"></a>Go switch</h2><p> switch 是一个条件语句，用于将表达式的值与可能匹配的选项列表进行比较，并根据匹配情况执行相应的代码块。 </p>
+<p><strong>1,不允许出现重复项</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    finger := <span class="number">4</span></span><br><span class="line">    <span class="keyword">switch</span> finger &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        fmt.Println(<span class="string">&quot;Thumb&quot;</span>)</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">        fmt.Println(<span class="string">&quot;Index&quot;</span>)</span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">        fmt.Println(<span class="string">&quot;Middle&quot;</span>)</span><br><span class="line">    <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">        fmt.Println(<span class="string">&quot;Ring&quot;</span>)</span><br><span class="line">    <span class="keyword">case</span> <span class="number">4</span>: <span class="comment">//重复项  报错</span></span><br><span class="line">        fmt.Println(<span class="string">&quot;Another Ring&quot;</span>)</span><br><span class="line">    <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">        fmt.Println(<span class="string">&quot;Pinky&quot;</span>)</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="默认情况（Default-Case）"><a href="#默认情况（Default-Case）" class="headerlink" title="默认情况（Default Case）"></a>默认情况（Default Case）</h3><p> default 不一定只能出现在 switch 语句的最后，它可以放在 switch 语句的任何地方。 </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">switch</span> finger := <span class="number">8</span>; finger &#123;  <span class="comment">//在这里，finger 变量的作用域仅限于这个 switch 内。</span></span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        fmt.Println(<span class="string">&quot;Thumb&quot;</span>)</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">        fmt.Println(<span class="string">&quot;Index&quot;</span>)</span><br><span class="line">    <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">        fmt.Println(<span class="string">&quot;Middle&quot;</span>)</span><br><span class="line">    <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">        fmt.Println(<span class="string">&quot;Ring&quot;</span>)</span><br><span class="line">    <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">        fmt.Println(<span class="string">&quot;Pinky&quot;</span>)</span><br><span class="line">    <span class="keyword">default</span>: <span class="comment">// 默认情况</span></span><br><span class="line">        fmt.Println(<span class="string">&quot;incorrect finger number&quot;</span>) <span class="comment">// 都不符合，则选8</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><br><span class="line">incorrect finger number</span><br></pre></td></tr></table></figure>
+
+<h3 id="多表达式判断"><a href="#多表达式判断" class="headerlink" title="多表达式判断"></a>多表达式判断</h3><p> 通过用逗号分隔，可以在一个 case 中包含多个表达式。 </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    letter := <span class="string">&quot;i&quot;</span></span><br><span class="line">    <span class="keyword">switch</span> letter &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;a&quot;</span>, <span class="string">&quot;e&quot;</span>, <span class="string">&quot;i&quot;</span>, <span class="string">&quot;o&quot;</span>, <span class="string">&quot;u&quot;</span>: <span class="comment">// 一个选项多个表达式</span></span><br><span class="line">        fmt.Println(<span class="string">&quot;vowel&quot;</span>)</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        fmt.Println(<span class="string">&quot;not a vowel&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">在 <span class="keyword">case</span> <span class="string">&quot;a&quot;</span>,<span class="string">&quot;e&quot;</span>,<span class="string">&quot;i&quot;</span>,<span class="string">&quot;o&quot;</span>,<span class="string">&quot;u&quot;</span>: 这一行中，列举了所有的元音。只要匹配该项，则将输出 vowel。</span><br></pre></td></tr></table></figure>
+
+<h3 id="无表达式的switch"><a href="#无表达式的switch" class="headerlink" title="无表达式的switch"></a>无表达式的switch</h3><p> 如果省略表达式，则表示这个 switch 语句等同于 <code>switch true</code>，并且每个 <code>case</code> 表达式都被认定为有效，相应的代码块也会被执行。 </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    num := <span class="number">75</span></span><br><span class="line">    <span class="keyword">switch</span> &#123; <span class="comment">// 表达式被省略了</span></span><br><span class="line">    <span class="keyword">case</span> num &gt;= <span class="number">0</span> &amp;&amp; num &lt;= <span class="number">50</span>:</span><br><span class="line">        fmt.Println(<span class="string">&quot;num is greater than 0 and less than 50&quot;</span>)</span><br><span class="line">    <span class="keyword">case</span> num &gt;= <span class="number">51</span> &amp;&amp; num &lt;= <span class="number">100</span>:</span><br><span class="line">        fmt.Println(<span class="string">&quot;num is greater than 51 and less than 100&quot;</span>)</span><br><span class="line">    <span class="keyword">case</span> num &gt;= <span class="number">101</span>:</span><br><span class="line">        fmt.Println(<span class="string">&quot;num is greater than 100&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><br><span class="line">num is greater than <span class="number">51</span> and less than <span class="number">100</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Fallthrough-语句"><a href="#Fallthrough-语句" class="headerlink" title="Fallthrough 语句"></a>Fallthrough 语句</h3><p> 在 Go 中，每执行完一个 case 后，会从 switch 语句中跳出来，不再做后续 case 的判断和执行。使用 <code>fallthrough</code> 语句可以在<strong>已经执行完成的 case 之后</strong>，把控制权转移到下一个 case 的执行代码中。 </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">number</span><span class="params">()</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    num := <span class="number">15</span> * <span class="number">5</span> </span><br><span class="line">    <span class="keyword">return</span> num</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> num := number(); &#123; <span class="comment">// num is not a constant</span></span><br><span class="line">    <span class="keyword">case</span> num &lt; <span class="number">50</span>:</span><br><span class="line">        fmt.Printf(<span class="string">&quot;%d is lesser than 50\n&quot;</span>, num)</span><br><span class="line">        <span class="keyword">fallthrough</span></span><br><span class="line">    <span class="keyword">case</span> num &lt; <span class="number">100</span>:</span><br><span class="line">        fmt.Printf(<span class="string">&quot;%d is lesser than 100\n&quot;</span>, num)</span><br><span class="line">        <span class="keyword">fallthrough</span></span><br><span class="line">    <span class="keyword">case</span> num &lt; <span class="number">200</span>:</span><br><span class="line">        fmt.Printf(<span class="string">&quot;%d is lesser than 200&quot;</span>, num)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><br><span class="line"><span class="number">75</span> is lesser than <span class="number">100</span></span><br><span class="line"><span class="number">75</span> is lesser than <span class="number">200</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="For循环"><a href="#For循环" class="headerlink" title="For循环"></a>For循环</h2><p>初始化语句只执行一次。循环初始化后，将检查循环条件。如果条件的计算结果为 <code>true</code> ，则 <code>&#123;&#125;</code> 内的循环体将执行，接着执行 post 语句。post 语句将在每次成功循环迭代后执行。在执行 post 语句后，条件将被再次检查。如果为 <code>true</code>, 则循环将继续执行，否则 for 循环将终止。（译注：这是典型的 for 循环三个表达式，第一个为初始化表达式或赋值语句；第二个为循环条件判定表达式；第三个为循环变量修正表达式，即此处的 post ）</p>
+<p>这三个组成部分，即初始化，条件和 post 都是可选的。让我们看一个例子来更好地理解循环。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> initialisation; condition; post &#123;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 让我们用 <code>for</code> 循环写一个打印出从 1 到 10 的程序 </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++ &#123;</span><br><span class="line">        fmt.Printf(<span class="string">&quot; %d&quot;</span>,i)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span> <span class="number">10</span> </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    i := <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i &lt;= <span class="number">10</span> &#123; <span class="comment">// initialisation and post are omitted</span></span><br><span class="line">        fmt.Printf(<span class="string">&quot;%d &quot;</span>, i)</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span> <span class="number">10</span> </span><br></pre></td></tr></table></figure>
+
+<p> 在 <code>for</code> 循环中可以声明和操作多个变量。 </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    <span class="keyword">for</span> no, i := <span class="number">10</span>, <span class="number">1</span>; i &lt;= <span class="number">10</span> &amp;&amp; no &lt;= <span class="number">19</span>; i, no = i+<span class="number">1</span>, no+<span class="number">1</span> &#123; <span class="comment">//multiple initialisation and increment</span></span><br><span class="line">        fmt.Printf(<span class="string">&quot;%d * %d = %d\n&quot;</span>, no, i, no*i)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><br><span class="line"><span class="number">10</span> * <span class="number">1</span> = <span class="number">10</span></span><br><span class="line"><span class="number">11</span> * <span class="number">2</span> = <span class="number">22</span></span><br><span class="line"><span class="number">12</span> * <span class="number">3</span> = <span class="number">36</span></span><br><span class="line"><span class="number">13</span> * <span class="number">4</span> = <span class="number">52</span></span><br><span class="line"><span class="number">14</span> * <span class="number">5</span> = <span class="number">70</span></span><br><span class="line"><span class="number">15</span> * <span class="number">6</span> = <span class="number">90</span></span><br><span class="line"><span class="number">16</span> * <span class="number">7</span> = <span class="number">112</span></span><br><span class="line"><span class="number">17</span> * <span class="number">8</span> = <span class="number">136</span></span><br><span class="line"><span class="number">18</span> * <span class="number">9</span> = <span class="number">162</span></span><br><span class="line"><span class="number">19</span> * <span class="number">10</span> = <span class="number">190</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="break"><a href="#break" class="headerlink" title="break"></a>break</h3><p><code>break</code> 语句用于在完成正常执行之前突然终止 for 循环，之后程序将会在 for 循环下一行代码开始执行。</p>
+<p>让我们写一个从 1 打印到 5 并且使用 <code>break</code> 跳出循环的程序。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">5</span> &#123;</span><br><span class="line">            <span class="keyword">break</span> <span class="comment">//loop is terminated if i &gt; 5</span></span><br><span class="line">        &#125;</span><br><span class="line">        fmt.Printf(<span class="string">&quot;%d &quot;</span>, i)</span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Printf(<span class="string">&quot;\nline after for loop&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span>  </span><br><span class="line">line after <span class="keyword">for</span> loop</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="break-label"><a href="#break-label" class="headerlink" title="break label"></a>break label</h3><p> 当处于多层嵌套for循环，直接跳出所有循环嵌套，可以用break label特性 </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;主程序开始执行&quot;</span>)</span><br><span class="line">Exit:</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">9</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">for</span> j := <span class="number">0</span>; j &lt; <span class="number">9</span>; j++ &#123;</span><br><span class="line">            <span class="keyword">if</span> i+j &gt; <span class="number">15</span> &#123;</span><br><span class="line">                fmt.Println(<span class="string">&quot;程序结束&quot;</span>)</span><br><span class="line">                <span class="keyword">break</span> Exit</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(<span class="string">&quot;已跳出循环体&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="continue"><a href="#continue" class="headerlink" title="continue"></a>continue</h3><p> <code>continue</code> 语句用来跳出 <code>for</code> 循环中当前循环。在 <code>continue</code> 语句后的所有的 <code>for</code> 循环语句都不会在本次循环中执行。循环体会在一下次循环中继续执行。 </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (  </span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;  </span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">0</span> &#123;</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        &#125;</span><br><span class="line">        fmt.Printf(<span class="string">&quot;%d &quot;</span>, i)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><br><span class="line"><span class="number">1</span> <span class="number">3</span> <span class="number">5</span> <span class="number">7</span> <span class="number">9</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="return语句"><a href="#return语句" class="headerlink" title="return语句"></a>return语句</h3><p>return用在方法或函数中，表示终止所在的方法或函数(method与function)。</p>
+<p>return在main函数中，表示终止main函数，终止程序。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt;= <span class="number">10</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">5</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="comment">//直接退出main函数了</span></span><br><span class="line">        &#125;</span><br><span class="line">        fmt.Printf(<span class="string">&quot;本次循环次数：%d\n&quot;</span>, i)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//永远走不带这里了，第五次for循环时候，直接return了</span></span><br><span class="line">    fmt.Println(<span class="string">&quot;循环结束，走到了我&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="无限循环"><a href="#无限循环" class="headerlink" title="无限循环"></a>无限循环</h3><p> for 什么条件也不带的，相当于 loop {} 语句。for 带一个条件的相当于 while 语句。for 带三个语句的就是普通的 for 语句。 </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        fmt.Println(<span class="string">&quot;hello world!&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 条件省略，等同于默认为true</span></span><br></pre></td></tr></table></figure>
+
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>祝你发财<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/222.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -727,16 +462,84 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/10/15/Go%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%AE%A4%E8%AF%86go%E7%A8%8B%E5%BA%8F/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://vivek-666.github.io/021/10/15/Go%E5%9F%BA%E7%A1%80%E4%B9%8B%E8%AE%A4%E8%AF%86go%E7%A8%8B%E5%BA%8F/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2021/10/16/Go%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E9%9B%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Go基础常见错误集
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/10/13/Go%E5%9F%BA%E7%A1%80%E4%B9%8B%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Go基础之打通第一个程序</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -751,26 +554,62 @@
         </div>
         
         
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F"><span class="toc-number">1.</span> <span class="toc-text">定义变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E"><span class="toc-number">1.1.</span> <span class="toc-text">多变量声明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%B8%B8%E9%87%8F"><span class="toc-number">2.</span> <span class="toc-text">定义常量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E5%B8%B8%E9%87%8F"><span class="toc-number">2.1.</span> <span class="toc-text">数字常量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">2.2.</span> <span class="toc-text">数字表达式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E"><span class="toc-number">3.1.</span> <span class="toc-text">函数声明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="toc-number">3.2.</span> <span class="toc-text">多返回值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E5%90%8D%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="toc-number">3.3.</span> <span class="toc-text">命名返回值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A9%BA%E7%99%BD%E7%AC%A6"><span class="toc-number">3.4.</span> <span class="toc-text">空白符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83"><span class="toc-number">4.</span> <span class="toc-text">命名规范</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89%E8%A7%84%E8%8C%83"><span class="toc-number">4.1.</span> <span class="toc-text">1,变量定义规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">4.2.</span> <span class="toc-text">2,关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BF%9D%E7%95%99%E5%AD%97"><span class="toc-number">4.3.</span> <span class="toc-text">3,保留字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%B3%A8%E6%84%8F"><span class="toc-number">4.4.</span> <span class="toc-text">4,注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if%E2%80%93else%E8%AF%AD%E5%8F%A5"><span class="toc-number">5.</span> <span class="toc-text">if–else语句</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#goto-%E6%A0%87%E7%AD%BE"><span class="toc-number">5.0.1.</span> <span class="toc-text">goto 标签</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Go-switch"><span class="toc-number">6.</span> <span class="toc-text">Go switch</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E6%83%85%E5%86%B5%EF%BC%88Default-Case%EF%BC%89"><span class="toc-number">6.1.</span> <span class="toc-text">默认情况（Default Case）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%88%A4%E6%96%AD"><span class="toc-number">6.2.</span> <span class="toc-text">多表达式判断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84switch"><span class="toc-number">6.3.</span> <span class="toc-text">无表达式的switch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fallthrough-%E8%AF%AD%E5%8F%A5"><span class="toc-number">6.4.</span> <span class="toc-text">Fallthrough 语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#For%E5%BE%AA%E7%8E%AF"><span class="toc-number">7.</span> <span class="toc-text">For循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#break"><span class="toc-number">7.1.</span> <span class="toc-text">break</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#break-label"><span class="toc-number">7.2.</span> <span class="toc-text">break label</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#continue"><span class="toc-number">7.3.</span> <span class="toc-text">continue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#return%E8%AF%AD%E5%8F%A5"><span class="toc-number">7.4.</span> <span class="toc-text">return语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E9%99%90%E5%BE%AA%E7%8E%AF"><span class="toc-number">7.5.</span> <span class="toc-text">无限循环</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
     </div>
 </aside>
 
 
+
+  
+  
+  
+
+  
+
+  
+
+  
  
 
-
-
   
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
-    </nav>
+      <section id="comments" class="comments">
+        <style>
+          .comments{margin:30px;padding:10px;background:#fff}
+          @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+        </style>
+        <div id="vcomment" class="comment"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var notify = 'false' == true ? true : false;
+  var verify = 'false' == true ? true : false;
+  new Valine({
+    av: AV,
+    el: '#vcomment',
+    notify: notify,
+    app_id: "4078A2Bntfkxp8EVq5TtPO1P-gzGzoHsz",
+    app_key: "2wBAkBOnl2RpsnGy3dYaEPlN",
+    placeholder: "Just go go",
+    avatar: "mm",
+  });
+</script>
+
+    </section>
   
 
-
-<!-- 添加代码  -->
-<span id="busuanzi_container_page_pv">
-  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-</span>
 
 
 
@@ -805,8 +644,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
